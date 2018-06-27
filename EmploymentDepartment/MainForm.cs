@@ -13,46 +13,69 @@ namespace EmploymentDepartment
 {
     public partial class MainForm : Form
     {
+        List<Faculty> fac;
+        List<Specialization> spec;
+
         public MainForm()
         {
-            InitializeComponent();
-        }
+            InitializeComponent();         
 
+        }
+        EntitiesGetter ent;
         private void button1_Click(object sender, EventArgs e)
         {
-            DBGetter db = new DBGetter();
+            MySqlGetter db = new MySqlGetter();
 
-            var a = db.GetCollection("SELECT s.ID, s.ApplicationFormNumber, s.Name, s.Surname, s.Patronymic, s.DOB, s.Gender + 0 AS Gender,"+
-  "s.MaritalStatus, s.YearOfGraduation, d.LevelOfEducation, d.Faculty, d.Specialization, s.StudyGroup," +
-  "s.Rating, s.PreferentialCategory, s.SelfEmployment, s.City, s.Region, s.District, s.Address, s.RegCity," +
-  "s.RegRegion, s.RegDistrict, s.RegAddress, s.Phone, s.Email FROM student s INNER JOIN" +
-  "(SELECT sp.LevelOfEducation + 0 as LevelOfEducation, sp.Name AS Specialization, f.Name AS Faculty, " +
-  "sp.ID FROM specialization sp INNER JOIN faculty f ON sp.Faculty = f.ID) AS d ON s.FieldOfStudy = d.ID");
-            var Student = new Student();
-            SetProperties(Student,a[0]);
+            ent = new EntitiesGetter(db);
+            var a = ent.GetStudents();
+
+            fac = ent.GetFaculties();
+            spec = ent.GetSpecializations();
         }
 
-        private void SetProperties<T>(T obj, Dictionary<string, object> dict)
+        private void BindComboboxData<T>(ComboBox cmb, List<T> data) where T : IIdentifiable
         {
-            if (dict == null)
+            var value = comboBox1.SelectedValue;
+            int id;
+
+            cmb.DataSource = null;
+            cmb.Items.Clear();
+            cmb.DataSource = data;
+            cmb.DisplayMember = "Name";
+            cmb.ValueMember = "ID";
+
+            // Выделить элемент (если он существует), который был активен до изменений.
+            if (!Int32.TryParse(value + "", out id))
                 return;
 
-            var properties = obj.GetType().GetProperties();
-            foreach (PropertyInfo property in properties)
-            {
-                if (dict.ContainsKey(property.Name))
-                {
-                    try
-                    {
-                        property.SetValue(obj, dict[property.Name], null);
-                    }
-                    catch (ArgumentException)
-                    {
-                        // if(propInf.GetType() == Type.E)
-                       // property.SetValue(obj, 1, null);
-                    }
-                }
-            }
+            var elem = data.FirstOrDefault(i => i.ID == id);
+
+            if (elem == null)
+                return;
+
+            cmb.SelectedIndex = data.IndexOf(elem);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var value = comboBox1.SelectedValue;
+            int id;
+
+            if (!Int32.TryParse(value + "", out id))
+                return;
+
+            var sp = spec.Where(i => (int)i.LevelOfEducation == comboBox2.SelectedIndex + 1 && i.Faculty == id).ToList();
+            BindComboboxData(comboBox3, sp);
+        }
+
+        
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {             
+            var fc = ent.GetFaculties((EducationLevelType)(comboBox2.SelectedIndex + 1));
+            BindComboboxData(comboBox1, fc);
+            var sp = spec.Where(i => (int)i.LevelOfEducation == comboBox2.SelectedIndex + 1 && i.Faculty == (int)comboBox1.SelectedValue).ToList();
+            BindComboboxData(comboBox3, sp);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public class DBGetter
+    public class MySqlGetter: IDBGetter
     {
         private readonly string connection = "Database=work;Data Source=localhost;User Id=root;Password=root;CharSet=utf8;";
 
@@ -60,7 +60,7 @@ namespace EmploymentDepartment.BL
                 }
             }
 
-            return queryList.Count == 0 ? null : queryList;
+            return queryList;
         }
     }
 }

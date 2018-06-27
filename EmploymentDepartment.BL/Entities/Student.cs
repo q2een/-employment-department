@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public class Student
+    public class Student : IIdentifiable
     {
         public int ID { get; set; }
         public string ApplicationFormNumber { get; set; }

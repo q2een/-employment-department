@@ -1,6 +1,6 @@
 ﻿namespace EmploymentDepartment.BL
 {
-    class Vacancy
+    public class Vacancy
     {
         public int ID { get; set; }
         public string VacancyNumber { get; set; }
