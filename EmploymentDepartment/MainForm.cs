@@ -18,8 +18,8 @@ namespace EmploymentDepartment
 
         public MainForm()
         {
-            InitializeComponent();         
-
+            InitializeComponent();
+            dataGridView1.DoubleBuffered(true);
         }
         EntitiesGetter ent;
         private void button1_Click(object sender, EventArgs e)
@@ -31,6 +31,8 @@ namespace EmploymentDepartment
 
             fac = ent.GetFaculties();
             spec = ent.GetSpecializations();
+
+            dataGridView1.DataSource = new BindingList<Student>(a);
         }
 
         private void BindComboboxData<T>(ComboBox cmb, List<T> data) where T : IIdentifiable
