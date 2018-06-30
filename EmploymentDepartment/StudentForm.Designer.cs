@@ -91,7 +91,6 @@
             this.tbStudyGroup = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.tbRating = new System.Windows.Forms.MaskedTextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -126,6 +125,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.tbRating = new System.Windows.Forms.NumericUpDown();
             this.mainPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -146,6 +146,7 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbRating)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -232,7 +233,7 @@
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label40.ForeColor = System.Drawing.Color.Tomato;
-            this.label40.Location = new System.Drawing.Point(74, 41);
+            this.label40.Location = new System.Drawing.Point(76, 41);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(14, 16);
             this.label40.TabIndex = 25;
@@ -858,7 +859,7 @@
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label32.ForeColor = System.Drawing.Color.Tomato;
-            this.label32.Location = new System.Drawing.Point(146, 7);
+            this.label32.Location = new System.Drawing.Point(148, 7);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(14, 16);
             this.label32.TabIndex = 25;
@@ -893,7 +894,7 @@
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label34.ForeColor = System.Drawing.Color.Tomato;
-            this.label34.Location = new System.Drawing.Point(134, 6);
+            this.label34.Location = new System.Drawing.Point(140, 6);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(14, 16);
             this.label34.TabIndex = 25;
@@ -904,6 +905,7 @@
             this.tbYearOfGraduation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbYearOfGraduation.BeepOnError = true;
             this.tbYearOfGraduation.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbYearOfGraduation.Location = new System.Drawing.Point(0, 26);
             this.tbYearOfGraduation.Mask = "0000";
@@ -983,19 +985,6 @@
             this.panel7.Size = new System.Drawing.Size(124, 57);
             this.panel7.TabIndex = 3;
             // 
-            // tbRating
-            // 
-            this.tbRating.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRating.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbRating.Location = new System.Drawing.Point(0, 26);
-            this.tbRating.Mask = "900.00";
-            this.tbRating.Name = "tbRating";
-            this.tbRating.Size = new System.Drawing.Size(117, 23);
-            this.tbRating.TabIndex = 9;
-            this.tbRating.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -1053,7 +1042,7 @@
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label31.ForeColor = System.Drawing.Color.Tomato;
-            this.label31.Location = new System.Drawing.Point(72, 0);
+            this.label31.Location = new System.Drawing.Point(73, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(14, 16);
             this.label31.TabIndex = 25;
@@ -1099,7 +1088,7 @@
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label30.ForeColor = System.Drawing.Color.Tomato;
-            this.label30.Location = new System.Drawing.Point(172, 0);
+            this.label30.Location = new System.Drawing.Point(182, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(14, 16);
             this.label30.TabIndex = 25;
@@ -1153,7 +1142,7 @@
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label37.ForeColor = System.Drawing.Color.Tomato;
-            this.label37.Location = new System.Drawing.Point(99, 3);
+            this.label37.Location = new System.Drawing.Point(108, 3);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(14, 16);
             this.label37.TabIndex = 25;
@@ -1164,6 +1153,7 @@
             this.tbDOB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDOB.BeepOnError = true;
             this.tbDOB.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDOB.Location = new System.Drawing.Point(0, 22);
             this.tbDOB.Mask = "00/00/0000";
@@ -1254,7 +1244,7 @@
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label36.ForeColor = System.Drawing.Color.Tomato;
-            this.label36.Location = new System.Drawing.Point(142, 3);
+            this.label36.Location = new System.Drawing.Point(148, 3);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(14, 16);
             this.label36.TabIndex = 25;
@@ -1334,10 +1324,10 @@
             this.tbApplicationFormNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbApplicationFormNumber.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbApplicationFormNumber.Location = new System.Drawing.Point(181, 6);
+            this.tbApplicationFormNumber.Location = new System.Drawing.Point(189, 6);
             this.tbApplicationFormNumber.MaxLength = 50;
             this.tbApplicationFormNumber.Name = "tbApplicationFormNumber";
-            this.tbApplicationFormNumber.Size = new System.Drawing.Size(458, 23);
+            this.tbApplicationFormNumber.Size = new System.Drawing.Size(450, 23);
             this.tbApplicationFormNumber.TabIndex = 0;
             // 
             // label4
@@ -1385,7 +1375,7 @@
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label41.ForeColor = System.Drawing.Color.Tomato;
-            this.label41.Location = new System.Drawing.Point(167, 9);
+            this.label41.Location = new System.Drawing.Point(175, 9);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(14, 16);
             this.label41.TabIndex = 25;
@@ -1400,6 +1390,28 @@
             this.label1.Size = new System.Drawing.Size(173, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Шифр анкеты студента ";
+            // 
+            // tbRating
+            // 
+            this.tbRating.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbRating.DecimalPlaces = 2;
+            this.tbRating.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbRating.Location = new System.Drawing.Point(0, 26);
+            this.tbRating.Minimum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.tbRating.Name = "tbRating";
+            this.tbRating.Size = new System.Drawing.Size(118, 23);
+            this.tbRating.TabIndex = 1;
+            this.tbRating.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
             // 
             // StudentForm
             // 
@@ -1447,6 +1459,7 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbRating)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1506,7 +1519,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox tbCity;
         private System.Windows.Forms.TextBox tbStudyGroup;
-        private System.Windows.Forms.MaskedTextBox tbRating;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox tbPhone;
         private System.Windows.Forms.Label label19;
@@ -1551,5 +1563,6 @@
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblDistrict;
         private System.Windows.Forms.Label lblRegion;
+        private System.Windows.Forms.NumericUpDown tbRating;
     }
 }

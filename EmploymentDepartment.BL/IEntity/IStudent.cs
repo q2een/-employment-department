@@ -4,31 +4,31 @@ namespace EmploymentDepartment.BL
 {
     public interface IStudent
     {
-        int ID { get;}
-        string ApplicationFormNumber { get;}
-        string Surname { get;}
-        string Name { get;}
-        string Patronymic { get;}
-        DateTime DOB { get;}
-        GenderType Gender { get;}
-        bool MaritalStatus { get;}
-        int YearOfGraduation { get;}
-        int Faculty { get;}
-        EducationLevelType LevelOfEducation { get;}
-        int FieldOfStudy { get;}
-        string StudyGroup { get;}
-        decimal Rating { get;}
-        string PreferentialCategory { get;}
-        bool SelfEmployment { get;}
-        string City { get;}
-        string Region { get;}
-        string District { get;}
-        string Address { get;}
-        string RegCity { get;}
-        string RegRegion { get;}
-        string RegDistrict { get;}
-        string RegAddress { get;}
-        string Phone { get;}
-        string Email { get;}
+        int ID { get; set; }
+        string ApplicationFormNumber { get; set;}
+        string Surname { get; set;}
+        string Name { get; set;}
+        string Patronymic { get; set;}
+        DateTime DOB { get; set;}
+        GenderType Gender { get; set;}
+        bool MaritalStatus { get; set;}
+        int YearOfGraduation { get; set;}
+        EducationLevelType LevelOfEducation { get; set;}
+        int Faculty { get; set; }
+        int FieldOfStudy { get; set;}
+        string StudyGroup { get; set;}
+        decimal Rating { get; set;}
+        string PreferentialCategory { get; set;}
+        bool SelfEmployment { get; set;}
+        string City { get; set;}
+        string Region { get; set;}
+        string District { get; set;}
+        string Address { get; set;}
+        string RegCity { get; set;}
+        string RegRegion { get; set;}
+        string RegDistrict { get; set;}
+        string RegAddress { get; set;}
+        string Phone { get; set;}
+        string Email { get; set;}
     }
 }

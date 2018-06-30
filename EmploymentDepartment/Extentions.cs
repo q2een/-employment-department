@@ -22,28 +22,52 @@ namespace EmploymentDepartment
             return !(char.IsLetter(KeyChar) || KeyChar == (char)Keys.Back || KeyChar == '-' || KeyChar == (char)Keys.Back);
         }
 
-        public static bool PublicInstancePropertiesEqual<T>(this T self, T to, params string[] ignore) where T : class
+        public static void SetPropertiesValue<T>(this T self, T source, params string[] ignore) where T : class
         {
-            if (self != null && to != null)
-            {
-                Type type = typeof(T);
-                List<string> ignoreList = new List<string>(ignore);
-                foreach (System.Reflection.PropertyInfo pi in type.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
-                {
-                    if (!ignoreList.Contains(pi.Name))
-                    {
-                        object selfValue = type.GetProperty(pi.Name).GetValue(self, null);
-                        object toValue = type.GetProperty(pi.Name).GetValue(to, null);
+            if (self == null || source == null)
+                return;
 
-                        if (selfValue != toValue && (selfValue == null || !selfValue.Equals(toValue)))
-                        {
-                            return false;
-                        }
-                    }
+            Type type = typeof(T);
+            List<string> ignoreList = new List<string>(ignore);
+
+            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (ignoreList.Contains(property.Name))
+                    continue;
+
+                var value = type.GetProperty(property.Name).GetValue(source, null);
+                property.SetValue(self, value, null);
+            }              
+        }
+
+        public static List<string> GetPropertiesDifference<T>(this T self, T to, params string[] ignore) where T : class
+        {
+            var dif = new List<string>();
+
+            if (self == null || to == null)
+                return dif;
+            
+            Type type = typeof(T);
+            List<string> ignoreList = new List<string>(ignore);
+
+            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (!ignoreList.Contains(property.Name))
+                {
+                    object selfValue = type.GetProperty(property.Name).GetValue(self, null);
+                    object toValue = type.GetProperty(property.Name).GetValue(to, null);
+
+                    if (selfValue != toValue && (selfValue == null || !selfValue.Equals(toValue)))
+                        dif.Add($"{property.Name} = '{toValue}'");
                 }
-                return true;
             }
-            return self == to;
+
+            return dif;       
+        }
+
+        public static bool IsPropertiesEqual<T>(this T self, T to, params string[] ignore) where T : class
+        {
+            return GetPropertiesDifference<T>(self, to, ignore).Count == 0;
         }
     }
 }

@@ -13,11 +13,16 @@ namespace EmploymentDepartment
     public partial class StudentForm : Form, IStudent
     {
         #region IStudent Implementation.
+        private int id;
         public int ID
         {
             get
             {
-                return Student?.ID ?? 0;
+                return id;
+            }
+            set
+            {
+                id = value;
             }
         }
 
@@ -25,7 +30,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbApplicationFormNumber.Text;
+                return String.IsNullOrEmpty(tbApplicationFormNumber.Text) ? null : tbApplicationFormNumber.Text;
+            }
+            set
+            {
+                tbApplicationFormNumber.Text = value;
             }
         }
 
@@ -33,7 +42,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbName.Text;
+                return String.IsNullOrEmpty(tbName.Text) ? null : tbName.Text; 
+            }
+            set
+            {
+                tbName.Text = value;
             }
         }
 
@@ -41,7 +54,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbSurname.Text;
+                return String.IsNullOrEmpty(tbSurname.Text) ? null : tbSurname.Text;
+            }
+            set
+            {
+                tbSurname.Text = value;
             }
         }
 
@@ -49,7 +66,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbPatronymic.Text;
+                return string.IsNullOrEmpty(tbPatronymic.Text) ? null : tbPatronymic.Text;
+            }
+            set
+            {
+                tbPatronymic.Text = value;
             }
         }
 
@@ -59,6 +80,10 @@ namespace EmploymentDepartment
             {
                 return DateTime.Parse(tbDOB.Text);
             }
+            set
+            {
+                tbDOB.Text = value.ToString("dd/MM/yyyy");
+            }
         }
 
         public GenderType Gender
@@ -66,6 +91,10 @@ namespace EmploymentDepartment
             get
             {
                 return (GenderType)cmbGender.SelectedIndex+1;
+            }
+            set
+            {
+                cmbGender.SelectedIndex = (int)value - 1;
             }
         }
 
@@ -75,6 +104,10 @@ namespace EmploymentDepartment
             {
                 return cmbMaritalStatus.SelectedIndex == 1; 
             }
+            set
+            {
+                cmbMaritalStatus.SelectedIndex = value ? 1 : 0;
+            }
         }
 
         public int YearOfGraduation
@@ -82,6 +115,10 @@ namespace EmploymentDepartment
             get
             {
                 return Int32.Parse(tbYearOfGraduation.Text);
+            }
+            set
+            {
+                tbYearOfGraduation.Text = value.ToString();
             }
         }
 
@@ -91,6 +128,10 @@ namespace EmploymentDepartment
             {
                 return Int32.Parse(cmbFaculty.SelectedValue.ToString());
             }
+            set
+            {
+                cmbFaculty.SelectedValue = value;
+            }
         }
 
         public EducationLevelType LevelOfEducation
@@ -98,6 +139,10 @@ namespace EmploymentDepartment
             get
             {
                 return (EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1);
+            }
+            set
+            {
+                cmbLevelOfEducation.SelectedIndex = (int)value - 1;
             }
         }
 
@@ -107,13 +152,21 @@ namespace EmploymentDepartment
             {
                 return Int32.Parse(cmbFieldOfStudy.SelectedValue.ToString());
             }
+            set
+            {
+                cmbFieldOfStudy.SelectedValue = value; 
+            }
         }
 
         public string StudyGroup
         {
             get
             {
-                return tbStudyGroup.Text;
+                return String.IsNullOrEmpty(tbStudyGroup.Text) ? null : tbStudyGroup.Text;
+            }
+            set
+            {
+                tbStudyGroup.Text = value;
             }
         }
 
@@ -123,6 +176,10 @@ namespace EmploymentDepartment
             {
                 return Decimal.Parse(tbRating.Text);
             }
+            set
+            {
+                tbRating.Text = value.ToString();
+            }
         }
 
         public string PreferentialCategory
@@ -130,6 +187,10 @@ namespace EmploymentDepartment
             get
             {
                 return null; throw new NotImplementedException();
+            }
+            set
+            {
+
             }
         }
 
@@ -139,13 +200,21 @@ namespace EmploymentDepartment
             {
                 return cbSelfEmployment.Checked;
             }
+            set
+            {
+                cbSelfEmployment.Checked = value;
+            }
         }
 
         public string City
         {
             get
             {
-                return tbCity.Text;
+                return String.IsNullOrEmpty(tbCity.Text) ? null : tbCity.Text;
+            }
+            set
+            {
+                tbCity.Text = value;
             }
         }
 
@@ -153,7 +222,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbRegion.Text;
+                return String.IsNullOrEmpty(tbRegion.Text) ? null : tbRegion.Text;
+            }
+            set
+            {
+                tbRegion.Text = value;
             }
         }
 
@@ -161,7 +234,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbDistrict.Text;
+                return String.IsNullOrEmpty(tbDistrict.Text) ? null : tbDistrict.Text;
+            }
+            set
+            {
+                tbDistrict.Text = value;
             }
         }
 
@@ -169,7 +246,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbAddress.Text;
+                return String.IsNullOrEmpty(tbAddress.Text) ? null : tbAddress.Text;
+            }
+            set
+            {
+                tbAddress.Text = value;
             }
         }
 
@@ -177,7 +258,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbRegCity.Text;
+                return String.IsNullOrEmpty(tbRegCity.Text) ? null : tbRegCity.Text;
+            }
+            set
+            {
+                tbRegCity.Text = value;
             }
         }
 
@@ -185,7 +270,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbRegRegion.Text;
+                return String.IsNullOrEmpty(tbRegRegion.Text) ? null : tbRegRegion.Text;
+            }
+            set
+            {
+                tbRegRegion.Text = value;
             }
         }
 
@@ -193,7 +282,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbRegDistrict.Text;
+                return String.IsNullOrEmpty(tbRegDistrict.Text) ? null : tbRegDistrict.Text;
+            }
+            set
+            {
+                tbRegDistrict.Text = value;
             }
         }
 
@@ -201,7 +294,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbRegAddress.Text;
+                return String.IsNullOrEmpty(tbRegAddress.Text) ? null : tbRegAddress.Text;
+            }
+            set
+            {
+                tbRegAddress.Text = value;
             }
         }
 
@@ -209,7 +306,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbPhone.Text;
+                return String.IsNullOrEmpty(tbPhone.Text) ? null : tbPhone.Text;
+            }
+            set
+            {
+                tbPhone.Text = value;
             }
         }
 
@@ -217,7 +318,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbEmail.Text;
+                return String.IsNullOrEmpty(tbEmail.Text) ? null : tbEmail.Text;
+            }
+            set
+            {
+                tbEmail.Text = value;
             }
         }
 
@@ -239,7 +344,7 @@ namespace EmploymentDepartment
             this.Type = type;
 
             if(type == ActionType.Edit)
-            {
+            {                    
                 btnRemove.Visible = false;
                 btnApply.Text = "Сохранить";
                 this.Text = $"Редактирование информации о студенте [{student.Surname} {student.Name} {student.Patronymic}]" ;
@@ -338,6 +443,8 @@ namespace EmploymentDepartment
                 throw new Exception();
 
             this.main = this.MdiParent as MainMDIForm;
+
+            this.SetPropertiesValue<IStudent>(Student, "");
         }
 
         private void cmbFaculty_DropDown(object sender, EventArgs e)
@@ -353,7 +460,7 @@ namespace EmploymentDepartment
         private void btnApply_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(FieldOfStudy + "");
-            MessageBox.Show(Student.PublicInstancePropertiesEqual<IStudent>(this,"") ? "true" : "false") ;
+            MessageBox.Show(Student.IsPropertiesEqual<IStudent>(this,"") ? "true" : "false") ;
         }
     }
 }
