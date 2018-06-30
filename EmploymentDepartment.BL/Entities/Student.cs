@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public class Student : IIdentifiable
+    public class Student : IIdentifiable , IStudent
     {
         [Browsable(false)]
         public int ID { get; set; }

@@ -35,49 +35,18 @@ namespace EmploymentDepartment
             dataGridView1.DataSource = new BindingList<Student>(a);
         }
 
-        private void BindComboboxData<T>(ComboBox cmb, List<T> data) where T : IIdentifiable
-        {
-            var value = comboBox1.SelectedValue;
-            int id;
 
-            cmb.DataSource = null;
-            cmb.Items.Clear();
-            cmb.DataSource = data;
-            cmb.DisplayMember = "Name";
-            cmb.ValueMember = "ID";
-
-            // Выделить элемент (если он существует), который был активен до изменений.
-            if (!Int32.TryParse(value + "", out id))
-                return;
-
-            var elem = data.FirstOrDefault(i => i.ID == id);
-
-            if (elem == null)
-                return;
-
-            cmb.SelectedIndex = data.IndexOf(elem);
-        }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var value = comboBox1.SelectedValue;
-            int id;
 
-            if (!Int32.TryParse(value + "", out id))
-                return;
-
-            var sp = spec.Where(i => (int)i.LevelOfEducation == comboBox2.SelectedIndex + 1 && i.Faculty == id).ToList();
-            BindComboboxData(comboBox3, sp);
         }
 
         
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {             
-            var fc = ent.GetFaculties((EducationLevelType)(comboBox2.SelectedIndex + 1));
-            BindComboboxData(comboBox1, fc);
-            var sp = spec.Where(i => (int)i.LevelOfEducation == comboBox2.SelectedIndex + 1 && i.Faculty == (int)comboBox1.SelectedValue).ToList();
-            BindComboboxData(comboBox3, sp);
+
         }
     }
 }

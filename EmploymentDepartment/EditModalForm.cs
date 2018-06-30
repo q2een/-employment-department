@@ -17,7 +17,8 @@ namespace EmploymentDepartment
         {
             InitializeComponent();
             this.tb = tb;
-            tbEdit.Text = tb.Text;            
+            tbEdit.Text = tb.Text;
+            tbEdit.MaxLength = tb.MaxLength;            
         }
 
         private void EditModalForm_Load(object sender, EventArgs e)

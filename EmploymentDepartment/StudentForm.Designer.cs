@@ -192,7 +192,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRemove.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnRemove.Location = new System.Drawing.Point(0, 13);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(187, 25);
@@ -200,11 +200,12 @@
             this.btnRemove.TabStop = false;
             this.btnRemove.Text = "Удалить анкету студента";
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Visible = false;
             // 
             // btnApply
             // 
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnApply.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnApply.Location = new System.Drawing.Point(528, 13);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(96, 25);
@@ -212,11 +213,12 @@
             this.btnApply.TabStop = false;
             this.btnApply.Text = "Добавить";
             this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnCancel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnCancel.Location = new System.Drawing.Point(414, 13);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(96, 25);
@@ -278,6 +280,8 @@
             // 
             // lblPhone
             // 
+            this.lblPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPhone.AutoSize = true;
             this.lblPhone.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblPhone.Location = new System.Drawing.Point(281, 4);
@@ -294,16 +298,17 @@
             // 
             this.tbPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPhone.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbPhone.Location = new System.Drawing.Point(78, 3);
+            this.tbPhone.MaxLength = 180;
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(203, 22);
+            this.tbPhone.Size = new System.Drawing.Size(203, 23);
             this.tbPhone.TabIndex = 22;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label18.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label18.Location = new System.Drawing.Point(-2, 6);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(68, 16);
@@ -335,10 +340,10 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label19.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label19.Location = new System.Drawing.Point(9, 6);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(49, 16);
+            this.label19.Size = new System.Drawing.Size(53, 16);
             this.label19.TabIndex = 0;
             this.label19.Text = "E-mail ";
             // 
@@ -346,10 +351,11 @@
             // 
             this.tbEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbEmail.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbEmail.Location = new System.Drawing.Point(71, 3);
+            this.tbEmail.MaxLength = 250;
             this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(211, 22);
+            this.tbEmail.Size = new System.Drawing.Size(211, 23);
             this.tbEmail.TabIndex = 23;
             // 
             // cbSelfEmployment
@@ -357,10 +363,10 @@
             this.cbSelfEmployment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSelfEmployment.AutoSize = true;
-            this.cbSelfEmployment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbSelfEmployment.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbSelfEmployment.Location = new System.Drawing.Point(15, 571);
             this.cbSelfEmployment.Name = "cbSelfEmployment";
-            this.cbSelfEmployment.Size = new System.Drawing.Size(441, 20);
+            this.cbSelfEmployment.Size = new System.Drawing.Size(457, 20);
             this.cbSelfEmployment.TabIndex = 24;
             this.cbSelfEmployment.Text = "Предоставляется право на самостоятельное трудоустройство";
             this.cbSelfEmployment.UseVisualStyleBackColor = true;
@@ -370,10 +376,10 @@
             this.cbAddressesAreEquals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbAddressesAreEquals.AutoSize = true;
-            this.cbAddressesAreEquals.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbAddressesAreEquals.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbAddressesAreEquals.Location = new System.Drawing.Point(16, 340);
             this.cbAddressesAreEquals.Name = "cbAddressesAreEquals";
-            this.cbAddressesAreEquals.Size = new System.Drawing.Size(331, 20);
+            this.cbAddressesAreEquals.Size = new System.Drawing.Size(347, 20);
             this.cbAddressesAreEquals.TabIndex = 14;
             this.cbAddressesAreEquals.Text = "Адреса регистрации и проживания совпадают";
             this.cbAddressesAreEquals.UseVisualStyleBackColor = true;
@@ -413,7 +419,7 @@
             this.groupBox1.Controls.Add(this.tbRegRegion);
             this.groupBox1.Controls.Add(this.tbRegDistrict);
             this.groupBox1.Controls.Add(this.label21);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(314, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(306, 157);
@@ -423,9 +429,11 @@
             // 
             // lblRegCity
             // 
+            this.lblRegCity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRegCity.AutoSize = true;
             this.lblRegCity.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblRegCity.Location = new System.Drawing.Point(280, 27);
+            this.lblRegCity.Location = new System.Drawing.Point(279, 27);
             this.lblRegCity.Name = "lblRegCity";
             this.lblRegCity.Size = new System.Drawing.Size(26, 18);
             this.lblRegCity.TabIndex = 29;
@@ -440,17 +448,19 @@
             this.tbRegCity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRegCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbRegCity.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbRegCity.Location = new System.Drawing.Point(68, 26);
             this.tbRegCity.Name = "tbRegCity";
-            this.tbRegCity.Size = new System.Drawing.Size(211, 22);
+            this.tbRegCity.Size = new System.Drawing.Size(211, 23);
             this.tbRegCity.TabIndex = 18;
             // 
             // lblRegRegion
             // 
+            this.lblRegRegion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRegRegion.AutoSize = true;
             this.lblRegRegion.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblRegRegion.Location = new System.Drawing.Point(280, 59);
+            this.lblRegRegion.Location = new System.Drawing.Point(279, 59);
             this.lblRegRegion.Name = "lblRegRegion";
             this.lblRegRegion.Size = new System.Drawing.Size(26, 18);
             this.lblRegRegion.TabIndex = 29;
@@ -465,17 +475,20 @@
             this.tbRegRegion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRegRegion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbRegRegion.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbRegRegion.Location = new System.Drawing.Point(68, 58);
+            this.tbRegRegion.MaxLength = 150;
             this.tbRegRegion.Name = "tbRegRegion";
-            this.tbRegRegion.Size = new System.Drawing.Size(211, 22);
+            this.tbRegRegion.Size = new System.Drawing.Size(211, 23);
             this.tbRegRegion.TabIndex = 19;
             // 
             // lblRegDistrict
             // 
+            this.lblRegDistrict.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRegDistrict.AutoSize = true;
             this.lblRegDistrict.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblRegDistrict.Location = new System.Drawing.Point(280, 93);
+            this.lblRegDistrict.Location = new System.Drawing.Point(279, 93);
             this.lblRegDistrict.Name = "lblRegDistrict";
             this.lblRegDistrict.Size = new System.Drawing.Size(26, 18);
             this.lblRegDistrict.TabIndex = 29;
@@ -490,17 +503,20 @@
             this.tbRegDistrict.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRegDistrict.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbRegDistrict.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbRegDistrict.Location = new System.Drawing.Point(68, 92);
+            this.tbRegDistrict.MaxLength = 150;
             this.tbRegDistrict.Name = "tbRegDistrict";
-            this.tbRegDistrict.Size = new System.Drawing.Size(211, 22);
+            this.tbRegDistrict.Size = new System.Drawing.Size(211, 23);
             this.tbRegDistrict.TabIndex = 20;
             // 
             // lblRegAddress
             // 
+            this.lblRegAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRegAddress.AutoSize = true;
             this.lblRegAddress.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblRegAddress.Location = new System.Drawing.Point(280, 122);
+            this.lblRegAddress.Location = new System.Drawing.Point(279, 122);
             this.lblRegAddress.Name = "lblRegAddress";
             this.lblRegAddress.Size = new System.Drawing.Size(26, 18);
             this.lblRegAddress.TabIndex = 29;
@@ -515,10 +531,11 @@
             this.tbRegAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRegAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbRegAddress.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbRegAddress.Location = new System.Drawing.Point(68, 121);
+            this.tbRegAddress.MaxLength = 200;
             this.tbRegAddress.Name = "tbRegAddress";
-            this.tbRegAddress.Size = new System.Drawing.Size(211, 22);
+            this.tbRegAddress.Size = new System.Drawing.Size(211, 23);
             this.tbRegAddress.TabIndex = 21;
             // 
             // label26
@@ -546,17 +563,17 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label23.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label23.Location = new System.Drawing.Point(3, 124);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(48, 16);
+            this.label23.Size = new System.Drawing.Size(49, 16);
             this.label23.TabIndex = 0;
             this.label23.Text = "Адрес";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label20.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label20.Location = new System.Drawing.Point(3, 29);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(47, 16);
@@ -566,20 +583,20 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label22.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label22.Location = new System.Drawing.Point(3, 95);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(49, 16);
+            this.label22.Size = new System.Drawing.Size(48, 16);
             this.label22.TabIndex = 0;
             this.label22.Text = "Район";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label21.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label21.Location = new System.Drawing.Point(3, 61);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(63, 16);
+            this.label21.Size = new System.Drawing.Size(64, 16);
             this.label21.TabIndex = 0;
             this.label21.Text = "Область";
             // 
@@ -601,7 +618,7 @@
             this.groupBox2.Controls.Add(this.tbRegion);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.tbCity);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(305, 157);
@@ -611,6 +628,8 @@
             // 
             // lblAddress
             // 
+            this.lblAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblAddress.Location = new System.Drawing.Point(278, 122);
@@ -628,14 +647,17 @@
             this.tbAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbAddress.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbAddress.Location = new System.Drawing.Point(67, 121);
+            this.tbAddress.MaxLength = 200;
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(211, 22);
+            this.tbAddress.Size = new System.Drawing.Size(211, 23);
             this.tbAddress.TabIndex = 17;
             // 
             // lblDistrict
             // 
+            this.lblDistrict.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDistrict.AutoSize = true;
             this.lblDistrict.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblDistrict.Location = new System.Drawing.Point(278, 93);
@@ -653,14 +675,17 @@
             this.tbDistrict.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDistrict.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbDistrict.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbDistrict.Location = new System.Drawing.Point(67, 92);
+            this.tbDistrict.MaxLength = 150;
             this.tbDistrict.Name = "tbDistrict";
-            this.tbDistrict.Size = new System.Drawing.Size(211, 22);
+            this.tbDistrict.Size = new System.Drawing.Size(211, 23);
             this.tbDistrict.TabIndex = 16;
             // 
             // lblRegion
             // 
+            this.lblRegion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRegion.AutoSize = true;
             this.lblRegion.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblRegion.Location = new System.Drawing.Point(278, 59);
@@ -678,14 +703,17 @@
             this.tbRegion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRegion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbRegion.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbRegion.Location = new System.Drawing.Point(67, 58);
+            this.tbRegion.MaxLength = 150;
             this.tbRegion.Name = "tbRegion";
-            this.tbRegion.Size = new System.Drawing.Size(211, 22);
+            this.tbRegion.Size = new System.Drawing.Size(211, 23);
             this.tbRegion.TabIndex = 15;
             // 
             // lblCity
             // 
+            this.lblCity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCity.AutoSize = true;
             this.lblCity.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblCity.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -704,10 +732,11 @@
             this.tbCity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbCity.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbCity.Location = new System.Drawing.Point(67, 26);
+            this.tbCity.MaxLength = 100;
             this.tbCity.Name = "tbCity";
-            this.tbCity.Size = new System.Drawing.Size(211, 22);
+            this.tbCity.Size = new System.Drawing.Size(211, 23);
             this.tbCity.TabIndex = 14;
             // 
             // label28
@@ -735,37 +764,37 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label17.Location = new System.Drawing.Point(3, 124);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(48, 16);
+            this.label17.Size = new System.Drawing.Size(49, 16);
             this.label17.TabIndex = 0;
             this.label17.Text = "Адрес";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label16.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label16.Location = new System.Drawing.Point(3, 95);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(49, 16);
+            this.label16.Size = new System.Drawing.Size(48, 16);
             this.label16.TabIndex = 0;
             this.label16.Text = "Район";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label15.Location = new System.Drawing.Point(3, 61);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(63, 16);
+            this.label15.Size = new System.Drawing.Size(64, 16);
             this.label15.TabIndex = 0;
             this.label15.Text = "Область";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label14.Location = new System.Drawing.Point(3, 29);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(47, 16);
@@ -812,7 +841,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbLevelOfEducation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLevelOfEducation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmbLevelOfEducation.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbLevelOfEducation.FormattingEnabled = true;
             this.cmbLevelOfEducation.Items.AddRange(new object[] {
             "Бакалавриат",
@@ -822,6 +851,7 @@
             this.cmbLevelOfEducation.Name = "cmbLevelOfEducation";
             this.cmbLevelOfEducation.Size = new System.Drawing.Size(188, 24);
             this.cmbLevelOfEducation.TabIndex = 10;
+            this.cmbLevelOfEducation.SelectedIndexChanged += new System.EventHandler(this.cmbLevelOfEducation_SelectedIndexChanged);
             // 
             // label32
             // 
@@ -837,10 +867,10 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(-3, 6);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(154, 16);
+            this.label11.Size = new System.Drawing.Size(156, 16);
             this.label11.TabIndex = 0;
             this.label11.Text = "Уровень образования";
             // 
@@ -874,21 +904,21 @@
             this.tbYearOfGraduation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbYearOfGraduation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbYearOfGraduation.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbYearOfGraduation.Location = new System.Drawing.Point(0, 26);
             this.tbYearOfGraduation.Mask = "0000";
             this.tbYearOfGraduation.Name = "tbYearOfGraduation";
-            this.tbYearOfGraduation.Size = new System.Drawing.Size(168, 22);
+            this.tbYearOfGraduation.Size = new System.Drawing.Size(168, 23);
             this.tbYearOfGraduation.TabIndex = 7;
             this.tbYearOfGraduation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(-3, 6);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(142, 16);
+            this.label8.Size = new System.Drawing.Size(146, 16);
             this.label8.TabIndex = 0;
             this.label8.Text = "Год окончания ВУЗа";
             // 
@@ -922,18 +952,18 @@
             this.tbStudyGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbStudyGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbStudyGroup.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbStudyGroup.Location = new System.Drawing.Point(0, 26);
             this.tbStudyGroup.MaxLength = 10;
             this.tbStudyGroup.Name = "tbStudyGroup";
-            this.tbStudyGroup.Size = new System.Drawing.Size(130, 22);
+            this.tbStudyGroup.Size = new System.Drawing.Size(130, 23);
             this.tbStudyGroup.TabIndex = 8;
             this.tbStudyGroup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(-1, 6);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(55, 16);
@@ -958,21 +988,21 @@
             this.tbRating.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRating.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbRating.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbRating.Location = new System.Drawing.Point(0, 26);
             this.tbRating.Mask = "900.00";
             this.tbRating.Name = "tbRating";
-            this.tbRating.Size = new System.Drawing.Size(117, 22);
+            this.tbRating.Size = new System.Drawing.Size(117, 23);
             this.tbRating.TabIndex = 9;
             this.tbRating.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(-3, 6);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(62, 16);
+            this.label10.Size = new System.Drawing.Size(61, 16);
             this.label10.TabIndex = 0;
             this.label10.Text = "Рейтинг";
             // 
@@ -1010,12 +1040,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbFaculty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFaculty.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmbFaculty.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFaculty.FormattingEnabled = true;
             this.cmbFaculty.Location = new System.Drawing.Point(1, 19);
             this.cmbFaculty.Name = "cmbFaculty";
             this.cmbFaculty.Size = new System.Drawing.Size(310, 24);
             this.cmbFaculty.TabIndex = 11;
+            this.cmbFaculty.SelectedIndexChanged += new System.EventHandler(this.cmbFaculty_SelectedIndexChanged);
             // 
             // label31
             // 
@@ -1031,10 +1062,10 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(-3, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(79, 16);
+            this.label12.Size = new System.Drawing.Size(80, 16);
             this.label12.TabIndex = 0;
             this.label12.Text = "Факультет";
             // 
@@ -1056,7 +1087,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbFieldOfStudy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFieldOfStudy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmbFieldOfStudy.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFieldOfStudy.FormattingEnabled = true;
             this.cmbFieldOfStudy.Location = new System.Drawing.Point(3, 19);
             this.cmbFieldOfStudy.Name = "cmbFieldOfStudy";
@@ -1077,10 +1108,10 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(-3, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(181, 16);
+            this.label13.Size = new System.Drawing.Size(189, 16);
             this.label13.TabIndex = 0;
             this.label13.Text = "Профиль (специализация)";
             // 
@@ -1133,11 +1164,11 @@
             this.tbDOB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbDOB.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDOB.Location = new System.Drawing.Point(0, 22);
             this.tbDOB.Mask = "00/00/0000";
             this.tbDOB.Name = "tbDOB";
-            this.tbDOB.Size = new System.Drawing.Size(201, 22);
+            this.tbDOB.Size = new System.Drawing.Size(201, 23);
             this.tbDOB.TabIndex = 4;
             this.tbDOB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbDOB.ValidatingType = typeof(System.DateTime);
@@ -1145,10 +1176,10 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(-3, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(107, 16);
+            this.label5.Size = new System.Drawing.Size(113, 16);
             this.label5.TabIndex = 0;
             this.label5.Text = "Дата рождения";
             // 
@@ -1183,7 +1214,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmbGender.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGender.FormattingEnabled = true;
             this.cmbGender.Items.AddRange(new object[] {
             "Мужской",
@@ -1197,10 +1228,10 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(-3, 3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(34, 16);
+            this.label6.Size = new System.Drawing.Size(33, 16);
             this.label6.TabIndex = 0;
             this.label6.Text = "Пол";
             // 
@@ -1235,7 +1266,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbMaritalStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMaritalStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmbMaritalStatus.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMaritalStatus.FormattingEnabled = true;
             this.cmbMaritalStatus.Location = new System.Drawing.Point(0, 22);
             this.cmbMaritalStatus.Name = "cmbMaritalStatus";
@@ -1245,10 +1276,10 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(-3, 3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(150, 16);
+            this.label7.Size = new System.Drawing.Size(154, 16);
             this.label7.TabIndex = 0;
             this.label7.Text = "Семейное положение";
             // 
@@ -1256,76 +1287,83 @@
             // 
             this.tbPatronymic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPatronymic.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPatronymic.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPatronymic.Location = new System.Drawing.Point(94, 96);
+            this.tbPatronymic.MaxLength = 80;
             this.tbPatronymic.Name = "tbPatronymic";
-            this.tbPatronymic.Size = new System.Drawing.Size(544, 22);
+            this.tbPatronymic.Size = new System.Drawing.Size(544, 23);
             this.tbPatronymic.TabIndex = 3;
+            this.tbPatronymic.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
             // 
             // tbName
             // 
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbName.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbName.Location = new System.Drawing.Point(94, 67);
+            this.tbName.MaxLength = 80;
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(544, 22);
+            this.tbName.Size = new System.Drawing.Size(544, 23);
             this.tbName.TabIndex = 2;
+            this.tbName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
             // 
             // tbPreferentialCategory
             // 
             this.tbPreferentialCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPreferentialCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPreferentialCategory.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPreferentialCategory.Location = new System.Drawing.Point(159, 306);
             this.tbPreferentialCategory.Name = "tbPreferentialCategory";
-            this.tbPreferentialCategory.Size = new System.Drawing.Size(479, 22);
+            this.tbPreferentialCategory.Size = new System.Drawing.Size(479, 23);
             this.tbPreferentialCategory.TabIndex = 13;
             // 
             // tbSurname
             // 
             this.tbSurname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbSurname.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbSurname.Location = new System.Drawing.Point(94, 38);
+            this.tbSurname.MaxLength = 120;
             this.tbSurname.Name = "tbSurname";
-            this.tbSurname.Size = new System.Drawing.Size(544, 22);
+            this.tbSurname.Size = new System.Drawing.Size(544, 23);
             this.tbSurname.TabIndex = 1;
+            this.tbSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
             // 
             // tbApplicationFormNumber
             // 
             this.tbApplicationFormNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbApplicationFormNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbApplicationFormNumber.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbApplicationFormNumber.Location = new System.Drawing.Point(181, 6);
+            this.tbApplicationFormNumber.MaxLength = 50;
             this.tbApplicationFormNumber.Name = "tbApplicationFormNumber";
-            this.tbApplicationFormNumber.Size = new System.Drawing.Size(458, 22);
+            this.tbApplicationFormNumber.Size = new System.Drawing.Size(458, 23);
             this.tbApplicationFormNumber.TabIndex = 0;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(12, 99);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 16);
+            this.label4.Size = new System.Drawing.Size(72, 16);
             this.label4.TabIndex = 0;
             this.label4.Text = "Отчество";
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label24.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.Location = new System.Drawing.Point(12, 309);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(141, 16);
+            this.label24.Size = new System.Drawing.Size(150, 16);
             this.label24.TabIndex = 0;
             this.label24.Text = "Льготная категория:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(13, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 16);
@@ -1335,10 +1373,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(13, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 16);
+            this.label2.Size = new System.Drawing.Size(68, 16);
             this.label2.TabIndex = 0;
             this.label2.Text = "Фамилия";
             // 
@@ -1356,10 +1394,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(163, 16);
+            this.label1.Size = new System.Drawing.Size(173, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Шифр анкеты студента ";
             // 
@@ -1369,10 +1407,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(649, 644);
             this.Controls.Add(this.mainPanel);
+            this.DoubleBuffered = true;
             this.MinimumSize = new System.Drawing.Size(665, 400);
             this.Name = "StudentForm";
             this.Text = "Добавление анкеты студента";
-            this.ResizeEnd += new System.EventHandler(this.StudentForm_ResizeEnd);
+            this.Load += new System.EventHandler(this.StudentForm_Load);
+            this.SizeChanged += new System.EventHandler(this.StudentForm_SizeChanged);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.panel1.ResumeLayout(false);

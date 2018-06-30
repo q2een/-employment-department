@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmploymentDepartment.BL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,11 +12,21 @@ namespace EmploymentDepartment
 {
     public partial class MainMDIForm : Form
     {
+        public MySqlGetter DBGetter { get; set; }
+        public EntitiesGetter EntGetter { get; set; }
+        public List<Faculty> Faculties { get; set; }
+        public List<Specialization> Specializations { get; set; }
+
         private int childFormNumber = 0;
 
         public MainMDIForm()
         {
             InitializeComponent();
+            DBGetter = new MySqlGetter();
+            EntGetter = new EntitiesGetter(DBGetter);
+
+            Faculties = EntGetter.GetFaculties();
+            Specializations = EntGetter.GetSpecializations();
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -101,9 +112,15 @@ namespace EmploymentDepartment
 
         private void addStudentMI_Click(object sender, EventArgs e)
         {
-            var form = new StudentForm(ActionType.Add);
+            var student = EntGetter.GetStudents()[0];
+            var form = new StudentForm(ActionType.Edit, student);
             form.MdiParent = this;
             form.Show();
+        }
+
+        private void MainMDIForm_Load(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
         }
     }
 }
