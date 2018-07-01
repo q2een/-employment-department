@@ -106,8 +106,9 @@ namespace EmploymentDepartment
 
         private void getStudentsMI_Click(object sender, EventArgs e)
         {
-            var search = new StudentForm(ActionType.Add);
-            search.ShowDialog();
+            var form = new StudentForm(ActionType.Add);
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void addStudentMI_Click(object sender, EventArgs e)

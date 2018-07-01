@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Windows.Forms;
 
@@ -345,10 +346,11 @@ namespace EmploymentDepartment
 
             if(type == ActionType.Edit)
             {                    
-                btnRemove.Visible = false;
+                btnRemove.Visible = true;
                 btnApply.Text = "Сохранить";
                 this.Text = $"Редактирование информации о студенте [{student.Surname} {student.Name} {student.Patronymic}]" ;
             }
+            
         }
 
         private void StudentForm_SizeChanged(object sender, EventArgs e)
@@ -392,6 +394,7 @@ namespace EmploymentDepartment
         private void cmbGender_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetMartialStatusByGender((GenderType)cmbGender.SelectedIndex + 1);
+            cmbMaritalStatus.Enabled = true;
         }
 
         private void BindComboboxData<T>(ComboBox cmb, List<T> data) where T : IIdentifiable
@@ -419,10 +422,13 @@ namespace EmploymentDepartment
 
         private void cmbLevelOfEducation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var fc = main.EntGetter.GetFaculties((EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1));
-            BindComboboxData(cmbFaculty, fc);
-            var sp = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == (int)cmbFaculty.SelectedValue).ToList();
-            BindComboboxData(cmbFieldOfStudy, sp);
+            var faculties = main.EntGetter.GetFaculties((EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1));
+            BindComboboxData(cmbFaculty, faculties);
+            var specializations = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == (int)cmbFaculty.SelectedValue).ToList();
+            BindComboboxData(cmbFieldOfStudy, specializations);
+
+            cmbFaculty.Enabled = faculties.Count() > 0;
+            cmbFieldOfStudy.Enabled = specializations.Count() > 0;
         }
 
         private void cmbFaculty_SelectedIndexChanged(object sender, EventArgs e)
@@ -459,8 +465,95 @@ namespace EmploymentDepartment
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(FieldOfStudy + "");
-            MessageBox.Show(Student.IsPropertiesEqual<IStudent>(this,"") ? "true" : "false") ;
+            Control a = mainPanel;
+            bool res = true;
+            if(Extentions.ValidateControls(this, errorProvider))
+                MessageBox.Show("Test");
+            else
+                SystemSounds.Beep.Play();
+
+            btnApply.Focus();
+
+            
+
+            //MessageBox.Show(Student.IsPropertiesEqual<IStudent>(this,"") ? "true" : "false") ;
+        }
+
+        private void tbRating_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void cbAddressesAreEquals_CheckedChanged(object sender, EventArgs e)
+        {
+            gbRegAddress.Enabled = !cbAddressesAreEquals.Checked;
+
+            if (cbAddressesAreEquals.Checked)
+            {
+                tbRegCity.Text = "";
+                tbRegRegion.Text = string.Empty;
+                tbRegDistrict.Text = string.Empty;
+                tbRegAddress.Text = "";
+
+                errorProvider.SetError(tbRegCity, "");
+                errorProvider.SetError(tbRegAddress, "");
+            }
+            else
+            {
+                tbRegCity.Focus();
+            }
+        }
+
+
+
+        #region Validations
+
+        private void RequiredCmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Extentions.RequiredComboBoxValidating(sender as ComboBox, errorProvider);
+        }
+
+        private void RequiredComboBox_Validating(object sender, CancelEventArgs e)
+        {
+            var cmb = sender as ComboBox;
+            Extentions.RequiredComboBoxValidating(cmb, errorProvider);
+        }
+
+        private void RequiredTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            var tb = sender as Control;
+            Extentions.RequiredTextBoxValidating(tb, errorProvider);
+        }
+
+        private void tbDOB_Validating(object sender, CancelEventArgs e)
+        {
+            DateTime dt;
+            string error;
+
+            if (!DateTime.TryParse(tbDOB.Text, out dt))
+                error = "Укажите корректную дату рождения";
+            else error = dt.Year < 1900 ? "Укажите корректную дату рождения" : "";
+
+            errorProvider.SetError(tbDOB, error);
+        }
+
+        private void tbYearOfGraduation_Validating(object sender, CancelEventArgs e)
+        {
+            int year;
+           
+            if (!Int32.TryParse(tbYearOfGraduation.Text, out year))
+                errorProvider.SetError(tbYearOfGraduation, "Укажите корректный год окончания университета");
+            else
+                if(year < 2018)
+                errorProvider.SetError(tbYearOfGraduation, "Год окончания университета должен быть больше 2018");
+            else
+                errorProvider.SetError(tbYearOfGraduation, "");
+        }
+        #endregion
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbRegAddress, "");
         }
     }
 }

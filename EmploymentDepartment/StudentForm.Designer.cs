@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -37,17 +38,17 @@
             this.label39 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.label29 = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.tbPhone = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.cbSelfEmployment = new System.Windows.Forms.CheckBox();
             this.cbAddressesAreEquals = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbRegAddress = new System.Windows.Forms.GroupBox();
             this.lblRegCity = new System.Windows.Forms.Label();
             this.tbRegCity = new System.Windows.Forms.TextBox();
             this.lblRegRegion = new System.Windows.Forms.Label();
@@ -58,10 +59,10 @@
             this.tbRegAddress = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblAddress = new System.Windows.Forms.Label();
             this.tbAddress = new System.Windows.Forms.TextBox();
@@ -91,6 +92,7 @@
             this.tbStudyGroup = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.tbRating = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -125,20 +127,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tbRating = new System.Windows.Forms.NumericUpDown();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.mainPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel12.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbRegAddress.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbRating)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -146,7 +149,7 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbRating)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -196,7 +199,7 @@
             this.btnRemove.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnRemove.Location = new System.Drawing.Point(0, 13);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(187, 25);
+            this.btnRemove.Size = new System.Drawing.Size(201, 25);
             this.btnRemove.TabIndex = 27;
             this.btnRemove.TabStop = false;
             this.btnRemove.Text = "Удалить анкету студента";
@@ -227,6 +230,7 @@
             this.btnCancel.TabStop = false;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // label40
             // 
@@ -268,9 +272,9 @@
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.label29);
             this.panel11.Controls.Add(this.lblPhone);
             this.panel11.Controls.Add(this.label18);
-            this.panel11.Controls.Add(this.label29);
             this.panel11.Controls.Add(this.tbPhone);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel11.Location = new System.Drawing.Point(0, 0);
@@ -278,6 +282,18 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(311, 30);
             this.panel11.TabIndex = 0;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.BackColor = System.Drawing.Color.Transparent;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label29.ForeColor = System.Drawing.Color.Tomato;
+            this.label29.Location = new System.Drawing.Point(61, 6);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(14, 16);
+            this.label29.TabIndex = 25;
+            this.label29.Text = "*";
             // 
             // lblPhone
             // 
@@ -300,11 +316,13 @@
             this.tbPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPhone.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbPhone.Location = new System.Drawing.Point(78, 3);
+            this.errorProvider.SetIconAlignment(this.tbPhone, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.tbPhone.Location = new System.Drawing.Point(88, 3);
             this.tbPhone.MaxLength = 180;
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(203, 23);
+            this.tbPhone.Size = new System.Drawing.Size(193, 23);
             this.tbPhone.TabIndex = 22;
+            this.tbPhone.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // label18
             // 
@@ -315,17 +333,6 @@
             this.label18.Size = new System.Drawing.Size(68, 16);
             this.label18.TabIndex = 0;
             this.label18.Text = "Телефон";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label29.ForeColor = System.Drawing.Color.Tomato;
-            this.label29.Location = new System.Drawing.Point(62, 6);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(14, 16);
-            this.label29.TabIndex = 25;
-            this.label29.Text = "*";
             // 
             // panel12
             // 
@@ -352,6 +359,7 @@
             // 
             this.tbEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbEmail.CausesValidation = false;
             this.tbEmail.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbEmail.Location = new System.Drawing.Point(71, 3);
             this.tbEmail.MaxLength = 250;
@@ -364,6 +372,7 @@
             this.cbSelfEmployment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSelfEmployment.AutoSize = true;
+            this.cbSelfEmployment.CausesValidation = false;
             this.cbSelfEmployment.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbSelfEmployment.Location = new System.Drawing.Point(15, 571);
             this.cbSelfEmployment.Name = "cbSelfEmployment";
@@ -377,6 +386,7 @@
             this.cbAddressesAreEquals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbAddressesAreEquals.AutoSize = true;
+            this.cbAddressesAreEquals.CausesValidation = false;
             this.cbAddressesAreEquals.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbAddressesAreEquals.Location = new System.Drawing.Point(16, 340);
             this.cbAddressesAreEquals.Name = "cbAddressesAreEquals";
@@ -384,6 +394,7 @@
             this.cbAddressesAreEquals.TabIndex = 14;
             this.cbAddressesAreEquals.Text = "Адреса регистрации и проживания совпадают";
             this.cbAddressesAreEquals.UseVisualStyleBackColor = true;
+            this.cbAddressesAreEquals.CheckedChanged += new System.EventHandler(this.cbAddressesAreEquals_CheckedChanged);
             // 
             // tableLayoutPanel4
             // 
@@ -392,7 +403,7 @@
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.groupBox1, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.gbRegAddress, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.groupBox2, 0, 0);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(16, 366);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -402,31 +413,31 @@
             this.tableLayoutPanel4.TabIndex = 14;
             this.tableLayoutPanel4.TabStop = true;
             // 
-            // groupBox1
+            // gbRegAddress
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbRegAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.lblRegCity);
-            this.groupBox1.Controls.Add(this.lblRegRegion);
-            this.groupBox1.Controls.Add(this.lblRegDistrict);
-            this.groupBox1.Controls.Add(this.lblRegAddress);
-            this.groupBox1.Controls.Add(this.label26);
-            this.groupBox1.Controls.Add(this.label25);
-            this.groupBox1.Controls.Add(this.label23);
-            this.groupBox1.Controls.Add(this.tbRegCity);
-            this.groupBox1.Controls.Add(this.tbRegAddress);
-            this.groupBox1.Controls.Add(this.label20);
-            this.groupBox1.Controls.Add(this.label22);
-            this.groupBox1.Controls.Add(this.tbRegRegion);
-            this.groupBox1.Controls.Add(this.tbRegDistrict);
-            this.groupBox1.Controls.Add(this.label21);
-            this.groupBox1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.Location = new System.Drawing.Point(314, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(306, 157);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Адрес регистрации";
+            this.gbRegAddress.Controls.Add(this.lblRegCity);
+            this.gbRegAddress.Controls.Add(this.lblRegRegion);
+            this.gbRegAddress.Controls.Add(this.lblRegDistrict);
+            this.gbRegAddress.Controls.Add(this.lblRegAddress);
+            this.gbRegAddress.Controls.Add(this.label26);
+            this.gbRegAddress.Controls.Add(this.label25);
+            this.gbRegAddress.Controls.Add(this.tbRegCity);
+            this.gbRegAddress.Controls.Add(this.tbRegAddress);
+            this.gbRegAddress.Controls.Add(this.label20);
+            this.gbRegAddress.Controls.Add(this.label22);
+            this.gbRegAddress.Controls.Add(this.tbRegRegion);
+            this.gbRegAddress.Controls.Add(this.tbRegDistrict);
+            this.gbRegAddress.Controls.Add(this.label21);
+            this.gbRegAddress.Controls.Add(this.label23);
+            this.gbRegAddress.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gbRegAddress.Location = new System.Drawing.Point(314, 3);
+            this.gbRegAddress.Name = "gbRegAddress";
+            this.gbRegAddress.Size = new System.Drawing.Size(306, 157);
+            this.gbRegAddress.TabIndex = 1;
+            this.gbRegAddress.TabStop = false;
+            this.gbRegAddress.Text = "Адрес регистрации";
             // 
             // lblRegCity
             // 
@@ -450,10 +461,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbRegCity.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorProvider.SetIconAlignment(this.tbRegCity, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.tbRegCity.Location = new System.Drawing.Point(68, 26);
             this.tbRegCity.Name = "tbRegCity";
             this.tbRegCity.Size = new System.Drawing.Size(211, 23);
             this.tbRegCity.TabIndex = 18;
+            this.tbRegCity.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // lblRegRegion
             // 
@@ -533,18 +546,21 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbRegAddress.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorProvider.SetIconAlignment(this.tbRegAddress, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.tbRegAddress.Location = new System.Drawing.Point(68, 121);
             this.tbRegAddress.MaxLength = 200;
             this.tbRegAddress.Name = "tbRegAddress";
             this.tbRegAddress.Size = new System.Drawing.Size(211, 23);
             this.tbRegAddress.TabIndex = 21;
+            this.tbRegAddress.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // label26
             // 
             this.label26.AutoSize = true;
+            this.label26.BackColor = System.Drawing.Color.Transparent;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label26.ForeColor = System.Drawing.Color.Tomato;
-            this.label26.Location = new System.Drawing.Point(47, 124);
+            this.label26.Location = new System.Drawing.Point(45, 124);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(14, 16);
             this.label26.TabIndex = 25;
@@ -555,27 +571,17 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label25.ForeColor = System.Drawing.Color.Tomato;
-            this.label25.Location = new System.Drawing.Point(45, 29);
+            this.label25.Location = new System.Drawing.Point(43, 29);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(14, 16);
             this.label25.TabIndex = 25;
             this.label25.Text = "*";
             // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label23.Location = new System.Drawing.Point(3, 124);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(49, 16);
-            this.label23.TabIndex = 0;
-            this.label23.Text = "Адрес";
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label20.Location = new System.Drawing.Point(3, 29);
+            this.label20.Location = new System.Drawing.Point(1, 29);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(47, 16);
             this.label20.TabIndex = 0;
@@ -585,7 +591,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label22.Location = new System.Drawing.Point(3, 95);
+            this.label22.Location = new System.Drawing.Point(1, 95);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(48, 16);
             this.label22.TabIndex = 0;
@@ -595,11 +601,21 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label21.Location = new System.Drawing.Point(3, 61);
+            this.label21.Location = new System.Drawing.Point(1, 61);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(64, 16);
             this.label21.TabIndex = 0;
             this.label21.Text = "Область";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label23.Location = new System.Drawing.Point(1, 124);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(49, 16);
+            this.label23.TabIndex = 0;
+            this.label23.Text = "Адрес";
             // 
             // groupBox2
             // 
@@ -649,11 +665,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAddress.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbAddress.Location = new System.Drawing.Point(67, 121);
+            this.errorProvider.SetIconAlignment(this.tbAddress, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.tbAddress.Location = new System.Drawing.Point(71, 121);
             this.tbAddress.MaxLength = 200;
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(211, 23);
+            this.tbAddress.Size = new System.Drawing.Size(207, 23);
             this.tbAddress.TabIndex = 17;
+            this.tbAddress.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // lblDistrict
             // 
@@ -677,10 +695,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDistrict.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbDistrict.Location = new System.Drawing.Point(67, 92);
+            this.tbDistrict.Location = new System.Drawing.Point(71, 92);
             this.tbDistrict.MaxLength = 150;
             this.tbDistrict.Name = "tbDistrict";
-            this.tbDistrict.Size = new System.Drawing.Size(211, 23);
+            this.tbDistrict.Size = new System.Drawing.Size(207, 23);
             this.tbDistrict.TabIndex = 16;
             // 
             // lblRegion
@@ -705,10 +723,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbRegion.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbRegion.Location = new System.Drawing.Point(67, 58);
+            this.tbRegion.Location = new System.Drawing.Point(71, 58);
             this.tbRegion.MaxLength = 150;
             this.tbRegion.Name = "tbRegion";
-            this.tbRegion.Size = new System.Drawing.Size(211, 23);
+            this.tbRegion.Size = new System.Drawing.Size(207, 23);
             this.tbRegion.TabIndex = 15;
             // 
             // lblCity
@@ -734,18 +752,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbCity.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbCity.Location = new System.Drawing.Point(67, 26);
+            this.errorProvider.SetIconAlignment(this.tbCity, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.tbCity.Location = new System.Drawing.Point(71, 26);
             this.tbCity.MaxLength = 100;
             this.tbCity.Name = "tbCity";
-            this.tbCity.Size = new System.Drawing.Size(211, 23);
+            this.tbCity.Size = new System.Drawing.Size(207, 23);
             this.tbCity.TabIndex = 14;
+            this.tbCity.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // label28
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label28.ForeColor = System.Drawing.Color.Tomato;
-            this.label28.Location = new System.Drawing.Point(45, 29);
+            this.label28.Location = new System.Drawing.Point(43, 29);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(14, 16);
             this.label28.TabIndex = 25;
@@ -766,7 +786,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label17.Location = new System.Drawing.Point(3, 124);
+            this.label17.Location = new System.Drawing.Point(1, 124);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(49, 16);
             this.label17.TabIndex = 0;
@@ -776,7 +796,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(3, 95);
+            this.label16.Location = new System.Drawing.Point(1, 95);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(48, 16);
             this.label16.TabIndex = 0;
@@ -786,7 +806,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label15.Location = new System.Drawing.Point(3, 61);
+            this.label15.Location = new System.Drawing.Point(1, 61);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(64, 16);
             this.label15.TabIndex = 0;
@@ -796,7 +816,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(3, 29);
+            this.label14.Location = new System.Drawing.Point(1, 29);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(47, 16);
             this.label14.TabIndex = 0;
@@ -844,6 +864,7 @@
             this.cmbLevelOfEducation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLevelOfEducation.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbLevelOfEducation.FormattingEnabled = true;
+            this.errorProvider.SetIconPadding(this.cmbLevelOfEducation, -35);
             this.cmbLevelOfEducation.Items.AddRange(new object[] {
             "Бакалавриат",
             "Специалитет",
@@ -853,6 +874,7 @@
             this.cmbLevelOfEducation.Size = new System.Drawing.Size(188, 24);
             this.cmbLevelOfEducation.TabIndex = 10;
             this.cmbLevelOfEducation.SelectedIndexChanged += new System.EventHandler(this.cmbLevelOfEducation_SelectedIndexChanged);
+            this.cmbLevelOfEducation.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
             // label32
             // 
@@ -907,12 +929,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbYearOfGraduation.BeepOnError = true;
             this.tbYearOfGraduation.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorProvider.SetIconPadding(this.tbYearOfGraduation, -25);
             this.tbYearOfGraduation.Location = new System.Drawing.Point(0, 26);
             this.tbYearOfGraduation.Mask = "0000";
             this.tbYearOfGraduation.Name = "tbYearOfGraduation";
             this.tbYearOfGraduation.Size = new System.Drawing.Size(168, 23);
             this.tbYearOfGraduation.TabIndex = 7;
             this.tbYearOfGraduation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbYearOfGraduation.Validating += new System.ComponentModel.CancelEventHandler(this.tbYearOfGraduation_Validating);
             // 
             // label8
             // 
@@ -955,12 +979,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbStudyGroup.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorProvider.SetIconPadding(this.tbStudyGroup, -25);
             this.tbStudyGroup.Location = new System.Drawing.Point(0, 26);
             this.tbStudyGroup.MaxLength = 10;
             this.tbStudyGroup.Name = "tbStudyGroup";
             this.tbStudyGroup.Size = new System.Drawing.Size(130, 23);
             this.tbStudyGroup.TabIndex = 8;
             this.tbStudyGroup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbStudyGroup.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // label9
             // 
@@ -984,6 +1010,28 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(124, 57);
             this.panel7.TabIndex = 3;
+            // 
+            // tbRating
+            // 
+            this.tbRating.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbRating.DecimalPlaces = 2;
+            this.tbRating.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbRating.Location = new System.Drawing.Point(0, 26);
+            this.tbRating.Minimum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.tbRating.Name = "tbRating";
+            this.tbRating.Size = new System.Drawing.Size(118, 23);
+            this.tbRating.TabIndex = 1;
+            this.tbRating.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
             // 
             // label10
             // 
@@ -1029,13 +1077,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbFaculty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFaculty.Enabled = false;
             this.cmbFaculty.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFaculty.FormattingEnabled = true;
+            this.errorProvider.SetIconPadding(this.cmbFaculty, -35);
             this.cmbFaculty.Location = new System.Drawing.Point(1, 19);
             this.cmbFaculty.Name = "cmbFaculty";
             this.cmbFaculty.Size = new System.Drawing.Size(310, 24);
             this.cmbFaculty.TabIndex = 11;
             this.cmbFaculty.SelectedIndexChanged += new System.EventHandler(this.cmbFaculty_SelectedIndexChanged);
+            this.cmbFaculty.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
             // label31
             // 
@@ -1076,12 +1127,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbFieldOfStudy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFieldOfStudy.Enabled = false;
             this.cmbFieldOfStudy.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFieldOfStudy.FormattingEnabled = true;
+            this.errorProvider.SetIconPadding(this.cmbFieldOfStudy, -35);
             this.cmbFieldOfStudy.Location = new System.Drawing.Point(3, 19);
             this.cmbFieldOfStudy.Name = "cmbFieldOfStudy";
             this.cmbFieldOfStudy.Size = new System.Drawing.Size(309, 24);
             this.cmbFieldOfStudy.TabIndex = 12;
+            this.cmbFieldOfStudy.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
             // label30
             // 
@@ -1155,6 +1209,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDOB.BeepOnError = true;
             this.tbDOB.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorProvider.SetIconPadding(this.tbDOB, -25);
             this.tbDOB.Location = new System.Drawing.Point(0, 22);
             this.tbDOB.Mask = "00/00/0000";
             this.tbDOB.Name = "tbDOB";
@@ -1162,6 +1217,7 @@
             this.tbDOB.TabIndex = 4;
             this.tbDOB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbDOB.ValidatingType = typeof(System.DateTime);
+            this.tbDOB.Validating += new System.ComponentModel.CancelEventHandler(this.tbDOB_Validating);
             // 
             // label5
             // 
@@ -1206,6 +1262,7 @@
             this.cmbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGender.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGender.FormattingEnabled = true;
+            this.errorProvider.SetIconPadding(this.cmbGender, -35);
             this.cmbGender.Items.AddRange(new object[] {
             "Мужской",
             "Женский"});
@@ -1214,6 +1271,7 @@
             this.cmbGender.Size = new System.Drawing.Size(198, 24);
             this.cmbGender.TabIndex = 5;
             this.cmbGender.SelectedIndexChanged += new System.EventHandler(this.cmbGender_SelectedIndexChanged);
+            this.cmbGender.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
             // label6
             // 
@@ -1256,12 +1314,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbMaritalStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMaritalStatus.Enabled = false;
             this.cmbMaritalStatus.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMaritalStatus.FormattingEnabled = true;
+            this.errorProvider.SetIconPadding(this.cmbMaritalStatus, -35);
             this.cmbMaritalStatus.Location = new System.Drawing.Point(0, 22);
             this.cmbMaritalStatus.Name = "cmbMaritalStatus";
             this.cmbMaritalStatus.Size = new System.Drawing.Size(209, 24);
             this.cmbMaritalStatus.TabIndex = 6;
+            this.cmbMaritalStatus.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
             // label7
             // 
@@ -1278,10 +1339,10 @@
             this.tbPatronymic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPatronymic.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPatronymic.Location = new System.Drawing.Point(94, 96);
+            this.tbPatronymic.Location = new System.Drawing.Point(104, 96);
             this.tbPatronymic.MaxLength = 80;
             this.tbPatronymic.Name = "tbPatronymic";
-            this.tbPatronymic.Size = new System.Drawing.Size(544, 23);
+            this.tbPatronymic.Size = new System.Drawing.Size(534, 23);
             this.tbPatronymic.TabIndex = 3;
             this.tbPatronymic.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
             // 
@@ -1290,12 +1351,14 @@
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbName.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbName.Location = new System.Drawing.Point(94, 67);
+            this.errorProvider.SetIconAlignment(this.tbName, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.tbName.Location = new System.Drawing.Point(104, 67);
             this.tbName.MaxLength = 80;
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(544, 23);
+            this.tbName.Size = new System.Drawing.Size(534, 23);
             this.tbName.TabIndex = 2;
             this.tbName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
+            this.tbName.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // tbPreferentialCategory
             // 
@@ -1312,23 +1375,27 @@
             this.tbSurname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSurname.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSurname.Location = new System.Drawing.Point(94, 38);
+            this.errorProvider.SetIconAlignment(this.tbSurname, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.tbSurname.Location = new System.Drawing.Point(104, 38);
             this.tbSurname.MaxLength = 120;
             this.tbSurname.Name = "tbSurname";
-            this.tbSurname.Size = new System.Drawing.Size(544, 23);
+            this.tbSurname.Size = new System.Drawing.Size(534, 23);
             this.tbSurname.TabIndex = 1;
             this.tbSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
+            this.tbSurname.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // tbApplicationFormNumber
             // 
             this.tbApplicationFormNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbApplicationFormNumber.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbApplicationFormNumber.Location = new System.Drawing.Point(189, 6);
+            this.errorProvider.SetIconAlignment(this.tbApplicationFormNumber, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.tbApplicationFormNumber.Location = new System.Drawing.Point(207, 6);
             this.tbApplicationFormNumber.MaxLength = 50;
             this.tbApplicationFormNumber.Name = "tbApplicationFormNumber";
-            this.tbApplicationFormNumber.Size = new System.Drawing.Size(450, 23);
+            this.tbApplicationFormNumber.Size = new System.Drawing.Size(432, 23);
             this.tbApplicationFormNumber.TabIndex = 0;
+            this.tbApplicationFormNumber.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // label4
             // 
@@ -1391,32 +1458,17 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Шифр анкеты студента ";
             // 
-            // tbRating
+            // errorProvider
             // 
-            this.tbRating.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRating.DecimalPlaces = 2;
-            this.tbRating.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbRating.Location = new System.Drawing.Point(0, 26);
-            this.tbRating.Minimum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.tbRating.Name = "tbRating";
-            this.tbRating.Size = new System.Drawing.Size(118, 23);
-            this.tbRating.TabIndex = 1;
-            this.tbRating.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
+            this.errorProvider.BlinkRate = 500;
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
             // 
             // StudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(649, 644);
             this.Controls.Add(this.mainPanel);
             this.DoubleBuffered = true;
@@ -1434,8 +1486,8 @@
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbRegAddress.ResumeLayout(false);
+            this.gbRegAddress.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1447,6 +1499,7 @@
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbRating)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
@@ -1459,7 +1512,7 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbRating)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1508,7 +1561,7 @@
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.CheckBox cbAddressesAreEquals;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbRegAddress;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox tbAddress;
@@ -1564,5 +1617,6 @@
         private System.Windows.Forms.Label lblDistrict;
         private System.Windows.Forms.Label lblRegion;
         private System.Windows.Forms.NumericUpDown tbRating;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
