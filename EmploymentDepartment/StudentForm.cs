@@ -87,15 +87,15 @@ namespace EmploymentDepartment
             }
         }
 
-        public GenderType Gender
+        public int Gender
         {
             get
             {
-                return (GenderType)cmbGender.SelectedIndex+1;
+                return cmbGender.SelectedIndex+1;
             }
             set
             {
-                cmbGender.SelectedIndex = (int)value - 1;
+                cmbGender.SelectedIndex = value - 1;
             }
         }
 
@@ -347,6 +347,7 @@ namespace EmploymentDepartment
             if(type == ActionType.Edit)
             {                    
                 btnRemove.Visible = true;
+                btnSetSource.Visible = true;
                 btnApply.Text = "Сохранить";
                 this.Text = $"Редактирование информации о студенте [{student.Surname} {student.Name} {student.Patronymic}]" ;
             }
@@ -465,16 +466,54 @@ namespace EmploymentDepartment
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            Control a = mainPanel;
-            bool res = true;
-            if(Extentions.ValidateControls(this, errorProvider))
-                MessageBox.Show("Test");
-            else
-                SystemSounds.Beep.Play();
+            /* Control a = mainPanel;
+             bool res = true;
+             if(Extentions.ValidateControls(this, errorProvider))
+                 MessageBox.Show("Test");
+             else
+                 SystemSounds.Beep.Play();
 
-            btnApply.Focus();
-
+             btnApply.Focus(); */
+            if (cbAddressesAreEquals.Checked)
+                SetRegAddressValues(false);
             
+            if (!Extentions.ValidateControls(this, errorProvider))
+            {
+                SystemSounds.Beep.Play();
+                return;
+            }
+
+            if (Type == ActionType.Add)
+            {
+                try
+                {
+                    var nameValue = this.GetPropertiesNameValuePair<IStudent>(true, "ID", "LevelOfEducation", "Faculty");
+                    main.DBGetter.Insert("Student", nameValue);
+                    MessageBox.Show($"Студент {Surname} {Name} {Patronymic}\nдобавлен в базу", "Добавление студента", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message,"Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                }
+                return;
+            }
+
+            if (Type == ActionType.Edit)
+            {
+                try
+                {
+                    var nameValue = Student.GetPropertiesDifference<IStudent>(this, "ID", "LevelOfEducation", "Faculty");
+                    main.DBGetter.Update("Student",ID,nameValue);
+                    MessageBox.Show($"Информация о студенте обновлена\nФИО студента: {Surname} {Name} {Patronymic}", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка обновления данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return;
+
+            }
 
             //MessageBox.Show(Student.IsPropertiesEqual<IStudent>(this,"") ? "true" : "false") ;
         }
@@ -484,27 +523,29 @@ namespace EmploymentDepartment
 
         }
 
+        private void SetRegAddressValues(bool isEmpty)
+        {
+            tbRegCity.Text = isEmpty ? "" : tbCity.Text;
+            tbRegRegion.Text = isEmpty ? "" : tbRegion.Text;
+            tbRegDistrict.Text = isEmpty ? "" : tbDistrict.Text;
+            tbRegAddress.Text = isEmpty ? "" : tbAddress.Text;
+            errorProvider.SetError(tbRegCity, "");
+            errorProvider.SetError(tbRegAddress, "");
+        }
+
         private void cbAddressesAreEquals_CheckedChanged(object sender, EventArgs e)
         {
             gbRegAddress.Enabled = !cbAddressesAreEquals.Checked;
 
             if (cbAddressesAreEquals.Checked)
             {
-                tbRegCity.Text = "";
-                tbRegRegion.Text = string.Empty;
-                tbRegDistrict.Text = string.Empty;
-                tbRegAddress.Text = "";
-
-                errorProvider.SetError(tbRegCity, "");
-                errorProvider.SetError(tbRegAddress, "");
+                SetRegAddressValues(true);
             }
             else
             {
                 tbRegCity.Focus();
             }
         }
-
-
 
         #region Validations
 
@@ -554,6 +595,11 @@ namespace EmploymentDepartment
         private void btnCancel_Click(object sender, EventArgs e)
         {
             errorProvider.SetError(tbRegAddress, "");
+        }
+
+        private void btnSetSource_Click(object sender, EventArgs e)
+        {
+            this.SetPropertiesValue<IStudent>(Student, "");
         }
     }
 }

@@ -12,7 +12,7 @@ namespace EmploymentDepartment
 {
     public partial class MainMDIForm : Form
     {
-        public MySqlGetter DBGetter { get; set; }
+        public IDBGetter DBGetter { get; set; }
         public EntitiesGetter EntGetter { get; set; }
         public List<Faculty> Faculties { get; set; }
         public List<Specialization> Specializations { get; set; }

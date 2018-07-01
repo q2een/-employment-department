@@ -10,7 +10,7 @@ namespace EmploymentDepartment.BL
         string Name { get; set;}
         string Patronymic { get; set;}
         DateTime DOB { get; set;}
-        GenderType Gender { get; set;}
+        int Gender { get; set;}
         bool MaritalStatus { get; set;}
         int YearOfGraduation { get; set;}
         EducationLevelType LevelOfEducation { get; set;}

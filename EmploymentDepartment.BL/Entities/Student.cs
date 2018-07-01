@@ -27,7 +27,7 @@ namespace EmploymentDepartment.BL
         public DateTime DOB { get; set; }
 
         [DisplayName("Пол")]
-        public GenderType Gender { get; set; }
+        public int Gender { get; set; }
 
         [DisplayName("Семейное положение ")]
         public bool MaritalStatus { get; set; }

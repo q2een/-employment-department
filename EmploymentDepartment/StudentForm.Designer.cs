@@ -128,6 +128,7 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnSetSource = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -185,6 +186,7 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.btnSetSource);
             this.panel1.Controls.Add(this.btnRemove);
             this.panel1.Controls.Add(this.btnApply);
             this.panel1.Controls.Add(this.btnCancel);
@@ -199,7 +201,7 @@
             this.btnRemove.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnRemove.Location = new System.Drawing.Point(0, 13);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(201, 25);
+            this.btnRemove.Size = new System.Drawing.Size(198, 25);
             this.btnRemove.TabIndex = 27;
             this.btnRemove.TabStop = false;
             this.btnRemove.Text = "Удалить анкету студента";
@@ -223,7 +225,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnCancel.Location = new System.Drawing.Point(414, 13);
+            this.btnCancel.Location = new System.Drawing.Point(426, 13);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(96, 25);
             this.btnCancel.TabIndex = 27;
@@ -1464,6 +1466,19 @@
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
+            // btnSetSource
+            // 
+            this.btnSetSource.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSetSource.Location = new System.Drawing.Point(204, 13);
+            this.btnSetSource.Name = "btnSetSource";
+            this.btnSetSource.Size = new System.Drawing.Size(159, 25);
+            this.btnSetSource.TabIndex = 27;
+            this.btnSetSource.TabStop = false;
+            this.btnSetSource.Text = "Исходные значения";
+            this.btnSetSource.UseVisualStyleBackColor = true;
+            this.btnSetSource.Visible = false;
+            this.btnSetSource.Click += new System.EventHandler(this.btnSetSource_Click);
+            // 
             // StudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1618,5 +1633,6 @@
         private System.Windows.Forms.Label lblRegion;
         private System.Windows.Forms.NumericUpDown tbRating;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button btnSetSource;
     }
 }

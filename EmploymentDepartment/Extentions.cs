@@ -31,6 +31,15 @@ namespace EmploymentDepartment
             return ValidateControls(container, errorProvider, ref container, ref result);
         }
 
+        /// <summary>
+        /// Возвращает результат проверки на ошибки элементов управления в заданном контейнере.
+        /// Проверка осуществляется путем поочередного задания фокуса на элемент упралвения.
+        /// </summary>
+        /// <param name="container">Контейнер элементов управления для проверки</param>
+        /// <param name="errorProvider">Интерфейс пользователя, указывающий на наличие ошибки</param>
+        /// <param name="lastControl">Послдедний элемент управления, находящийся под фокусом</param>
+        /// <param name="result">Результат</param>
+        /// <returns></returns>
         private static bool ValidateControls(Control container, ErrorProvider errorProvider, ref Control lastControl, ref bool result)
         {   
             foreach (Control control in container.Controls)
@@ -66,7 +75,7 @@ namespace EmploymentDepartment
 
         public static void RequiredComboBoxValidating(ComboBox cmb, ErrorProvider errorProvider)
         {
-            if (cmb.SelectedIndex < 0)
+            if (cmb.SelectedIndex < 0 && cmb.Enabled)
                 errorProvider.SetError(cmb, "Необходимо выбрать элемент из выпадающего списка");
             else
                 errorProvider.SetError(cmb, "");
@@ -74,7 +83,7 @@ namespace EmploymentDepartment
 
         public static void RequiredTextBoxValidating(Control tb, ErrorProvider errorProvider)
         {
-            if (String.IsNullOrEmpty(tb.Text.Replace(".", "").Trim()))
+            if (String.IsNullOrEmpty(tb.Text.Replace(".", "").Trim()) && tb.Enabled)
                 errorProvider.SetError(tb, "Поле обязательно к заполнению");
             else
                 errorProvider.SetError(tb, ""); 
@@ -104,9 +113,35 @@ namespace EmploymentDepartment
             }              
         }
 
-        public static List<string> GetPropertiesDifference<T>(this T self, T to, params string[] ignore) where T : class
+        public static Dictionary<string, object> GetPropertiesNameValuePair<T>(this T self,bool isNotNullOnly, params string[] ignore) where T : class
         {
-            var dif = new List<string>();
+            var nameValue = new Dictionary<string, object>();
+
+            if (self == null)
+                return nameValue;
+
+            Type type = typeof(T);
+            List<string> ignoreList = new List<string>(ignore);
+
+            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (!ignoreList.Contains(property.Name))
+                {
+                    object value = type.GetProperty(property.Name).GetValue(self, null);
+
+                    if (isNotNullOnly && value == null || string.IsNullOrEmpty(value.ToString()))
+                        continue;
+
+                    nameValue.Add(property.Name, value);
+                }
+            }
+
+            return nameValue;
+        }
+
+        public static Dictionary<string,object> GetPropertiesDifference<T>(this T self, T to, params string[] ignore) where T : class
+        {
+            var dif = new Dictionary<string, object>();
 
             if (self == null || to == null)
                 return dif;
@@ -122,7 +157,7 @@ namespace EmploymentDepartment
                     object toValue = type.GetProperty(property.Name).GetValue(to, null);
 
                     if (selfValue != toValue && (selfValue == null || !selfValue.Equals(toValue)))
-                        dif.Add($"{property.Name} = '{toValue}'");
+                        dif.Add(property.Name,toValue);
                 }
             }
 
