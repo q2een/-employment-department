@@ -44,11 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="DataBase\MySqlGetter.cs" />
+    <Compile Include="DataBase\MySqlDB.cs" />
     <Compile Include="DataBase\EntitiesGetter.cs" />
-    <Compile Include="DataBase\IDBGetter.cs" />
-    <Compile Include="DataBase\Queries.cs" />
+    <Compile Include="DataBase\IDataBase.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\EducationLevelType.cs" />
     <Compile Include="Entities\Faculty.cs" />
@@ -61,6 +59,7 @@
     <Compile Include="Entities\Vacancy.cs" />
     <Compile Include="Extention.cs" />
     <Compile Include="IEntity\ICompany.cs" />
+    <Compile Include="IEntity\ISpecialization.cs" />
     <Compile Include="IEntity\IStudent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

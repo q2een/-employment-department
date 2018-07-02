@@ -5,12 +5,11 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public class Specialization : IIdentifiable
+    public class Specialization : IIdentifiable, ISpecialization
     {
         public int ID { get; set; }
         public int Faculty { get; set; }
         public EducationLevelType LevelOfEducation { get; set; }
-        public string Name { get; set; }
-        public Faculty OnFaculty { get; set; }        
+        public string Name { get; set; }        
     }
 }

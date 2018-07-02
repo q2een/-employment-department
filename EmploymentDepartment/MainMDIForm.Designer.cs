@@ -50,7 +50,7 @@
             this.льготнаяКатегорияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.факультетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.профильToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.specializationMI = new System.Windows.Forms.ToolStripMenuItem();
             this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -169,26 +169,26 @@
             // getStudentsMI
             // 
             this.getStudentsMI.Name = "getStudentsMI";
-            this.getStudentsMI.Size = new System.Drawing.Size(147, 22);
+            this.getStudentsMI.Size = new System.Drawing.Size(152, 22);
             this.getStudentsMI.Text = "Студенты";
             this.getStudentsMI.Click += new System.EventHandler(this.getStudentsMI_Click);
             // 
             // предприятияToolStripMenuItem
             // 
             this.предприятияToolStripMenuItem.Name = "предприятияToolStripMenuItem";
-            this.предприятияToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.предприятияToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.предприятияToolStripMenuItem.Text = "Предприятия";
             // 
             // вакансииToolStripMenuItem
             // 
             this.вакансииToolStripMenuItem.Name = "вакансииToolStripMenuItem";
-            this.вакансииToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.вакансииToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.вакансииToolStripMenuItem.Text = "Вакансии";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(144, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
             // 
             // добавитьToolStripMenuItem
             // 
@@ -200,7 +200,7 @@
             this.льготнаяКатегорияToolStripMenuItem,
             this.toolStripMenuItem2,
             this.факультетToolStripMenuItem,
-            this.профильToolStripMenuItem});
+            this.specializationMI});
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
             this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.добавитьToolStripMenuItem.Text = "Добавить";
@@ -247,11 +247,12 @@
             this.факультетToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.факультетToolStripMenuItem.Text = "Факультет";
             // 
-            // профильToolStripMenuItem
+            // specializationMI
             // 
-            this.профильToolStripMenuItem.Name = "профильToolStripMenuItem";
-            this.профильToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.профильToolStripMenuItem.Text = "Профиль";
+            this.specializationMI.Name = "specializationMI";
+            this.specializationMI.Size = new System.Drawing.Size(182, 22);
+            this.specializationMI.Text = "Профиль";
+            this.specializationMI.Click += new System.EventHandler(this.specializationMI_Click);
             // 
             // editMenu
             // 
@@ -613,7 +614,7 @@
         private System.Windows.Forms.ToolStripMenuItem льготнаяКатегорияToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem факультетToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem профильToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem specializationMI;
         private System.Windows.Forms.ToolStripMenuItem предприятияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem вакансииToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;

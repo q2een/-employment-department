@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public interface IDBGetter
+    public interface IDataBase
     {
         List<Dictionary<string, object>> GetCollection(string query);
         void Insert(string tableName, Dictionary<string, object> fields);

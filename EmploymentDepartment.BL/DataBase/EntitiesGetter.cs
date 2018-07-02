@@ -7,7 +7,7 @@ namespace EmploymentDepartment.BL
 {
     public class EntitiesGetter
     {
-        private readonly IDBGetter db;
+        private readonly IDataBase db;
 
         private string Student
         {
@@ -70,7 +70,7 @@ namespace EmploymentDepartment.BL
             }
         }
 
-        public EntitiesGetter(IDBGetter dbGetter)
+        public EntitiesGetter(IDataBase dbGetter)
         {
             this.db = dbGetter;
         }

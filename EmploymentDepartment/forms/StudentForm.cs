@@ -39,7 +39,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public new string Name
+        string IStudent.Name
         {
             get
             {
@@ -196,8 +196,7 @@ namespace EmploymentDepartment
                 if (value != null)
                     pc = main.PreferentialCategories.FirstOrDefault(i => i.ID == value);
 
-                linkPreferentialCategory.Tag = pc?.Name ?? "Выбрать льготную категорию...";
-                linkPreferentialCategory.Text = ShortenString();
+                linkPreferentialCategory.Text = ShortenString(pc?.Name ?? "Выбрать льготную категорию...");
             }
         }
 
@@ -334,8 +333,7 @@ namespace EmploymentDepartment
         }
 
         #endregion
-
-
+        
         public IStudent Student { get; private set; }
         public ActionType Type { get; private set; }
         private MainMDIForm main;
@@ -353,34 +351,30 @@ namespace EmploymentDepartment
             SetFormText(student);
         }
 
+        // Обработка события загрузки формы.
         private void StudentForm_Load(object sender, EventArgs e)
         {
             if (!(this.MdiParent is MainMDIForm))
                 throw new Exception();
 
             this.main = this.MdiParent as MainMDIForm;
-            InitFiels();
+            SetDefaultValues();
         }
         
+        // Обработка события изменения размера формы.
         private void StudentForm_SizeChanged(object sender, EventArgs e)
         {
             mainPanel.AutoScroll = this.Size.Height < 650;
             linkPreferentialCategory.Text = ShortenString();
         }
         
+        // Устанавливает заголовок окна.
         private void SetFormText(IStudent student)
         {
             if (Type == ActionType.Edit)
                 this.Text = $"Редактирование информации о студенте [{student.Surname} {student.Name} {student.Patronymic}]";
         }
         
-        private void InitFiels()
-        {
-            this.SetPropertiesValue<IStudent>(Student, "");
-            if (tbRegCity.Text == tbCity.Text && tbRegRegion.Text == tbRegion.Text && tbRegDistrict.Text == tbDistrict.Text && tbRegAddress.Text == tbAddress.Text)
-                cbAddressesAreEquals.Checked = true;
-        }
-
         #region Поведение кнопок "..." (Редакторовать)
         private void lblEdit_Click(object sender, EventArgs e)
         {
@@ -400,6 +394,18 @@ namespace EmploymentDepartment
 
         #region Поведение элементов управления.
 
+        // Установка одинаковых значений адресов.
+        private void SetRegAddressValues(bool isEmpty)
+        {
+            tbRegCity.Text = isEmpty ? "" : tbCity.Text;
+            tbRegRegion.Text = isEmpty ? "" : tbRegion.Text;
+            tbRegDistrict.Text = isEmpty ? "" : tbDistrict.Text;
+            tbRegAddress.Text = isEmpty ? "" : tbAddress.Text;
+            errorProvider.SetError(tbRegCity, "");
+            errorProvider.SetError(tbRegAddress, "");
+        }
+
+        // Устанавливает варианты выпадающего списка "Семейное положение" в зависимости от выбранного пола.
         private void SetMartialStatusByGender(GenderType type)
         {
             cmbMaritalStatus.Items.Clear();
@@ -418,46 +424,26 @@ namespace EmploymentDepartment
             cmbMaritalStatus.SelectedIndex = 0;
         }
 
+        // Смена значений в выдающем списке "Пол". Обработка события.
         private void cmbGender_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetMartialStatusByGender((GenderType)cmbGender.SelectedIndex + 1);
             cmbMaritalStatus.Enabled = true;
         }
 
-        private void BindComboboxData<T>(ComboBox cmb, List<T> data) where T : IIdentifiable
-        {
-            var value = cmb.SelectedValue;
-            int id;
-
-            cmb.DataSource = null;
-            cmb.Items.Clear();
-            cmb.DataSource = data;
-            cmb.DisplayMember = "Name";
-            cmb.ValueMember = "ID";
-
-            // Выделить элемент (если он существует), который был активен до изменений.
-            if (!Int32.TryParse(value + "", out id))
-                return;
-
-            var elem = data.FirstOrDefault(i => i.ID == id);
-
-            if (elem == null)
-                return;
-
-            cmb.SelectedIndex = data.IndexOf(elem);
-        }
-
+        // Смена значений в выдающем списке "Уровень образования". Обработка события.
         private void cmbLevelOfEducation_SelectedIndexChanged(object sender, EventArgs e)
         {
             var faculties = main.EntGetter.GetFaculties((EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1));
-            BindComboboxData(cmbFaculty, faculties);
+            cmbFaculty.BindComboboxData(faculties);
             var specializations = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == (int)cmbFaculty.SelectedValue).ToList();
-            BindComboboxData(cmbFieldOfStudy, specializations);
+            cmbFieldOfStudy.BindComboboxData(specializations);
 
             cmbFaculty.Enabled = faculties.Count() > 0;
             cmbFieldOfStudy.Enabled = specializations.Count() > 0;
         }
 
+        // Смена значений в выдающем списке "Факультет". Обработка события.
         private void cmbFaculty_SelectedIndexChanged(object sender, EventArgs e)
         {
             var value = cmbFaculty.SelectedValue;
@@ -467,44 +453,16 @@ namespace EmploymentDepartment
                 return;
 
             var sp = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == id).ToList();
-            BindComboboxData(cmbFieldOfStudy, sp);
-        }
-       
-        private void cmbFaculty_DropDown(object sender, EventArgs e)
-        {
-
+            cmbFieldOfStudy.BindComboboxData(sp);
         }
 
+        // Валидация нажатия клавиши при вводе значений ФИО. Разрешены А-яA-z-. Обработка события.
         private void tbSurname_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = Extentions.SurnameKeyPressValidator(e.KeyChar);
         }
 
-        private void btnApply_Click(object sender, EventArgs e)
-        {
-            /* Control a = mainPanel;
-             bool res = true;
-             if(Extentions.ValidateControls(this, errorProvider))
-                 MessageBox.Show("Test");
-             else
-                 SystemSounds.Beep.Play();
-
-             btnApply.Focus(); */
-
-
-            //MessageBox.Show(Student.IsPropertiesEqual<IStudent>(this,"") ? "true" : "false") ;
-        }
-
-        private void SetRegAddressValues(bool isEmpty)
-        {
-            tbRegCity.Text = isEmpty ? "" : tbCity.Text;
-            tbRegRegion.Text = isEmpty ? "" : tbRegion.Text;
-            tbRegDistrict.Text = isEmpty ? "" : tbDistrict.Text;
-            tbRegAddress.Text = isEmpty ? "" : tbAddress.Text;
-            errorProvider.SetError(tbRegCity, "");
-            errorProvider.SetError(tbRegAddress, "");
-        }
-
+        // Смена состояния флага "Адреса совпадают ...". Обработка события.
         private void cbAddressesAreEquals_CheckedChanged(object sender, EventArgs e)
         {
             gbRegAddress.Enabled = !cbAddressesAreEquals.Checked;
@@ -520,26 +478,30 @@ namespace EmploymentDepartment
         }
 
         #endregion
-      
+
         #region Validations
 
+        // Валидация выпадающих списков обязательных к выбору элемента при изменении выбранного индекса.
         private void RequiredCmb_SelectedIndexChanged(object sender, EventArgs e)
         {
             Extentions.RequiredComboBoxValidating(sender as ComboBox, errorProvider);            
         }
 
+        // Валидация выпадающих списков обязательных к выбору элемента.
         private void RequiredComboBox_Validating(object sender, CancelEventArgs e)
         {
             var cmb = sender as ComboBox;
             Extentions.RequiredComboBoxValidating(cmb, errorProvider);
         }
 
+        // Валидация текстовых полей обязательных к заполнению.
         private void RequiredTextBox_Validating(object sender, CancelEventArgs e)
         {
             var tb = sender as Control;
             Extentions.RequiredTextBoxValidating(tb, errorProvider);
         }
 
+        // Валидация текстового поля "Год рождения".
         private void tbDOB_Validating(object sender, CancelEventArgs e)
         {
             DateTime dt;
@@ -552,6 +514,7 @@ namespace EmploymentDepartment
             errorProvider.SetError(tbDOB, error);
         }
 
+        // Валадация текстового поля "Год окончания ВУЗа".
         private void tbYearOfGraduation_Validating(object sender, CancelEventArgs e)
         {
             int year;
@@ -566,38 +529,31 @@ namespace EmploymentDepartment
         }
         #endregion
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnSetSource_Click(object sender, EventArgs e)
-        {
-           
-        }
-
         #region IEditable interfaces implemantation.
 
-        private bool ValidateFields()
+        // Валидация полей на форме.
+        public bool ValidateFields()
         {
+            // Установка одинаковых адресов в полях.
             if (cbAddressesAreEquals.Checked)
                 SetRegAddressValues(false);
 
-            if (!Extentions.ValidateControls(this, errorProvider))
-            {
-                SystemSounds.Beep.Play();
-                return false;
-            }
-
-            return true;
+            return Extentions.ValidateFields(this, errorProvider);
         }
 
+        // Задает полям исходные значения.
         public void SetDefaultValues()
         {
-            InitFiels();
+            this.SetPropertiesValue<IStudent>(Student, "");
+            if (tbRegCity.Text == tbCity.Text && !string.IsNullOrEmpty(tbRegCity.Text) &&
+                tbRegRegion.Text == tbRegion.Text && !string.IsNullOrEmpty(tbRegRegion.Text) &&
+                tbRegDistrict.Text == tbDistrict.Text && !string.IsNullOrEmpty(tbRegDistrict.Text) &&
+                tbRegAddress.Text == tbAddress.Text && !string.IsNullOrEmpty(tbRegAddress.Text))
+                cbAddressesAreEquals.Checked = true;
         }
 
-        public void SaveChanges()
+        // Сохраняет внесенные изменения в БД.
+        public void Save()
         {
             if (!ValidateFields() || Type != ActionType.Edit)
                 return;
@@ -613,11 +569,10 @@ namespace EmploymentDepartment
                 // Обновляем данные
                 main.DBGetter.Update("Student", ID, nameValue);
 
-                MessageBox.Show($"Информация о студенте обновлена\nФИО студента: {Surname} {Name} {Patronymic}", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Информация о студенте обновлена\nФИО студента: {Surname} {((IStudent)this).Name} {Patronymic}", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Присваеваем свойству новые исходные значения.
                 Student = ((IStudent)this).GetInstance<IStudent, Student>();
-
                 SetFormText(this);
             }
             catch (Exception ex)
@@ -626,14 +581,17 @@ namespace EmploymentDepartment
             }         
         }
 
+        // TODO
+        // Удаление анкеты пользователя из БД.
         public void Remove()
         {
             throw new NotImplementedException();
         }
 
-        public void Add()
+        // Добавляет данные в БД.
+        public void Insert()
         {
-            if (!ValidateFields() || Type != ActionType.Add)
+            /*if (!ValidateFields() || Type != ActionType.Add)
                 return;
 
             try
@@ -650,21 +608,47 @@ namespace EmploymentDepartment
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }     */
+
+            try
+            {
+                this.Insert(main.DBGetter, "student", "ID", "LevelOfEducation", "Faculty");
+
+                var msg = $"Студент {Surname} {((IStudent)this).Name} {Patronymic}\nдобавлен в базу";
+
+                MessageBox.Show(msg, "Добавление студента", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
         }
 
         #endregion
 
-        public string ShortenString()
+        #region Обработка событий для выбора льготной категирии.
+
+        // Обрезает строку для ее корректного отображения на окне.
+        private string ShortenString(string tagText=null)
         {
+            if (tagText == null)
+                tagText = linkPreferentialCategory.Tag.ToString();
+            else
+                linkPreferentialCategory.Tag = tagText;
+
             string result = string.Copy(linkPreferentialCategory.Tag.ToString());
 
             int width = this.Width - lblPreferentialCategory.Width - 70;
             TextRenderer.MeasureText(result, linkPreferentialCategory.Font, new Size(width, 0), TextFormatFlags.EndEllipsis | TextFormatFlags.ModifyString);
 
             return result;
-        }
+        }      
 
+        // Нажатие на элемент управление для выбора льготной категории. Обработка события.
         private void linkPreferentialCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = new PreferentialCategoryPicker(main.PreferentialCategories, linkPreferentialCategory, linkPreferentialCategory.Tag.ToString());
@@ -672,34 +656,29 @@ namespace EmploymentDepartment
             linkPreferentialCategory.Text = ShortenString();
         }
 
+        // Нажатие на элемент управления "Очистить". Обработка события.
         private void linkClear_Click(object sender, EventArgs e)
         {
-            linkPreferentialCategory.Tag = "Выбрать льготную категорию...";
-            linkPreferentialCategory.Text = ShortenString();
+            linkPreferentialCategory.Text = ShortenString("Выбрать льготную категорию...");
         }
 
-        private void StudentForm_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (linkPreferentialCategory.Focused)
-            {
-
-
-            }
-        }
-
+        // Обработка события нажития клавиши при активном элементе для выбора льготной категории. Обработка события.
         private void linkPreferentialCategory_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+            // Открыть окно на space.
             if (e.KeyCode == Keys.Space)
             {
                 linkPreferentialCategory_LinkClicked(sender, null);
                 return;
             }
 
+            // Очистить на backspace and delete.
             if (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete)
             {
                 linkClear_Click(sender, null);
                 return;
             }
         }
+        #endregion
     }
 }

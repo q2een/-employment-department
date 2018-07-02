@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.linkClear = new System.Windows.Forms.Label();
+            this.linkPreferentialCategory = new System.Windows.Forms.LinkLabel();
+            this.lblPreferentialCategory = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
@@ -117,16 +121,13 @@
             this.tbSurname = new System.Windows.Forms.TextBox();
             this.tbApplicationFormNumber = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblPreferentialCategory = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.linkPreferentialCategory = new System.Windows.Forms.LinkLabel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.linkClear = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel12.SuspendLayout();
@@ -147,7 +148,6 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -176,6 +176,58 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(649, 604);
             this.mainPanel.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.linkClear);
+            this.panel1.Controls.Add(this.linkPreferentialCategory);
+            this.panel1.Controls.Add(this.lblPreferentialCategory);
+            this.panel1.Location = new System.Drawing.Point(15, 298);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(624, 40);
+            this.panel1.TabIndex = 14;
+            // 
+            // linkClear
+            // 
+            this.linkClear.AutoSize = true;
+            this.linkClear.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkClear.ForeColor = System.Drawing.Color.Blue;
+            this.linkClear.Location = new System.Drawing.Point(72, 20);
+            this.linkClear.Name = "linkClear";
+            this.linkClear.Size = new System.Drawing.Size(71, 16);
+            this.linkClear.TabIndex = 2;
+            this.linkClear.Text = "Очистить";
+            this.linkClear.Click += new System.EventHandler(this.linkClear_Click);
+            // 
+            // linkPreferentialCategory
+            // 
+            this.linkPreferentialCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkPreferentialCategory.AutoEllipsis = true;
+            this.linkPreferentialCategory.AutoSize = true;
+            this.linkPreferentialCategory.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkPreferentialCategory.Location = new System.Drawing.Point(157, 11);
+            this.linkPreferentialCategory.Name = "linkPreferentialCategory";
+            this.linkPreferentialCategory.Size = new System.Drawing.Size(223, 16);
+            this.linkPreferentialCategory.TabIndex = 1;
+            this.linkPreferentialCategory.TabStop = true;
+            this.linkPreferentialCategory.Tag = "Выбрать льготную категорию...";
+            this.linkPreferentialCategory.Text = "Выбрать льготную категорию...";
+            this.linkPreferentialCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPreferentialCategory_LinkClicked);
+            this.linkPreferentialCategory.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.linkPreferentialCategory_PreviewKeyDown);
+            // 
+            // lblPreferentialCategory
+            // 
+            this.lblPreferentialCategory.AutoSize = true;
+            this.lblPreferentialCategory.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPreferentialCategory.Location = new System.Drawing.Point(-3, 4);
+            this.lblPreferentialCategory.Name = "lblPreferentialCategory";
+            this.lblPreferentialCategory.Size = new System.Drawing.Size(150, 16);
+            this.lblPreferentialCategory.TabIndex = 0;
+            this.lblPreferentialCategory.Text = "Льготная категория:";
             // 
             // label40
             // 
@@ -784,7 +836,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(623, 57);
             this.tableLayoutPanel2.TabIndex = 12;
             // 
@@ -1343,16 +1395,6 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Отчество";
             // 
-            // lblPreferentialCategory
-            // 
-            this.lblPreferentialCategory.AutoSize = true;
-            this.lblPreferentialCategory.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPreferentialCategory.Location = new System.Drawing.Point(-3, 4);
-            this.lblPreferentialCategory.Name = "lblPreferentialCategory";
-            this.lblPreferentialCategory.Size = new System.Drawing.Size(150, 16);
-            this.lblPreferentialCategory.TabIndex = 0;
-            this.lblPreferentialCategory.Text = "Льготная категория:";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -1400,47 +1442,6 @@
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
-            // linkPreferentialCategory
-            // 
-            this.linkPreferentialCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkPreferentialCategory.AutoEllipsis = true;
-            this.linkPreferentialCategory.AutoSize = true;
-            this.linkPreferentialCategory.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkPreferentialCategory.Location = new System.Drawing.Point(157, 11);
-            this.linkPreferentialCategory.Name = "linkPreferentialCategory";
-            this.linkPreferentialCategory.Size = new System.Drawing.Size(223, 16);
-            this.linkPreferentialCategory.TabIndex = 1;
-            this.linkPreferentialCategory.Tag = "Выбрать льготную категорию...";
-            this.linkPreferentialCategory.Text = "Выбрать льготную категорию...";
-            this.linkPreferentialCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPreferentialCategory_LinkClicked);
-            this.linkPreferentialCategory.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.linkPreferentialCategory_PreviewKeyDown);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.linkClear);
-            this.panel1.Controls.Add(this.linkPreferentialCategory);
-            this.panel1.Controls.Add(this.lblPreferentialCategory);
-            this.panel1.Location = new System.Drawing.Point(15, 298);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(624, 40);
-            this.panel1.TabIndex = 14;
-            // 
-            // linkClear
-            // 
-            this.linkClear.AutoSize = true;
-            this.linkClear.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkClear.ForeColor = System.Drawing.Color.Blue;
-            this.linkClear.Location = new System.Drawing.Point(72, 20);
-            this.linkClear.Name = "linkClear";
-            this.linkClear.Size = new System.Drawing.Size(71, 16);
-            this.linkClear.TabIndex = 2;
-            this.linkClear.Text = "Очистить";
-            this.linkClear.Click += new System.EventHandler(this.linkClear_Click);
-            // 
             // StudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1454,9 +1455,10 @@
             this.Text = "Добавление анкеты студента";
             this.Load += new System.EventHandler(this.StudentForm_Load);
             this.SizeChanged += new System.EventHandler(this.StudentForm_SizeChanged);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StudentForm_KeyPress);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
@@ -1490,8 +1492,6 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

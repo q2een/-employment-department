@@ -7,7 +7,7 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public class MySqlGetter: IDBGetter
+    public class MySqlDB: IDataBase
     {
         private readonly string connection = "Database=work;Data Source=localhost;User Id=root;Password=root;CharSet=utf8;";
 

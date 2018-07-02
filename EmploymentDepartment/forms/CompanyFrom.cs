@@ -262,6 +262,7 @@ namespace EmploymentDepartment
                 throw new Exception();
 
             this.main = this.MdiParent as MainMDIForm;
+            
             InitFiels();
         }
         
@@ -298,23 +299,14 @@ namespace EmploymentDepartment
 
         #region IEditable interfaces implemantation.
 
-        private bool ValidateFields()
-        {
-            if (!Extentions.ValidateControls(this, errorProvider))
-            {
-                System.Media.SystemSounds.Beep.Play();
-                return false;
-            }
-
-            return true;
-        }
+        public bool ValidateFields() => Extentions.ValidateFields(this, errorProvider);
 
         public void SetDefaultValues()
         {
             InitFiels();
         }
 
-        public void SaveChanges()
+        public void Save()
         {
             if (!ValidateFields() || Type != ActionType.Edit)
                 return;
@@ -347,7 +339,7 @@ namespace EmploymentDepartment
             throw new NotImplementedException();
         }
 
-        public void Add()
+        public void Insert()
         {
             if (!ValidateFields() || Type != ActionType.Add)
                 return;

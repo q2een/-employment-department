@@ -12,7 +12,7 @@ namespace EmploymentDepartment
 {
     public partial class MainMDIForm : Form
     {
-        public IDBGetter DBGetter { get; set; }
+        public IDataBase DBGetter { get; set; }
         public EntitiesGetter EntGetter { get; set; }
 
         public List<Faculty> Faculties { get; set; }
@@ -24,12 +24,36 @@ namespace EmploymentDepartment
         public MainMDIForm()
         {
             InitializeComponent();
-            DBGetter = new MySqlGetter();
+            DBGetter = new MySqlDB();
             EntGetter = new EntitiesGetter(DBGetter);
 
-            Faculties = EntGetter.GetFaculties();
-            Specializations = EntGetter.GetSpecializations();
-            PreferentialCategories = EntGetter.GetPreferentialCategories();
+            UpdateFaculties();
+            UpdateSpecializations();
+            UpdatePreferentialCategories();
+        }
+
+        /// <summary>
+        /// Обновляет коллекцию с данными о факультетах из БД.
+        /// </summary>
+        public void UpdateFaculties()
+        {
+            this.Faculties = EntGetter.GetFaculties(); 
+        }
+
+        /// <summary>
+        /// Обновляет коллекцию с данными о профилях подготовки из БД.
+        /// </summary>
+        public void UpdateSpecializations()
+        {
+            this.Specializations = EntGetter.GetSpecializations();
+        }
+
+        /// <summary>
+        /// Обновляет коллекцию с данными о льготных категориях из БД.
+        /// </summary>
+        public void UpdatePreferentialCategories()
+        {
+            this.PreferentialCategories = EntGetter.GetPreferentialCategories();
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -139,7 +163,14 @@ namespace EmploymentDepartment
         {
             var active = this.ActiveMdiChild as IEditable;
 
-            active.SaveChanges();
+            active.Save();
+        }
+
+        private void specializationMI_Click(object sender, EventArgs e)
+        {
+            var spec = EntGetter.GetSpecializations()[0];
+            var form = new SpecializationForm(this, ActionType.Edit, spec);
+            form.ShowDialog();
         }
     }
 }
