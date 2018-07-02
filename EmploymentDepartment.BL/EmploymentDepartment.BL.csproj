@@ -54,11 +54,13 @@
     <Compile Include="Entities\Faculty.cs" />
     <Compile Include="Entities\GenderType.cs" />
     <Compile Include="Entities\IIdentifiable.cs" />
+    <Compile Include="Entities\PreferentialCategory.cs" />
     <Compile Include="Entities\Specialization.cs" />
     <Compile Include="Entities\Student.cs" />
     <Compile Include="Entities\StudentCompany.cs" />
     <Compile Include="Entities\Vacancy.cs" />
     <Compile Include="Extention.cs" />
+    <Compile Include="IEntity\ICompany.cs" />
     <Compile Include="IEntity\IStudent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

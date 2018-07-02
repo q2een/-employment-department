@@ -18,7 +18,7 @@ namespace EmploymentDepartment.BL
         int FieldOfStudy { get; set;}
         string StudyGroup { get; set;}
         decimal Rating { get; set;}
-        string PreferentialCategory { get; set;}
+        int? PreferentialCategory { get; set;}
         bool SelfEmployment { get; set;}
         string City { get; set;}
         string Region { get; set;}

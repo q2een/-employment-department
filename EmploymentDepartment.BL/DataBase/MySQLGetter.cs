@@ -75,7 +75,7 @@ namespace EmploymentDepartment.BL
                 var value = TypeValidator(kv.Value);
 
                 fields += $"{kv.Key},";
-                values += $"'{value}',";
+                values += $"{value},";
             }
 
             Query($"INSERT INTO {tableName} ({fields.TrimEnd(',')}) VALUES ({values.TrimEnd(',')})");
@@ -91,7 +91,7 @@ namespace EmploymentDepartment.BL
             {
                 object value = TypeValidator(kv.Value);
                 
-                values += $"{kv.Key} = '{value}',";
+                values += $"{kv.Key} = {value},";
             }
 
             Query($"UPDATE {tableName} SET {values.TrimEnd(',')} WHERE id = {id}");
@@ -99,6 +99,9 @@ namespace EmploymentDepartment.BL
 
         private object TypeValidator(object obj)
         {
+            if (obj == null)
+                return "NULL";
+
             if (obj is DateTime)
                 obj = ((DateTime)obj).ToString("yyyy/MM/dd");
 
@@ -108,7 +111,7 @@ namespace EmploymentDepartment.BL
             if (obj.GetType() == ((decimal)0.00).GetType())
                 obj = obj.ToString().Replace(",", ".");
 
-            return obj;
+            return $"'{obj}'";
         }
 
         /// <summary>

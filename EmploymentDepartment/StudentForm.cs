@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class StudentForm : Form, IStudent
+    public partial class StudentForm : Form, IStudent, IEditable
     {
         #region IStudent Implementation.
         private int id;
@@ -39,7 +39,7 @@ namespace EmploymentDepartment
             }
         }
 
-        string IStudent.Name
+        public new string Name
         {
             get
             {
@@ -183,15 +183,21 @@ namespace EmploymentDepartment
             }
         }
 
-        public string PreferentialCategory
+        public int? PreferentialCategory
         {
             get
             {
-                return null; throw new NotImplementedException();
+                var id = main.PreferentialCategories.FirstOrDefault(i => i.Name.Equals(linkPreferentialCategory.Tag));
+                return id?.ID;
             }
             set
             {
+                PreferentialCategory pc = null;
+                if (value != null)
+                    pc = main.PreferentialCategories.FirstOrDefault(i => i.ID == value);
 
+                linkPreferentialCategory.Tag = pc?.Name ?? "Выбрать льготную категорию...";
+                linkPreferentialCategory.Text = ShortenString();
             }
         }
 
@@ -219,7 +225,7 @@ namespace EmploymentDepartment
             }
         }
 
-        string IStudent.Region
+        public new string Region
         {
             get
             {
@@ -330,7 +336,7 @@ namespace EmploymentDepartment
         #endregion
 
 
-        public Student Student { get; private set; }
+        public IStudent Student { get; private set; }
         public ActionType Type { get; private set; }
         private MainMDIForm main;
 
@@ -344,21 +350,38 @@ namespace EmploymentDepartment
             this.Student = student;
             this.Type = type;
 
-            if(type == ActionType.Edit)
-            {                    
-                btnRemove.Visible = true;
-                btnSetSource.Visible = true;
-                btnApply.Text = "Сохранить";
-                this.Text = $"Редактирование информации о студенте [{student.Surname} {student.Name} {student.Patronymic}]" ;
-            }
-            
+            SetFormText(student);
         }
 
+        private void StudentForm_Load(object sender, EventArgs e)
+        {
+            if (!(this.MdiParent is MainMDIForm))
+                throw new Exception();
+
+            this.main = this.MdiParent as MainMDIForm;
+            InitFiels();
+        }
+        
         private void StudentForm_SizeChanged(object sender, EventArgs e)
         {
             mainPanel.AutoScroll = this.Size.Height < 650;
+            linkPreferentialCategory.Text = ShortenString();
+        }
+        
+        private void SetFormText(IStudent student)
+        {
+            if (Type == ActionType.Edit)
+                this.Text = $"Редактирование информации о студенте [{student.Surname} {student.Name} {student.Patronymic}]";
+        }
+        
+        private void InitFiels()
+        {
+            this.SetPropertiesValue<IStudent>(Student, "");
+            if (tbRegCity.Text == tbCity.Text && tbRegRegion.Text == tbRegion.Text && tbRegDistrict.Text == tbDistrict.Text && tbRegAddress.Text == tbAddress.Text)
+                cbAddressesAreEquals.Checked = true;
         }
 
+        #region Поведение кнопок "..." (Редакторовать)
         private void lblEdit_Click(object sender, EventArgs e)
         {
             new EditModalForm((sender as Label).Tag as TextBox).ShowDialog();
@@ -373,6 +396,9 @@ namespace EmploymentDepartment
         {
             (sender as Label).ForeColor = SystemColors.ControlText;
         }
+        #endregion
+
+        #region Поведение элементов управления.
 
         private void SetMartialStatusByGender(GenderType type)
         {
@@ -443,17 +469,7 @@ namespace EmploymentDepartment
             var sp = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == id).ToList();
             BindComboboxData(cmbFieldOfStudy, sp);
         }
-
-        private void StudentForm_Load(object sender, EventArgs e)
-        {
-            if (!(this.MdiParent is MainMDIForm))
-                throw new Exception();
-
-            this.main = this.MdiParent as MainMDIForm;
-
-            this.SetPropertiesValue<IStudent>(Student, "");
-        }
-
+       
         private void cmbFaculty_DropDown(object sender, EventArgs e)
         {
 
@@ -474,53 +490,9 @@ namespace EmploymentDepartment
                  SystemSounds.Beep.Play();
 
              btnApply.Focus(); */
-            if (cbAddressesAreEquals.Checked)
-                SetRegAddressValues(false);
-            
-            if (!Extentions.ValidateControls(this, errorProvider))
-            {
-                SystemSounds.Beep.Play();
-                return;
-            }
 
-            if (Type == ActionType.Add)
-            {
-                try
-                {
-                    var nameValue = this.GetPropertiesNameValuePair<IStudent>(true, "ID", "LevelOfEducation", "Faculty");
-                    main.DBGetter.Insert("Student", nameValue);
-                    MessageBox.Show($"Студент {Surname} {Name} {Patronymic}\nдобавлен в базу", "Добавление студента", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message,"Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                }
-                return;
-            }
-
-            if (Type == ActionType.Edit)
-            {
-                try
-                {
-                    var nameValue = Student.GetPropertiesDifference<IStudent>(this, "ID", "LevelOfEducation", "Faculty");
-                    main.DBGetter.Update("Student",ID,nameValue);
-                    MessageBox.Show($"Информация о студенте обновлена\nФИО студента: {Surname} {Name} {Patronymic}", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка обновления данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return;
-
-            }
 
             //MessageBox.Show(Student.IsPropertiesEqual<IStudent>(this,"") ? "true" : "false") ;
-        }
-
-        private void tbRating_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
         }
 
         private void SetRegAddressValues(bool isEmpty)
@@ -547,11 +519,13 @@ namespace EmploymentDepartment
             }
         }
 
+        #endregion
+      
         #region Validations
 
         private void RequiredCmb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Extentions.RequiredComboBoxValidating(sender as ComboBox, errorProvider);
+            Extentions.RequiredComboBoxValidating(sender as ComboBox, errorProvider);            
         }
 
         private void RequiredComboBox_Validating(object sender, CancelEventArgs e)
@@ -594,12 +568,138 @@ namespace EmploymentDepartment
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            errorProvider.SetError(tbRegAddress, "");
+            
         }
 
         private void btnSetSource_Click(object sender, EventArgs e)
         {
-            this.SetPropertiesValue<IStudent>(Student, "");
+           
+        }
+
+        #region IEditable interfaces implemantation.
+
+        private bool ValidateFields()
+        {
+            if (cbAddressesAreEquals.Checked)
+                SetRegAddressValues(false);
+
+            if (!Extentions.ValidateControls(this, errorProvider))
+            {
+                SystemSounds.Beep.Play();
+                return false;
+            }
+
+            return true;
+        }
+
+        public void SetDefaultValues()
+        {
+            InitFiels();
+        }
+
+        public void SaveChanges()
+        {
+            if (!ValidateFields() || Type != ActionType.Edit)
+                return;
+
+            try
+            {
+                // Поля не учитываются в таблице в БД.
+                var nameValue = Student.GetPropertiesDifference<IStudent>(this, "ID", "LevelOfEducation", "Faculty");
+
+                if (nameValue.Count == 0)
+                    return;
+
+                // Обновляем данные
+                main.DBGetter.Update("Student", ID, nameValue);
+
+                MessageBox.Show($"Информация о студенте обновлена\nФИО студента: {Surname} {Name} {Patronymic}", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Присваеваем свойству новые исходные значения.
+                Student = ((IStudent)this).GetInstance<IStudent, Student>();
+
+                SetFormText(this);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка обновления данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }         
+        }
+
+        public void Remove()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add()
+        {
+            if (!ValidateFields() || Type != ActionType.Add)
+                return;
+
+            try
+            {
+                // Поля не учитываются в таблице в БД.
+                var nameValue = this.GetPropertiesNameValuePair<IStudent>(true, "ID", "LevelOfEducation", "Faculty");
+
+                // Добавляем запись в БД.
+                main.DBGetter.Insert("Student", nameValue);
+
+                MessageBox.Show($"Студент {Surname} {Name} {Patronymic}\nдобавлен в базу", "Добавление студента", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
+        public string ShortenString()
+        {
+            string result = string.Copy(linkPreferentialCategory.Tag.ToString());
+
+            int width = this.Width - lblPreferentialCategory.Width - 70;
+            TextRenderer.MeasureText(result, linkPreferentialCategory.Font, new Size(width, 0), TextFormatFlags.EndEllipsis | TextFormatFlags.ModifyString);
+
+            return result;
+        }
+
+        private void linkPreferentialCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var form = new PreferentialCategoryPicker(main.PreferentialCategories, linkPreferentialCategory, linkPreferentialCategory.Tag.ToString());
+            form.ShowDialog(this);
+            linkPreferentialCategory.Text = ShortenString();
+        }
+
+        private void linkClear_Click(object sender, EventArgs e)
+        {
+            linkPreferentialCategory.Tag = "Выбрать льготную категорию...";
+            linkPreferentialCategory.Text = ShortenString();
+        }
+
+        private void StudentForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (linkPreferentialCategory.Focused)
+            {
+
+
+            }
+        }
+
+        private void linkPreferentialCategory_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                linkPreferentialCategory_LinkClicked(sender, null);
+                return;
+            }
+
+            if (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete)
+            {
+                linkClear_Click(sender, null);
+                return;
+            }
         }
     }
 }

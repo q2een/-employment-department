@@ -117,18 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="listBox1.Items" xml:space="preserve">
-    <value>Инвалиды вследствие военной травмы или заболевания, полученных в период прохождения военной службы, которым согласно заключению учреждения медико-социальной экспертизы не противопоказано обучение в соответствующих образовательных организациях (ДонГТУ).</value>
-  </data>
-  <data name="listBox1.Items1" xml:space="preserve">
-    <value>Лица, на которых распространяется действие Закона Луганской Народной Республики от 21.02.2017 №147-ІІ «Об участниках боевых действий в период отражения вооруженной агрессии Украины против Луганской Народной Республики»</value>
-  </data>
-  <data name="listView1.Items" xml:space="preserve">
-    <value>Инвалиды вследствие военной травмы или заболевания, полученных в период прохождения военной службы, которым согласно заключению учреждения медико-социальной экспертизы не противопоказано обучение в соответствующих образовательных организациях (ДонГТУ).</value>
-  </data>
-  <data name="listViewItem1.ToolTipText" xml:space="preserve">
-    <value>Инвалиды вследствие военной травмы или заболевания, полученных в период прохождения военной службы, которым согласно заключению учреждения медико-социальной экспертизы не противопоказано обучение в соответствующих образовательных организациях (ДонГТУ).</value>
-  </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

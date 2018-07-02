@@ -164,7 +164,28 @@ namespace EmploymentDepartment
             return dif;       
         }
 
-        public static bool IsPropertiesEqual<T>(this T self, T to, params string[] ignore) where T : class
+        /// <summary>
+        /// Возвращает объект класса <c>U</c>.
+        /// U - объект класса. Т - интерфейс.
+        /// </summary>
+        public static U GetInstance<T,U>(this T self) where U : class, new()
+        {
+            var result = new U();
+
+            if (self == null)
+                return null;
+
+            Type type = typeof(T);
+            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                object value = type.GetProperty(property.Name).GetValue(self, null);
+                type.GetProperty(property.Name).SetValue(result, value, null);
+            }
+
+            return result;
+        }
+
+        public static bool IsPropertiesAreEqual<T>(this T self, T to, params string[] ignore) where T : class
         {
             return GetPropertiesDifference<T>(self, to, ignore).Count == 0;
         }

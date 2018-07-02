@@ -14,8 +14,10 @@ namespace EmploymentDepartment
     {
         public IDBGetter DBGetter { get; set; }
         public EntitiesGetter EntGetter { get; set; }
+
         public List<Faculty> Faculties { get; set; }
         public List<Specialization> Specializations { get; set; }
+        public List<PreferentialCategory> PreferentialCategories { get; set; }
 
         private int childFormNumber = 0;
 
@@ -27,6 +29,7 @@ namespace EmploymentDepartment
 
             Faculties = EntGetter.GetFaculties();
             Specializations = EntGetter.GetSpecializations();
+            PreferentialCategories = EntGetter.GetPreferentialCategories();
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -122,6 +125,21 @@ namespace EmploymentDepartment
         private void MainMDIForm_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+        }
+
+        private void addCompanyMI_Click(object sender, EventArgs e)
+        {
+            var company = EntGetter.GetCompanies()[0];
+            var form = new CompanyFrom(ActionType.Edit, company);
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            var active = this.ActiveMdiChild as IEditable;
+
+            active.SaveChanges();
         }
     }
 }

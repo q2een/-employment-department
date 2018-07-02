@@ -68,7 +68,7 @@ namespace EmploymentDepartment.BL
         public decimal Rating { get; set; }
 
         [DisplayName("Льготная категория")]
-        public string PreferentialCategory { get; set; }
+        public int? PreferentialCategory { get; set; }
 
         [DisplayName("Самостоятельное трудоустройство")]
         public bool SelfEmployment { get; set; }

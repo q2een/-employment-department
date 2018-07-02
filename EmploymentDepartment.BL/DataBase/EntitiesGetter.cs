@@ -62,6 +62,14 @@ namespace EmploymentDepartment.BL
             }
         }
 
+        public string PreferentialCategory
+        {
+            get
+            {
+                return "SELECT * FROM preferentialcategory";
+            }
+        }
+
         public EntitiesGetter(IDBGetter dbGetter)
         {
             this.db = dbGetter;
@@ -144,6 +152,16 @@ namespace EmploymentDepartment.BL
         public List<Specialization> GetSpecializations()
         {
             return GetEntities<Specialization>(Specialization);
+        }
+
+        public List<PreferentialCategory> GetPreferentialCategories(string dbQuery)
+        {
+            return GetEntities<PreferentialCategory>(dbQuery);
+        }
+
+        public List<PreferentialCategory> GetPreferentialCategories()
+        {
+            return GetEntities<PreferentialCategory>(PreferentialCategory);
         }
     }
 }

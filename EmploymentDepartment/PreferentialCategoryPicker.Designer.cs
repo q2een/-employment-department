@@ -29,81 +29,79 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PreferentialCategoryPicker));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(resources.GetString("listView1.Items"));
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Дети погибших при исполнении служебных обязанностей военнослужащих Народной милиц" +
-        "ии Луганской Народной Республики, органов внутренних дел, органов государственно" +
-        "й безопасности. ");
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.mainDgv = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnApply = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.mainDgv)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listBox1
+            // mainDgv
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Items.AddRange(new object[] {
-            resources.GetString("listBox1.Items"),
-            "Дети погибших при исполнении служебных обязанностей военнослужащих Народной милиц" +
-                "ии Луганской Народной Республики, органов внутренних дел, органов государственно" +
-                "й безопасности. ",
-            "Лица, пострадавшие вследствие Чернобыльской катастрофы.",
-            resources.GetString("listBox1.Items1"),
-            "Иные категории, определенные действующим законодательством Луганской Народной Рес" +
-                "публики."});
-            this.listBox1.Location = new System.Drawing.Point(0, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(569, 100);
-            this.listBox1.TabIndex = 0;
+            this.mainDgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.mainDgv.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.mainDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.mainDgv.DefaultCellStyle = dataGridViewCellStyle1;
+            this.mainDgv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainDgv.Location = new System.Drawing.Point(0, 0);
+            this.mainDgv.MultiSelect = false;
+            this.mainDgv.Name = "mainDgv";
+            this.mainDgv.RowHeadersVisible = false;
+            this.mainDgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.mainDgv.Size = new System.Drawing.Size(569, 248);
+            this.mainDgv.TabIndex = 3;
+            this.mainDgv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mainDgv_KeyPress);
             // 
-            // richTextBox1
+            // panel1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(0, 149);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(100, 96);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.panel1.Controls.Add(this.btnApply);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 248);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(569, 48);
+            this.panel1.TabIndex = 4;
             // 
-            // listView1
+            // btnApply
             // 
-            this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            listViewItem1.ToolTipText = resources.GetString("listViewItem1.ToolTipText");
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
-            this.listView1.Location = new System.Drawing.Point(12, 273);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(545, 30);
-            this.listView1.TabIndex = 2;
-            this.listView1.TileSize = new System.Drawing.Size(491, 30);
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Tile;
-            this.listView1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyUp);
+            this.btnApply.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnApply.Location = new System.Drawing.Point(447, 13);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(110, 23);
+            this.btnApply.TabIndex = 0;
+            this.btnApply.Text = "Подтвердить";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // PreferentialCategoryPicker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 519);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.listBox1);
+            this.ClientSize = new System.Drawing.Size(569, 296);
+            this.Controls.Add(this.mainDgv);
+            this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "PreferentialCategoryPicker";
-            this.Text = "PreferentialCategoryPicker";
+            this.Text = "Выбор льготной категории";
             this.Load += new System.EventHandler(this.PreferentialCategoryPicker_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.mainDgv)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.DataGridView mainDgv;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnApply;
     }
 }

@@ -30,10 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.btnApply = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.label40 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
@@ -118,19 +114,19 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tbPatronymic = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
-            this.tbPreferentialCategory = new System.Windows.Forms.TextBox();
             this.tbSurname = new System.Windows.Forms.TextBox();
             this.tbApplicationFormNumber = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
+            this.lblPreferentialCategory = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnSetSource = new System.Windows.Forms.Button();
+            this.linkPreferentialCategory = new System.Windows.Forms.LinkLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.linkClear = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel12.SuspendLayout();
@@ -151,6 +147,7 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -167,11 +164,9 @@
             this.mainPanel.Controls.Add(this.tableLayoutPanel1);
             this.mainPanel.Controls.Add(this.tbPatronymic);
             this.mainPanel.Controls.Add(this.tbName);
-            this.mainPanel.Controls.Add(this.tbPreferentialCategory);
             this.mainPanel.Controls.Add(this.tbSurname);
             this.mainPanel.Controls.Add(this.tbApplicationFormNumber);
             this.mainPanel.Controls.Add(this.label4);
-            this.mainPanel.Controls.Add(this.label24);
             this.mainPanel.Controls.Add(this.label3);
             this.mainPanel.Controls.Add(this.label2);
             this.mainPanel.Controls.Add(this.label41);
@@ -179,60 +174,8 @@
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(649, 644);
+            this.mainPanel.Size = new System.Drawing.Size(649, 604);
             this.mainPanel.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.btnSetSource);
-            this.panel1.Controls.Add(this.btnRemove);
-            this.panel1.Controls.Add(this.btnApply);
-            this.panel1.Controls.Add(this.btnCancel);
-            this.panel1.Location = new System.Drawing.Point(15, 594);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(624, 50);
-            this.panel1.TabIndex = 28;
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRemove.Location = new System.Drawing.Point(0, 13);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(198, 25);
-            this.btnRemove.TabIndex = 27;
-            this.btnRemove.TabStop = false;
-            this.btnRemove.Text = "Удалить анкету студента";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Visible = false;
-            // 
-            // btnApply
-            // 
-            this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApply.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnApply.Location = new System.Drawing.Point(528, 13);
-            this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(96, 25);
-            this.btnApply.TabIndex = 26;
-            this.btnApply.TabStop = false;
-            this.btnApply.Text = "Добавить";
-            this.btnApply.UseVisualStyleBackColor = true;
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnCancel.Location = new System.Drawing.Point(426, 13);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(96, 25);
-            this.btnCancel.TabIndex = 27;
-            this.btnCancel.TabStop = false;
-            this.btnCancel.Text = "Отмена";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // label40
             // 
@@ -242,7 +185,7 @@
             this.label40.Location = new System.Drawing.Point(76, 41);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(14, 16);
-            this.label40.TabIndex = 25;
+            this.label40.TabIndex = 4;
             this.label40.Text = "*";
             // 
             // label39
@@ -253,7 +196,7 @@
             this.label39.Location = new System.Drawing.Point(42, 70);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(14, 16);
-            this.label39.TabIndex = 25;
+            this.label39.TabIndex = 7;
             this.label39.Text = "*";
             // 
             // tableLayoutPanel5
@@ -270,7 +213,7 @@
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(623, 30);
-            this.tableLayoutPanel5.TabIndex = 22;
+            this.tableLayoutPanel5.TabIndex = 17;
             // 
             // panel11
             // 
@@ -294,7 +237,7 @@
             this.label29.Location = new System.Drawing.Point(61, 6);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(14, 16);
-            this.label29.TabIndex = 25;
+            this.label29.TabIndex = 1;
             this.label29.Text = "*";
             // 
             // lblPhone
@@ -306,7 +249,7 @@
             this.lblPhone.Location = new System.Drawing.Point(281, 4);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(26, 18);
-            this.lblPhone.TabIndex = 29;
+            this.lblPhone.TabIndex = 3;
             this.lblPhone.Tag = this.tbPhone;
             this.lblPhone.Text = "...";
             this.lblPhone.Click += new System.EventHandler(this.lblEdit_Click);
@@ -323,7 +266,7 @@
             this.tbPhone.MaxLength = 180;
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(193, 23);
-            this.tbPhone.TabIndex = 22;
+            this.tbPhone.TabIndex = 2;
             this.tbPhone.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // label18
@@ -345,7 +288,7 @@
             this.panel12.Margin = new System.Windows.Forms.Padding(0);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(312, 30);
-            this.panel12.TabIndex = 0;
+            this.panel12.TabIndex = 1;
             // 
             // label19
             // 
@@ -367,7 +310,7 @@
             this.tbEmail.MaxLength = 250;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(211, 23);
-            this.tbEmail.TabIndex = 23;
+            this.tbEmail.TabIndex = 1;
             // 
             // cbSelfEmployment
             // 
@@ -379,7 +322,7 @@
             this.cbSelfEmployment.Location = new System.Drawing.Point(15, 571);
             this.cbSelfEmployment.Name = "cbSelfEmployment";
             this.cbSelfEmployment.Size = new System.Drawing.Size(457, 20);
-            this.cbSelfEmployment.TabIndex = 24;
+            this.cbSelfEmployment.TabIndex = 18;
             this.cbSelfEmployment.Text = "Предоставляется право на самостоятельное трудоустройство";
             this.cbSelfEmployment.UseVisualStyleBackColor = true;
             // 
@@ -393,7 +336,7 @@
             this.cbAddressesAreEquals.Location = new System.Drawing.Point(16, 340);
             this.cbAddressesAreEquals.Name = "cbAddressesAreEquals";
             this.cbAddressesAreEquals.Size = new System.Drawing.Size(347, 20);
-            this.cbAddressesAreEquals.TabIndex = 14;
+            this.cbAddressesAreEquals.TabIndex = 15;
             this.cbAddressesAreEquals.Text = "Адреса регистрации и проживания совпадают";
             this.cbAddressesAreEquals.UseVisualStyleBackColor = true;
             this.cbAddressesAreEquals.CheckedChanged += new System.EventHandler(this.cbAddressesAreEquals_CheckedChanged);
@@ -412,7 +355,7 @@
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(623, 163);
-            this.tableLayoutPanel4.TabIndex = 14;
+            this.tableLayoutPanel4.TabIndex = 16;
             this.tableLayoutPanel4.TabStop = true;
             // 
             // gbRegAddress
@@ -467,7 +410,7 @@
             this.tbRegCity.Location = new System.Drawing.Point(68, 26);
             this.tbRegCity.Name = "tbRegCity";
             this.tbRegCity.Size = new System.Drawing.Size(211, 23);
-            this.tbRegCity.TabIndex = 18;
+            this.tbRegCity.TabIndex = 2;
             this.tbRegCity.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // lblRegRegion
@@ -496,7 +439,7 @@
             this.tbRegRegion.MaxLength = 150;
             this.tbRegRegion.Name = "tbRegRegion";
             this.tbRegRegion.Size = new System.Drawing.Size(211, 23);
-            this.tbRegRegion.TabIndex = 19;
+            this.tbRegRegion.TabIndex = 4;
             // 
             // lblRegDistrict
             // 
@@ -524,7 +467,7 @@
             this.tbRegDistrict.MaxLength = 150;
             this.tbRegDistrict.Name = "tbRegDistrict";
             this.tbRegDistrict.Size = new System.Drawing.Size(211, 23);
-            this.tbRegDistrict.TabIndex = 20;
+            this.tbRegDistrict.TabIndex = 6;
             // 
             // lblRegAddress
             // 
@@ -553,7 +496,7 @@
             this.tbRegAddress.MaxLength = 200;
             this.tbRegAddress.Name = "tbRegAddress";
             this.tbRegAddress.Size = new System.Drawing.Size(211, 23);
-            this.tbRegAddress.TabIndex = 21;
+            this.tbRegAddress.TabIndex = 9;
             this.tbRegAddress.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // label26
@@ -565,7 +508,7 @@
             this.label26.Location = new System.Drawing.Point(45, 124);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(14, 16);
-            this.label26.TabIndex = 25;
+            this.label26.TabIndex = 8;
             this.label26.Text = "*";
             // 
             // label25
@@ -576,7 +519,7 @@
             this.label25.Location = new System.Drawing.Point(43, 29);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(14, 16);
-            this.label25.TabIndex = 25;
+            this.label25.TabIndex = 1;
             this.label25.Text = "*";
             // 
             // label20
@@ -596,7 +539,7 @@
             this.label22.Location = new System.Drawing.Point(1, 95);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(48, 16);
-            this.label22.TabIndex = 0;
+            this.label22.TabIndex = 5;
             this.label22.Text = "Район";
             // 
             // label21
@@ -606,7 +549,7 @@
             this.label21.Location = new System.Drawing.Point(1, 61);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(64, 16);
-            this.label21.TabIndex = 0;
+            this.label21.TabIndex = 3;
             this.label21.Text = "Область";
             // 
             // label23
@@ -616,7 +559,7 @@
             this.label23.Location = new System.Drawing.Point(1, 124);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(49, 16);
-            this.label23.TabIndex = 0;
+            this.label23.TabIndex = 7;
             this.label23.Text = "Адрес";
             // 
             // groupBox2
@@ -672,7 +615,7 @@
             this.tbAddress.MaxLength = 200;
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(207, 23);
-            this.tbAddress.TabIndex = 17;
+            this.tbAddress.TabIndex = 9;
             this.tbAddress.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // lblDistrict
@@ -701,7 +644,7 @@
             this.tbDistrict.MaxLength = 150;
             this.tbDistrict.Name = "tbDistrict";
             this.tbDistrict.Size = new System.Drawing.Size(207, 23);
-            this.tbDistrict.TabIndex = 16;
+            this.tbDistrict.TabIndex = 6;
             // 
             // lblRegion
             // 
@@ -729,7 +672,7 @@
             this.tbRegion.MaxLength = 150;
             this.tbRegion.Name = "tbRegion";
             this.tbRegion.Size = new System.Drawing.Size(207, 23);
-            this.tbRegion.TabIndex = 15;
+            this.tbRegion.TabIndex = 4;
             // 
             // lblCity
             // 
@@ -759,7 +702,7 @@
             this.tbCity.MaxLength = 100;
             this.tbCity.Name = "tbCity";
             this.tbCity.Size = new System.Drawing.Size(207, 23);
-            this.tbCity.TabIndex = 14;
+            this.tbCity.TabIndex = 2;
             this.tbCity.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // label28
@@ -770,7 +713,7 @@
             this.label28.Location = new System.Drawing.Point(43, 29);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(14, 16);
-            this.label28.TabIndex = 25;
+            this.label28.TabIndex = 1;
             this.label28.Text = "*";
             // 
             // label27
@@ -781,7 +724,7 @@
             this.label27.Location = new System.Drawing.Point(45, 124);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(14, 16);
-            this.label27.TabIndex = 25;
+            this.label27.TabIndex = 8;
             this.label27.Text = "*";
             // 
             // label17
@@ -791,7 +734,7 @@
             this.label17.Location = new System.Drawing.Point(1, 124);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(49, 16);
-            this.label17.TabIndex = 0;
+            this.label17.TabIndex = 7;
             this.label17.Text = "Адрес";
             // 
             // label16
@@ -801,7 +744,7 @@
             this.label16.Location = new System.Drawing.Point(1, 95);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(48, 16);
-            this.label16.TabIndex = 0;
+            this.label16.TabIndex = 5;
             this.label16.Text = "Район";
             // 
             // label15
@@ -811,7 +754,7 @@
             this.label15.Location = new System.Drawing.Point(1, 61);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(64, 16);
-            this.label15.TabIndex = 0;
+            this.label15.TabIndex = 3;
             this.label15.Text = "Область";
             // 
             // label14
@@ -841,8 +784,9 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(623, 57);
-            this.tableLayoutPanel2.TabIndex = 7;
+            this.tableLayoutPanel2.TabIndex = 12;
             // 
             // panel8
             // 
@@ -856,7 +800,7 @@
             this.panel8.Margin = new System.Windows.Forms.Padding(0);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(188, 57);
-            this.panel8.TabIndex = 4;
+            this.panel8.TabIndex = 3;
             // 
             // cmbLevelOfEducation
             // 
@@ -874,7 +818,7 @@
             this.cmbLevelOfEducation.Location = new System.Drawing.Point(0, 26);
             this.cmbLevelOfEducation.Name = "cmbLevelOfEducation";
             this.cmbLevelOfEducation.Size = new System.Drawing.Size(188, 24);
-            this.cmbLevelOfEducation.TabIndex = 10;
+            this.cmbLevelOfEducation.TabIndex = 2;
             this.cmbLevelOfEducation.SelectedIndexChanged += new System.EventHandler(this.cmbLevelOfEducation_SelectedIndexChanged);
             this.cmbLevelOfEducation.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
@@ -886,7 +830,7 @@
             this.label32.Location = new System.Drawing.Point(148, 7);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(14, 16);
-            this.label32.TabIndex = 25;
+            this.label32.TabIndex = 1;
             this.label32.Text = "*";
             // 
             // label11
@@ -911,7 +855,7 @@
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(174, 57);
-            this.panel5.TabIndex = 3;
+            this.panel5.TabIndex = 0;
             // 
             // label34
             // 
@@ -921,7 +865,7 @@
             this.label34.Location = new System.Drawing.Point(140, 6);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(14, 16);
-            this.label34.TabIndex = 25;
+            this.label34.TabIndex = 1;
             this.label34.Text = "*";
             // 
             // tbYearOfGraduation
@@ -936,7 +880,7 @@
             this.tbYearOfGraduation.Mask = "0000";
             this.tbYearOfGraduation.Name = "tbYearOfGraduation";
             this.tbYearOfGraduation.Size = new System.Drawing.Size(168, 23);
-            this.tbYearOfGraduation.TabIndex = 7;
+            this.tbYearOfGraduation.TabIndex = 2;
             this.tbYearOfGraduation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbYearOfGraduation.Validating += new System.ComponentModel.CancelEventHandler(this.tbYearOfGraduation_Validating);
             // 
@@ -962,7 +906,7 @@
             this.panel6.Margin = new System.Windows.Forms.Padding(0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(137, 57);
-            this.panel6.TabIndex = 3;
+            this.panel6.TabIndex = 1;
             // 
             // label33
             // 
@@ -972,7 +916,7 @@
             this.label33.Location = new System.Drawing.Point(48, 6);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(14, 16);
-            this.label33.TabIndex = 25;
+            this.label33.TabIndex = 1;
             this.label33.Text = "*";
             // 
             // tbStudyGroup
@@ -986,7 +930,7 @@
             this.tbStudyGroup.MaxLength = 10;
             this.tbStudyGroup.Name = "tbStudyGroup";
             this.tbStudyGroup.Size = new System.Drawing.Size(130, 23);
-            this.tbStudyGroup.TabIndex = 8;
+            this.tbStudyGroup.TabIndex = 2;
             this.tbStudyGroup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbStudyGroup.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
@@ -1011,7 +955,7 @@
             this.panel7.Margin = new System.Windows.Forms.Padding(0);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(124, 57);
-            this.panel7.TabIndex = 3;
+            this.panel7.TabIndex = 2;
             // 
             // tbRating
             // 
@@ -1059,7 +1003,7 @@
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(623, 48);
-            this.tableLayoutPanel3.TabIndex = 11;
+            this.tableLayoutPanel3.TabIndex = 13;
             // 
             // panel9
             // 
@@ -1071,7 +1015,7 @@
             this.panel9.Margin = new System.Windows.Forms.Padding(0);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(311, 48);
-            this.panel9.TabIndex = 3;
+            this.panel9.TabIndex = 0;
             // 
             // cmbFaculty
             // 
@@ -1086,7 +1030,7 @@
             this.cmbFaculty.Location = new System.Drawing.Point(1, 19);
             this.cmbFaculty.Name = "cmbFaculty";
             this.cmbFaculty.Size = new System.Drawing.Size(310, 24);
-            this.cmbFaculty.TabIndex = 11;
+            this.cmbFaculty.TabIndex = 2;
             this.cmbFaculty.SelectedIndexChanged += new System.EventHandler(this.cmbFaculty_SelectedIndexChanged);
             this.cmbFaculty.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
@@ -1098,7 +1042,7 @@
             this.label31.Location = new System.Drawing.Point(73, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(14, 16);
-            this.label31.TabIndex = 25;
+            this.label31.TabIndex = 1;
             this.label31.Text = "*";
             // 
             // label12
@@ -1121,7 +1065,7 @@
             this.panel10.Margin = new System.Windows.Forms.Padding(0);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(312, 48);
-            this.panel10.TabIndex = 3;
+            this.panel10.TabIndex = 1;
             // 
             // cmbFieldOfStudy
             // 
@@ -1136,7 +1080,7 @@
             this.cmbFieldOfStudy.Location = new System.Drawing.Point(3, 19);
             this.cmbFieldOfStudy.Name = "cmbFieldOfStudy";
             this.cmbFieldOfStudy.Size = new System.Drawing.Size(309, 24);
-            this.cmbFieldOfStudy.TabIndex = 12;
+            this.cmbFieldOfStudy.TabIndex = 2;
             this.cmbFieldOfStudy.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
             // label30
@@ -1147,7 +1091,7 @@
             this.label30.Location = new System.Drawing.Point(182, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(14, 16);
-            this.label30.TabIndex = 25;
+            this.label30.TabIndex = 1;
             this.label30.Text = "*";
             // 
             // label13
@@ -1177,7 +1121,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(623, 51);
-            this.tableLayoutPanel1.TabIndex = 4;
+            this.tableLayoutPanel1.TabIndex = 11;
             // 
             // panel2
             // 
@@ -1191,7 +1135,7 @@
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(207, 51);
-            this.panel2.TabIndex = 3;
+            this.panel2.TabIndex = 1;
             // 
             // label37
             // 
@@ -1201,7 +1145,7 @@
             this.label37.Location = new System.Drawing.Point(108, 3);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(14, 16);
-            this.label37.TabIndex = 25;
+            this.label37.TabIndex = 1;
             this.label37.Text = "*";
             // 
             // tbDOB
@@ -1216,7 +1160,7 @@
             this.tbDOB.Mask = "00/00/0000";
             this.tbDOB.Name = "tbDOB";
             this.tbDOB.Size = new System.Drawing.Size(201, 23);
-            this.tbDOB.TabIndex = 4;
+            this.tbDOB.TabIndex = 2;
             this.tbDOB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbDOB.ValidatingType = typeof(System.DateTime);
             this.tbDOB.Validating += new System.ComponentModel.CancelEventHandler(this.tbDOB_Validating);
@@ -1243,7 +1187,7 @@
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(207, 51);
-            this.panel3.TabIndex = 3;
+            this.panel3.TabIndex = 2;
             // 
             // label35
             // 
@@ -1253,7 +1197,7 @@
             this.label35.Location = new System.Drawing.Point(26, 3);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(14, 16);
-            this.label35.TabIndex = 25;
+            this.label35.TabIndex = 1;
             this.label35.Text = "*";
             // 
             // cmbGender
@@ -1271,7 +1215,7 @@
             this.cmbGender.Location = new System.Drawing.Point(0, 22);
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(198, 24);
-            this.cmbGender.TabIndex = 5;
+            this.cmbGender.TabIndex = 2;
             this.cmbGender.SelectedIndexChanged += new System.EventHandler(this.cmbGender_SelectedIndexChanged);
             this.cmbGender.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
@@ -1307,7 +1251,7 @@
             this.label36.Location = new System.Drawing.Point(148, 3);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(14, 16);
-            this.label36.TabIndex = 25;
+            this.label36.TabIndex = 1;
             this.label36.Text = "*";
             // 
             // cmbMaritalStatus
@@ -1323,7 +1267,7 @@
             this.cmbMaritalStatus.Location = new System.Drawing.Point(0, 22);
             this.cmbMaritalStatus.Name = "cmbMaritalStatus";
             this.cmbMaritalStatus.Size = new System.Drawing.Size(209, 24);
-            this.cmbMaritalStatus.TabIndex = 6;
+            this.cmbMaritalStatus.TabIndex = 2;
             this.cmbMaritalStatus.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
             // label7
@@ -1345,7 +1289,7 @@
             this.tbPatronymic.MaxLength = 80;
             this.tbPatronymic.Name = "tbPatronymic";
             this.tbPatronymic.Size = new System.Drawing.Size(534, 23);
-            this.tbPatronymic.TabIndex = 3;
+            this.tbPatronymic.TabIndex = 10;
             this.tbPatronymic.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
             // 
             // tbName
@@ -1358,19 +1302,9 @@
             this.tbName.MaxLength = 80;
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(534, 23);
-            this.tbName.TabIndex = 2;
+            this.tbName.TabIndex = 8;
             this.tbName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
             this.tbName.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
-            // 
-            // tbPreferentialCategory
-            // 
-            this.tbPreferentialCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPreferentialCategory.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPreferentialCategory.Location = new System.Drawing.Point(159, 306);
-            this.tbPreferentialCategory.Name = "tbPreferentialCategory";
-            this.tbPreferentialCategory.Size = new System.Drawing.Size(479, 23);
-            this.tbPreferentialCategory.TabIndex = 13;
             // 
             // tbSurname
             // 
@@ -1382,7 +1316,7 @@
             this.tbSurname.MaxLength = 120;
             this.tbSurname.Name = "tbSurname";
             this.tbSurname.Size = new System.Drawing.Size(534, 23);
-            this.tbSurname.TabIndex = 1;
+            this.tbSurname.TabIndex = 5;
             this.tbSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
             this.tbSurname.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
@@ -1396,7 +1330,7 @@
             this.tbApplicationFormNumber.MaxLength = 50;
             this.tbApplicationFormNumber.Name = "tbApplicationFormNumber";
             this.tbApplicationFormNumber.Size = new System.Drawing.Size(432, 23);
-            this.tbApplicationFormNumber.TabIndex = 0;
+            this.tbApplicationFormNumber.TabIndex = 2;
             this.tbApplicationFormNumber.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // label4
@@ -1406,18 +1340,18 @@
             this.label4.Location = new System.Drawing.Point(12, 99);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 16);
-            this.label4.TabIndex = 0;
+            this.label4.TabIndex = 9;
             this.label4.Text = "Отчество";
             // 
-            // label24
+            // lblPreferentialCategory
             // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(12, 309);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(150, 16);
-            this.label24.TabIndex = 0;
-            this.label24.Text = "Льготная категория:";
+            this.lblPreferentialCategory.AutoSize = true;
+            this.lblPreferentialCategory.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPreferentialCategory.Location = new System.Drawing.Point(-3, 4);
+            this.lblPreferentialCategory.Name = "lblPreferentialCategory";
+            this.lblPreferentialCategory.Size = new System.Drawing.Size(150, 16);
+            this.lblPreferentialCategory.TabIndex = 0;
+            this.lblPreferentialCategory.Text = "Льготная категория:";
             // 
             // label3
             // 
@@ -1426,7 +1360,7 @@
             this.label3.Location = new System.Drawing.Point(13, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 16);
-            this.label3.TabIndex = 0;
+            this.label3.TabIndex = 6;
             this.label3.Text = "Имя";
             // 
             // label2
@@ -1436,7 +1370,7 @@
             this.label2.Location = new System.Drawing.Point(13, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 16);
-            this.label2.TabIndex = 0;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Фамилия";
             // 
             // label41
@@ -1447,7 +1381,7 @@
             this.label41.Location = new System.Drawing.Point(175, 9);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(14, 16);
-            this.label41.TabIndex = 25;
+            this.label41.TabIndex = 1;
             this.label41.Text = "*";
             // 
             // label1
@@ -1466,25 +1400,53 @@
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
-            // btnSetSource
+            // linkPreferentialCategory
             // 
-            this.btnSetSource.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetSource.Location = new System.Drawing.Point(204, 13);
-            this.btnSetSource.Name = "btnSetSource";
-            this.btnSetSource.Size = new System.Drawing.Size(159, 25);
-            this.btnSetSource.TabIndex = 27;
-            this.btnSetSource.TabStop = false;
-            this.btnSetSource.Text = "Исходные значения";
-            this.btnSetSource.UseVisualStyleBackColor = true;
-            this.btnSetSource.Visible = false;
-            this.btnSetSource.Click += new System.EventHandler(this.btnSetSource_Click);
+            this.linkPreferentialCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkPreferentialCategory.AutoEllipsis = true;
+            this.linkPreferentialCategory.AutoSize = true;
+            this.linkPreferentialCategory.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkPreferentialCategory.Location = new System.Drawing.Point(157, 11);
+            this.linkPreferentialCategory.Name = "linkPreferentialCategory";
+            this.linkPreferentialCategory.Size = new System.Drawing.Size(223, 16);
+            this.linkPreferentialCategory.TabIndex = 1;
+            this.linkPreferentialCategory.Tag = "Выбрать льготную категорию...";
+            this.linkPreferentialCategory.Text = "Выбрать льготную категорию...";
+            this.linkPreferentialCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPreferentialCategory_LinkClicked);
+            this.linkPreferentialCategory.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.linkPreferentialCategory_PreviewKeyDown);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.linkClear);
+            this.panel1.Controls.Add(this.linkPreferentialCategory);
+            this.panel1.Controls.Add(this.lblPreferentialCategory);
+            this.panel1.Location = new System.Drawing.Point(15, 298);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(624, 40);
+            this.panel1.TabIndex = 14;
+            // 
+            // linkClear
+            // 
+            this.linkClear.AutoSize = true;
+            this.linkClear.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkClear.ForeColor = System.Drawing.Color.Blue;
+            this.linkClear.Location = new System.Drawing.Point(72, 20);
+            this.linkClear.Name = "linkClear";
+            this.linkClear.Size = new System.Drawing.Size(71, 16);
+            this.linkClear.TabIndex = 2;
+            this.linkClear.Text = "Очистить";
+            this.linkClear.Click += new System.EventHandler(this.linkClear_Click);
             // 
             // StudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.ClientSize = new System.Drawing.Size(649, 644);
+            this.ClientSize = new System.Drawing.Size(649, 604);
             this.Controls.Add(this.mainPanel);
             this.DoubleBuffered = true;
             this.MinimumSize = new System.Drawing.Size(665, 400);
@@ -1492,9 +1454,9 @@
             this.Text = "Добавление анкеты студента";
             this.Load += new System.EventHandler(this.StudentForm_Load);
             this.SizeChanged += new System.EventHandler(this.StudentForm_SizeChanged);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StudentForm_KeyPress);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
@@ -1528,6 +1490,8 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1600,8 +1564,7 @@
         private System.Windows.Forms.TextBox tbRegDistrict;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.CheckBox cbSelfEmployment;
-        private System.Windows.Forms.TextBox tbPreferentialCategory;
-        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label lblPreferentialCategory;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label29;
@@ -1618,10 +1581,6 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnApply;
-        private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblCity;
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.Label lblRegCity;
@@ -1633,6 +1592,8 @@
         private System.Windows.Forms.Label lblRegion;
         private System.Windows.Forms.NumericUpDown tbRating;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        private System.Windows.Forms.Button btnSetSource;
+        private System.Windows.Forms.LinkLabel linkPreferentialCategory;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label linkClear;
     }
 }
