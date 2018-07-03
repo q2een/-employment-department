@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public class PreferentialCategory
+    public class PreferentialCategory : IPreferentialCategory
     {
         public int ID { get; set; }
 

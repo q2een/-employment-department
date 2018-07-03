@@ -72,15 +72,15 @@ namespace EmploymentDepartment
             }
         }
 
-        public EducationLevelType LevelOfEducation
+        public int LevelOfEducation
         {
             get
             {
-                return (EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1);
+                return cmbLevelOfEducation.SelectedIndex + 1;
             }
             set
             {
-                cmbLevelOfEducation.SelectedIndex = (int)value - 1;
+                cmbLevelOfEducation.SelectedIndex = value - 1;
             }
         }
         #endregion
@@ -90,7 +90,7 @@ namespace EmploymentDepartment
         {
             try
             {
-                this.Insert(main.DBGetter, "specialization", "ID");
+                this.Insert<SpecializationForm, ISpecialization>(main.DBGetter, "specialization", "ID");
 
                 var msg = $"Профиль подготовки добавлен в базу.\nНаименование профиля: {((ISpecialization)this).Name}";
 
@@ -127,7 +127,6 @@ namespace EmploymentDepartment
 
                 MessageBox.Show($"Информация о профиле подготовки обновлена\nНаименование профиля: {((ISpecialization)this).Name}", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                main.UpdatePreferentialCategories();
                 this.Close();
             }
             catch (Exception ex)
@@ -158,7 +157,7 @@ namespace EmploymentDepartment
         private void SpecializationForm_Load(object sender, EventArgs e)
         {
             cmbFaculty.BindComboboxData(main.Faculties);
-            SetDefaultValues();
+            if(Type == ActionType.Edit) SetDefaultValues();
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -168,6 +167,9 @@ namespace EmploymentDepartment
 
             if (Type == ActionType.Edit)
                 this.Save();
+
+            main.UpdateFaculties();
+            main.UpdateSpecializations();
         }
     }
 }

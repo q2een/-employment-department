@@ -612,7 +612,7 @@ namespace EmploymentDepartment
 
             try
             {
-                this.Insert(main.DBGetter, "student", "ID", "LevelOfEducation", "Faculty");
+                this.Insert<StudentForm, IStudent>(main.DBGetter, "student", "ID", "LevelOfEducation", "Faculty");
 
                 var msg = $"Студент {Surname} {((IStudent)this).Name} {Patronymic}\nдобавлен в базу";
 

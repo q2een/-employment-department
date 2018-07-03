@@ -287,16 +287,31 @@ namespace EmploymentDepartment
         /// <param name="db">Экземпляр объекта, реализующий интерфейс <c>IDataBase</c></param>
         /// <param name="tableName">Имя таблицы в базе данных</param>
         /// <param name="ignore">Набор имен свойств, которые необходимо проигнорировать</param>
-        public static void Insert<T>(this T self, IDataBase db, string tableName, params string[] ignore) where T : class, IEditable
+        public static void Insert<T,U>(this T self, IDataBase db, string tableName, params string[] ignore) where T : class, IEditable, U where U:class
         {
             if (!self.ValidateFields() || self.Type != ActionType.Add)
                 return;
 
             // Поля не учитываются в таблице в БД.
-            var nameValue = self.GetPropertiesNameValuePair<T>(true, ignore);
+            var nameValue = self.GetPropertiesNameValuePair<U>(true, ignore);
 
             // Добавляем запись в БД.
             db.Insert(tableName, nameValue);
+        }
+
+        public static void Save<T, U>(this T self, U obj, IDataBase db, string tableName, params string[] ignore) where T : class, IEditable, U where U : class, IIdentifiable
+        {
+            if (!self.ValidateFields() || self.Type != ActionType.Edit)
+                return;
+
+            // Поля не учитываются в таблице в БД.
+            var nameValue = obj.GetPropertiesDifference<U>(self, ignore);
+
+            if (nameValue.Count == 0)
+                return;
+
+            // Обновляем данные
+            db.Update(tableName, obj.ID, nameValue);
         }
     }
 }

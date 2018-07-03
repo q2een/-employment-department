@@ -56,6 +56,24 @@
     <Compile Include="forms\CompanyFrom.Designer.cs">
       <DependentUpon>CompanyFrom.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\VacancyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\VacancyForm.Designer.cs">
+      <DependentUpon>VacancyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="modalforms\FacultyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modalforms\FacultyForm.Designer.cs">
+      <DependentUpon>FacultyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="modalforms\EditModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modalforms\EditModal.Designer.cs">
+      <DependentUpon>EditModal.cs</DependentUpon>
+    </Compile>
     <Compile Include="modalforms\EditModalForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +88,12 @@
     </Compile>
     <Compile Include="MainMDIForm.Designer.cs">
       <DependentUpon>MainMDIForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="modalforms\PreferentialCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modalforms\PreferentialCategoryForm.Designer.cs">
+      <DependentUpon>PreferentialCategoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="modalforms\PreferentialCategoryPicker.cs">
       <SubType>Form</SubType>
@@ -94,14 +118,26 @@
     <EmbeddedResource Include="forms\CompanyFrom.resx">
       <DependentUpon>CompanyFrom.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\VacancyForm.resx">
+      <DependentUpon>VacancyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="modalforms\EditModal.resx">
+      <DependentUpon>EditModal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="modalforms\EditModalForm.resx">
       <DependentUpon>EditModalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMDIForm.resx">
       <DependentUpon>MainMDIForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="modalforms\PreferentialCategoryForm.resx">
+      <DependentUpon>PreferentialCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="modalforms\PreferentialCategoryPicker.resx">
       <DependentUpon>PreferentialCategoryPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="modalforms\FacultyForm.resx">
+      <DependentUpon>FacultyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

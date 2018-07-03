@@ -9,7 +9,7 @@ namespace EmploymentDepartment.BL
     {
         public int ID { get; set; }
         public int Faculty { get; set; }
-        public EducationLevelType LevelOfEducation { get; set; }
+        public int LevelOfEducation { get; set; }
         public string Name { get; set; }        
     }
 }

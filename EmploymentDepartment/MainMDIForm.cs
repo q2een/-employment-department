@@ -172,5 +172,12 @@ namespace EmploymentDepartment
             var form = new SpecializationForm(this, ActionType.Edit, spec);
             form.ShowDialog();
         }
+
+        private void факультетToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var spec = Faculties[0];
+            var form = new FacultyForm(this, ActionType.Edit, spec);
+            form.ShowDialog();
+        }
     }
 }
