@@ -32,6 +32,8 @@ namespace EmploymentDepartment
             UpdatePreferentialCategories();
         }
 
+        #region Получение базовых списков.
+
         /// <summary>
         /// Обновляет коллекцию с данными о факультетах из БД.
         /// </summary>
@@ -55,6 +57,8 @@ namespace EmploymentDepartment
         {
             this.PreferentialCategories = EntGetter.GetPreferentialCategories();
         }
+
+        #endregion
 
         private void ShowNewForm(object sender, EventArgs e)
         {
@@ -140,7 +144,7 @@ namespace EmploymentDepartment
 
         private void addStudentMI_Click(object sender, EventArgs e)
         {
-            var student = EntGetter.GetStudents()[0];
+            IStudent student = EntGetter.GetStudents()[0];
             var form = new StudentForm(ActionType.Edit, student);
             form.MdiParent = this;
             form.Show();
@@ -182,8 +186,52 @@ namespace EmploymentDepartment
 
         private void вакансияToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var company = EntGetter.GetCompanies()[0];
             var form = new StudentCompanyForm(this);
-            form.ShowDialog();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void предприятияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var student = EntGetter.GetStudents();
+            var form = new DataViewForm<Student>(ViewType.Edit, student);
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void ShowDialog(Form form)
+        {
+            form.ShowDialog(this);
+        }
+
+        private void ShowMdiChild(Form form)
+        {
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void ShowStudentFormByType(ActionType view, IStudent student)
+        {
+            switch (view)
+            {
+                case ActionType.View:
+                    ShowDialog(new StudentForm(this, student));
+                    break;
+                case ActionType.Edit:
+                case ActionType.Add:
+                    ShowMdiChild(new StudentForm(view, student));
+                    break;
+            }
+        }
+
+        public void ShowFormByType(ActionType view, object type)
+        {
+            if(type is IStudent)
+            {
+                var student = type as IStudent;
+                ShowStudentFormByType(view, student);
+            }
         }
     }
 }

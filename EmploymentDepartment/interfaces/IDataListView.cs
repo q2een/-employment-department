@@ -5,10 +5,9 @@ using System.Text;
 
 namespace EmploymentDepartment
 {
-    public enum ActionType
+    public interface IDataListView<T>
     {
-        Add,
-        Edit,
-        View
+        List<T> Data { get; set; }
+        ViewType Type { get; set; }
     }
 }

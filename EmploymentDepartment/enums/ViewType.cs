@@ -5,10 +5,11 @@ using System.Text;
 
 namespace EmploymentDepartment
 {
-    public enum ActionType
+    public enum ViewType
     {
-        Add,
+        View,
         Edit,
-        View
+        Select,
+        Search 
     }
 }

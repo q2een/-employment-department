@@ -118,7 +118,7 @@ namespace EmploymentDepartment
         /// <returns>true, в случае если <c>KeyChar</c> валидный</returns>
         public static bool SurnameKeyPressValidator(char KeyChar)
         {
-            return !(char.IsLetter(KeyChar) || KeyChar == (char)Keys.Back || KeyChar == '-' || KeyChar == (char)Keys.Back);
+            return !(char.IsLetter(KeyChar) || KeyChar == (char)Keys.Back || KeyChar == '-' || KeyChar == (char)Keys.Back || KeyChar == (char)Keys.Space);
         }
         #endregion
 
@@ -129,7 +129,7 @@ namespace EmploymentDepartment
                 BindingFlags.Instance | BindingFlags.NonPublic);
             pi.SetValue(dgv, setting, null);
         }
-
+        // Обрезает строку для ее корректного отображения на окне.
         public static string ShortenString(string myString, int width, Font font)
         {
             string result = string.Copy(myString);

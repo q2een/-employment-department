@@ -186,17 +186,12 @@ namespace EmploymentDepartment
         public int? PreferentialCategory
         {
             get
-            {
-                var id = main.PreferentialCategories.FirstOrDefault(i => i.Name.Equals(linkPreferentialCategory.Tag));
-                return id?.ID;
+            {                
+                return LinkPreferentialCategory?.ID;
             }
             set
             {
-                PreferentialCategory pc = null;
-                if (value != null)
-                    pc = main.PreferentialCategories.FirstOrDefault(i => i.ID == value);
-
-                linkPreferentialCategory.Text = ShortenString(pc?.Name ?? "Выбрать льготную категорию...");
+                LinkPreferentialCategory = main.PreferentialCategories.FirstOrDefault(i => i.ID == value);
             }
         }
 
@@ -336,43 +331,82 @@ namespace EmploymentDepartment
         
         public IStudent Student { get; private set; }
         public ActionType Type { get; private set; }
+        public IPreferentialCategory LinkPreferentialCategory
+        {
+            get
+            {
+                return linkPreferentialCategory.Tag as IPreferentialCategory;
+            }
+            set
+            {
+                linkPreferentialCategory.Tag = value;
+
+                linkClear.Visible = Type != ActionType.View;
+
+                string text = Type == ActionType.View ? "Отсутствует" : "Выбрать студента ...";
+                text = value == null ? text : $"{value.Name}";
+                int width = this.Width - lblPreferentialCategory.Width - 70;
+
+                linkPreferentialCategory.Text = Extentions.ShortenString(text, width, linkPreferentialCategory.Font);
+            }
+        }
+
         private MainMDIForm main;
 
-        public StudentForm(ActionType type, Student student = null)
+        public StudentForm(ActionType type, IStudent student = null)
         {
             if (type == ActionType.Edit && student == null)
                 throw new ArgumentNullException();
 
             InitializeComponent();
            
-            this.Student = student;
+            this.Student = type == ActionType.Add ? null : student;
             this.Type = type;
 
-            SetFormText(student);
+            SetFormText(student);          
+        }
+
+        // Модальное окно для просмотра информации.
+        public StudentForm(MainMDIForm mainForm, IStudent student) : this(ActionType.View, student)
+        {
+            this.main = mainForm;
+            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
         }
 
         // Обработка события загрузки формы.
         private void StudentForm_Load(object sender, EventArgs e)
         {
-            if (!(this.MdiParent is MainMDIForm))
-                throw new Exception();
+            if (!(this.MdiParent is MainMDIForm) && main == null)
+                throw new ArgumentNullException();
 
-            this.main = this.MdiParent as MainMDIForm;
+            this.main = main == null ? this.MdiParent as MainMDIForm : main;
+
             SetDefaultValues();
+            mainPanel.Enabled = Type != ActionType.View;
         }
         
         // Обработка события изменения размера формы.
         private void StudentForm_SizeChanged(object sender, EventArgs e)
         {
             mainPanel.AutoScroll = this.Size.Height < 650;
-            linkPreferentialCategory.Text = ShortenString();
+            LinkPreferentialCategory = LinkPreferentialCategory;
         }
         
         // Устанавливает заголовок окна.
         private void SetFormText(IStudent student)
         {
-            if (Type == ActionType.Edit)
-                this.Text = $"Редактирование информации о студенте [{student.Surname} {student.Name} {student.Patronymic}]";
+            switch (Type)
+            {
+                case ActionType.Edit:
+                    this.Text = $"Редактирование информации о студенте [{student.Surname} {student.Name} {student.Patronymic}]";
+                    break;
+                case ActionType.Add:
+                    this.Text = $"Добавление анкеты студента";
+                    break;
+                case ActionType.View:
+                    this.Text = $"{student.Surname} {student.Name} {student.Patronymic} - Просмотр анкеты студента";
+                    break;
+            }                
         }
         
         #region Поведение кнопок "..." (Редакторовать)
@@ -632,34 +666,17 @@ namespace EmploymentDepartment
 
         #region Обработка событий для выбора льготной категирии.
 
-        // Обрезает строку для ее корректного отображения на окне.
-        private string ShortenString(string tagText=null)
-        {
-            if (tagText == null)
-                tagText = linkPreferentialCategory.Tag.ToString();
-            else
-                linkPreferentialCategory.Tag = tagText;
-
-            string result = string.Copy(linkPreferentialCategory.Tag.ToString());
-
-            int width = this.Width - lblPreferentialCategory.Width - 70;
-            TextRenderer.MeasureText(result, linkPreferentialCategory.Font, new Size(width, 0), TextFormatFlags.EndEllipsis | TextFormatFlags.ModifyString);
-
-            return result;
-        }      
-
         // Нажатие на элемент управление для выбора льготной категории. Обработка события.
         private void linkPreferentialCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var form = new PreferentialCategoryPicker(main.PreferentialCategories, linkPreferentialCategory, linkPreferentialCategory.Tag.ToString());
+            var form = new PreferentialCategoryPicker(main.PreferentialCategories,this);
             form.ShowDialog(this);
-            linkPreferentialCategory.Text = ShortenString();
         }
 
         // Нажатие на элемент управления "Очистить". Обработка события.
         private void linkClear_Click(object sender, EventArgs e)
         {
-            linkPreferentialCategory.Text = ShortenString("Выбрать льготную категорию...");
+            LinkPreferentialCategory = null;
         }
 
         // Обработка события нажития клавиши при активном элементе для выбора льготной категории. Обработка события.
@@ -680,5 +697,16 @@ namespace EmploymentDepartment
             }
         }
         #endregion
+
+        private void StudentForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Type != ActionType.View)
+                return;
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

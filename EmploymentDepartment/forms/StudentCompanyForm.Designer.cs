@@ -85,7 +85,7 @@
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(550, 436);
+            this.mainPanel.Size = new System.Drawing.Size(549, 436);
             this.mainPanel.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -101,7 +101,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(526, 60);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(525, 60);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // panel3
@@ -110,7 +110,7 @@
             this.panel3.Controls.Add(this.label32);
             this.panel3.Controls.Add(this.label13);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(263, 0);
+            this.panel3.Location = new System.Drawing.Point(262, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(263, 60);
@@ -164,7 +164,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(263, 60);
+            this.panel4.Size = new System.Drawing.Size(262, 60);
             this.panel4.TabIndex = 0;
             // 
             // tbYearOfEmployment
@@ -178,7 +178,7 @@
             this.tbYearOfEmployment.Location = new System.Drawing.Point(6, 32);
             this.tbYearOfEmployment.Mask = "0000";
             this.tbYearOfEmployment.Name = "tbYearOfEmployment";
-            this.tbYearOfEmployment.Size = new System.Drawing.Size(244, 23);
+            this.tbYearOfEmployment.Size = new System.Drawing.Size(243, 23);
             this.tbYearOfEmployment.TabIndex = 2;
             this.tbYearOfEmployment.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbYearOfEmployment.Validating += new System.ComponentModel.CancelEventHandler(this.tbYearOfEmployment_Validating);
@@ -214,7 +214,7 @@
             this.tbNote.MaxLength = 3000;
             this.tbNote.Multiline = true;
             this.tbNote.Name = "tbNote";
-            this.tbNote.Size = new System.Drawing.Size(431, 120);
+            this.tbNote.Size = new System.Drawing.Size(430, 120);
             this.tbNote.TabIndex = 12;
             // 
             // tbPost
@@ -226,7 +226,7 @@
             this.tbPost.Location = new System.Drawing.Point(138, 190);
             this.tbPost.MaxLength = 200;
             this.tbPost.Name = "tbPost";
-            this.tbPost.Size = new System.Drawing.Size(400, 23);
+            this.tbPost.Size = new System.Drawing.Size(399, 23);
             this.tbPost.TabIndex = 9;
             this.tbPost.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
@@ -239,7 +239,7 @@
             this.tbCompany.Location = new System.Drawing.Point(138, 156);
             this.tbCompany.MaxLength = 200;
             this.tbCompany.Name = "tbCompany";
-            this.tbCompany.Size = new System.Drawing.Size(400, 23);
+            this.tbCompany.Size = new System.Drawing.Size(399, 23);
             this.tbCompany.TabIndex = 6;
             this.tbCompany.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
@@ -254,12 +254,13 @@
             this.vacancyPanel.Enabled = false;
             this.vacancyPanel.Location = new System.Drawing.Point(12, 92);
             this.vacancyPanel.Name = "vacancyPanel";
-            this.vacancyPanel.Size = new System.Drawing.Size(526, 47);
+            this.vacancyPanel.Size = new System.Drawing.Size(525, 47);
             this.vacancyPanel.TabIndex = 3;
             // 
             // linkVacancyClear
             // 
             this.linkVacancyClear.AutoSize = true;
+            this.linkVacancyClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkVacancyClear.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.linkVacancyClear.ForeColor = System.Drawing.Color.Blue;
             this.linkVacancyClear.Location = new System.Drawing.Point(0, 22);
@@ -277,6 +278,7 @@
             this.linkVacancy.AutoEllipsis = true;
             this.linkVacancy.AutoSize = true;
             this.linkVacancy.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorProvider.SetIconAlignment(this.linkVacancy, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.linkVacancy.Location = new System.Drawing.Point(97, 15);
             this.linkVacancy.Name = "linkVacancy";
             this.linkVacancy.Size = new System.Drawing.Size(150, 16);
@@ -286,6 +288,7 @@
             this.linkVacancy.Text = "Выбрать вакансию...";
             this.linkVacancy.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkVacancy_LinkClicked);
             this.linkVacancy.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.link_PreviewKeyDown);
+            this.linkVacancy.Validating += new System.ComponentModel.CancelEventHandler(this.linkVacancy_Validating);
             // 
             // label2
             // 
@@ -392,12 +395,13 @@
             this.studentPanel.Controls.Add(this.lblPreferentialCategory);
             this.studentPanel.Location = new System.Drawing.Point(12, 12);
             this.studentPanel.Name = "studentPanel";
-            this.studentPanel.Size = new System.Drawing.Size(526, 47);
+            this.studentPanel.Size = new System.Drawing.Size(525, 47);
             this.studentPanel.TabIndex = 1;
             // 
             // linkStudentClear
             // 
             this.linkStudentClear.AutoSize = true;
+            this.linkStudentClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkStudentClear.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.linkStudentClear.ForeColor = System.Drawing.Color.Blue;
             this.linkStudentClear.Location = new System.Drawing.Point(0, 22);
@@ -415,6 +419,7 @@
             this.linkStudent.AutoEllipsis = true;
             this.linkStudent.AutoSize = true;
             this.linkStudent.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorProvider.SetIconAlignment(this.linkStudent, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.linkStudent.Location = new System.Drawing.Point(97, 14);
             this.linkStudent.Name = "linkStudent";
             this.linkStudent.Size = new System.Drawing.Size(145, 16);
@@ -424,6 +429,7 @@
             this.linkStudent.Text = "Выбрать студента...";
             this.linkStudent.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkStudent_LinkClicked);
             this.linkStudent.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.link_PreviewKeyDown);
+            this.linkStudent.Validating += new System.ComponentModel.CancelEventHandler(this.linkStudent_Validating);
             // 
             // label11
             // 
@@ -456,8 +462,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 436);
+            this.ClientSize = new System.Drawing.Size(549, 436);
             this.Controls.Add(this.mainPanel);
+            this.MinimumSize = new System.Drawing.Size(565, 475);
             this.Name = "StudentCompanyForm";
             this.Text = "Добавление информации о месте работы";
             this.mainPanel.ResumeLayout(false);

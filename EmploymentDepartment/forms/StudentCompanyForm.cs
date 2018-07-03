@@ -56,7 +56,7 @@ namespace EmploymentDepartment
         {
             var link = sender as Label;
 
-            if (link.Name == "linkStudent") 
+            if (link.Name == "linkStudent" || link.Name == "linkStudentClear") 
                 LinkStudent = null;
             else
                 LinkVacancy = null;
@@ -87,7 +87,14 @@ namespace EmploymentDepartment
 
         private void linkStudent_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LinkStudent = main.EntGetter.GetStudents()[1];
+            if (LinkStudent == null)
+            {
+                LinkStudent = main.EntGetter.GetStudents()[1];
+                return;
+            }
+
+            var form = new StudentForm(main, LinkStudent);
+            form.ShowDialog(this);
         }
 
         private void linkVacancy_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -105,10 +112,11 @@ namespace EmploymentDepartment
             {
                 LinkVacancy = null;
                 tbCompany.Focus();
-
+                errorProvider.SetError(linkVacancy, "");
             }
             else
             {
+                linkVacancy.Focus();
                 errorProvider.SetError(tbCompany, "");
                 errorProvider.SetError(tbPost, "");
             }
@@ -142,5 +150,20 @@ namespace EmploymentDepartment
                 errorProvider.SetError(tbYearOfEmployment, "");
         }
 
+        private void linkStudent_Validating(object sender, CancelEventArgs e)
+        {
+            if (LinkStudent == null)
+                errorProvider.SetError(linkStudent, "Необходимо выбрать студента");
+            else
+                errorProvider.SetError(linkStudent, "");
+        }
+
+        private void linkVacancy_Validating(object sender, CancelEventArgs e)
+        {
+            if (LinkVacancy == null)
+                errorProvider.SetError(linkVacancy, "Необходимо выбрать вакансию");
+            else
+                errorProvider.SetError(linkVacancy, "");
+        }
     }
 }

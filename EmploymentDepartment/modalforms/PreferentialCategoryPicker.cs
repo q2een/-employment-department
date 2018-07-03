@@ -12,16 +12,16 @@ namespace EmploymentDepartment
 {
     public partial class PreferentialCategoryPicker : Form
     {
-        private readonly Control control;
-        private readonly string value;
+        private readonly StudentForm studentForm;
+        private readonly List<PreferentialCategory> categories;
 
-        public PreferentialCategoryPicker(List<PreferentialCategory> categories, Control control, string value = "")
+        public PreferentialCategoryPicker(List<PreferentialCategory> categories, StudentForm studentForm)
         {
-            if (categories == null)
+            if (categories == null || studentForm == null)
                 throw new ArgumentNullException();
 
-            this.control = control;
-            this.value = value;
+            this.studentForm = studentForm;
+            this.categories = categories;
 
             InitializeComponent();
 
@@ -43,20 +43,17 @@ namespace EmploymentDepartment
                 c.DefaultCellStyle.Font = new Font("Verdana", 9.75F, GraphicsUnit.Point);
             }
 
-            SelectRowByCategoryID(value);
-        }
+            var elen = categories.FirstOrDefault(i => studentForm.LinkPreferentialCategory.IsPropertiesAreEqual((IPreferentialCategory)i));
+            var index = categories.IndexOf(elen);
 
-        private void SelectRowByCategoryID(string value)
-        {
-            foreach (DataGridViewRow row in mainDgv.Rows)
-                if (row.Cells[1].Value.ToString().Equals(value))
-                    row.Cells[1].Selected = true;
+            if (index >= 0)
+                mainDgv.Rows[index].Cells[1].Selected = true;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            var selected = mainDgv.SelectedRows[0];         
-            control.Tag = selected.Cells[1].Value.ToString();
+            var selected = mainDgv.SelectedRows[0].Index;
+            studentForm.LinkPreferentialCategory = categories[selected];
             this.Close();
         }
 

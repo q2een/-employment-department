@@ -1455,6 +1455,7 @@
             this.Text = "Добавление анкеты студента";
             this.Load += new System.EventHandler(this.StudentForm_Load);
             this.SizeChanged += new System.EventHandler(this.StudentForm_SizeChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StudentForm_KeyDown);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
