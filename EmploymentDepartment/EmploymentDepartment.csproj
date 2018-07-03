@@ -56,6 +56,12 @@
     <Compile Include="forms\CompanyFrom.Designer.cs">
       <DependentUpon>CompanyFrom.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\StudentCompanyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\StudentCompanyForm.Designer.cs">
+      <DependentUpon>StudentCompanyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\VacancyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,9 @@
     </Compile>
     <EmbeddedResource Include="forms\CompanyFrom.resx">
       <DependentUpon>CompanyFrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\StudentCompanyForm.resx">
+      <DependentUpon>StudentCompanyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\VacancyForm.resx">
       <DependentUpon>VacancyForm.cs</DependentUpon>

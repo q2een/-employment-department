@@ -63,6 +63,7 @@
     <Compile Include="IEntity\IPreferentialCategory.cs" />
     <Compile Include="IEntity\ISpecialization.cs" />
     <Compile Include="IEntity\IStudent.cs" />
+    <Compile Include="IEntity\IVacancy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

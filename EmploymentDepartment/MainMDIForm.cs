@@ -179,5 +179,11 @@ namespace EmploymentDepartment
             var form = new FacultyForm(this, ActionType.Edit, spec);
             form.ShowDialog();
         }
+
+        private void вакансияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new StudentCompanyForm(this);
+            form.ShowDialog();
+        }
     }
 }

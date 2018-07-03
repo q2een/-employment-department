@@ -224,6 +224,7 @@
             this.вакансияToolStripMenuItem.Name = "вакансияToolStripMenuItem";
             this.вакансияToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.вакансияToolStripMenuItem.Text = "Вакансия";
+            this.вакансияToolStripMenuItem.Click += new System.EventHandler(this.вакансияToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 

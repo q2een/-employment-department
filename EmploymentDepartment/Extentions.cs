@@ -1,6 +1,7 @@
 ﻿using EmploymentDepartment.BL;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Reflection;
@@ -127,6 +128,14 @@ namespace EmploymentDepartment
             PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
                 BindingFlags.Instance | BindingFlags.NonPublic);
             pi.SetValue(dgv, setting, null);
+        }
+
+        public static string ShortenString(string myString, int width, Font font)
+        {
+            string result = string.Copy(myString);
+            TextRenderer.MeasureText(result, font, new Size(width, 0), TextFormatFlags.EndEllipsis | TextFormatFlags.ModifyString);
+
+            return result;
         }
 
         /// <summary>

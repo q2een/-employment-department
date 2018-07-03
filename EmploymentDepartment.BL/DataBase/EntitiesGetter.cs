@@ -99,6 +99,16 @@ namespace EmploymentDepartment.BL
             return GetEntities<Student>(Student);
         }
 
+        public string GetCompanyById(int id)
+        {
+            var coll = db.GetCollection("SELECT Name FROM company WHERE ID = " + id);
+
+            if (coll == null || coll.Count != 1)
+                return null;
+
+            return coll[0].Values.First().ToString();
+        }
+
         public List<Company> GetCompanies(string dbQuery)
         {
             return GetEntities<Company>(dbQuery);
