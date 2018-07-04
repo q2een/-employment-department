@@ -1,33 +1,17 @@
 ﻿using EmploymentDepartment.BL;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Media;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class StudentForm : Form, IStudent, IEditable<IStudent>
+    public partial class StudentForm : BaseStudentForm, IStudent
     {
         #region IStudent Implementation.
-        private int id;
-        public int ID
-        {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                id = value;
-            }
-        }
 
-        public string ApplicationFormNumber
+        public new string ApplicationFormNumber
         {
             get
             {
@@ -39,7 +23,7 @@ namespace EmploymentDepartment
             }
         }
 
-        string IStudent.Name
+        string  IStudent.Name
         {
             get
             {
@@ -51,7 +35,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string Surname
+        public new string Surname
         {
             get
             {
@@ -63,7 +47,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string Patronymic
+        public new string Patronymic
         {
             get
             {
@@ -75,7 +59,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public DateTime DOB
+        public new DateTime DOB
         {
             get
             {
@@ -87,7 +71,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public int Gender
+        public new int Gender
         {
             get
             {
@@ -99,7 +83,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public bool MaritalStatus
+        public new bool MaritalStatus
         {
             get
             {
@@ -111,7 +95,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public int YearOfGraduation
+        public new int YearOfGraduation
         {
             get
             {
@@ -123,7 +107,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public int Faculty
+        public new int Faculty
         {
             get
             {
@@ -135,7 +119,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public EducationLevelType LevelOfEducation
+        public new EducationLevelType LevelOfEducation
         {
             get
             {
@@ -147,7 +131,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public int FieldOfStudy
+        public new int FieldOfStudy
         {
             get
             {
@@ -159,7 +143,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string StudyGroup
+        public new string StudyGroup
         {
             get
             {
@@ -171,7 +155,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public decimal Rating
+        public new decimal Rating
         {
             get
             {
@@ -183,7 +167,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public int? PreferentialCategory
+        public new int? PreferentialCategory
         {
             get
             {                
@@ -195,7 +179,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public bool SelfEmployment
+        public new bool SelfEmployment
         {
             get
             {
@@ -207,7 +191,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string City
+        public new string City
         {
             get
             {
@@ -219,7 +203,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public new string Region
+        string IStudent.Region
         {
             get
             {
@@ -231,7 +215,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string District
+        public new string District
         {
             get
             {
@@ -243,7 +227,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string Address
+        public new string Address
         {
             get
             {
@@ -255,7 +239,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string RegCity
+        public new string RegCity
         {
             get
             {
@@ -267,7 +251,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string RegRegion
+        public new string RegRegion
         {
             get
             {
@@ -279,7 +263,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string RegDistrict
+        public new string RegDistrict
         {
             get
             {
@@ -291,7 +275,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string RegAddress
+        public new string RegAddress
         {
             get
             {
@@ -303,7 +287,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string Phone
+        public new string Phone
         {
             get
             {
@@ -315,7 +299,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string Email
+        public new string Email
         {
             get
             {
@@ -329,8 +313,6 @@ namespace EmploymentDepartment
 
         #endregion
         
-        public IStudent Entity { get; private set; }
-        public ActionType Type { get; private set; }
         public IPreferentialCategory LinkPreferentialCategory
         {
             get
@@ -351,38 +333,15 @@ namespace EmploymentDepartment
             }
         }
 
-        private MainMDIForm main;
-
-        public StudentForm(ActionType type, IStudent student = null)
+        public StudentForm(ActionType type, IStudent student = null):base(type, student)
         {
-            if (type == ActionType.Edit && student == null)
-                throw new ArgumentNullException();
-
-            InitializeComponent();
-           
-            this.Entity = type == ActionType.Add ? null : student;
-            this.Type = type;
-
-            SetFormText(student);          
+            InitializeComponent();        
         }
 
         // Модальное окно для просмотра информации.
-        public StudentForm(MainMDIForm mainForm, IStudent student) : this(ActionType.View, student)
+        public StudentForm(MainMDIForm mainForm, IStudent student) : base(mainForm, student)
         {
-            this.main = mainForm;
-            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
-        }
-
-        // Обработка события загрузки формы.
-        private void StudentForm_Load(object sender, EventArgs e)
-        {
-            if (!(this.MdiParent is MainMDIForm) && main == null)
-                throw new ArgumentNullException();
-
-            this.main = main == null ? this.MdiParent as MainMDIForm : main;
-
-            SetDefaultValues();
-            mainPanel.Enabled = Type != ActionType.View;
+            InitializeComponent();
         }
         
         // Обработка события изменения размера формы.
@@ -392,40 +351,11 @@ namespace EmploymentDepartment
             LinkPreferentialCategory = LinkPreferentialCategory;
         }
         
-        // Устанавливает заголовок окна.
-        private void SetFormText(IStudent student)
+        protected override ErrorProvider GetErrorProvider()
         {
-            switch (Type)
-            {
-                case ActionType.Edit:
-                    this.Text = $"Редактирование информации о студенте [{student.Surname} {student.Name} {student.Patronymic}]";
-                    break;
-                case ActionType.Add:
-                    this.Text = $"Добавление анкеты студента";
-                    break;
-                case ActionType.View:
-                    this.Text = $"{student.Surname} {student.Name} {student.Patronymic} - Просмотр анкеты студента";
-                    break;
-            }                
+            return errorProvider;
         }
-        
-        #region Поведение кнопок "..." (Редакторовать)
-        private void lblEdit_Click(object sender, EventArgs e)
-        {
-            new EditModalForm((sender as Label).Tag as TextBox).ShowDialog();
-        }
-
-        private void lblEdit_MouseHover(object sender, EventArgs e)
-        {
-            (sender as Label).ForeColor = Color.RoyalBlue;
-        }
-
-        private void lblEdit_MouseLeave(object sender, EventArgs e)
-        {
-            (sender as Label).ForeColor = SystemColors.ControlText;
-        }
-        #endregion
-
+            
         #region Поведение элементов управления.
 
         // Установка одинаковых значений адресов.
@@ -521,20 +451,6 @@ namespace EmploymentDepartment
             Extentions.RequiredComboBoxValidating(sender as ComboBox, errorProvider);            
         }
 
-        // Валидация выпадающих списков обязательных к выбору элемента.
-        private void RequiredComboBox_Validating(object sender, CancelEventArgs e)
-        {
-            var cmb = sender as ComboBox;
-            Extentions.RequiredComboBoxValidating(cmb, errorProvider);
-        }
-
-        // Валидация текстовых полей обязательных к заполнению.
-        private void RequiredTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            var tb = sender as Control;
-            Extentions.RequiredTextBoxValidating(tb, errorProvider);
-        }
-
         // Валидация текстового поля "Год рождения".
         private void tbDOB_Validating(object sender, CancelEventArgs e)
         {
@@ -563,10 +479,10 @@ namespace EmploymentDepartment
         }
         #endregion
 
-        #region IEditable interfaces implemantation.
+        #region IEditable interfac implemantation.
 
         // Валидация полей на форме.
-        public bool ValidateFields()
+        public override bool ValidateFields()
         {
             // Установка одинаковых адресов в полях.
             if (cbAddressesAreEquals.Checked)
@@ -576,7 +492,7 @@ namespace EmploymentDepartment
         }
 
         // Задает полям исходные значения.
-        public void SetDefaultValues()
+        public override void SetDefaultValues()
         {
             this.SetPropertiesValue<IStudent>(Entity, "");
             if (tbRegCity.Text == tbCity.Text && !string.IsNullOrEmpty(tbRegCity.Text) &&
@@ -585,74 +501,6 @@ namespace EmploymentDepartment
                 tbRegAddress.Text == tbAddress.Text && !string.IsNullOrEmpty(tbRegAddress.Text))
                 cbAddressesAreEquals.Checked = true;
         }
-
-        // Сохраняет внесенные изменения в БД.
-        public void Save()
-        {
-            /*if (!ValidateFields() || Type != ActionType.Edit)
-                return;
-
-            try
-            {
-                // Поля не учитываются в таблице в БД.
-                var nameValue = Entity.GetPropertiesDifference<IStudent>(this, "ID", "LevelOfEducation", "Faculty");
-
-                if (nameValue.Count == 0)
-                    return;
-
-                // Обновляем данные
-                main.DBGetter.Update("Student", ID, nameValue);
-
-                MessageBox.Show($"Информация о студенте обновлена\nФИО студента: {Surname} {((IStudent)this).Name} {Patronymic}", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Присваеваем свойству новые исходные значения.
-                Entity = ((IStudent)this).GetInstance<IStudent, Student>();
-                SetFormText(this);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка обновления данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
-
-            var msg = $"Информация о студенте обновлена\nФИО студента: {Surname} {((IStudent)this).Name} {Patronymic}";
-            if (this.UpdateFormEntityInDataBase<StudentForm,IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty"))
-                SetFormText(this); 
-        }
-
-        // TODO
-        // Удаление анкеты пользователя из БД.
-        public void Remove()
-        {
-            throw new NotImplementedException();
-        }
-
-        // Добавляет данные в БД.
-        public void Insert()
-        {
-            /*if (!ValidateFields() || Type != ActionType.Add)
-                return;
-
-            try
-            {
-                // Поля не учитываются в таблице в БД.
-                var nameValue = this.GetPropertiesNameValuePair<IStudent>(true, "ID", "LevelOfEducation", "Faculty");
-
-                // Добавляем запись в БД.
-                main.DBGetter.Insert("Student", nameValue);
-
-                MessageBox.Show($"Студент {Surname} {Name} {Patronymic}\nдобавлен в базу", "Добавление студента", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }     */
-
-            var msg = $"Студент {Surname} {((IStudent)this).Name} {Patronymic}\nдобавлен в базу";
-            this.InsertFormEntityToDataBase<StudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty");
-                
-        }
-
         #endregion
 
         #region Обработка событий для выбора льготной категирии.
@@ -689,15 +537,13 @@ namespace EmploymentDepartment
         }
         #endregion
 
-        private void StudentForm_KeyDown(object sender, KeyEventArgs e)
+        private void StudentForm_Load(object sender, EventArgs e)
         {
-            if (Type != ActionType.View)
-                return;
-
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Close();
-            }
+            mainPanel.Enabled = Type != ActionType.View;
         }
+
+        private void RequiredTB_Validating(object sender, CancelEventArgs e) => this.RequiredTextBox_Validating(sender, e);
+
+        private void RequireCMB_Validating(object sender, CancelEventArgs e) => RequiredComboBox_Validating(sender, e);
     }
 }

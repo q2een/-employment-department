@@ -198,7 +198,7 @@ namespace EmploymentDepartment
         /// <param name="isNotNullOnly">Учитывать только свойства со значением</param>
         /// <param name="ignore">Набор имен свойств, которые необходимо проигнорировать</param>
         /// <returns>Коллекцию "Ключ-Значение"</returns>
-        public static Dictionary<string, object> GetPropertiesNameValuePair<T>(this T self,bool isNotNullOnly, params string[] ignore) where T : class
+        public static Dictionary<string, object> GetPropertiesNameValuePair<T>(this T self,bool isNotNullOnly, params string[] ignore) where T : class, IIdentifiable
         {
             var nameValue = new Dictionary<string, object>();
 
@@ -357,9 +357,9 @@ namespace EmploymentDepartment
                 self.Close();
             }
             catch (Exception ex)
-            {
-                return false;
+            {                
                 MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
             return true;

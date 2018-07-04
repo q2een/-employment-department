@@ -69,7 +69,7 @@ namespace EmploymentDepartment
         {
             try
             {
-                this.Save(Entity, main.DBGetter, "preferentialcategory", "ID");
+                //this.Save(Entity, main.DBGetter, "preferentialcategory", "ID");
 
                 MessageBox.Show($"Информация о льготной категории изменена", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -91,7 +91,7 @@ namespace EmploymentDepartment
         {
             try
             {
-                this.Insert<PreferentialCategoryForm, IPreferentialCategory>(main.DBGetter, "preferentialcategory", "ID");
+                //this.Insert<PreferentialCategoryForm, IPreferentialCategory>(main.DBGetter, "preferentialcategory", "ID");
 
                 var msg = $"Льготная категоря добавлена в базу";
 

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class DataViewForm<T>: Form, IDataListView<T>
+    public partial class DataViewForm<T>: Form, IDataListView<T> where T:class,IIdentifiable
     {
         private MainMDIForm main;
 
@@ -54,8 +54,7 @@ namespace EmploymentDepartment
                     break;
             }
 
-            main.ShowFormByType(type, Data[mainDgv.SelectedRows[0].Index]); 
-                    
+            main.ShowFormByType(type, Data[mainDgv.SelectedRows[0].Index]);          
         }
     }
 }

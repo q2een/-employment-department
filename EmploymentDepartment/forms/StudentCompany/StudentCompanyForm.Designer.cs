@@ -132,7 +132,7 @@
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(257, 24);
             this.cmbStatus.TabIndex = 2;
-            this.cmbStatus.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
+            this.cmbStatus.Validating += RequiredComboBox_Validating;
             // 
             // label32
             // 
@@ -228,7 +228,7 @@
             this.tbPost.Name = "tbPost";
             this.tbPost.Size = new System.Drawing.Size(399, 23);
             this.tbPost.TabIndex = 9;
-            this.tbPost.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbPost.Validating += RequiredTextBox_Validating;
             // 
             // tbCompany
             // 
@@ -241,7 +241,7 @@
             this.tbCompany.Name = "tbCompany";
             this.tbCompany.Size = new System.Drawing.Size(399, 23);
             this.tbCompany.TabIndex = 6;
-            this.tbCompany.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbCompany.Validating += RequiredTextBox_Validating;
             // 
             // vacancyPanel
             // 
@@ -467,8 +467,6 @@
             this.MinimumSize = new System.Drawing.Size(565, 475);
             this.Name = "StudentCompanyForm";
             this.Text = "Добавление информации о месте работы";
-            this.Load += new System.EventHandler(this.StudentCompanyForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StudentCompanyForm_KeyDown);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);

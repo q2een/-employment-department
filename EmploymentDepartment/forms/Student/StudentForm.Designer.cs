@@ -304,9 +304,6 @@
             this.lblPhone.TabIndex = 3;
             this.lblPhone.Tag = this.tbPhone;
             this.lblPhone.Text = "...";
-            this.lblPhone.Click += new System.EventHandler(this.lblEdit_Click);
-            this.lblPhone.MouseLeave += new System.EventHandler(this.lblEdit_MouseLeave);
-            this.lblPhone.MouseHover += new System.EventHandler(this.lblEdit_MouseHover);
             // 
             // tbPhone
             // 
@@ -319,7 +316,7 @@
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(193, 23);
             this.tbPhone.TabIndex = 2;
-            this.tbPhone.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbPhone.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label18
             // 
@@ -448,9 +445,6 @@
             this.lblRegCity.TabIndex = 29;
             this.lblRegCity.Tag = this.tbRegCity;
             this.lblRegCity.Text = "...";
-            this.lblRegCity.Click += new System.EventHandler(this.lblEdit_Click);
-            this.lblRegCity.MouseLeave += new System.EventHandler(this.lblEdit_MouseLeave);
-            this.lblRegCity.MouseHover += new System.EventHandler(this.lblEdit_MouseHover);
             // 
             // tbRegCity
             // 
@@ -463,7 +457,7 @@
             this.tbRegCity.Name = "tbRegCity";
             this.tbRegCity.Size = new System.Drawing.Size(211, 23);
             this.tbRegCity.TabIndex = 2;
-            this.tbRegCity.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbRegCity.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // lblRegRegion
             // 
@@ -477,9 +471,6 @@
             this.lblRegRegion.TabIndex = 29;
             this.lblRegRegion.Tag = this.tbRegRegion;
             this.lblRegRegion.Text = "...";
-            this.lblRegRegion.Click += new System.EventHandler(this.lblEdit_Click);
-            this.lblRegRegion.MouseLeave += new System.EventHandler(this.lblEdit_MouseLeave);
-            this.lblRegRegion.MouseHover += new System.EventHandler(this.lblEdit_MouseHover);
             // 
             // tbRegRegion
             // 
@@ -505,9 +496,6 @@
             this.lblRegDistrict.TabIndex = 29;
             this.lblRegDistrict.Tag = this.tbRegDistrict;
             this.lblRegDistrict.Text = "...";
-            this.lblRegDistrict.Click += new System.EventHandler(this.lblEdit_Click);
-            this.lblRegDistrict.MouseLeave += new System.EventHandler(this.lblEdit_MouseLeave);
-            this.lblRegDistrict.MouseHover += new System.EventHandler(this.lblEdit_MouseHover);
             // 
             // tbRegDistrict
             // 
@@ -533,9 +521,6 @@
             this.lblRegAddress.TabIndex = 29;
             this.lblRegAddress.Tag = this.tbRegAddress;
             this.lblRegAddress.Text = "...";
-            this.lblRegAddress.Click += new System.EventHandler(this.lblEdit_Click);
-            this.lblRegAddress.MouseLeave += new System.EventHandler(this.lblEdit_MouseLeave);
-            this.lblRegAddress.MouseHover += new System.EventHandler(this.lblEdit_MouseHover);
             // 
             // tbRegAddress
             // 
@@ -549,7 +534,7 @@
             this.tbRegAddress.Name = "tbRegAddress";
             this.tbRegAddress.Size = new System.Drawing.Size(211, 23);
             this.tbRegAddress.TabIndex = 9;
-            this.tbRegAddress.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbRegAddress.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label26
             // 
@@ -652,9 +637,6 @@
             this.lblAddress.TabIndex = 29;
             this.lblAddress.Tag = this.tbAddress;
             this.lblAddress.Text = "...";
-            this.lblAddress.Click += new System.EventHandler(this.lblEdit_Click);
-            this.lblAddress.MouseLeave += new System.EventHandler(this.lblEdit_MouseLeave);
-            this.lblAddress.MouseHover += new System.EventHandler(this.lblEdit_MouseHover);
             // 
             // tbAddress
             // 
@@ -668,7 +650,7 @@
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(207, 23);
             this.tbAddress.TabIndex = 9;
-            this.tbAddress.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbAddress.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // lblDistrict
             // 
@@ -682,9 +664,6 @@
             this.lblDistrict.TabIndex = 29;
             this.lblDistrict.Tag = this.tbDistrict;
             this.lblDistrict.Text = "...";
-            this.lblDistrict.Click += new System.EventHandler(this.lblEdit_Click);
-            this.lblDistrict.MouseLeave += new System.EventHandler(this.lblEdit_MouseLeave);
-            this.lblDistrict.MouseHover += new System.EventHandler(this.lblEdit_MouseHover);
             // 
             // tbDistrict
             // 
@@ -710,9 +689,6 @@
             this.lblRegion.TabIndex = 29;
             this.lblRegion.Tag = this.tbRegion;
             this.lblRegion.Text = "...";
-            this.lblRegion.Click += new System.EventHandler(this.lblEdit_Click);
-            this.lblRegion.MouseLeave += new System.EventHandler(this.lblEdit_MouseLeave);
-            this.lblRegion.MouseHover += new System.EventHandler(this.lblEdit_MouseHover);
             // 
             // tbRegion
             // 
@@ -739,9 +715,6 @@
             this.lblCity.TabIndex = 29;
             this.lblCity.Tag = this.tbCity;
             this.lblCity.Text = "...";
-            this.lblCity.Click += new System.EventHandler(this.lblEdit_Click);
-            this.lblCity.MouseLeave += new System.EventHandler(this.lblEdit_MouseLeave);
-            this.lblCity.MouseHover += new System.EventHandler(this.lblEdit_MouseHover);
             // 
             // tbCity
             // 
@@ -755,7 +728,7 @@
             this.tbCity.Name = "tbCity";
             this.tbCity.Size = new System.Drawing.Size(207, 23);
             this.tbCity.TabIndex = 2;
-            this.tbCity.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbCity.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label28
             // 
@@ -872,7 +845,7 @@
             this.cmbLevelOfEducation.Size = new System.Drawing.Size(188, 24);
             this.cmbLevelOfEducation.TabIndex = 2;
             this.cmbLevelOfEducation.SelectedIndexChanged += new System.EventHandler(this.cmbLevelOfEducation_SelectedIndexChanged);
-            this.cmbLevelOfEducation.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
+            this.cmbLevelOfEducation.Validating += new System.ComponentModel.CancelEventHandler(this.RequireCMB_Validating);
             // 
             // label32
             // 
@@ -984,7 +957,7 @@
             this.tbStudyGroup.Size = new System.Drawing.Size(130, 23);
             this.tbStudyGroup.TabIndex = 2;
             this.tbStudyGroup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbStudyGroup.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbStudyGroup.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label9
             // 
@@ -1084,7 +1057,7 @@
             this.cmbFaculty.Size = new System.Drawing.Size(310, 24);
             this.cmbFaculty.TabIndex = 2;
             this.cmbFaculty.SelectedIndexChanged += new System.EventHandler(this.cmbFaculty_SelectedIndexChanged);
-            this.cmbFaculty.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
+            this.cmbFaculty.Validating += new System.ComponentModel.CancelEventHandler(this.RequireCMB_Validating);
             // 
             // label31
             // 
@@ -1133,7 +1106,7 @@
             this.cmbFieldOfStudy.Name = "cmbFieldOfStudy";
             this.cmbFieldOfStudy.Size = new System.Drawing.Size(309, 24);
             this.cmbFieldOfStudy.TabIndex = 2;
-            this.cmbFieldOfStudy.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
+            this.cmbFieldOfStudy.Validating += new System.ComponentModel.CancelEventHandler(this.RequireCMB_Validating);
             // 
             // label30
             // 
@@ -1269,7 +1242,7 @@
             this.cmbGender.Size = new System.Drawing.Size(198, 24);
             this.cmbGender.TabIndex = 2;
             this.cmbGender.SelectedIndexChanged += new System.EventHandler(this.cmbGender_SelectedIndexChanged);
-            this.cmbGender.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
+            this.cmbGender.Validating += new System.ComponentModel.CancelEventHandler(this.RequireCMB_Validating);
             // 
             // label6
             // 
@@ -1320,7 +1293,7 @@
             this.cmbMaritalStatus.Name = "cmbMaritalStatus";
             this.cmbMaritalStatus.Size = new System.Drawing.Size(209, 24);
             this.cmbMaritalStatus.TabIndex = 2;
-            this.cmbMaritalStatus.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
+            this.cmbMaritalStatus.Validating += new System.ComponentModel.CancelEventHandler(this.RequireCMB_Validating);
             // 
             // label7
             // 
@@ -1356,7 +1329,7 @@
             this.tbName.Size = new System.Drawing.Size(534, 23);
             this.tbName.TabIndex = 8;
             this.tbName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
-            this.tbName.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbName.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // tbSurname
             // 
@@ -1370,7 +1343,7 @@
             this.tbSurname.Size = new System.Drawing.Size(534, 23);
             this.tbSurname.TabIndex = 5;
             this.tbSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
-            this.tbSurname.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbSurname.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // tbApplicationFormNumber
             // 
@@ -1383,7 +1356,7 @@
             this.tbApplicationFormNumber.Name = "tbApplicationFormNumber";
             this.tbApplicationFormNumber.Size = new System.Drawing.Size(432, 23);
             this.tbApplicationFormNumber.TabIndex = 2;
-            this.tbApplicationFormNumber.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
+            this.tbApplicationFormNumber.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label4
             // 
@@ -1455,7 +1428,6 @@
             this.Text = "Добавление анкеты студента";
             this.Load += new System.EventHandler(this.StudentForm_Load);
             this.SizeChanged += new System.EventHandler(this.StudentForm_SizeChanged);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StudentForm_KeyDown);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.panel1.ResumeLayout(false);

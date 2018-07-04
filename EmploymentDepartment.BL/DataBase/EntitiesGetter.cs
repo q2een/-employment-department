@@ -89,6 +89,19 @@ namespace EmploymentDepartment.BL
             return result;
         }
 
+        public Student GetStudentById(int id)
+        {
+            var dict = db.GetCollection($"{Student} WHERE ID = {id}");
+
+            if (dict == null || dict.Count != 1)
+                return null;
+
+            var entity = new Student();
+            entity.SetProperties(dict[0]);
+
+            return entity;
+        }
+
         public List<Student> GetStudents(string dbQuery)
         {
             return GetEntities<Student>(dbQuery);
@@ -99,14 +112,17 @@ namespace EmploymentDepartment.BL
             return GetEntities<Student>(Student);
         }
 
-        public string GetCompanyById(int id)
+        public Company GetCompanyById(int id)
         {
-            var coll = db.GetCollection("SELECT Name FROM company WHERE ID = " + id);
+            var dict = db.GetCollection("SELECT * FROM company WHERE ID = " + id);
 
-            if (coll == null || coll.Count != 1)
+            if (dict == null || dict.Count != 1)
                 return null;
 
-            return coll[0].Values.First().ToString();
+            var entity = new Company();
+            entity.SetProperties(dict[0]);
+
+            return entity;
         }
 
         public List<Company> GetCompanies(string dbQuery)
@@ -133,7 +149,23 @@ namespace EmploymentDepartment.BL
         {
             return GetEntities<Vacancy>(dbQuery);
         }
+                
+        public Vacancy GetVacancyById(int? id)
+        {
+            if (id == null)
+                return null;
 
+            var dict = db.GetCollection($"{Vacancy} WHERE ID = {id}");
+
+            if (dict == null || dict.Count != 1)
+                return null;
+
+            var entity = new Vacancy();
+            entity.SetProperties(dict[0]);
+
+            return entity;
+        }
+         
         public List<Vacancy> GetVacancies()
         {
             return GetEntities<Vacancy>(Vacancy);

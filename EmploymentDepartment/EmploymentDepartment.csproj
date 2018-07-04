@@ -44,12 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChildForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChildForm.Designer.cs">
-      <DependentUpon>ChildForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,22 +51,40 @@
       <DependentUpon>DataViewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="enums\ViewType.cs" />
-    <Compile Include="forms\CompanyFrom.cs">
+    <Compile Include="forms\Company\BaseCompanyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\CompanyFrom.Designer.cs">
+    <Compile Include="forms\StudentCompany\BaseStudentCompenyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\Student\BaseStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\Vacancy\BaseVacancyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\Company\CompanyFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\Company\CompanyFrom.Designer.cs">
       <DependentUpon>CompanyFrom.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\StudentCompanyForm.cs">
+    <Compile Include="forms\MDIChild.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\StudentCompanyForm.Designer.cs">
+    <Compile Include="forms\MDIChild.Designer.cs">
+      <DependentUpon>MDIChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\StudentCompany\StudentCompanyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\StudentCompany\StudentCompanyForm.Designer.cs">
       <DependentUpon>StudentCompanyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\VacancyForm.cs">
+    <Compile Include="forms\Vacancy\VacancyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\VacancyForm.Designer.cs">
+    <Compile Include="forms\Vacancy\VacancyForm.Designer.cs">
       <DependentUpon>VacancyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="interfaces\IDataListView.cs" />
@@ -126,22 +138,25 @@
     <Compile Include="modalforms\SpecializationForm.Designer.cs">
       <DependentUpon>SpecializationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\StudentForm.cs">
+    <Compile Include="forms\Student\StudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\StudentForm.Designer.cs">
+    <Compile Include="forms\Student\StudentForm.Designer.cs">
       <DependentUpon>StudentForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="DataViewForm.resx">
       <DependentUpon>DataViewForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\CompanyFrom.resx">
+    <EmbeddedResource Include="forms\Company\CompanyFrom.resx">
       <DependentUpon>CompanyFrom.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\StudentCompanyForm.resx">
+    <EmbeddedResource Include="forms\MDIChild.resx">
+      <DependentUpon>MDIChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\StudentCompany\StudentCompanyForm.resx">
       <DependentUpon>StudentCompanyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\VacancyForm.resx">
+    <EmbeddedResource Include="forms\Vacancy\VacancyForm.resx">
       <DependentUpon>VacancyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="modalforms\EditModal.resx">
@@ -174,7 +189,7 @@
     <EmbeddedResource Include="modalforms\SpecializationForm.resx">
       <DependentUpon>SpecializationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\StudentForm.resx">
+    <EmbeddedResource Include="forms\Student\StudentForm.resx">
       <DependentUpon>StudentForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

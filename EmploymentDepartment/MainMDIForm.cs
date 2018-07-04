@@ -60,14 +60,6 @@ namespace EmploymentDepartment
 
         #endregion
 
-        private void ShowNewForm(object sender, EventArgs e)
-        {
-            Form childForm = new Form();
-            childForm.MdiParent = this;
-            childForm.Text = "Окно " + childFormNumber++;
-            childForm.Show();
-        }
-
         private void OpenFile(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -93,18 +85,6 @@ namespace EmploymentDepartment
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
         }
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -173,6 +153,16 @@ namespace EmploymentDepartment
             active.Save();
         }
 
+        private void tsbAdd_Click(object sender, EventArgs e)
+        {
+            if (!(this.ActiveMdiChild is IInsertable))
+                return;
+
+            var active = this.ActiveMdiChild as IInsertable;
+
+            active.Insert();
+        }
+
         private void specializationMI_Click(object sender, EventArgs e)
         {
             var spec = EntGetter.GetSpecializations()[0];
@@ -189,8 +179,7 @@ namespace EmploymentDepartment
 
         private void вакансияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var company = EntGetter.GetCompanies()[0];
-            var form = new StudentCompanyForm(this);
+            var form = new VacancyForm(ActionType.Add);
             form.MdiParent = this;
             form.Show();
         }
@@ -202,50 +191,65 @@ namespace EmploymentDepartment
             form.MdiParent = this;
             form.Show();
         }
-
-        private void ShowDialog(Form form)
-        {
-            form.ShowDialog(this);
-        }
-
         
-        private void ShowMdiChild<T,U>(T form, U entity) where T:Form, IEditable<U>, U where U:IIdentifiable
+        public void ShowMdiChild<U, T>(U entity, ActionType type) where U: class, IIdentifiable where T : MDIChild<U>
         {
-            var temp = this.MdiChildren.FirstOrDefault(i => (i is T) && form.ID == entity.ID && (i as T).Type == form.Type);
+            var form = this.MdiChildren.FirstOrDefault(i => (i is MDIChild<U>) && (i as MDIChild<U>).Type == type && (i as MDIChild<U>).ID == entity.ID);
 
-            if (temp != null)
-            {
-                form.Dispose();
-                temp.Show();
-                temp.Activate();
-                return;
-            }
+            if (form == null)
+                form = Activator.CreateInstance(typeof(T), new object[] { type, entity }) as T;
 
             form.MdiParent = this;
             form.Show();
+            form.Activate();
         }
 
-        private void ShowStudentFormByType(ActionType view, IStudent student)
+        public void ShowViewDialog<U, T>(U entity) where U : class, IIdentifiable where T : MDIChild<U>
         {
-            switch (view)
-            {
-                case ActionType.View:
-                    ShowDialog(new StudentForm(this, student));
-                    break;
-                case ActionType.Edit:
-                case ActionType.Add:
-                    ShowMdiChild(new StudentForm(view, student), student);
-                    break;
-            }
+            var form = Activator.CreateInstance(typeof(T), new object[] { this, entity }) as T;
+            form.ShowDialog(this);
         }
 
-        public void ShowFormByType(ActionType view, object type)
+        public void ShowFormByViewType<U,T>(ActionType type, U entity) where U : class, IIdentifiable where T : MDIChild<U>
         {
-            if(type is IStudent)
+            if (type == ActionType.View)
             {
-                var student = type as IStudent;
-                ShowStudentFormByType(view, student);
+                ShowViewDialog<U, T>(entity);
+                return;
             }
+
+            ShowMdiChild<U, T>(entity, type);
+        }
+
+        public void ShowFormByType<U>(ActionType type, U entity) where U : class, IIdentifiable
+        {
+            if (entity is IVacancy)
+            { 
+                ShowFormByViewType<IVacancy, VacancyForm>(type, entity as IVacancy);
+            }
+
+            if (entity is IStudent)
+            {
+                ShowFormByViewType<IStudent, StudentForm>(type, entity as IStudent);
+            }  
+
+            if (entity is ICompany)
+            {
+                ShowFormByViewType<ICompany, CompanyFrom>(type, entity as ICompany);
+            }
+           
+            if (entity is IStudentCompany)
+            {
+                ShowFormByViewType<IStudentCompany, StudentCompanyForm>(type, entity as IStudentCompany);
+            }  
+        }
+
+        private void вакансииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //var company = EntGetter.GetStudentCompanies()[0];
+            var form = new StudentCompanyForm(ActionType.Add);//, company);
+            form.MdiParent = this;
+            form.Show();
         }
     }
 }

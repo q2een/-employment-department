@@ -1,6 +1,6 @@
 ﻿namespace EmploymentDepartment
 {
-    partial class ChildForm
+    partial class MDIChild<T>
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // MDIChild
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "ChildForm";
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "MDIChild";
+            this.Text = "MDIChild";
+            this.Load += new System.EventHandler(this.MDIChild_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MDIChild_KeyDown);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

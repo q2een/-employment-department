@@ -38,8 +38,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.tbSalary = new System.Windows.Forms.TextBox();
+            this.companyPanel = new System.Windows.Forms.Panel();
             this.linkClear = new System.Windows.Forms.Label();
             this.linkCompany = new System.Windows.Forms.LinkLabel();
             this.label11 = new System.Windows.Forms.Label();
@@ -49,38 +49,38 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbFeatures = new System.Windows.Forms.TextBox();
+            this.tbSalaryNote = new System.Windows.Forms.TextBox();
+            this.tbWorkArea = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbPost = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.tbCompanyNumber = new System.Windows.Forms.TextBox();
+            this.tbVacancyNumber = new System.Windows.Forms.TextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.mainPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.companyPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
             this.mainPanel.Controls.Add(this.tableLayoutPanel1);
-            this.mainPanel.Controls.Add(this.panel1);
+            this.mainPanel.Controls.Add(this.companyPanel);
             this.mainPanel.Controls.Add(this.label8);
             this.mainPanel.Controls.Add(this.label41);
             this.mainPanel.Controls.Add(this.label10);
             this.mainPanel.Controls.Add(this.label9);
             this.mainPanel.Controls.Add(this.label4);
-            this.mainPanel.Controls.Add(this.textBox5);
-            this.mainPanel.Controls.Add(this.textBox4);
-            this.mainPanel.Controls.Add(this.textBox2);
+            this.mainPanel.Controls.Add(this.tbFeatures);
+            this.mainPanel.Controls.Add(this.tbSalaryNote);
+            this.mainPanel.Controls.Add(this.tbWorkArea);
             this.mainPanel.Controls.Add(this.label7);
-            this.mainPanel.Controls.Add(this.textBox3);
+            this.mainPanel.Controls.Add(this.tbPost);
             this.mainPanel.Controls.Add(this.label1);
-            this.mainPanel.Controls.Add(this.tbCompanyNumber);
+            this.mainPanel.Controls.Add(this.tbVacancyNumber);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
@@ -89,6 +89,8 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -130,6 +132,7 @@
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(213, 24);
             this.cmbGender.TabIndex = 2;
+            this.cmbGender.Validating += new System.ComponentModel.CancelEventHandler(this.cmbGender_Validating);
             // 
             // label6
             // 
@@ -156,7 +159,7 @@
             // 
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.tbSalary);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
@@ -185,30 +188,31 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "*";
             // 
-            // textBox1
+            // tbSalary
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbSalary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.errorProvider.SetIconAlignment(this.textBox1, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
-            this.textBox1.Location = new System.Drawing.Point(74, 9);
-            this.textBox1.MaxLength = 200;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 22);
-            this.textBox1.TabIndex = 2;
+            this.tbSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorProvider.SetIconAlignment(this.tbSalary, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.tbSalary.Location = new System.Drawing.Point(74, 9);
+            this.tbSalary.MaxLength = 10;
+            this.tbSalary.Name = "tbSalary";
+            this.tbSalary.Size = new System.Drawing.Size(200, 22);
+            this.tbSalary.TabIndex = 2;
+            this.tbSalary.Validating += new System.ComponentModel.CancelEventHandler(this.tbSalaryDecimal_Validating);
             // 
-            // panel1
+            // companyPanel
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.companyPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.linkClear);
-            this.panel1.Controls.Add(this.linkCompany);
-            this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.lblPreferentialCategory);
-            this.panel1.Location = new System.Drawing.Point(15, 76);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(557, 47);
-            this.panel1.TabIndex = 6;
+            this.companyPanel.Controls.Add(this.linkClear);
+            this.companyPanel.Controls.Add(this.linkCompany);
+            this.companyPanel.Controls.Add(this.label11);
+            this.companyPanel.Controls.Add(this.lblPreferentialCategory);
+            this.companyPanel.Location = new System.Drawing.Point(15, 76);
+            this.companyPanel.Name = "companyPanel";
+            this.companyPanel.Size = new System.Drawing.Size(557, 47);
+            this.companyPanel.TabIndex = 6;
             // 
             // linkClear
             // 
@@ -315,41 +319,41 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Рабочая область";
             // 
-            // textBox5
+            // tbFeatures
             // 
-            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbFeatures.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(141, 367);
-            this.textBox5.MaxLength = 300;
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(431, 66);
-            this.textBox5.TabIndex = 13;
+            this.tbFeatures.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbFeatures.Location = new System.Drawing.Point(141, 367);
+            this.tbFeatures.MaxLength = 300;
+            this.tbFeatures.Multiline = true;
+            this.tbFeatures.Name = "tbFeatures";
+            this.tbFeatures.Size = new System.Drawing.Size(431, 66);
+            this.tbFeatures.TabIndex = 13;
             // 
-            // textBox4
+            // tbSalaryNote
             // 
-            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbSalaryNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox4.Location = new System.Drawing.Point(141, 284);
-            this.textBox4.MaxLength = 300;
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(431, 66);
-            this.textBox4.TabIndex = 11;
+            this.tbSalaryNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbSalaryNote.Location = new System.Drawing.Point(141, 284);
+            this.tbSalaryNote.MaxLength = 300;
+            this.tbSalaryNote.Multiline = true;
+            this.tbSalaryNote.Name = "tbSalaryNote";
+            this.tbSalaryNote.Size = new System.Drawing.Size(431, 66);
+            this.tbSalaryNote.TabIndex = 11;
             // 
-            // textBox2
+            // tbWorkArea
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbWorkArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(141, 145);
-            this.textBox2.MaxLength = 300;
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(431, 66);
-            this.textBox2.TabIndex = 8;
+            this.tbWorkArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbWorkArea.Location = new System.Drawing.Point(141, 145);
+            this.tbWorkArea.MaxLength = 300;
+            this.tbWorkArea.Multiline = true;
+            this.tbWorkArea.Name = "tbWorkArea";
+            this.tbWorkArea.Size = new System.Drawing.Size(431, 66);
+            this.tbWorkArea.TabIndex = 8;
             // 
             // label7
             // 
@@ -361,17 +365,18 @@
             this.label7.TabIndex = 3;
             this.label7.Text = "Должность";
             // 
-            // textBox3
+            // tbPost
             // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbPost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.errorProvider.SetIconAlignment(this.textBox3, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
-            this.textBox3.Location = new System.Drawing.Point(156, 39);
-            this.textBox3.MaxLength = 50;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(416, 22);
-            this.textBox3.TabIndex = 5;
+            this.tbPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorProvider.SetIconAlignment(this.tbPost, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.tbPost.Location = new System.Drawing.Point(156, 39);
+            this.tbPost.MaxLength = 200;
+            this.tbPost.Name = "tbPost";
+            this.tbPost.Size = new System.Drawing.Size(416, 22);
+            this.tbPost.TabIndex = 5;
+            this.tbPost.Validating += new System.ComponentModel.CancelEventHandler(this.tbSalary_Validating);
             // 
             // label1
             // 
@@ -383,21 +388,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Шифр вакансии";
             // 
-            // tbCompanyNumber
+            // tbVacancyNumber
             // 
-            this.tbCompanyNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbVacancyNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCompanyNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.errorProvider.SetIconAlignment(this.tbCompanyNumber, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
-            this.tbCompanyNumber.Location = new System.Drawing.Point(156, 6);
-            this.tbCompanyNumber.MaxLength = 50;
-            this.tbCompanyNumber.Name = "tbCompanyNumber";
-            this.tbCompanyNumber.Size = new System.Drawing.Size(416, 22);
-            this.tbCompanyNumber.TabIndex = 2;
+            this.tbVacancyNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorProvider.SetIconAlignment(this.tbVacancyNumber, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.tbVacancyNumber.Location = new System.Drawing.Point(156, 6);
+            this.tbVacancyNumber.MaxLength = 50;
+            this.tbVacancyNumber.Name = "tbVacancyNumber";
+            this.tbVacancyNumber.Size = new System.Drawing.Size(416, 22);
+            this.tbVacancyNumber.TabIndex = 2;
+            this.tbVacancyNumber.Validating += new System.ComponentModel.CancelEventHandler(this.tbSalary_Validating);
             // 
             // errorProvider
             // 
-            this.errorProvider.BlinkRate = 500;
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
@@ -411,7 +416,6 @@
             this.Name = "VacancyForm";
             this.Text = "Добавление вакансии";
             this.Load += new System.EventHandler(this.VacancyForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.VacancyForm_KeyDown);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -419,8 +423,8 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.companyPanel.ResumeLayout(false);
+            this.companyPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
@@ -432,29 +436,29 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbSalary;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbCompanyNumber;
+        private System.Windows.Forms.TextBox tbVacancyNumber;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel companyPanel;
         private System.Windows.Forms.Label linkClear;
         private System.Windows.Forms.LinkLabel linkCompany;
         private System.Windows.Forms.Label lblPreferentialCategory;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbWorkArea;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbGender;
-        private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbFeatures;
+        private System.Windows.Forms.TextBox tbSalaryNote;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbPost;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

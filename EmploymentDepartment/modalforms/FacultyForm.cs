@@ -69,7 +69,7 @@ namespace EmploymentDepartment
         {
             try
             {
-                this.Save(Entity, main.DBGetter, "faculty", "ID");
+               // this.Save(Entity, main.DBGetter, "faculty", "ID");
 
                 MessageBox.Show($"Информация о факультете\nНаименование факультета: {((IFaculty)this).Name}", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -90,7 +90,7 @@ namespace EmploymentDepartment
         {
             try
             {
-                this.Insert<FacultyForm, IFaculty>(main.DBGetter, "faculty", "ID");
+                //this.Insert<FacultyForm, IFaculty>(main.DBGetter, "faculty", "ID");
 
                 var msg = $"Факультет добавлен в базу.\nНаименование факультета: {((IFaculty)this).Name}";
 

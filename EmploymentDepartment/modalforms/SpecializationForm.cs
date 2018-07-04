@@ -90,7 +90,7 @@ namespace EmploymentDepartment
         {
             try
             {
-                this.Insert<SpecializationForm, ISpecialization>(main.DBGetter, "specialization", "ID");
+                //this.Insert<SpecializationForm, ISpecialization>(main.DBGetter, "specialization", "ID");
 
                 var msg = $"Профиль подготовки добавлен в базу.\nНаименование профиля: {((ISpecialization)this).Name}";
 

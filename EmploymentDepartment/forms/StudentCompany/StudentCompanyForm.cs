@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class StudentCompanyForm : Form, IStudentCompany, IEditable<IStudentCompany>
+    public partial class StudentCompanyForm : BaseStudentCompanyForm, IStudentCompany
     {
-        public IStudentCompany Entity { get; private set; }
-        public ActionType Type { get; private set; }
-        private MainMDIForm main;
+        public StudentCompanyForm(ActionType type, IStudentCompany entity = null):base(type, entity)
+        {
+            InitializeComponent();
+        }
+
+        // Модальное окно для просмотра информации.
+        public StudentCompanyForm(MainMDIForm mainForm, IStudentCompany entity) : base(mainForm, entity)
+        {
+            InitializeComponent();
+        }
 
         public IStudent LinkStudent
         {
@@ -43,44 +50,13 @@ namespace EmploymentDepartment
                 linkVacancy.Tag = value;
                 string text = value == null ? "Выбрать вакансию ..." : $"Вакансия №{value.VacancyNumber}";
                 linkVacancy.Text = Extentions.ShortenString(text, vacancyPanel.Width - linkVacancyClear.Width - 90, linkVacancy.Font);
-                tbCompany.Text = value == null ? "" : main.EntGetter.GetCompanyById(value.Employer);
+                tbCompany.Text = value == null ? "" : main.EntGetter.GetCompanyById(value.Employer)?.Name;
                 tbPost.Text = value?.Post;
 
                 linkVacancyClear.Visible = Type != ActionType.View;
             }
         }
-
-        public StudentCompanyForm(ActionType type, IStudentCompany company = null)
-        {
-            if (type == ActionType.Edit && company == null)
-                throw new ArgumentNullException();
-
-            InitializeComponent();
-
-            this.Entity = type == ActionType.Add ? null : company;
-            this.Type = type;  
-        }
-
-        // Модальное окно для просмотра информации.
-        public StudentCompanyForm(MainMDIForm mainForm, IStudentCompany company) : this(ActionType.View, company)
-        {
-            this.main = mainForm;
-            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
-        }
-
-        // Обработка события загрузки формы.
-        private void StudentCompanyForm_Load(object sender, EventArgs e)
-        {
-            if (!(this.MdiParent is MainMDIForm) && main == null)
-                throw new ArgumentNullException();
-
-            this.main = main == null ? this.MdiParent as MainMDIForm : main;
-
-            SetDefaultValues();
-            SetFormText();
-            mainPanel.Enabled = Type != ActionType.View;
-        }
-        
+                
         private void cbUnivercityEmployment_CheckedChanged(object sender, EventArgs e)
         {
             vacancyPanel.Enabled = cbUnivercityEmployment.Checked;
@@ -100,20 +76,9 @@ namespace EmploymentDepartment
                 errorProvider.SetError(tbPost, "");
             }
         }
-
-        private void StudentCompanyForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (Type != ActionType.View)
-                return;
-
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Close();
-            }
-        }
-
+        
         // Устанавливает заголовок окна.
-        private void SetFormText()
+        protected override void SetFormText()
         {
             switch (Type)
             {
@@ -127,6 +92,11 @@ namespace EmploymentDepartment
                     this.Text = $"Просмотр места работы. Студент: {LinkStudent.Surname} {LinkStudent.Name} {LinkStudent.Patronymic}";
                     break;
             }
+        }
+
+        protected override ErrorProvider GetErrorProvider()
+        {
+            return errorProvider;
         }
 
         #region link elements events
@@ -172,31 +142,22 @@ namespace EmploymentDepartment
                 return;
             }
 
-            var form = new StudentForm(main, LinkStudent);
-            form.ShowDialog(this);
+            main.ShowFormByType(ActionType.View, LinkStudent);
         }
 
         private void linkVacancy_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LinkVacancy = main.EntGetter.GetVacancies()[0];
+            if (LinkVacancy == null)
+            {
+                LinkVacancy = main.EntGetter.GetVacancies()[0];
+                return;
+            }
+
+            main.ShowFormByType(ActionType.View, LinkVacancy);
         }
         #endregion
 
         #region Validating
-        // Валидация выпадающих списков обязательных к выбору элемента.
-        private void RequiredComboBox_Validating(object sender, CancelEventArgs e)
-        {
-            var cmb = sender as ComboBox;
-            Extentions.RequiredComboBoxValidating(cmb, errorProvider);
-        }
-
-        // Валидация текстовых полей обязательных к заполнению.
-        private void RequiredTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            var tb = sender as Control;
-            Extentions.RequiredTextBoxValidating(tb, errorProvider);
-        }
-
         // Валадация текстового поля "Год трудоустройства".
         private void tbYearOfEmployment_Validating(object sender, CancelEventArgs e)
         {
@@ -228,48 +189,9 @@ namespace EmploymentDepartment
         }
         #endregion
 
-        #region IEditable interfaces implemantation.
-
-        public bool ValidateFields() => Extentions.ValidateFields(this, errorProvider);
-
-
-        public void SetDefaultValues() => this.SetPropertiesValue<IStudentCompany>(Entity, null);
-        
-        public void Save()
-        {
-            var msg = $"Информация о месте работы студента обновлена";
-            if (this.UpdateFormEntityInDataBase<StudentCompanyForm, IStudentCompany>(main.DBGetter, msg, "ID", "Name"))
-                SetFormText();
-        }
-
-        public void Remove()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert()
-        {
-            var msg = $"Информация о месте работы студента добавлена в базу";
-            this.InsertFormEntityToDataBase<StudentCompanyForm, IStudentCompany>(main.DBGetter, msg, "ID", "Name");
-        }
-        #endregion
-        
         #region IStudentCompany implementation
-        int id;
-        public int ID
-        {
-            get
-            {
-                return id;
-            }
 
-            set
-            {
-                id = value;
-            }
-        }
-
-        public int Student
+        public new int Student
         {
             get
             {
@@ -277,7 +199,7 @@ namespace EmploymentDepartment
             }
             set
             {
-                throw new NotImplementedException();
+                LinkStudent = main?.EntGetter?.GetStudentById(value);
             }
         }
 
@@ -293,7 +215,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public bool Status
+        public new bool Status
         {
             get
             {
@@ -306,20 +228,20 @@ namespace EmploymentDepartment
             }
         }
 
-        public int? Vacancy
+        public new int? Vacancy
         {
             get
             {
-                throw new NotImplementedException();
+                return LinkVacancy?.ID;
             }
 
             set
             {
-                throw new NotImplementedException();
+                LinkVacancy = main?.EntGetter?.GetVacancyById(value);
             }
         }
 
-        public string Post
+        public new string Post
         {
             get
             {
@@ -332,7 +254,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public string Note
+        public new string Note
         {
             get
             {
