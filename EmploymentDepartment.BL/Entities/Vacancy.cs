@@ -1,4 +1,6 @@
-﻿namespace EmploymentDepartment.BL
+﻿using System;
+
+namespace EmploymentDepartment.BL
 {
     public class Vacancy: IVacancy
     {
@@ -12,5 +14,16 @@
         public string SalaryNote { get; set; }
         public int Gender { get; set; }
         public string Features { get; set; }
+        string IIdentifiable.Name
+        {
+            get
+            {
+                return VacancyNumber;
+            } 
+            set
+            {
+                
+            }
+        }
     }
 }

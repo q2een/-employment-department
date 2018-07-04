@@ -165,7 +165,10 @@ namespace EmploymentDepartment
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            var active = this.ActiveMdiChild as IEditable;
+            if (!(this.ActiveMdiChild is IUpdateble))
+                return;
+
+            var active = this.ActiveMdiChild as IUpdateble;
 
             active.Save();
         }
@@ -205,8 +208,19 @@ namespace EmploymentDepartment
             form.ShowDialog(this);
         }
 
-        private void ShowMdiChild(Form form)
+        
+        private void ShowMdiChild<T,U>(T form, U entity) where T:Form, IEditable<U>, U where U:IIdentifiable
         {
+            var temp = this.MdiChildren.FirstOrDefault(i => (i is T) && form.ID == entity.ID && (i as T).Type == form.Type);
+
+            if (temp != null)
+            {
+                form.Dispose();
+                temp.Show();
+                temp.Activate();
+                return;
+            }
+
             form.MdiParent = this;
             form.Show();
         }
@@ -220,7 +234,7 @@ namespace EmploymentDepartment
                     break;
                 case ActionType.Edit:
                 case ActionType.Add:
-                    ShowMdiChild(new StudentForm(view, student));
+                    ShowMdiChild(new StudentForm(view, student), student);
                     break;
             }
         }

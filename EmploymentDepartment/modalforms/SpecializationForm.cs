@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class SpecializationForm : Form, ISpecialization, IEditable
+    public partial class SpecializationForm : Form, ISpecialization, IEditable<ISpecialization>
     {
         public ActionType Type { get; set; }
-        public ISpecialization Specialization { get; set; }
+        public ISpecialization Entity { get; set; }
         private MainMDIForm main;
 
         public SpecializationForm(MainMDIForm main, ActionType type, ISpecialization specialization = null)
@@ -24,7 +24,7 @@ namespace EmploymentDepartment
             InitializeComponent();
 
             this.Type = type;
-            this.Specialization = specialization;
+            this.Entity = specialization;
             this.main = main;
 
             if (Type == ActionType.Edit)
@@ -117,7 +117,7 @@ namespace EmploymentDepartment
             try
             {
                 // Поля не учитываются в таблице в БД.
-                var nameValue = Specialization.GetPropertiesDifference<ISpecialization>(this, "ID");
+                var nameValue = Entity.GetPropertiesDifference<ISpecialization>(this, "ID");
 
                 if (nameValue.Count == 0)
                     return;
@@ -135,7 +135,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public void SetDefaultValues() => this.SetPropertiesValue(Specialization, "");
+        public void SetDefaultValues() => this.SetPropertiesValue(Entity, "");
 
         public bool ValidateFields() => Extentions.ValidateFields(this, errorProvider);
         #endregion

@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class PreferentialCategoryForm : EditModal, IEditable, IPreferentialCategory
+    public partial class PreferentialCategoryForm : EditModal, IEditable<IPreferentialCategory>, IPreferentialCategory
     {
         public ActionType Type { get; set; }
-        public IPreferentialCategory PreferentialCategory { get; set; }
+        public IPreferentialCategory Entity { get; set; }
         private MainMDIForm main;
 
         public PreferentialCategoryForm(MainMDIForm main, ActionType type, IPreferentialCategory preferentialCategory = null)
@@ -24,7 +24,7 @@ namespace EmploymentDepartment
             InitializeComponent();
 
             this.Type = type;
-            this.PreferentialCategory = preferentialCategory;
+            this.Entity = preferentialCategory;
             this.main = main;
 
             if (Type == ActionType.Edit)
@@ -69,7 +69,7 @@ namespace EmploymentDepartment
         {
             try
             {
-                this.Save(PreferentialCategory, main.DBGetter, "preferentialcategory", "ID");
+                this.Save(Entity, main.DBGetter, "preferentialcategory", "ID");
 
                 MessageBox.Show($"Информация о льготной категории изменена", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -105,7 +105,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public void SetDefaultValues() => this.SetPropertiesValue(PreferentialCategory, "");
+        public void SetDefaultValues() => this.SetPropertiesValue(Entity, "");
 
         public bool ValidateFields() => Extentions.ValidateFields(this, errorProvider);
 

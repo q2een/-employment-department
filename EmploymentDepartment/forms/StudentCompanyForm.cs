@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class StudentCompanyForm : Form
+    public partial class StudentCompanyForm : Form, IStudentCompany, IEditable<IStudentCompany>
     {
-
-        private readonly MainMDIForm main;
-        public StudentCompanyForm(MainMDIForm main)
-        {
-            InitializeComponent();
-
-            this.main = main;
-        }
+        public IStudentCompany Entity { get; private set; }
+        public ActionType Type { get; private set; }
+        private MainMDIForm main;
 
         public IStudent LinkStudent
         {
@@ -32,6 +27,8 @@ namespace EmploymentDepartment
                 linkStudent.Tag = value;
                 string text = value == null ? "Выбрать студента ..." : $"{value.Surname} {value.Name} {value.Patronymic}";
                 linkStudent.Text = Extentions.ShortenString(text, studentPanel.Width - linkStudentClear.Width - 90, linkStudent.Font);
+
+                linkStudentClear.Visible = Type != ActionType.View;
             }
         }
 
@@ -48,9 +45,91 @@ namespace EmploymentDepartment
                 linkVacancy.Text = Extentions.ShortenString(text, vacancyPanel.Width - linkVacancyClear.Width - 90, linkVacancy.Font);
                 tbCompany.Text = value == null ? "" : main.EntGetter.GetCompanyById(value.Employer);
                 tbPost.Text = value?.Post;
+
+                linkVacancyClear.Visible = Type != ActionType.View;
             }
         }
 
+        public StudentCompanyForm(ActionType type, IStudentCompany company = null)
+        {
+            if (type == ActionType.Edit && company == null)
+                throw new ArgumentNullException();
+
+            InitializeComponent();
+
+            this.Entity = type == ActionType.Add ? null : company;
+            this.Type = type;  
+        }
+
+        // Модальное окно для просмотра информации.
+        public StudentCompanyForm(MainMDIForm mainForm, IStudentCompany company) : this(ActionType.View, company)
+        {
+            this.main = mainForm;
+            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
+        }
+
+        // Обработка события загрузки формы.
+        private void StudentCompanyForm_Load(object sender, EventArgs e)
+        {
+            if (!(this.MdiParent is MainMDIForm) && main == null)
+                throw new ArgumentNullException();
+
+            this.main = main == null ? this.MdiParent as MainMDIForm : main;
+
+            SetDefaultValues();
+            SetFormText();
+            mainPanel.Enabled = Type != ActionType.View;
+        }
+        
+        private void cbUnivercityEmployment_CheckedChanged(object sender, EventArgs e)
+        {
+            vacancyPanel.Enabled = cbUnivercityEmployment.Checked;
+            tbCompany.Enabled = !cbUnivercityEmployment.Checked;
+            tbPost.Enabled = !cbUnivercityEmployment.Checked;
+
+            if (!cbUnivercityEmployment.Checked)
+            {
+                LinkVacancy = null;
+                tbCompany.Focus();
+                errorProvider.SetError(linkVacancy, "");
+            }
+            else
+            {
+                linkVacancy.Focus();
+                errorProvider.SetError(tbCompany, "");
+                errorProvider.SetError(tbPost, "");
+            }
+        }
+
+        private void StudentCompanyForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Type != ActionType.View)
+                return;
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        // Устанавливает заголовок окна.
+        private void SetFormText()
+        {
+            switch (Type)
+            {
+                case ActionType.Edit:
+                    this.Text = $"Редактирование информации о месте работы студента";
+                    break;
+                case ActionType.Add:
+                    this.Text = $"Добавление места работы студента";
+                    break;
+                case ActionType.View:
+                    this.Text = $"Просмотр места работы. Студент: {LinkStudent.Surname} {LinkStudent.Name} {LinkStudent.Patronymic}";
+                    break;
+            }
+        }
+
+        #region link elements events
         // Нажатие на элемент управления "Очистить". Обработка события.
         private void linkClear_Click(object sender, EventArgs e)
         {
@@ -101,27 +180,9 @@ namespace EmploymentDepartment
         {
             LinkVacancy = main.EntGetter.GetVacancies()[0];
         }
+        #endregion
 
-        private void cbUnivercityEmployment_CheckedChanged(object sender, EventArgs e)
-        {
-            vacancyPanel.Enabled = cbUnivercityEmployment.Checked;
-            tbCompany.Enabled = !cbUnivercityEmployment.Checked;
-            tbPost.Enabled = !cbUnivercityEmployment.Checked;
-
-            if(!cbUnivercityEmployment.Checked)
-            {
-                LinkVacancy = null;
-                tbCompany.Focus();
-                errorProvider.SetError(linkVacancy, "");
-            }
-            else
-            {
-                linkVacancy.Focus();
-                errorProvider.SetError(tbCompany, "");
-                errorProvider.SetError(tbPost, "");
-            }
-        }
-
+        #region Validating
         // Валидация выпадающих списков обязательных к выбору элемента.
         private void RequiredComboBox_Validating(object sender, CancelEventArgs e)
         {
@@ -165,5 +226,125 @@ namespace EmploymentDepartment
             else
                 errorProvider.SetError(linkVacancy, "");
         }
+        #endregion
+
+        #region IEditable interfaces implemantation.
+
+        public bool ValidateFields() => Extentions.ValidateFields(this, errorProvider);
+
+
+        public void SetDefaultValues() => this.SetPropertiesValue<IStudentCompany>(Entity, null);
+        
+        public void Save()
+        {
+            var msg = $"Информация о месте работы студента обновлена";
+            if (this.UpdateFormEntityInDataBase<StudentCompanyForm, IStudentCompany>(main.DBGetter, msg, "ID", "Name"))
+                SetFormText();
+        }
+
+        public void Remove()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert()
+        {
+            var msg = $"Информация о месте работы студента добавлена в базу";
+            this.InsertFormEntityToDataBase<StudentCompanyForm, IStudentCompany>(main.DBGetter, msg, "ID", "Name");
+        }
+        #endregion
+        
+        #region IStudentCompany implementation
+        int id;
+        public int ID
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
+        }
+
+        public int Student
+        {
+            get
+            {
+                return LinkStudent.ID;
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        string IStudentCompany.CompanyName
+        {
+            get
+            {
+                return tbCompany.Text;
+            }
+            set
+            {
+                tbCompany.Text = value;
+            }
+        }
+
+        public bool Status
+        {
+            get
+            {
+                return cmbStatus.SelectedIndex == 0 ? true : false;
+            }
+
+            set
+            {
+                cmbStatus.SelectedIndex = value ? 0 : 1;
+            }
+        }
+
+        public int? Vacancy
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Post
+        {
+            get
+            {
+                return tbPost.Text;
+            }
+
+            set
+            {
+                tbPost.Text = value;
+            }
+        }
+
+        public string Note
+        {
+            get
+            {
+                return tbNote.Text;
+            }
+
+            set
+            {
+                tbNote.Text = value;
+            }
+        }
+        #endregion
+
     }
 }

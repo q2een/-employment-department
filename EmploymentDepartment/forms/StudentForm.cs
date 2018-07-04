@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class StudentForm : Form, IStudent, IEditable
+    public partial class StudentForm : Form, IStudent, IEditable<IStudent>
     {
         #region IStudent Implementation.
         private int id;
@@ -329,7 +329,7 @@ namespace EmploymentDepartment
 
         #endregion
         
-        public IStudent Student { get; private set; }
+        public IStudent Entity { get; private set; }
         public ActionType Type { get; private set; }
         public IPreferentialCategory LinkPreferentialCategory
         {
@@ -360,7 +360,7 @@ namespace EmploymentDepartment
 
             InitializeComponent();
            
-            this.Student = type == ActionType.Add ? null : student;
+            this.Entity = type == ActionType.Add ? null : student;
             this.Type = type;
 
             SetFormText(student);          
@@ -578,7 +578,7 @@ namespace EmploymentDepartment
         // Задает полям исходные значения.
         public void SetDefaultValues()
         {
-            this.SetPropertiesValue<IStudent>(Student, "");
+            this.SetPropertiesValue<IStudent>(Entity, "");
             if (tbRegCity.Text == tbCity.Text && !string.IsNullOrEmpty(tbRegCity.Text) &&
                 tbRegRegion.Text == tbRegion.Text && !string.IsNullOrEmpty(tbRegRegion.Text) &&
                 tbRegDistrict.Text == tbDistrict.Text && !string.IsNullOrEmpty(tbRegDistrict.Text) &&
@@ -589,13 +589,13 @@ namespace EmploymentDepartment
         // Сохраняет внесенные изменения в БД.
         public void Save()
         {
-            if (!ValidateFields() || Type != ActionType.Edit)
+            /*if (!ValidateFields() || Type != ActionType.Edit)
                 return;
 
             try
             {
                 // Поля не учитываются в таблице в БД.
-                var nameValue = Student.GetPropertiesDifference<IStudent>(this, "ID", "LevelOfEducation", "Faculty");
+                var nameValue = Entity.GetPropertiesDifference<IStudent>(this, "ID", "LevelOfEducation", "Faculty");
 
                 if (nameValue.Count == 0)
                     return;
@@ -606,13 +606,17 @@ namespace EmploymentDepartment
                 MessageBox.Show($"Информация о студенте обновлена\nФИО студента: {Surname} {((IStudent)this).Name} {Patronymic}", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Присваеваем свойству новые исходные значения.
-                Student = ((IStudent)this).GetInstance<IStudent, Student>();
+                Entity = ((IStudent)this).GetInstance<IStudent, Student>();
                 SetFormText(this);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка обновления данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }         
+            }*/
+
+            var msg = $"Информация о студенте обновлена\nФИО студента: {Surname} {((IStudent)this).Name} {Patronymic}";
+            if (this.UpdateFormEntityInDataBase<StudentForm,IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty"))
+                SetFormText(this); 
         }
 
         // TODO
@@ -644,22 +648,9 @@ namespace EmploymentDepartment
                 MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }     */
 
-            try
-            {
-                this.Insert<StudentForm, IStudent>(main.DBGetter, "student", "ID", "LevelOfEducation", "Faculty");
-
-                var msg = $"Студент {Surname} {((IStudent)this).Name} {Patronymic}\nдобавлен в базу";
-
-                MessageBox.Show(msg, "Добавление студента", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            
+            var msg = $"Студент {Surname} {((IStudent)this).Name} {Patronymic}\nдобавлен в базу";
+            this.InsertFormEntityToDataBase<StudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty");
+                
         }
 
         #endregion

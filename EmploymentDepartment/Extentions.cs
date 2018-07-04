@@ -56,7 +56,7 @@ namespace EmploymentDepartment
         {
             foreach (Control control in container.Controls)
             {
-                if (!(control is TextBox) && !(control is MaskedTextBox) && !(control is ComboBox))
+                if (!(control is TextBox) && !(control is MaskedTextBox) && !(control is ComboBox) && !(control is LinkLabel))
                 {
                     // Если нет вложенных элементов управления.
                     if (control.Controls.Count == 0)
@@ -290,37 +290,80 @@ namespace EmploymentDepartment
         }
 
         /// <summary>
-        /// Добавляет в базу данных запись со значениями свойств объекта класса.
+        /// Сохраняет внесенные изменения в БД.
         /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="U"></typeparam>
         /// <param name="self">Экземпляр класса со свойствами  для сохранения</param>
-        /// <param name="db">Экземпляр объекта, реализующий интерфейс <c>IDataBase</c></param>
-        /// <param name="tableName">Имя таблицы в базе данных</param>
+        /// <param name="db">Экземпляр объекта, реализующий интерфейс <c>IDataBase</c></param
+        /// <param name="informationMessage">Сообщение об успешних изменениях</param>
         /// <param name="ignore">Набор имен свойств, которые необходимо проигнорировать</param>
-        public static void Insert<T,U>(this T self, IDataBase db, string tableName, params string[] ignore) where T : class, IEditable, U where U:class
-        {
-            if (!self.ValidateFields() || self.Type != ActionType.Add)
-                return;
-
-            // Поля не учитываются в таблице в БД.
-            var nameValue = self.GetPropertiesNameValuePair<U>(true, ignore);
-
-            // Добавляем запись в БД.
-            db.Insert(tableName, nameValue);
-        }
-
-        public static void Save<T, U>(this T self, U obj, IDataBase db, string tableName, params string[] ignore) where T : class, IEditable, U where U : class, IIdentifiable
+        /// <returns>Результат операции</returns>
+        public static bool UpdateFormEntityInDataBase<T, U>(this T self, IDataBase db, string informationMessage, params string[] ignore) where T : Form, IEditable<U>, U where U : class, IIdentifiable
         {
             if (!self.ValidateFields() || self.Type != ActionType.Edit)
-                return;
+                return false;
 
-            // Поля не учитываются в таблице в БД.
-            var nameValue = obj.GetPropertiesDifference<U>(self, ignore);
+            try
+            {
+                // Поля не учитываются в таблице в БД.
+                var nameValue = self.Entity.GetPropertiesDifference<U>(self, ignore);
 
-            if (nameValue.Count == 0)
-                return;
+                if (nameValue.Count == 0)
+                    return false;
 
-            // Обновляем данные
-            db.Update(tableName, obj.ID, nameValue);
+                // Обновляем данные
+                db.Update(EntitiesGetter.GetTableNameByType<U>(self).ToString(), self.ID, nameValue);
+
+                MessageBox.Show(informationMessage, "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Присваеваем свойству новые исходные значения.
+                self.Entity.SetPropertiesValue(self, ignore);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка обновления данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
+
+        /// <summary>
+        /// Добавляет в базу данных запись со значениями свойств объекта класса
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="U"></typeparam>
+        /// <param name="self">Экземпляр класса со свойствами  для добавления</param>
+        /// <param name="db">Экземпляр объекта, реализующий интерфейс <c>IDataBase</c></param
+        /// <param name="informationMessage">Сообщение об успешних изменениях</param>
+        /// <param name="ignore">Набор имен свойств, которые необходимо проигнорировать</param>
+        /// <returns>Результат операции</returns>
+        public static bool InsertFormEntityToDataBase<T, U>(this T self, IDataBase db, string informationMessage, params string[] ignore) where T: Form, IEditable<U>, U where U : class, IIdentifiable
+        {
+            if (!self.ValidateFields() || self.Type != ActionType.Add)
+                return false;
+
+            try
+            {
+                // Поля не учитываются в таблице в БД.
+                var nameValue = (self as U).GetPropertiesNameValuePair<U>(true, ignore);
+
+                // Добавляем запись в БД.
+                db.Insert(EntitiesGetter.GetTableNameByType<U>(self).ToString(), nameValue);
+
+                MessageBox.Show(informationMessage, "Операция добавления", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+                self.Close();
+            }
+            catch (Exception ex)
+            {
+                return false;
+                MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return true;
+        }
+
     }
 }

@@ -3,12 +3,14 @@
     /// <summary>
     /// Предоставляет интерфейс указывающий на изменяемость и редактируемость данных.
     /// </summary>
-    public interface IEditable
+    public interface IEditable<out T> : IUpdateble, IInsertable, IRemovable where T:IIdentifiable
     {
         /// <summary>
         /// Тип действия. 
         /// </summary>
         ActionType Type { get;}
+
+        T Entity { get;}
 
         /// <summary>
         /// Задает полям исходные значения.

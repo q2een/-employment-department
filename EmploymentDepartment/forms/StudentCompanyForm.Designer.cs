@@ -467,6 +467,8 @@
             this.MinimumSize = new System.Drawing.Size(565, 475);
             this.Name = "StudentCompanyForm";
             this.Text = "Добавление информации о месте работы";
+            this.Load += new System.EventHandler(this.StudentCompanyForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StudentCompanyForm_KeyDown);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);

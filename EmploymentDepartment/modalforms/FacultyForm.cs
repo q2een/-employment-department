@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class FacultyForm : EditModal, IFaculty, IEditable
+    public partial class FacultyForm : EditModal, IFaculty, IEditable<IFaculty>
     {
         public ActionType Type { get; set; }
-        public IFaculty Faculty { get; set; }
+        public IFaculty Entity { get; set; }
         private MainMDIForm main;
 
         public FacultyForm(MainMDIForm main, ActionType type, IFaculty faculty = null)
@@ -24,7 +24,7 @@ namespace EmploymentDepartment
             InitializeComponent();
 
             this.Type = type;
-            this.Faculty = faculty;
+            this.Entity = faculty;
             this.main = main;
 
             if (Type == ActionType.Edit)
@@ -69,7 +69,7 @@ namespace EmploymentDepartment
         {
             try
             {
-                this.Save(Faculty, main.DBGetter, "faculty", "ID");
+                this.Save(Entity, main.DBGetter, "faculty", "ID");
 
                 MessageBox.Show($"Информация о факультете\nНаименование факультета: {((IFaculty)this).Name}", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -104,7 +104,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public void SetDefaultValues() => this.SetPropertiesValue(Faculty, "");
+        public void SetDefaultValues() => this.SetPropertiesValue(Entity, "");
 
         public bool ValidateFields() => Extentions.ValidateFields(this, errorProvider);
 

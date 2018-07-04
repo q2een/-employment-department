@@ -2,7 +2,7 @@
 
 namespace EmploymentDepartment.BL
 {
-    public interface IStudent
+    public interface IStudent : IIdentifiable
     {
         int ID { get; set; }
         string ApplicationFormNumber { get; set;}

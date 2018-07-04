@@ -47,6 +47,7 @@
     <Compile Include="DataBase\MySqlDB.cs" />
     <Compile Include="DataBase\EntitiesGetter.cs" />
     <Compile Include="DataBase\IDataBase.cs" />
+    <Compile Include="DataBase\Table.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\EducationLevelType.cs" />
     <Compile Include="Entities\Faculty.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="IEntity\IPreferentialCategory.cs" />
     <Compile Include="IEntity\ISpecialization.cs" />
     <Compile Include="IEntity\IStudent.cs" />
+    <Compile Include="IEntity\IStudentCompany.cs" />
     <Compile Include="IEntity\IVacancy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

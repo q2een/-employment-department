@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public interface ICompany
+    public interface ICompany : IIdentifiable
     {
         int ID { get; set; }
         string CompanyNumber { get; set; }

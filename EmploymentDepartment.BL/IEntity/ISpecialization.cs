@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public interface ISpecialization
+    public interface ISpecialization : IIdentifiable
     {
         int ID { get; set; }
         int Faculty { get; set; }

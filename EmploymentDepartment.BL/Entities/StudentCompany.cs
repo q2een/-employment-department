@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public class StudentCompany
+    public class StudentCompany : IStudentCompany
     {
         public int ID { get; set; }
         public int Student { get; set; }
@@ -14,5 +14,15 @@ namespace EmploymentDepartment.BL
         public int? Vacancy { get; set; }
         public string Post { get; set; }
         public string Note { get; set; }
+        public string Name
+        {
+            get
+            {
+                return CompanyName;
+            } 
+            set
+            {
+            }
+        }
     }
 }

@@ -76,6 +76,9 @@
       <DependentUpon>VacancyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="interfaces\IDataListView.cs" />
+    <Compile Include="interfaces\IInsertable.cs" />
+    <Compile Include="interfaces\IRemovable.cs" />
+    <Compile Include="interfaces\IUpdateble.cs" />
     <Compile Include="modalforms\FacultyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +192,9 @@
       <Project>{17c47d81-fca6-433f-bc67-02828ed5ac30}</Project>
       <Name>EmploymentDepartment.BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="database\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

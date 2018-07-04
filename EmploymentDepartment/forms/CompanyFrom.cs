@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class CompanyFrom : Form, ICompany, IEditable
+    public partial class CompanyFrom : Form, ICompany, IEditable<ICompany>
     {
         #region ICompany implementation.
 
@@ -210,7 +210,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public new string Region
+        string ICompany.Region
         {
             get
             {
@@ -223,7 +223,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public new string Name
+        string ICompany.Name
         {
             get
             {
@@ -238,9 +238,16 @@ namespace EmploymentDepartment
 
         #endregion
 
-        public ICompany Company { get; private set; }
+        public ICompany Entity { get; private set; }
         public ActionType Type { get; private set; }
         private MainMDIForm main;
+
+        // Модальное окно для просмотра информации.
+        public CompanyFrom(MainMDIForm mainForm, ICompany company) : this(ActionType.View, company)
+        {
+            this.main = mainForm;
+            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
+        }
 
         public CompanyFrom(ActionType type, ICompany company = null)
         {
@@ -249,32 +256,38 @@ namespace EmploymentDepartment
 
             InitializeComponent();
 
-            this.Company = company;
+            this.Entity = type == ActionType.Add ? null : company;
             this.Type = type;
 
-            // Устанавливаем заголовок окна.
-            SetFormText(company.Name);
+            SetFormText(company);
         }
 
         private void CompanyFrom_Load(object sender, EventArgs e)
         {
-            if (!(this.MdiParent is MainMDIForm))
-                throw new Exception();
+            if (!(this.MdiParent is MainMDIForm) && main == null)
+                throw new ArgumentNullException();
 
-            this.main = this.MdiParent as MainMDIForm;
-            
-            InitFiels();
+            this.main = main == null ? this.MdiParent as MainMDIForm : main;
+
+            SetDefaultValues();
+            mainPanel.Enabled = Type != ActionType.View;
         }
-        
-        private void InitFiels()
+
+        // Устанавливает заголовок окна.
+        private void SetFormText(ICompany company)
         {
-            this.SetPropertiesValue<ICompany>(Company, ""); ;
-        }
-        
-        private void SetFormText(string companyName)
-        {
-            if (Type == ActionType.Edit)
-                this.Text = $"Редактирование информации о предприятии [{companyName}]";
+            switch (Type)
+            {
+                case ActionType.Edit:
+                    this.Text = $"Редактирование информации о предприятии [{company.Name}]";
+                    break;
+                case ActionType.Add:
+                    this.Text = $"Добавление предприятия в базу";
+                    break;
+                case ActionType.View:
+                    this.Text = $"[{company.Name}] - Просмотр информации о предприятии";
+                    break;
+            }
         }
 
         private void tbSurname_KeyPress(object sender, KeyPressEventArgs e)
@@ -301,37 +314,14 @@ namespace EmploymentDepartment
 
         public bool ValidateFields() => Extentions.ValidateFields(this, errorProvider);
 
-        public void SetDefaultValues()
-        {
-            InitFiels();
-        }
+        public void SetDefaultValues() => this.SetPropertiesValue<ICompany>(Entity, "");
 
         public void Save()
         {
-            if (!ValidateFields() || Type != ActionType.Edit)
-                return;
+            var msg = $"Информация о предприятии «{(this as ICompany).Name}» обновлена";
 
-            try
-            {
-                // Поля не учитываются в таблице в БД.
-                var nameValue = Company.GetPropertiesDifference<ICompany>(this, "ID");
-
-                // Обновляем данные
-                main.DBGetter.Update("Company", ID, nameValue);
-
-                MessageBox.Show($"Информация о предприятии {this.Name} обновлена", "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Присваеваем свойству новые исходные значения.
-                Company = ((ICompany)this).GetInstance<ICompany, Company>();
-
-                // Устанавливаем заголовок окна.
-                SetFormText(this.Name);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка обновления данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            if (this.UpdateFormEntityInDataBase<CompanyFrom, ICompany>(main.DBGetter, msg, "ID"))
+                SetFormText(this);
         }
 
         public void Remove()
@@ -341,24 +331,10 @@ namespace EmploymentDepartment
 
         public void Insert()
         {
-            if (!ValidateFields() || Type != ActionType.Add)
-                return;
+            var msg = $"Предприятие «{(this as ICompany).Name}»\nдобавлено в базу";
 
-            try
-            {
-                // Поля не учитываются в таблице в БД.
-                var nameValue = this.GetPropertiesNameValuePair<ICompany>(true, "ID");
-
-                // Добавляем запись в БД.
-                main.DBGetter.Insert("Company", nameValue);
-
-                MessageBox.Show($"Предприятие «{Name}»\nдобавлено в базу", "Добавление предприятия", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            if (this.UpdateFormEntityInDataBase<CompanyFrom, ICompany>(main.DBGetter, msg, "ID"))
+                SetFormText(this);
         }
 
         #endregion
