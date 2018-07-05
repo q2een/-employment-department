@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace EmploymentDepartment
+﻿namespace EmploymentDepartment
 {
-    public interface IDataListView<T>
+    public interface IDataListView<T> : IDataView
     {
-        List<T> Data { get; set; }
-        ViewType Type { get; set; }
+        System.Collections.Generic.List<T> Data { get; set; }         
     }
 }

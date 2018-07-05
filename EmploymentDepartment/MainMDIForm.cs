@@ -173,6 +173,18 @@ namespace EmploymentDepartment
                 var form = new SpecializationForm(this,type, entity as ISpecialization);
                 form.ShowDialog();
             }
+
+            if (entity is IFaculty)
+            {
+                var form = new FacultyForm(this, type, entity as IFaculty);
+                form.ShowDialog();
+            }
+
+            if (entity is IPreferentialCategory)
+            {
+                var form = new PreferentialCategoryForm(this, type, entity as IPreferentialCategory);
+                form.ShowDialog();
+            }
         }
 
         public void ShowAddForm<T>() where T: class, IIdentifiable, new()
@@ -293,7 +305,11 @@ namespace EmploymentDepartment
         {
             (ActiveMdiChild as IDataView)?.Remove();
         }
-        
+
         #endregion
+
+        private void экспортДанныхToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

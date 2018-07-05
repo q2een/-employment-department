@@ -1,8 +1,5 @@
 ﻿using EmploymentDepartment.BL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace EmploymentDepartment
 {
@@ -49,14 +46,18 @@ namespace EmploymentDepartment
 
         public override bool ValidateFields() => Extentions.ValidateFields(this, GetErrorProvider());
 
-        public override void SetDefaultValues() => this.SetPropertiesValue<ISpecialization>(Entity, "");
-
         public override void Save()
         {
             var msg = $"Информация о профиле подготовки обновлена\nНаименование профиля: {((ISpecialization)this).Name}";
 
             if (this.UpdateFormEntityInDataBase<BaseSpecializationForm, ISpecialization>(main.DBGetter, msg, "ID"))
+            {
                 SetFormText();
+                main.UpdateFaculties();
+                main.UpdateSpecializations();
+                this.Close();
+            }
+            
         }
 
         public override void Remove()
@@ -69,7 +70,12 @@ namespace EmploymentDepartment
             var msg = $"Профиль подготовки добавлен в базу.\nНаименование профиля: {((ISpecialization)this).Name}";
 
             if (this.UpdateFormEntityInDataBase<BaseSpecializationForm, ISpecialization>(main.DBGetter, msg, "ID"))
+            {
                 SetFormText();
+                main.UpdateFaculties();
+                main.UpdateSpecializations();
+                this.Close();
+            }
         }
 
         #endregion

@@ -398,9 +398,9 @@ namespace EmploymentDepartment
         // Смена значений в выдающем списке "Уровень образования". Обработка события.
         private void cmbLevelOfEducation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var faculties = main.EntGetter.GetFaculties((EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1));
+            var faculties = main.EntGetter.GetFaculties((EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1)).Select(i=> i as IFaculty).ToList();
             cmbFaculty.BindComboboxData(faculties);
-            var specializations = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == (int)cmbFaculty.SelectedValue).ToList();
+            var specializations = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == (int)cmbFaculty.SelectedValue).Select(i => i as ISpecialization).ToList();
             cmbFieldOfStudy.BindComboboxData(specializations);
 
             cmbFaculty.Enabled = faculties.Count() > 0;
@@ -416,7 +416,7 @@ namespace EmploymentDepartment
             if (!Int32.TryParse(value + "", out id))
                 return;
 
-            var sp = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == id).ToList();
+            var sp = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == id).Select( z => z as ISpecialization).ToList();
             cmbFieldOfStudy.BindComboboxData(sp);
         }
 

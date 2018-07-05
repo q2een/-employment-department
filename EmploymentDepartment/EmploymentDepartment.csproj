@@ -93,20 +93,26 @@
     <Compile Include="interfaces\ILinkPickable.cs" />
     <Compile Include="interfaces\IRemovable.cs" />
     <Compile Include="interfaces\IUpdateble.cs" />
-    <Compile Include="modalforms\BaseSpecializationForm.cs">
+    <Compile Include="modalforms\Faculty\BaseFacultyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modalforms\FacultyForm.cs">
+    <Compile Include="modalforms\Faculty\FacultyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modalforms\FacultyForm.Designer.cs">
+    <Compile Include="modalforms\Faculty\FacultyForm.Designer.cs">
       <DependentUpon>FacultyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="modalforms\EditModal.cs">
+    <Compile Include="modalforms\PreferentialCategory\BasePreferentialCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modalforms\EditModal.Designer.cs">
-      <DependentUpon>EditModal.cs</DependentUpon>
+    <Compile Include="modalforms\PreferentialCategory\PreferentialCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modalforms\PreferentialCategory\PreferentialCategoryForm.Designer.cs">
+      <DependentUpon>PreferentialCategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="modalforms\Specialization\BaseSpecializationForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="modalforms\EditModalForm.cs">
       <SubType>Form</SubType>
@@ -123,12 +129,6 @@
     <Compile Include="MainMDIForm.Designer.cs">
       <DependentUpon>MainMDIForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="modalforms\PreferentialCategoryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="modalforms\PreferentialCategoryForm.Designer.cs">
-      <DependentUpon>PreferentialCategoryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="modalforms\PreferentialCategoryPicker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,10 +137,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="modalforms\SpecializationForm.cs">
+    <Compile Include="modalforms\Specialization\SpecializationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modalforms\SpecializationForm.Designer.cs">
+    <Compile Include="modalforms\Specialization\SpecializationForm.Designer.cs">
       <DependentUpon>SpecializationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\Student\StudentForm.cs">
@@ -164,23 +164,20 @@
     <EmbeddedResource Include="forms\Vacancy\VacancyForm.resx">
       <DependentUpon>VacancyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="modalforms\EditModal.resx">
-      <DependentUpon>EditModal.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="modalforms\EditModalForm.resx">
       <DependentUpon>EditModalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMDIForm.resx">
       <DependentUpon>MainMDIForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="modalforms\PreferentialCategoryForm.resx">
+    <EmbeddedResource Include="modalforms\Faculty\FacultyForm.resx">
+      <DependentUpon>FacultyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="modalforms\PreferentialCategory\PreferentialCategoryForm.resx">
       <DependentUpon>PreferentialCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="modalforms\PreferentialCategoryPicker.resx">
       <DependentUpon>PreferentialCategoryPicker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="modalforms\FacultyForm.resx">
-      <DependentUpon>FacultyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -191,7 +188,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="modalforms\SpecializationForm.resx">
+    <EmbeddedResource Include="modalforms\Specialization\SpecializationForm.resx">
       <DependentUpon>SpecializationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Student\StudentForm.resx">

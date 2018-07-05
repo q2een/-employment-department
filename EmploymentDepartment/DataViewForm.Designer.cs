@@ -36,7 +36,7 @@
             // 
             // mainDgv
             // 
-            this.mainDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.mainDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.mainDgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.mainDgv.BackgroundColor = System.Drawing.SystemColors.Control;
             this.mainDgv.BorderStyle = System.Windows.Forms.BorderStyle.None;

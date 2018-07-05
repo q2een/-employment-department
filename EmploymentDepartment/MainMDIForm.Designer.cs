@@ -129,6 +129,7 @@
             this.экспортДанныхToolStripMenuItem.Name = "экспортДанныхToolStripMenuItem";
             this.экспортДанныхToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.экспортДанныхToolStripMenuItem.Text = "Экспорт данных";
+            this.экспортДанныхToolStripMenuItem.Click += new System.EventHandler(this.экспортДанныхToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -429,7 +430,7 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.optionsToolStripMenuItem.Text = "&Параметры";
             // 
             // toolStrip

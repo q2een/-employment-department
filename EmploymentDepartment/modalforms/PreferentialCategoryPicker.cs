@@ -32,11 +32,9 @@ namespace EmploymentDepartment
         {
             mainDgv.ColumnHeadersVisible = false;
           
-            mainDgv.Columns[1].ReadOnly = true;
-            mainDgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            mainDgv.Columns[1].FillWeight = 100;
-
-            mainDgv.Columns[0].Visible = false;
+            mainDgv.Columns[0].ReadOnly = true;
+            mainDgv.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            mainDgv.Columns[0].FillWeight = 100;
 
             foreach (DataGridViewColumn c in mainDgv.Columns)
             {
@@ -47,7 +45,7 @@ namespace EmploymentDepartment
             var index = categories.IndexOf(elen);
 
             if (index >= 0)
-                mainDgv.Rows[index].Cells[1].Selected = true;
+                mainDgv.Rows[index].Cells[0].Selected = true;
         }
 
         private void btnApply_Click(object sender, EventArgs e)

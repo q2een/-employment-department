@@ -86,8 +86,13 @@ namespace EmploymentDepartment
 
         private void SpecializationForm_Load(object sender, EventArgs e)
         {
-            cmbFaculty.BindComboboxData(main.Faculties);            
             mainPanel.Enabled = btnApply.Visible = Type != ActionType.View;
+        }
+
+        public override void SetDefaultValues()
+        {
+            cmbFaculty.BindComboboxData(main.Faculties.Select(i => i as IFaculty).ToList());
+            this.SetPropertiesValue<ISpecialization>(Entity, "");
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -97,9 +102,6 @@ namespace EmploymentDepartment
 
             if (Type == ActionType.Edit)
                 this.Save();
-
-            main.UpdateFaculties();
-            main.UpdateSpecializations();
         }
     }
 }

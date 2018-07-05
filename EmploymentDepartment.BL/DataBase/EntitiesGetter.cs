@@ -34,7 +34,7 @@ namespace EmploymentDepartment.BL
         {
             get
             {
-                return "SELECT s.ID, s.Faculty, s.LevelOfEducation + 0 AS LevelOfEducation, s.Name FROM specialization s";
+                return "SELECT s.ID, s.Faculty, f.Name AS FacultyName, s.LevelOfEducation AS LevelOfEducationName, s.LevelOfEducation + 0 AS LevelOfEducation, s.Name FROM specialization s INNER JOIN faculty f ON s.Faculty = f.ID";
             }
         }
 

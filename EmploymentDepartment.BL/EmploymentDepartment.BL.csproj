@@ -52,7 +52,7 @@
     <Compile Include="Entities\EducationLevelType.cs" />
     <Compile Include="Entities\Faculty.cs" />
     <Compile Include="Entities\GenderType.cs" />
-    <Compile Include="Entities\IIdentifiable.cs" />
+    <Compile Include="IEntity\IIdentifiable.cs" />
     <Compile Include="Entities\PreferentialCategory.cs" />
     <Compile Include="Entities\Specialization.cs" />
     <Compile Include="Entities\Student.cs" />

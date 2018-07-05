@@ -13,8 +13,8 @@ namespace EmploymentDepartment
     public partial class DataViewForm<T>: Form, IDataListView<T>, IDataView where T:class,IIdentifiable
     {
         private MainMDIForm main;
-        private readonly ILinkPickable selectParent; 
-
+        private readonly ILinkPickable selectParent;
+        
         public DataViewForm(ViewType type, List<T> data)
         {
             InitializeComponent();

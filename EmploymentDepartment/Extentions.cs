@@ -160,7 +160,8 @@ namespace EmploymentDepartment
             cmb.Items.Clear();
             cmb.DataSource = data;
             cmb.DisplayMember = "Name";
-            cmb.ValueMember = "ID";
+            cmb.ValueMember = "ID";            
+
 
             // Выделить элемент (если он существует), который был активен до изменений.
             if (!Int32.TryParse(value + "", out id))
@@ -312,9 +313,8 @@ namespace EmploymentDepartment
                 return false;
 
             try
-            {
-                // Поля не учитываются в таблице в БД.
-                var nameValue = self.Entity.GetPropertiesDifference<U>(self, ignore);
+            {   
+                var nameValue = self.Entity.GetPropertiesDifference<U>(self as U, ignore);
 
                 if (nameValue.Count == 0)
                     return false;
