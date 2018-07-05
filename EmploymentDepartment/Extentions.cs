@@ -122,6 +122,13 @@ namespace EmploymentDepartment
         }
         #endregion
 
+        public static void StretchLastColumn(this DataGridView dataGridView)
+        {
+            var lastColIndex = dataGridView.Columns.Count - 1;
+            var lastCol = dataGridView.Columns[lastColIndex];
+            lastCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
         public static void DoubleBuffered(this DataGridView dgv, bool setting)
         {
             Type dgvType = dgv.GetType();

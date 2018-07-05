@@ -13,8 +13,6 @@ namespace EmploymentDepartment
 
     public partial class MDIChild<T> : Form, IEditable<T>, IIdentifiable where T : class, IIdentifiable
     {
-        private Panel mainPanel = new Panel();
-
         protected MainMDIForm main { get; set; }
         public T Entity { get; set; }
         public ActionType Type { get; set; }
@@ -51,9 +49,6 @@ namespace EmploymentDepartment
             this.main = main == null ? this.MdiParent as MainMDIForm : main;
 
             SetDefaultValues();
-
-            mainPanel.Enabled = Type != ActionType.View;
-
             SetFormText();
         }
 

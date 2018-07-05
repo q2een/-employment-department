@@ -109,7 +109,6 @@
             this.tbCompanyNumber.Name = "tbCompanyNumber";
             this.tbCompanyNumber.Size = new System.Drawing.Size(398, 22);
             this.tbCompanyNumber.TabIndex = 1;
-            this.tbCompanyNumber.Validating += this.RequiredTextBox_Validating;
             // 
             // label41
             // 
@@ -164,7 +163,6 @@
             this.tbOrganizationName.Name = "tbOrganizationName";
             this.tbOrganizationName.Size = new System.Drawing.Size(371, 22);
             this.tbOrganizationName.TabIndex = 2;
-            this.tbOrganizationName.Validating += RequiredTextBox_Validating;
             // 
             // label4
             // 
@@ -199,9 +197,6 @@
             this.lblNameOfStateDepartment.TabIndex = 30;
             this.lblNameOfStateDepartment.Tag = this.tbNameOfStateDepartment;
             this.lblNameOfStateDepartment.Text = "...";
-            this.lblNameOfStateDepartment.Click += lblEdit_Click;
-            this.lblNameOfStateDepartment.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblNameOfStateDepartment.MouseHover += this.lblEdit_MouseHover;
             // 
             // groupBox2
             // 
@@ -242,9 +237,6 @@
             this.lblAddress.TabIndex = 29;
             this.lblAddress.Tag = this.tbAddress;
             this.lblAddress.Text = "...";
-            this.lblAddress.Click += lblEdit_Click;
-            this.lblAddress.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblAddress.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbAddress
             // 
@@ -258,7 +250,6 @@
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(511, 22);
             this.tbAddress.TabIndex = 7;
-            this.tbAddress.Validating += RequiredTextBox_Validating;
             // 
             // lblDistrict
             // 
@@ -273,9 +264,6 @@
             this.lblDistrict.TabIndex = 29;
             this.lblDistrict.Tag = this.tbDistrict;
             this.lblDistrict.Text = "...";
-            this.lblDistrict.Click += lblEdit_Click;
-            this.lblDistrict.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblDistrict.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbDistrict
             // 
@@ -302,9 +290,6 @@
             this.lblRegion.TabIndex = 29;
             this.lblRegion.Tag = this.tbRegion;
             this.lblRegion.Text = "...";
-            this.lblRegion.Click += lblEdit_Click;
-            this.lblRegion.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblRegion.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbRegion
             // 
@@ -332,9 +317,6 @@
             this.lblCity.TabIndex = 29;
             this.lblCity.Tag = this.tbCity;
             this.lblCity.Text = "...";
-            this.lblCity.Click += lblEdit_Click;
-            this.lblCity.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblCity.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbCity
             // 
@@ -348,7 +330,6 @@
             this.tbCity.Name = "tbCity";
             this.tbCity.Size = new System.Drawing.Size(511, 22);
             this.tbCity.TabIndex = 4;
-            this.tbCity.Validating += RequiredTextBox_Validating;
             // 
             // label28
             // 
@@ -480,7 +461,6 @@
             this.tbName.Size = new System.Drawing.Size(210, 22);
             this.tbName.TabIndex = 9;
             this.tbName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
-            this.tbName.Validating += RequiredTextBox_Validating;
             // 
             // tbSurname
             // 
@@ -494,7 +474,6 @@
             this.tbSurname.Size = new System.Drawing.Size(210, 22);
             this.tbSurname.TabIndex = 8;
             this.tbSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
-            this.tbSurname.Validating += RequiredTextBox_Validating;
             // 
             // label7
             // 
@@ -614,7 +593,6 @@
             this.tbContactName.Size = new System.Drawing.Size(209, 22);
             this.tbContactName.TabIndex = 13;
             this.tbContactName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
-            this.tbContactName.Validating += RequiredTextBox_Validating;
             // 
             // label12
             // 
@@ -638,7 +616,6 @@
             this.tbContactSurname.Size = new System.Drawing.Size(209, 22);
             this.tbContactSurname.TabIndex = 12;
             this.tbContactSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
-            this.tbContactSurname.Validating += RequiredTextBox_Validating;
             // 
             // mainPanel
             // 
@@ -739,9 +716,6 @@
             this.lblPhone.TabIndex = 29;
             this.lblPhone.Tag = this.tbPhone;
             this.lblPhone.Text = "...";
-            this.lblPhone.Click += lblEdit_Click;
-            this.lblPhone.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblPhone.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbPhone
             // 
@@ -754,7 +728,6 @@
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(203, 22);
             this.tbPhone.TabIndex = 15;
-            this.tbPhone.Validating += RequiredTextBox_Validating;
             // 
             // label20
             // 
@@ -826,9 +799,6 @@
             this.lblOrganizationName.TabIndex = 30;
             this.lblOrganizationName.Tag = this.tbOrganizationName;
             this.lblOrganizationName.Text = "...";
-            this.lblOrganizationName.Click += lblEdit_Click;
-            this.lblOrganizationName.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblOrganizationName.MouseHover += this.lblEdit_MouseHover;
             // 
             // errorProvider
             // 
@@ -845,6 +815,7 @@
             this.MinimumSize = new System.Drawing.Size(645, 400);
             this.Name = "CompanyFrom";
             this.Text = "Добавление предприятия";
+            this.Load += new System.EventHandler(this.CompanyFrom_Load);
             this.SizeChanged += new System.EventHandler(this.CompanyFrom_SizeChanged);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

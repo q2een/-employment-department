@@ -225,7 +225,7 @@ namespace EmploymentDepartment
         #endregion
 
         // Модальное окно для просмотра информации.
-        public CompanyFrom(MainMDIForm mainForm, ICompany company) : base(ActionType.View, company)
+        public CompanyFrom(MainMDIForm mainForm, ICompany company) : base(mainForm, company)
         {
             InitializeComponent();
         }
@@ -248,6 +248,11 @@ namespace EmploymentDepartment
         private void CompanyFrom_SizeChanged(object sender, EventArgs e)
         {
             mainPanel.AutoScroll = this.Size.Height < 575;
+        }
+
+        private void CompanyFrom_Load(object sender, EventArgs e)
+        {
+            mainPanel.Enabled = Type != ActionType.View;
         }
     }
 }

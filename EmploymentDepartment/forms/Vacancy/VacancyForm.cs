@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class VacancyForm : BaseVacancyForm, IVacancy
+    public partial class VacancyForm : BaseVacancyForm, IVacancy, ILinkPickable
     {
         public ICompany LinkCompany
         {
@@ -165,14 +165,18 @@ namespace EmploymentDepartment
         }
         #endregion
 
-        #region Обработка событий для выбора студента.
+        #region Обработка событий для выбора предприятия.
         // Нажатие на элемент управление для выбора льготной категории. Обработка события.
         private void linkCompany_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (LinkCompany == null)
-                LinkCompany = main.EntGetter.GetCompanyById(1);
-            else
-                new CompanyFrom(main, LinkCompany).ShowDialog();
+            {
+                var form = new DataViewForm<Company>(main.EntGetter.GetCompanies(), main, this);
+                form.ShowDialog(this);
+                return;
+            }
+
+            main.ShowFormByType(ActionType.View, LinkCompany);
         }
 
         // Нажатие на элемент управления "Очистить". Обработка события.
@@ -199,6 +203,14 @@ namespace EmploymentDepartment
             }
         }
         #endregion
+
+        public void SetLinkValue<T>(T obj) 
+        {
+            if (!(obj is ICompany))
+                return;
+
+            LinkCompany = obj as ICompany;
+        }
 
         protected override ErrorProvider GetErrorProvider()
         {
@@ -228,5 +240,6 @@ namespace EmploymentDepartment
         {
             mainPanel.Enabled = Type != ActionType.View;
         }
+
     }
 }

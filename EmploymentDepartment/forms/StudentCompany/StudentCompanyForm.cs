@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class StudentCompanyForm : BaseStudentCompanyForm, IStudentCompany
+    public partial class StudentCompanyForm : BaseStudentCompanyForm, IStudentCompany, ILinkPickable
     {
         public StudentCompanyForm(ActionType type, IStudentCompany entity = null):base(type, entity)
         {
@@ -134,11 +134,20 @@ namespace EmploymentDepartment
             }
         }
 
+        public void SetLinkValue<T>(T obj)
+        {
+            if (obj is IStudent)
+                LinkStudent = obj as IStudent;
+            if (obj is IVacancy)
+                LinkVacancy = obj as IVacancy;
+        }
+
         private void linkStudent_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (LinkStudent == null)
             {
-                LinkStudent = main.EntGetter.GetStudents()[1];
+                var form = new DataViewForm<Student>(main.EntGetter.GetStudents(), main, this);
+                form.ShowDialog(this);
                 return;
             }
 
@@ -149,7 +158,8 @@ namespace EmploymentDepartment
         {
             if (LinkVacancy == null)
             {
-                LinkVacancy = main.EntGetter.GetVacancies()[0];
+                var form = new DataViewForm<Vacancy>(main.EntGetter.GetVacancies(), main, this);
+                form.ShowDialog(this);
                 return;
             }
 

@@ -19,8 +19,6 @@ namespace EmploymentDepartment
         public List<Specialization> Specializations { get; set; }
         public List<PreferentialCategory> PreferentialCategories { get; set; }
 
-        private int childFormNumber = 0;
-
         public MainMDIForm()
         {
             InitializeComponent();
@@ -60,32 +58,12 @@ namespace EmploymentDepartment
 
         #endregion
 
-        private void OpenFile(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            openFileDialog.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*";
-            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                string FileName = openFileDialog.FileName;
-            }
-        }
-
-        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            saveFileDialog.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*";
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                string FileName = saveFileDialog.FileName;
-            }
-        }
-
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        #region Пункт меню "Окно".
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -102,11 +80,6 @@ namespace EmploymentDepartment
             LayoutMdi(MdiLayout.TileHorizontal);
         }
 
-        private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.ArrangeIcons);
-        }
-
         private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (Form childForm in MdiChildren)
@@ -115,34 +88,13 @@ namespace EmploymentDepartment
             }
         }
 
-        private void getStudentsMI_Click(object sender, EventArgs e)
-        {
-            var form = new StudentForm(ActionType.Add);
-            form.MdiParent = this;
-            form.Show();
-        }
-
-        private void addStudentMI_Click(object sender, EventArgs e)
-        {
-            IStudent student = EntGetter.GetStudents()[0];
-            var form = new StudentForm(ActionType.Edit, student);
-            form.MdiParent = this;
-            form.Show();
-        }
+        #endregion
 
         private void MainMDIForm_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
         }
-
-        private void addCompanyMI_Click(object sender, EventArgs e)
-        {
-            var company = EntGetter.GetCompanies()[0];
-            var form = new CompanyFrom(ActionType.Edit, company);
-            form.MdiParent = this;
-            form.Show();
-        }
-
+       
         private void tsbSave_Click(object sender, EventArgs e)
         {
             if (!(this.ActiveMdiChild is IUpdateble))
@@ -163,35 +115,8 @@ namespace EmploymentDepartment
             active.Insert();
         }
 
-        private void specializationMI_Click(object sender, EventArgs e)
-        {
-            var spec = EntGetter.GetSpecializations()[0];
-            var form = new SpecializationForm(this, ActionType.Edit, spec);
-            form.ShowDialog();
-        }
+        #region Show child froms.         
 
-        private void факультетToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var spec = Faculties[0];
-            var form = new FacultyForm(this, ActionType.Edit, spec);
-            form.ShowDialog();
-        }
-
-        private void вакансияToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = new VacancyForm(ActionType.Add);
-            form.MdiParent = this;
-            form.Show();
-        }
-
-        private void предприятияToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var student = EntGetter.GetStudents();
-            var form = new DataViewForm<Student>(ViewType.Edit, student);
-            form.MdiParent = this;
-            form.Show();
-        }
-        
         public void ShowMdiChild<U, T>(U entity, ActionType type) where U: class, IIdentifiable where T : MDIChild<U>
         {
             var form = this.MdiChildren.FirstOrDefault(i => (i is MDIChild<U>) && (i as MDIChild<U>).Type == type && (i as MDIChild<U>).ID == entity.ID);
@@ -241,15 +166,134 @@ namespace EmploymentDepartment
             if (entity is IStudentCompany)
             {
                 ShowFormByViewType<IStudentCompany, StudentCompanyForm>(type, entity as IStudentCompany);
-            }  
+            }
+
+            if (entity is ISpecialization)
+            {
+                var form = new SpecializationForm(this,type, entity as ISpecialization);
+                form.ShowDialog();
+            }
         }
 
-        private void вакансииToolStripMenuItem_Click(object sender, EventArgs e)
+        public void ShowAddForm<T>() where T: class, IIdentifiable, new()
         {
-            //var company = EntGetter.GetStudentCompanies()[0];
-            var form = new StudentCompanyForm(ActionType.Add);//, company);
+            ShowFormByType(ActionType.Add, new T());
+        }
+
+        private DataViewForm<T> GetDataViewForm<T>() where T : class, IIdentifiable
+        {
+            if (!(typeof(T) is IFaculty) && (typeof(T) is ISpecialization) && (typeof(T) is IPreferentialCategory))
+                return null;
+
+            return this.MdiChildren.FirstOrDefault(i => (i is DataViewForm<T>) && (i as DataViewForm<T>).Type == ViewType.Edit) as DataViewForm<T>;
+        }
+
+        public void ShowEditDataViewForm<T>(List<T> data) where T : class, IIdentifiable
+        {
+            var form = GetDataViewForm<T>();
+            form = form == null ? new DataViewForm<T>(ViewType.Edit, data) : form;
             form.MdiParent = this;
             form.Show();
+            form.Activate();
         }
+
+        #endregion
+
+        #region Пункт меню "Добавить".
+
+        private void addStudentMI_Click(object sender, EventArgs e)
+        {
+            ShowAddForm<Student>();
+        }
+
+        private void addStudentCompanyMI_Click(object sender, EventArgs e)
+        {
+            ShowAddForm<StudentCompany>();
+        }
+
+        private void addCompanyMI_Click(object sender, EventArgs e)
+        {
+            ShowAddForm<Company>();
+        }
+
+        private void addVacancyMI_Click(object sender, EventArgs e)
+        {
+            ShowAddForm<Vacancy>();
+        }
+
+        #endregion
+
+        #region Пункт меню "Служебные - Добавть".
+
+        private void dataFacultiesMI_Click(object sender, EventArgs e)
+        {
+            ShowEditDataViewForm(this.Faculties);
+        }
+
+        private void dataSpecializationsMI_Click(object sender, EventArgs e)
+        {
+            ShowEditDataViewForm(this.Specializations);
+        }
+
+        private void dataPreferentialCategoriesMI_Click(object sender, EventArgs e)
+        {
+            ShowEditDataViewForm(this.PreferentialCategories);
+        }
+
+        #endregion
+
+        private void MainMDIForm_MdiChildActivate(object sender, EventArgs e)
+        {
+            SetEntityMITextByActiveChild();
+        }
+
+        #region Пункт меню "Сущность".
+
+        private void SetEntityMITextByActiveChild()
+        {
+            var active = this.ActiveMdiChild;
+
+            string text = null;
+
+            if (active is DataViewForm<Student>)
+                text = "Студент";
+            if (active is DataViewForm<Company>)
+                text = "Предприятие";
+            if (active is DataViewForm<Vacancy>)
+                text = "Вакансия";
+            if (active is DataViewForm<StudentCompany>)
+                text = "Место работы";
+            if (active is DataViewForm<Faculty>)
+                text = "Факультет";
+            if (active is DataViewForm<Specialization>)
+                text = "Профиль";
+            if (active is DataViewForm<PreferentialCategory>)
+                text = "Льготная категория";
+
+            entityMI.Text = text;
+            entityMI.Visible = text != null;
+        }
+
+        private void entityViewMI_Click(object sender, EventArgs e)
+        {
+            (ActiveMdiChild as IDataView)?.View();
+        }
+
+        private void entityInserMI_Click(object sender, EventArgs e)
+        {
+            (ActiveMdiChild as IDataView)?.Insert();
+        }
+
+        private void entityEditMI_Click(object sender, EventArgs e)
+        {
+            (ActiveMdiChild as IDataView)?.Edit();
+        }
+
+        private void entityRemoveMI_Click(object sender, EventArgs e)
+        {
+            (ActiveMdiChild as IDataView)?.Remove();
+        }
+        
+        #endregion
     }
 }

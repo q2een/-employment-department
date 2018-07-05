@@ -67,6 +67,7 @@
             this.mainDgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.mainDgv.Size = new System.Drawing.Size(573, 349);
             this.mainDgv.TabIndex = 0;
+            this.mainDgv.DoubleClick += new System.EventHandler(this.mainDgv_DoubleClick);
             this.mainDgv.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.mainDgv_PreviewKeyDown);
             // 
             // DataViewForm

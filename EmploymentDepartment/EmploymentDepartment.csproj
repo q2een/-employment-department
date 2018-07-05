@@ -88,9 +88,14 @@
       <DependentUpon>VacancyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="interfaces\IDataListView.cs" />
+    <Compile Include="interfaces\IDataView.cs" />
     <Compile Include="interfaces\IInsertable.cs" />
+    <Compile Include="interfaces\ILinkPickable.cs" />
     <Compile Include="interfaces\IRemovable.cs" />
     <Compile Include="interfaces\IUpdateble.cs" />
+    <Compile Include="modalforms\BaseSpecializationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="modalforms\FacultyForm.cs">
       <SubType>Form</SubType>
     </Compile>
