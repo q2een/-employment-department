@@ -13,12 +13,11 @@ namespace EmploymentDepartment.BL
         {
             get
             {
-                return "SELECT s.ID, s.ApplicationFormNumber, s.Name, s.Surname, s.Patronymic, s.DOB, s.Gender + 0 AS Gender," +
-                       "s.MaritalStatus, s.YearOfGraduation, d.LevelOfEducation, d.Faculty, d.Specialization, s.StudyGroup," +
-                       "s.Rating, s.PreferentialCategory, s.SelfEmployment, s.City, s.Region, s.District, s.Address, s.RegCity," +
-                       "s.RegRegion, s.RegDistrict, s.RegAddress, s.Phone, s.Email, s.FieldOfStudy FROM student s INNER JOIN" +
-                       "(SELECT sp.LevelOfEducation + 0 as LevelOfEducation, sp.Name AS Specialization, f.ID AS Faculty, " +
-                       "sp.ID FROM specialization sp INNER JOIN faculty f ON sp.Faculty = f.ID) AS d ON s.FieldOfStudy = d.ID";
+                return "SELECT s.ID, s.ApplicationFormNumber, s.Name, s.Surname, s.Patronymic, s.DOB, s.Gender + 0 AS Gender,"+
+                       "s.MaritalStatus, s.YearOfGraduation, d.LevelOfEducation,d.Faculty,d.FacultyName, d.Specialization, s.StudyGroup,s.Rating," +
+                       "s.PreferentialCategory, s.SelfEmployment,s.City, s.Region, s.District, s.Address, s.RegCity,s.RegRegion, s.RegDistrict," +
+                       "s.RegAddress, s.Phone, s.Email, s.FieldOfStudy FROM student s INNER JOIN(SELECT sp.LevelOfEducation + 0 as LevelOfEducation," +
+                       "sp.Name AS Specialization, f.ID AS Faculty, f.Name AS FacultyName, sp.ID FROM specialization sp INNER JOIN faculty f ON sp.Faculty = f.ID) AS d ON s.FieldOfStudy = d.ID";
             }
         }
 
@@ -50,7 +49,7 @@ namespace EmploymentDepartment.BL
         {
             get
             {
-                return "SELECT v.ID, v.VacancyNumber, v.Post, v.Employer, v.WorkArea, v.Salary, v.IsActive, v.SalaryNote, v.Gender + 0 AS Gender, v.Features FROM vacancy v";
+                return "SELECT v.ID, v.VacancyNumber, v.Post, v.Employer, c.Name as CompanyName, v.WorkArea, v.Salary, v.IsActive, v.SalaryNote,v.Gender AS GenderName, v.Gender + 0 AS Gender, v.Features FROM vacancy v INNER JOIN company c ON v.Employer = c.ID";
             }
         }
 
@@ -58,7 +57,7 @@ namespace EmploymentDepartment.BL
         {
             get
             {
-                return "SELECT * FROM studentcompany";
+                return "SELECT s.ID, s.Student,CONCAT(s1.Surname,\" \", s1.Name,\" \", s1.Patronymic) AS StudentFullName, s.CompanyName, s.Status, s.Post, s.YearOfEmployment, s.Vacancy, v.VacancyNumber AS VacancyNumber, s.Note FROM studentcompany s LEFT JOIN vacancy v ON s.Vacancy = v.ID INNER JOIN student s1 ON s.Student = s1.ID";
             }
         }
 
@@ -91,7 +90,7 @@ namespace EmploymentDepartment.BL
 
         public Student GetStudentById(int id)
         {
-            var dict = db.GetCollection($"{Student} WHERE ID = {id}");
+            var dict = db.GetCollection($"{Student} WHERE s.ID = {id}");
 
             if (dict == null || dict.Count != 1)
                 return null;

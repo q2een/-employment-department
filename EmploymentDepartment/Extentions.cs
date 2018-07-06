@@ -1,6 +1,7 @@
 ﻿using EmploymentDepartment.BL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Media;
@@ -372,5 +373,20 @@ namespace EmploymentDepartment
             return true;
         }
 
+        public static Dictionary<string, string> GetTypePropertiesNameDisplayName<T>(this T self)
+        {
+            var nameDisplayName = new Dictionary<string, string>();
+
+            var type = typeof(T);
+            foreach (var propertyInfo in type.GetProperties())
+            {
+                var attr = Attribute.GetCustomAttribute(propertyInfo, typeof(DisplayNameAttribute)) as DisplayNameAttribute;
+
+                if (attr != null)
+                    nameDisplayName.Add(propertyInfo.Name, attr.DisplayName);
+            }
+
+            return nameDisplayName;
+        }
     }
 }

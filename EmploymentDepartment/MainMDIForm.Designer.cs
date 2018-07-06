@@ -160,18 +160,21 @@
             this.dataStudentsMI.Name = "dataStudentsMI";
             this.dataStudentsMI.Size = new System.Drawing.Size(152, 22);
             this.dataStudentsMI.Text = "Студенты";
+            this.dataStudentsMI.Click += new System.EventHandler(this.dataStudentsMI_Click);
             // 
             // dataCompaniesMI
             // 
             this.dataCompaniesMI.Name = "dataCompaniesMI";
             this.dataCompaniesMI.Size = new System.Drawing.Size(152, 22);
             this.dataCompaniesMI.Text = "Предприятия";
+            this.dataCompaniesMI.Click += new System.EventHandler(this.dataCompaniesMI_Click);
             // 
             // dataVacanciesMI
             // 
             this.dataVacanciesMI.Name = "dataVacanciesMI";
             this.dataVacanciesMI.Size = new System.Drawing.Size(152, 22);
             this.dataVacanciesMI.Text = "Вакансии";
+            this.dataVacanciesMI.Click += new System.EventHandler(this.dataVacanciesMI_Click);
             // 
             // toolStripMenuItem8
             // 
@@ -430,7 +433,7 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.optionsToolStripMenuItem.Text = "&Параметры";
             // 
             // toolStrip

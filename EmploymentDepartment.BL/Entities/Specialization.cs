@@ -4,7 +4,7 @@ namespace EmploymentDepartment.BL
 {
     public class Specialization : IIdentifiable, ISpecialization
     {
-        [Browsable(false)]
+        [DisplayName("ID")]
         public int ID { get; set; }
 
         [Browsable(false)]

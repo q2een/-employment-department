@@ -8,7 +8,7 @@ namespace EmploymentDepartment.BL
 {
     public class Student : IIdentifiable , IStudent
     {
-        [Browsable(false)]
+        [DisplayName("ID")]
         public int ID { get; set; }
 
         [DisplayName("Шифр анкеты")]
@@ -27,15 +27,33 @@ namespace EmploymentDepartment.BL
         public DateTime DOB { get; set; }
 
         [DisplayName("Пол")]
+        public string GenderName
+        {
+            get
+            {
+                return Gender == 1 ? "Мужской" : "Женский";
+            }
+        }
+
         public int Gender { get; set; }
 
-        [DisplayName("Семейное положение ")]
+        [DisplayName("Семейное положение")]
+        public string MartialStatusString
+        {
+            get
+            {
+                return !MaritalStatus ? "Не женат\n(Не замужем)" : "Женат\n(Замужем)";
+            }
+        }
+
         public bool MaritalStatus { get; set; }
 
         [DisplayName("Год окончания университета")]
         public int YearOfGraduation { get; set; }
 
         [DisplayName("Факультет")]
+        public string FacultyName { get; set; }
+
         public int Faculty { get; set; }
 
         [Browsable(false)]
@@ -59,6 +77,8 @@ namespace EmploymentDepartment.BL
         }
 
         [DisplayName("Профиль(Специализация)")]
+        public string Specialization { get; set; }
+
         public int FieldOfStudy { get; set; }
 
         [DisplayName("Группа")]
@@ -68,6 +88,14 @@ namespace EmploymentDepartment.BL
         public decimal Rating { get; set; }
 
         [DisplayName("Льготная категория")]
+        public string PreferentialCategoryText
+        {
+            get
+            {
+                return PreferentialCategory == null ? "Нет" : "Да";
+            }
+        }
+
         public int? PreferentialCategory { get; set; }
 
         [DisplayName("Самостоятельное трудоустройство")]
@@ -76,31 +104,31 @@ namespace EmploymentDepartment.BL
         [DisplayName("Город (проживание)")]
         public string City { get; set; }
 
-        [DisplayName("Область (проживание)")]
+        //[DisplayName("Область (проживание)")]
         public string Region { get; set; }
 
-        [DisplayName("Район (проживание)")]
+        //[DisplayName("Район (проживание)")]
         public string District { get; set; }
 
-        [DisplayName("Адрес (проживание)")]
+        //[DisplayName("Адрес (проживание)")]
         public string Address { get; set; }
 
-        [DisplayName("Город (регистрация)")]
+        //[DisplayName("Город (регистрация)")]
         public string RegCity { get; set; }
 
-        [DisplayName("Область (регистрация)")]
+        //[DisplayName("Область (регистрация)")]
         public string RegRegion { get; set; }
 
-        [DisplayName("Район (регистрация)")]
+        //[DisplayName("Район (регистрация)")]
         public string RegDistrict { get; set; }
 
-        [DisplayName("Адрес (регистрация)")]
+        //[DisplayName("Адрес (регистрация)")]
         public string RegAddress { get; set; }
 
         [DisplayName("Телефон")]
         public string Phone { get; set; }
 
-        [DisplayName("Электронный адрес")]
+        //[DisplayName("Электронный адрес")]
         public string Email { get; set; }
     }
 }

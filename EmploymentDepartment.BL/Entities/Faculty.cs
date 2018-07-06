@@ -4,7 +4,7 @@ namespace EmploymentDepartment.BL
 {
     public class Faculty : IIdentifiable, IFaculty
     {
-        [Browsable(false)]
+        [DisplayName("ID")]
         public int ID { get; set; }
 
         [DisplayName("Наименование")]

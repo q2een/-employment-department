@@ -34,7 +34,7 @@ namespace EmploymentDepartment
         public override bool ValidateFields() => Extentions.ValidateFields(this, GetErrorProvider());
 
 
-        public override void SetDefaultValues() => this.SetPropertiesValue<IStudentCompany>(Entity, null);
+        public override void SetDefaultValues() => this.SetPropertiesValue<IStudentCompany>(Entity, "");
 
         public override void Save()
         {

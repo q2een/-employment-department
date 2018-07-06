@@ -76,7 +76,12 @@ namespace EmploymentDepartment
                 errorProvider.SetError(tbPost, "");
             }
         }
-        
+
+        private void StudentCompanyForm_Load(object sender, EventArgs e)
+        {
+            mainPanel.Enabled = Type != ActionType.View;
+        }
+
         // Устанавливает заголовок окна.
         protected override void SetFormText()
         {
@@ -277,6 +282,5 @@ namespace EmploymentDepartment
             }
         }
         #endregion
-
     }
 }

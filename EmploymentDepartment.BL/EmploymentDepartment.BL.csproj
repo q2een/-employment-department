@@ -49,9 +49,9 @@
     <Compile Include="DataBase\IDataBase.cs" />
     <Compile Include="DataBase\Table.cs" />
     <Compile Include="Entities\Company.cs" />
-    <Compile Include="Entities\EducationLevelType.cs" />
+    <Compile Include="enums\EducationLevelType.cs" />
     <Compile Include="Entities\Faculty.cs" />
-    <Compile Include="Entities\GenderType.cs" />
+    <Compile Include="enums\GenderType.cs" />
     <Compile Include="IEntity\IIdentifiable.cs" />
     <Compile Include="Entities\PreferentialCategory.cs" />
     <Compile Include="Entities\Specialization.cs" />

@@ -310,6 +310,22 @@ namespace EmploymentDepartment
 
         private void экспортДанныхToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void dataVacanciesMI_Click(object sender, EventArgs e)
+        {
+            ShowEditDataViewForm(EntGetter.GetVacancies());
+        }
+
+        private void dataCompaniesMI_Click(object sender, EventArgs e)
+        {
+            ShowEditDataViewForm(EntGetter.GetCompanies());
+        }
+
+        private void dataStudentsMI_Click(object sender, EventArgs e)
+        {
+            ShowEditDataViewForm(EntGetter.GetStudents());
         }
     }
 }

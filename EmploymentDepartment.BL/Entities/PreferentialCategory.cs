@@ -5,10 +5,10 @@ namespace EmploymentDepartment.BL
 {
     public class PreferentialCategory : IPreferentialCategory
     {
-        [Browsable(false)]
+        [DisplayName("ID")]
         public int ID { get; set; }
 
-        [DisplayName("Наименование")]
+        [DisplayName("Льготная категория")]
         public string Name { get; set; }
     }
 }

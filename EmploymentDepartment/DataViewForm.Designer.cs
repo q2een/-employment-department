@@ -28,28 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.mainDgv = new System.Windows.Forms.DataGridView();
+            this.mainDgv = new ADGV.AdvancedDataGridView();
+            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.mainDgv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // mainDgv
             // 
-            this.mainDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.mainDgv.AllowUserToAddRows = false;
+            this.mainDgv.AllowUserToDeleteRows = false;
+            this.mainDgv.AutoGenerateContextFilters = true;
+            this.mainDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.mainDgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.mainDgv.BackgroundColor = System.Drawing.SystemColors.Control;
             this.mainDgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.mainDgv.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.mainDgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.mainDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.mainDgv.DateWithTime = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -67,6 +74,9 @@
             this.mainDgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.mainDgv.Size = new System.Drawing.Size(573, 349);
             this.mainDgv.TabIndex = 0;
+            this.mainDgv.TimeFilter = false;
+            this.mainDgv.SortStringChanged += new System.EventHandler(this.mainDgv_SortStringChanged);
+            this.mainDgv.FilterStringChanged += new System.EventHandler(this.mainDgv_FilterStringChanged);
             this.mainDgv.DoubleClick += new System.EventHandler(this.mainDgv_DoubleClick);
             this.mainDgv.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.mainDgv_PreviewKeyDown);
             // 
@@ -80,12 +90,14 @@
             this.Text = "DataViewForm";
             this.Load += new System.EventHandler(this.DataViewForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainDgv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView mainDgv;
+        private ADGV.AdvancedDataGridView mainDgv;
+        private System.Windows.Forms.BindingSource bindingSource;
     }
 }
