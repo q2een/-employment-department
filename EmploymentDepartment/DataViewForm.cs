@@ -165,7 +165,7 @@ namespace EmploymentDepartment
         private void mainDgv_DoubleClick(object sender, EventArgs e)
         {
             SetSelected();
-            new ExcelFile(dataTable);
+            new ExcelFile(dataTable, mainDgv.FilterString, mainDgv.SortString);
         }
 
 

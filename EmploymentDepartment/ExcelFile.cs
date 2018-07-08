@@ -12,7 +12,7 @@ namespace EmploymentDepartment
         Excel.Application ex;
         Excel.Workbook workBook;
 
-        public ExcelFile(DataTable table)
+        public ExcelFile(DataTable table, string filter, string sort)
         {
             ex = new Excel.Application();
             ex.Visible = true;
@@ -31,20 +31,17 @@ namespace EmploymentDepartment
             var range = sheet.Cells[1, table.Columns.Count];
             range.EntireColumn.AutoFit();
             range.EntireRow.AutoFit();
-
-            for (int j = 0; j < table.Rows.Count; j++)
+            var rows = table.Select(filter, sort);
+            for (int j = 0; j < rows.Length; j++)
             {
                 for (int k = 0; k < table.Columns.Count; k++)
                 {
-                    sheet.Cells[j + 2, k + 1] = table.Rows[j].ItemArray[k].ToString();
+                    sheet.Cells[j + 2, k + 1] = rows[j].ItemArray[k].ToString();
                 }
                 range = sheet.Cells[j + 2, table.Columns.Count];
                 range.EntireColumn.AutoFit();
                 range.EntireRow.AutoFit();
             }
-
-            
-
 
             ex.Application.ActiveWorkbook.SaveAs("doc.xls", Excel.XlFileFormat.xlWorkbookNormal);
         }
