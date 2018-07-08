@@ -192,7 +192,7 @@ namespace EmploymentDepartment
         {
             if (LinkCompany == null)
             {
-                var form = new DataViewForm<Company>(main.EntGetter.GetCompanies(), main, this);
+                var form = new DataViewForm<Company>("Выбор предприятия", main.EntGetter.GetCompanies(), main, this);
                 form.ShowDialog(this);
                 return;
             }

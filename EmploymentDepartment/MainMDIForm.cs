@@ -200,10 +200,10 @@ namespace EmploymentDepartment
             return this.MdiChildren.FirstOrDefault(i => (i is DataViewForm<T>) && (i as DataViewForm<T>).Type == ViewType.Edit) as DataViewForm<T>;
         }
 
-        public void ShowEditDataViewForm<T>(List<T> data) where T : class, IIdentifiable
+        public void ShowEditDataViewForm<T>(string text, List<T> data) where T : class, IIdentifiable
         {
             var form = GetDataViewForm<T>();
-            form = form == null ? new DataViewForm<T>(ViewType.Edit, data) : form;
+            form = form == null ? new DataViewForm<T>(text,ViewType.Edit, data) : form;
             form.MdiParent = this;
             form.Show();
             form.Activate();
@@ -231,25 +231,6 @@ namespace EmploymentDepartment
         private void addVacancyMI_Click(object sender, EventArgs e)
         {
             ShowAddForm<Vacancy>();
-        }
-
-        #endregion
-
-        #region Пункт меню "Служебные - Добавть".
-
-        private void dataFacultiesMI_Click(object sender, EventArgs e)
-        {
-            ShowEditDataViewForm(this.Faculties);
-        }
-
-        private void dataSpecializationsMI_Click(object sender, EventArgs e)
-        {
-            ShowEditDataViewForm(this.Specializations);
-        }
-
-        private void dataPreferentialCategoriesMI_Click(object sender, EventArgs e)
-        {
-            ShowEditDataViewForm(this.PreferentialCategories);
         }
 
         #endregion
@@ -313,19 +294,41 @@ namespace EmploymentDepartment
 
         }
 
+        #region Пункт меню "Данные"
         private void dataVacanciesMI_Click(object sender, EventArgs e)
         {
-            ShowEditDataViewForm(EntGetter.GetVacancies());
+            ShowEditDataViewForm("Вакансии", EntGetter.GetVacancies());
         }
 
         private void dataCompaniesMI_Click(object sender, EventArgs e)
         {
-            ShowEditDataViewForm(EntGetter.GetCompanies());
+            ShowEditDataViewForm("Предприятия", EntGetter.GetCompanies());
         }
 
         private void dataStudentsMI_Click(object sender, EventArgs e)
         {
-            ShowEditDataViewForm(EntGetter.GetStudents());
+            ShowEditDataViewForm("Студенты", EntGetter.GetStudents());
         }
+
+        #region Пункт меню "Данные - Служебные".
+
+        private void dataFacultiesMI_Click(object sender, EventArgs e)
+        {
+            ShowEditDataViewForm("Факультеты", this.Faculties);
+        }
+
+        private void dataSpecializationsMI_Click(object sender, EventArgs e)
+        {
+            ShowEditDataViewForm("Профили подготовки", this.Specializations);
+        }
+
+        private void dataPreferentialCategoriesMI_Click(object sender, EventArgs e)
+        {
+            ShowEditDataViewForm("Льготные категории", this.PreferentialCategories);
+        }
+
+        #endregion
+
+        #endregion
     }
 }

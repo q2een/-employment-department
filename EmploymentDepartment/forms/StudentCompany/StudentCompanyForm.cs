@@ -17,11 +17,25 @@ namespace EmploymentDepartment
             InitializeComponent();
         }
 
+        public StudentCompanyForm(IStudentCompany entity, IStudent student) : base(ActionType.Add, entity)
+        {
+            InitializeComponent();
+            LinkStudent = student;
+            linkStudent.Enabled =linkStudentClear.Visible = false;
+        }
+
+        public StudentCompanyForm(IStudentCompany entity, IVacancy vacancy) : base(ActionType.Add, entity)
+        {
+            InitializeComponent();
+            LinkVacancy = vacancy;
+            linkVacancy.Enabled = linkVacancyClear.Visible = false;
+        }
+
         public StudentCompanyForm(ActionType type, IStudentCompany entity, IDataListView<IStudentCompany> viewContext) : base(type, entity, viewContext)
         {
             InitializeComponent();
         }
-
+        
         // Модальное окно для просмотра информации.
         public StudentCompanyForm(MainMDIForm mainForm, IStudentCompany entity) : base(mainForm, entity)
         {
@@ -156,7 +170,7 @@ namespace EmploymentDepartment
         {
             if (LinkStudent == null)
             {
-                var form = new DataViewForm<Student>(main.EntGetter.GetStudents(), main, this);
+                var form = new DataViewForm<Student>("Выбор студента", main.EntGetter.GetStudents(), main, this);
                 form.ShowDialog(this);
                 return;
             }
@@ -168,7 +182,7 @@ namespace EmploymentDepartment
         {
             if (LinkVacancy == null)
             {
-                var form = new DataViewForm<Vacancy>(main.EntGetter.GetVacancies(), main, this);
+                var form = new DataViewForm<Vacancy>("Выбор вакансии", main.EntGetter.GetVacancies(), main, this);
                 form.ShowDialog(this);
                 return;
             }

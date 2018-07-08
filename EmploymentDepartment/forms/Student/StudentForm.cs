@@ -229,7 +229,7 @@ namespace EmploymentDepartment
         {
             if (LinkPreferentialCategory == null)
             {
-                var form = new DataViewForm<PreferentialCategory>(main.PreferentialCategories, main, this);
+                var form = new DataViewForm<PreferentialCategory>("Выбор льготной категории", main.PreferentialCategories, main, this);
                 form.ShowDialog(this);
                 return;
             }

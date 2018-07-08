@@ -19,7 +19,7 @@ namespace EmploymentDepartment
 
         private readonly ILinkPickable selectParent;
         
-        public DataViewForm( ViewType type, List<T> data)
+        public DataViewForm(string text, ViewType type, List<T> data)
         {
             if (data == null)
                 throw new ArgumentNullException();
@@ -27,6 +27,7 @@ namespace EmploymentDepartment
             InitializeComponent();
             this.Data = data;
             this.Type = type;
+            this.Text = text;
 
             dataTable = new DataTable();
             dataSet = new DataSet();
@@ -38,7 +39,7 @@ namespace EmploymentDepartment
             SetData();
         }
 
-        public DataViewForm(List<T> data, MainMDIForm mainForm, ILinkPickable parent) :this(ViewType.Select,data)
+        public DataViewForm(string text, List<T> data, MainMDIForm mainForm, ILinkPickable parent) :this(text,ViewType.Select,data)
         {
             this.selectParent = parent;
             this.main = mainForm;
@@ -164,7 +165,10 @@ namespace EmploymentDepartment
         private void mainDgv_DoubleClick(object sender, EventArgs e)
         {
             SetSelected();
+            new ExcelFile(dataTable);
         }
+
+
 
         private void mainDgv_FilterStringChanged(object sender, EventArgs e)
         {
