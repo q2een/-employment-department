@@ -117,12 +117,12 @@ namespace EmploymentDepartment
 
         #region Show child froms.         
 
-        public void ShowMdiChild<U, T>(U entity, ActionType type) where U: class, IIdentifiable where T : MDIChild<U>
+        public void ShowMdiChild<U, T>(U entity, ActionType type, IDataListView<U> viewContext) where U: class, IIdentifiable where T : MDIChild<U>
         {
             var form = this.MdiChildren.FirstOrDefault(i => (i is MDIChild<U>) && (i as MDIChild<U>).Type == type && (i as MDIChild<U>).ID == entity.ID);
 
             if (form == null)
-                form = Activator.CreateInstance(typeof(T), new object[] { type, entity }) as T;
+                form = Activator.CreateInstance(typeof(T), new object[] { type, entity, viewContext }) as T;
 
             form.MdiParent = this;
             form.Show();
@@ -135,7 +135,7 @@ namespace EmploymentDepartment
             form.ShowDialog(this);
         }
 
-        public void ShowFormByViewType<U,T>(ActionType type, U entity) where U : class, IIdentifiable where T : MDIChild<U>
+        public void ShowFormByViewType<U,T>(ActionType type, U entity, IDataListView<U> viewContext) where U : class, IIdentifiable where T : MDIChild<U>
         {
             if (type == ActionType.View)
             {
@@ -143,53 +143,53 @@ namespace EmploymentDepartment
                 return;
             }
 
-            ShowMdiChild<U, T>(entity, type);
+            ShowMdiChild<U, T>(entity, type, viewContext);
         }
 
-        public void ShowFormByType<U>(ActionType type, U entity) where U : class, IIdentifiable
+        public void ShowFormByType<U>(ActionType type, U entity, IDataListView<U> viewContext = null) where U : class, IIdentifiable
         {
             if (entity is IVacancy)
             { 
-                ShowFormByViewType<IVacancy, VacancyForm>(type, entity as IVacancy);
+                ShowFormByViewType<IVacancy, VacancyForm>(type, entity as IVacancy, viewContext as IDataListView<IVacancy>);
             }
 
             if (entity is IStudent)
             {
-                ShowFormByViewType<IStudent, StudentForm>(type, entity as IStudent);
+                ShowFormByViewType<IStudent, StudentForm>(type, entity as IStudent, viewContext as IDataListView<IStudent>);
             }  
 
             if (entity is ICompany)
             {
-                ShowFormByViewType<ICompany, CompanyFrom>(type, entity as ICompany);
+                ShowFormByViewType<ICompany, CompanyFrom>(type, entity as ICompany, viewContext as IDataListView<ICompany>);
             }
            
             if (entity is IStudentCompany)
             {
-                ShowFormByViewType<IStudentCompany, StudentCompanyForm>(type, entity as IStudentCompany);
+                ShowFormByViewType<IStudentCompany, StudentCompanyForm>(type, entity as IStudentCompany, viewContext as IDataListView<IStudentCompany>);
             }
 
             if (entity is ISpecialization)
             {
-                var form = new SpecializationForm(this,type, entity as ISpecialization);
+                var form = new SpecializationForm(this,type, entity as ISpecialization, viewContext as IDataListView<ISpecialization>);
                 form.ShowDialog();
-            }
+            }   
 
             if (entity is IFaculty)
             {
-                var form = new FacultyForm(this, type, entity as IFaculty);
+                var form = new FacultyForm(this, type, entity as IFaculty, viewContext as IDataListView<IFaculty>);
                 form.ShowDialog();
             }
 
             if (entity is IPreferentialCategory)
             {
-                var form = new PreferentialCategoryForm(this, type, entity as IPreferentialCategory);
+                var form = new PreferentialCategoryForm(this, type, entity as IPreferentialCategory, viewContext as IDataListView<IPreferentialCategory>);
                 form.ShowDialog();
             }
         }
 
         public void ShowAddForm<T>() where T: class, IIdentifiable, new()
         {
-            ShowFormByType(ActionType.Add, new T());
+            ShowFormByType(ActionType.Add, new T(), null);
         }
 
         private DataViewForm<T> GetDataViewForm<T>() where T : class, IIdentifiable

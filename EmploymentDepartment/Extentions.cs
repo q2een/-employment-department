@@ -358,11 +358,9 @@ namespace EmploymentDepartment
                 var nameValue = (self as U).GetPropertiesNameValuePair<U>(true, ignore);
 
                 // Добавляем запись в БД.
-                db.Insert(EntitiesGetter.GetTableNameByType<U>(self).ToString(), nameValue);
+                self.ID = (int)db.Insert(EntitiesGetter.GetTableNameByType<U>(self).ToString(), nameValue);
 
                 MessageBox.Show(informationMessage, "Операция добавления", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-                self.Close();
             }
             catch (Exception ex)
             {                
@@ -371,6 +369,23 @@ namespace EmploymentDepartment
             }
 
             return true;
+        }
+
+        public static object[] GetDisplayedPropertiesValue<T>(this T self) where T:IIdentifiable
+        {
+            var propValues = new List<object>();
+
+            var type = typeof(T);
+
+            foreach (var propertyInfo in type.GetProperties())
+            {
+                var attr = Attribute.GetCustomAttribute(propertyInfo, typeof(DisplayNameAttribute)) as DisplayNameAttribute;
+
+                if (attr != null)
+                    propValues.Add(type.GetProperty(propertyInfo.Name).GetValue(self,null));
+            }
+
+            return propValues.ToArray();
         }
 
         public static Dictionary<string, string> GetTypePropertiesNameDisplayName<T>(this T self)

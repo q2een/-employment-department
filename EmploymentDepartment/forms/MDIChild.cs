@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmploymentDepartment.BL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,7 @@ namespace EmploymentDepartment
         protected MainMDIForm main { get; set; }
         public T Entity { get; set; }
         public ActionType Type { get; set; }
+        protected IDataListView<T> ViewContext { get; set; }
 
         public MDIChild()
         {
@@ -31,6 +33,11 @@ namespace EmploymentDepartment
 
             this.Entity = type == ActionType.Add ? null : entity;
             this.Type = type;
+        }
+
+        public MDIChild(ActionType type, T entity, IDataListView<T> viewContext) : this(type, entity)
+        {
+            this.ViewContext = viewContext;
         }
 
         // Модальное окно для просмотра информации.

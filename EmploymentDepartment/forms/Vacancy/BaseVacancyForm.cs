@@ -8,13 +8,19 @@ namespace EmploymentDepartment
 {
     public class BaseVacancyForm : MDIChild<IVacancy>, IVacancy
     {
-        public BaseVacancyForm():base()
+        protected BaseVacancyForm() : base()
         {
 
         }
+
         public BaseVacancyForm(ActionType type, IVacancy entity = null) : base (type, entity)
         {
         }
+
+        public BaseVacancyForm(ActionType type, IVacancy entity, IDataListView<IVacancy> viewContext) : base(type, entity, viewContext)
+        {
+        }
+
         public BaseVacancyForm(MainMDIForm mainForm, IVacancy entity) : base(mainForm, entity)
         {
         }
@@ -46,6 +52,9 @@ namespace EmploymentDepartment
         public string SalaryNote { get; set; }
         public int Gender { get; set; }
         public string Features { get; set; }
+
+        string IVacancy.CompanyName { get; }
+        public string GenderName { get; }
         #endregion
 
         #region IEditable implementation.
@@ -53,8 +62,11 @@ namespace EmploymentDepartment
         public override void Insert()
         {
             var msg = $"Информация о вакансии добавлена в базу";
-            this.InsertFormEntityToDataBase<BaseVacancyForm, IVacancy>(main.DBGetter, msg, "ID", "Name");
-            
+            if(this.InsertFormEntityToDataBase<BaseVacancyForm, IVacancy>(main.DBGetter, msg, "ID", "Name", "CompanyName", "GenderName"))
+            {
+                ViewContext?.SetDataTableRow(this as IVacancy);
+                this.Close();
+            }
         }
 
         public override void Remove()
@@ -65,13 +77,16 @@ namespace EmploymentDepartment
         public override void Save()
         {
             var msg = $"Информация о вакансии обновлена";
-            if (this.UpdateFormEntityInDataBase<BaseVacancyForm, IVacancy>(main.DBGetter, msg, "ID", "Name"))
+            if (this.UpdateFormEntityInDataBase<BaseVacancyForm, IVacancy>(main.DBGetter, msg, "ID", "Name", "CompanyName", "GenderName"))
+            {
                 SetFormText();
+                ViewContext?.SetDataTableRow(this as IVacancy);
+            }
         }
 
         public override bool ValidateFields() => Extentions.ValidateFields(this, GetErrorProvider());
 
-        public override void SetDefaultValues() => this.SetPropertiesValue<IVacancy>(Entity, "");
+        public override void SetDefaultValues() => this.SetPropertiesValue<IVacancy>(Entity, "CompanyName", "GenderName");
 
         #endregion
     }

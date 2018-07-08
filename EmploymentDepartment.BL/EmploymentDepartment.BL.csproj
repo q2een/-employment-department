@@ -48,24 +48,24 @@
     <Compile Include="DataBase\EntitiesGetter.cs" />
     <Compile Include="DataBase\IDataBase.cs" />
     <Compile Include="DataBase\Table.cs" />
+    <Compile Include="IEntity\ICompany.cs" />
+    <Compile Include="IEntity\IFaculty.cs" />
+    <Compile Include="IIdentifiable.cs" />
+    <Compile Include="IEntity\IPreferentialCategory.cs" />
+    <Compile Include="IEntity\ISpecialization.cs" />
+    <Compile Include="IEntity\IStudent.cs" />
+    <Compile Include="IEntity\IStudentCompany.cs" />
+    <Compile Include="IEntity\IVacancy.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="enums\EducationLevelType.cs" />
     <Compile Include="Entities\Faculty.cs" />
     <Compile Include="enums\GenderType.cs" />
-    <Compile Include="IEntity\IIdentifiable.cs" />
     <Compile Include="Entities\PreferentialCategory.cs" />
     <Compile Include="Entities\Specialization.cs" />
     <Compile Include="Entities\Student.cs" />
     <Compile Include="Entities\StudentCompany.cs" />
     <Compile Include="Entities\Vacancy.cs" />
     <Compile Include="Extention.cs" />
-    <Compile Include="IEntity\ICompany.cs" />
-    <Compile Include="IEntity\IFaculty.cs" />
-    <Compile Include="IEntity\IPreferentialCategory.cs" />
-    <Compile Include="IEntity\ISpecialization.cs" />
-    <Compile Include="IEntity\IStudent.cs" />
-    <Compile Include="IEntity\IStudentCompany.cs" />
-    <Compile Include="IEntity\IVacancy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

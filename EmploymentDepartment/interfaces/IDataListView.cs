@@ -1,7 +1,8 @@
 ﻿namespace EmploymentDepartment
 {
-    public interface IDataListView<T> : IDataView
+    public interface IDataListView<out T> : IDataView where T: BL.IIdentifiable
     {
-        System.Collections.Generic.List<T> Data { get; set; }         
+        System.Collections.Generic.IEnumerable<T> Data { get; }
+        void SetDataTableRow<T>(T entity) where T : BL.IIdentifiable;
     }
 }

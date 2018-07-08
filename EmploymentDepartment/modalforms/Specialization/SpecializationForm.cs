@@ -12,17 +12,13 @@ namespace EmploymentDepartment
 {
     public partial class SpecializationForm : BaseSpecializationForm, ISpecialization
     {
-        public SpecializationForm(MainMDIForm main, ActionType type, ISpecialization specialization = null) : base(type, specialization)
+        public SpecializationForm(MainMDIForm main, ActionType type, ISpecialization entity, IDataListView<ISpecialization> viewContext) : base(type, entity, viewContext)
         {
             InitializeComponent();
 
             this.main = main;
-
-            if (Type == ActionType.Edit)
-            {
-                btnApply.Text = "Применить";
-            }
         }
+
 
         public SpecializationForm(MainMDIForm main, ISpecialization specialization) : base(main, specialization)
         {
@@ -63,8 +59,24 @@ namespace EmploymentDepartment
                 cmbLevelOfEducation.SelectedIndex = value - 1;
             }
         }
+
+        public new string FacultyName
+        {
+            get
+            {
+                return cmbFaculty.Text;
+            }
+        }
+
+        public new string LevelOfEducationName
+        {
+            get
+            {
+                return cmbLevelOfEducation.Text;
+            }
+        }
         #endregion
-        
+
         #region Validating events.
         private new void RequiredComboBox_Validating(object sender, CancelEventArgs e)
         {
@@ -86,13 +98,16 @@ namespace EmploymentDepartment
 
         private void SpecializationForm_Load(object sender, EventArgs e)
         {
+            if (Type == ActionType.Edit)
+                btnApply.Text = "Применить";
+
             mainPanel.Enabled = btnApply.Visible = Type != ActionType.View;
         }
 
         public override void SetDefaultValues()
         {
             cmbFaculty.BindComboboxData(main.Faculties.Select(i => i as IFaculty).ToList());
-            this.SetPropertiesValue<ISpecialization>(Entity, "");
+            this.SetPropertiesValue<ISpecialization>(Entity, "FacultyName", "LevelOfEducationName");
         }
 
         private void btnApply_Click(object sender, EventArgs e)

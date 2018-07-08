@@ -138,9 +138,30 @@ namespace EmploymentDepartment
             }
         }
 
+        string IVacancy.CompanyName
+        {
+            get
+            {
+                return LinkCompany?.Name;
+            }
+        }
+
+        public new string GenderName
+        {
+            get
+            {
+                return cmbGender.Text;
+            }
+        }
+
         #endregion
 
         public VacancyForm(ActionType type, IVacancy entity = null) : base (type, entity)
+        {
+            InitializeComponent();
+        }
+
+        public VacancyForm(ActionType type, IVacancy entity, IDataListView<IVacancy> viewContext) : base(type, entity, viewContext)
         {
             InitializeComponent();
         }

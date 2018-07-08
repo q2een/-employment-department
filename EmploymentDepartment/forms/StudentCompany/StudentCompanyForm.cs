@@ -17,6 +17,11 @@ namespace EmploymentDepartment
             InitializeComponent();
         }
 
+        public StudentCompanyForm(ActionType type, IStudentCompany entity, IDataListView<IStudentCompany> viewContext) : base(type, entity, viewContext)
+        {
+            InitializeComponent();
+        }
+
         // Модальное окно для просмотра информации.
         public StudentCompanyForm(MainMDIForm mainForm, IStudentCompany entity) : base(mainForm, entity)
         {
@@ -281,6 +286,31 @@ namespace EmploymentDepartment
                 tbNote.Text = value;
             }
         }
+
+        public new string StudentFullName
+        {
+            get
+            {
+                return LinkStudent == null ? null : $"{LinkStudent.Surname} {LinkStudent.Name} {LinkStudent.Patronymic}";
+            }
+        }
+
+        public new string StatusText
+        {
+            get
+            {
+                return cmbStatus.Text;
+            }
+        }
+
+        public new string VacancyNumber
+        {
+            get
+            {
+                return LinkVacancy?.VacancyNumber;
+            }
+        }
+
         #endregion
     }
 }

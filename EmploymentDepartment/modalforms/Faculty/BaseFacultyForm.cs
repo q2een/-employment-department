@@ -5,11 +5,15 @@ namespace EmploymentDepartment
 {
     public class BaseFacultyForm : MDIChild<IFaculty>, IFaculty
     {
-        public BaseFacultyForm() : base()
+        private BaseFacultyForm() : base()
         {
         }
 
         public BaseFacultyForm(ActionType type, IFaculty entity = null) : base(type, entity)
+        {
+        }
+
+        public BaseFacultyForm(ActionType type, IFaculty entity, IDataListView<IFaculty> viewContext) : base(type, entity, viewContext)
         {
         }
 
@@ -52,6 +56,7 @@ namespace EmploymentDepartment
                 SetFormText();
                 main.UpdateFaculties();
                 main.UpdateSpecializations();
+                ViewContext?.SetDataTableRow(this as IFaculty);
                 this.Close();
             }
         }
@@ -65,11 +70,12 @@ namespace EmploymentDepartment
         {
             var msg = $"Факультет добавлен в базу.\nНаименование факультета: {((IFaculty)this).Name}";
 
-            if (this.UpdateFormEntityInDataBase<BaseFacultyForm, IFaculty>(main.DBGetter, msg, "ID"))
+            if (this.InsertFormEntityToDataBase<BaseFacultyForm, IFaculty>(main.DBGetter, msg, "ID"))
             {
                 SetFormText();
                 main.UpdateFaculties();
                 main.UpdateSpecializations();
+                ViewContext?.SetDataTableRow(this as IFaculty);
                 this.Close();
             }
         }

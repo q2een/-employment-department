@@ -63,10 +63,10 @@ namespace EmploymentDepartment.BL
             return queryList;
         }
         
-        public void Insert(string tableName, Dictionary<string, object> nameValue)
+        public long Insert(string tableName, Dictionary<string, object> nameValue)
         {
             if (nameValue == null || nameValue.Count == 0)
-                return;
+                throw new ArgumentNullException();
             
             string fields = "", values = "";
 
@@ -78,7 +78,28 @@ namespace EmploymentDepartment.BL
                 values += $"{value},";
             }
 
-            Query($"INSERT INTO {tableName} ({fields.TrimEnd(',')}) VALUES ({values.TrimEnd(',')})");
+            try
+            {
+                using (var conn = new MySqlConnection(this.connection))
+                {
+                    var command = new MySqlCommand($"INSERT INTO {tableName} ({fields.TrimEnd(',')}) VALUES ({values.TrimEnd(',')})", conn);
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    return command.LastInsertedId;
+                }
+            }
+            catch (MySqlException MySqlEx)
+            {
+                switch (MySqlEx.Number)
+                {
+                    case 1451: throw new Exception("Не удалось выполнить операцию! Данаая запись используется в других таблицах!");
+                    case 1042: // Исключения при отсутствии соединения
+                    case 1044: // Или неправильно введенной комбинации "имя пользователя - пароль"
+                    case 1045: throw new Exception("Не удалось подключиться к базе данных!");
+                    case 1264: throw new Exception("Проверьте правильность введенных данных!");
+                    default: throw new Exception("Ошибка при обращении к базе данных! #" + MySqlEx.Number);
+                }
+            }
         }
 
         public void Update(string tableName, int id, Dictionary<string, object> fields)

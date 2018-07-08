@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public class Student : IIdentifiable , IStudent
+    public class Student : IIdentifiable, IStudent
     {
         [DisplayName("ID")]
         public int ID { get; set; }

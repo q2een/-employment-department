@@ -2,7 +2,7 @@
 
 namespace EmploymentDepartment.BL
 {
-    public class Vacancy: IVacancy
+    public class Vacancy : IVacancy
     {
         [DisplayName("ID")]
         public int ID { get; set; }
@@ -11,15 +11,15 @@ namespace EmploymentDepartment.BL
         public string VacancyNumber { get; set; }
 
         [DisplayName("Должность")]
-        public string  Post { get; set; }
+        public string Post { get; set; }
 
         [DisplayName("Предприятие")]
         public string CompanyName { get; set; }
 
         public int Employer { get; set; }
-        
+
         [DisplayName("Рабочая область")]
-        public string  WorkArea { get; set; }
+        public string WorkArea { get; set; }
 
         [DisplayName("Оклад")]
         public decimal Salary { get; set; }
@@ -42,10 +42,10 @@ namespace EmploymentDepartment.BL
             get
             {
                 return VacancyNumber;
-            } 
+            }
             set
             {
-                
+
             }
         }
     }

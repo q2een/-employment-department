@@ -8,14 +8,18 @@ namespace EmploymentDepartment
 {
     public class BaseCompanyForm : MDIChild<ICompany>, ICompany
     {
-        public BaseCompanyForm() : base()
+        protected BaseCompanyForm() : base()
         {
-
         }
 
         public BaseCompanyForm(ActionType type, ICompany entity = null) : base(type, entity)
         {
         }
+
+        public BaseCompanyForm(ActionType type, ICompany entity, IDataListView<ICompany> viewContext) : base(type, entity, viewContext)
+        {
+        }
+
         public BaseCompanyForm(MainMDIForm mainForm, ICompany entity) : base(mainForm, entity)
         {
         }
@@ -67,7 +71,10 @@ namespace EmploymentDepartment
             var msg = $"Информация о предприятии «{(this as ICompany).Name}» обновлена";
 
             if (this.UpdateFormEntityInDataBase<BaseCompanyForm, ICompany>(main.DBGetter, msg, "ID"))
+            {
                 SetFormText();
+                ViewContext?.SetDataTableRow(this as ICompany);
+            }
         }
 
         public override void Remove()
@@ -79,8 +86,11 @@ namespace EmploymentDepartment
         {
             var msg = $"Предприятие «{(this as ICompany).Name}»\nдобавлено в базу";
 
-            if (this.UpdateFormEntityInDataBase<BaseCompanyForm, ICompany>(main.DBGetter, msg, "ID"))
-                SetFormText();
+            if (this.InsertFormEntityToDataBase<BaseCompanyForm, ICompany>(main.DBGetter, msg, "ID"))
+            {
+                ViewContext?.SetDataTableRow(this as IStudent);
+                this.Close();
+            }
         }
 
         #endregion

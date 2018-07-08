@@ -8,14 +8,18 @@ namespace EmploymentDepartment
 {
     public class BaseStudentForm : MDIChild<IStudent>, IStudent
     {
-        public BaseStudentForm() : base()
+        protected BaseStudentForm() : base()
         {
-
         }
 
         public BaseStudentForm(ActionType type, IStudent entity = null) : base(type, entity)
         {
         }
+
+        public BaseStudentForm(ActionType type, IStudent entity, IDataListView<IStudent> viewContext) : base(type, entity, viewContext)
+        {
+        }
+
         public BaseStudentForm(MainMDIForm mainForm, IStudent entity) : base(mainForm, entity)
         {
         }
@@ -64,15 +68,26 @@ namespace EmploymentDepartment
         public string Phone { get; set; }
         public string Email { get; set; }
 
+        public string GenderName { get; }
+        public string MartialStatusString { get; }
+        public string FacultyName { get; }
+        public string EducationLevel { get; }
+        public string Specialization { get; }
+        public string PreferentialCategoryText { get; }
+
         #endregion
 
         #region IEditable implementation.
 
         public override void Save()
         {
-            var msg = $"Информация о студенте обновлена\nФИО студента: {Surname} {((IStudent)this).Name} {Patronymic}";
-            if (this.UpdateFormEntityInDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty"))
+            var msg = $"Информация о студенте обновлена\nФИО студента: {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}";
+
+            if (this.UpdateFormEntityInDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "PreferentialCategoryText"))
+            {
                 SetFormText();
+                ViewContext?.SetDataTableRow(this as IStudent);
+            }
         }
 
         public override void Remove()
@@ -82,8 +97,12 @@ namespace EmploymentDepartment
 
         public override void Insert()
         {
-            var msg = $"Студент {Surname} {((IStudent)this).Name} {Patronymic}\nдобавлен в базу";
-            this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty");
+            var msg = $"Студент {Surname} {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}\nдобавлен в базу";
+            if(this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "PreferentialCategoryText"))
+            {
+                ViewContext?.SetDataTableRow(this as IStudent);
+                this.Close();
+            }
         }
 
         #endregion

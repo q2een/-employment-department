@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
-namespace EmploymentDepartment
+namespace EmploymentDepartment.BL
 {
     public interface IPreferentialCategory : IIdentifiable
     {
+        [DisplayName("ID")]
         int ID { get; set; }
 
+        [DisplayName("Льготная категория")]
         string Name { get; set; }
     }
 }

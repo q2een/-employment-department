@@ -7,16 +7,12 @@ namespace EmploymentDepartment
 {
     public partial class PreferentialCategoryForm : BasePreferentialCategory, IPreferentialCategory
     {
-        public PreferentialCategoryForm(MainMDIForm main, ActionType type, IPreferentialCategory faculty = null) : base(type, faculty)
+
+        public PreferentialCategoryForm(MainMDIForm main, ActionType type, IPreferentialCategory entity, IDataListView<IPreferentialCategory> viewContext) : base(type, entity, viewContext)
         {
             InitializeComponent();
 
             this.main = main;
-
-            if (Type == ActionType.Edit)
-            {
-                btnApply.Text = "Применить";
-            }
         }
 
         public PreferentialCategoryForm(MainMDIForm main, IPreferentialCategory faculty) : base(main, faculty)
@@ -55,6 +51,10 @@ namespace EmploymentDepartment
 
         private void PreferentialCategoryForm_Load(object sender, EventArgs e)
         {
+            if (Type == ActionType.Edit)
+                btnApply.Text = "Применить";
+            
+
             mainPanel.Enabled = controlPanel.Visible = Type != ActionType.View;
         }
 

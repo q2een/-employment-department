@@ -5,12 +5,16 @@ namespace EmploymentDepartment
 {
     public class BasePreferentialCategory : MDIChild<IPreferentialCategory>, IPreferentialCategory
     {
-        public BasePreferentialCategory() : base()
+        private BasePreferentialCategory() 
         {
         }
 
         public BasePreferentialCategory(ActionType type, IPreferentialCategory entity = null) : base(type, entity)
         {
+        }
+
+        public BasePreferentialCategory(ActionType type, IPreferentialCategory entity, IDataListView<IPreferentialCategory> viewContext):base(type,entity,viewContext)
+        { 
         }
 
         public BasePreferentialCategory(MainMDIForm mainForm, IPreferentialCategory entity) : base(mainForm, entity)
@@ -45,12 +49,15 @@ namespace EmploymentDepartment
 
         public override void Save()
         {
-            var msg = $"Информация о льготной категории обновлена\nНаименование факультета: {((IPreferentialCategory)this).Name}";
+            var msg = $"Информация о льготной категории обновлена";
 
             if (this.UpdateFormEntityInDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DBGetter, msg, "ID"))
             {
                 SetFormText();
                 main.UpdatePreferentialCategories();
+
+                ViewContext?.SetDataTableRow(this as IPreferentialCategory);
+
                 this.Close();
             }
         }
@@ -62,12 +69,13 @@ namespace EmploymentDepartment
 
         public override void Insert()
         {
-            var msg = $"Льготная категория добавлена в базу.\nНаименование факультета: {((IPreferentialCategory)this).Name}";
-
-            if (this.UpdateFormEntityInDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DBGetter, msg, "ID"))
+            var msg = $"Льготная категория добавлена в базу";
+            if (this.InsertFormEntityToDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DBGetter, msg, "ID"))
             {
-                SetFormText();
                 main.UpdatePreferentialCategories();
+
+                ViewContext?.SetDataTableRow(this as IPreferentialCategory);
+
                 this.Close();
             }
         }

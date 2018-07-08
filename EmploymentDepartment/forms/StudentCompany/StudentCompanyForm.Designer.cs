@@ -128,7 +128,7 @@
             this.cmbStatus.Items.AddRange(new object[] {
             "Работает",
             "Не работает"});
-            this.cmbStatus.Location = new System.Drawing.Point(3, 31);
+            this.cmbStatus.Location = new System.Drawing.Point(6, 32);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(257, 24);
             this.cmbStatus.TabIndex = 2;
@@ -174,7 +174,7 @@
             this.tbYearOfEmployment.BeepOnError = true;
             this.tbYearOfEmployment.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorProvider.SetIconPadding(this.tbYearOfEmployment, -35);
-            this.tbYearOfEmployment.Location = new System.Drawing.Point(6, 32);
+            this.tbYearOfEmployment.Location = new System.Drawing.Point(0, 32);
             this.tbYearOfEmployment.Mask = "0000";
             this.tbYearOfEmployment.Name = "tbYearOfEmployment";
             this.tbYearOfEmployment.Size = new System.Drawing.Size(243, 23);
@@ -186,7 +186,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 7);
+            this.label10.Location = new System.Drawing.Point(-3, 7);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(153, 16);
             this.label10.TabIndex = 0;
@@ -197,7 +197,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label12.ForeColor = System.Drawing.Color.Tomato;
-            this.label12.Location = new System.Drawing.Point(153, 7);
+            this.label12.Location = new System.Drawing.Point(147, 7);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(14, 16);
             this.label12.TabIndex = 1;

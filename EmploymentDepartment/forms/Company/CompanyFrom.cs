@@ -230,6 +230,11 @@ namespace EmploymentDepartment
             InitializeComponent();
         }
 
+        public CompanyFrom(ActionType type, ICompany entity, IDataListView<ICompany> viewContext) : base(type, entity, viewContext)
+        {
+            InitializeComponent();
+        }
+
         public CompanyFrom(ActionType type, ICompany company = null) :base(type,company)
         {
             InitializeComponent();
@@ -253,6 +258,21 @@ namespace EmploymentDepartment
         private void CompanyFrom_Load(object sender, EventArgs e)
         {
             mainPanel.Enabled = Type != ActionType.View;
+        }
+
+        private void lblPhone_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPhone_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPhone_MouseLeave(object sender, EventArgs e)
+        {
+
         }
     }
 }

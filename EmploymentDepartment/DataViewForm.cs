@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class DataViewForm<T>: Form, IDataListView<T>, IDataView where T:class,IIdentifiable
+    public partial class DataViewForm<T>: Form, IDataListView<T> where T:class,IIdentifiable
     {
         private MainMDIForm main;
         private DataTable dataTable = null;
@@ -19,7 +19,7 @@ namespace EmploymentDepartment
 
         private readonly ILinkPickable selectParent;
         
-        public DataViewForm(ViewType type, List<T> data)
+        public DataViewForm( ViewType type, List<T> data)
         {
             if (data == null)
                 throw new ArgumentNullException();
@@ -33,9 +33,6 @@ namespace EmploymentDepartment
 
             bindingSource.DataSource = this.dataSet;
 
-            //initialize datagridview
-            //dvancedDataGridView1.DoubleBuffered();
-
             mainDgv.DataSource = bindingSource;
 
             SetData();
@@ -47,7 +44,7 @@ namespace EmploymentDepartment
             this.main = mainForm;
         }
 
-        public List<T> Data { get; set; }
+        public IEnumerable<T> Data { get; set; }
         public ViewType Type { get; set; }
 
         private void DataViewForm_Load(object sender, EventArgs e)
@@ -65,22 +62,35 @@ namespace EmploymentDepartment
         {
             dataTable = dataSet.Tables.Add("Entity");
 
+            // Получаем наименования свойств объекта в формате "Имя свойства" - "Отображаемое имя свойства".
             var columns = Data.First().GetTypePropertiesNameDisplayName();
 
+            if (columns?.Count == 0)
+                return;
+
+            // Заполняем таблицу.
             using (var reader = ObjectReader.Create(Data, columns.Keys.ToArray()))
             {
                 dataTable.Load(reader);
             }
 
+            if (!dataTable.Columns.Contains("ID"))
+                throw new ArgumentException("Необходим уникальный идентификатор");
+
+            // Установка уникального первичного ключа.
+            dataTable.PrimaryKey = new DataColumn[] { dataTable.Columns["ID"] };
             dataTable.Columns["ID"].Unique = true;
 
+            // Переименовываем имена колонок на "Отображаемое имя свойства".
             foreach (DataColumn column in dataTable.Columns)
             {
                 column.ColumnName = columns[column.ColumnName] ?? column.ColumnName;
             }
             
+            
             bindingSource.DataMember = dataTable.TableName;
 
+            // Скрываем данные. Пользователь не должен видеть уникальный идентификатор.
             mainDgv.Columns["ID"].Visible = false;
         }
 
@@ -88,24 +98,39 @@ namespace EmploymentDepartment
         {
             if (Type == ViewType.Select)
             {
-                selectParent.SetLinkValue<T>(Data[mainDgv.SelectedRows[0].Index]);
+                selectParent.SetLinkValue<T>(GetSelectedEntity());
                 this.Close();
             }
         }
 
-        private void ShowOperationForm(ActionType type)
+        // TODO : GET ENTITY BY ID
+        private T GetSelectedEntity()
         {
             int id;
 
             if (!Int32.TryParse(mainDgv.SelectedRows[0].Cells[0].Value.ToString(), out id))
-                return;
+                return null;
+             
+            return Data.FirstOrDefault(entity => entity.ID == id);
+        }
 
-            var selected = Data.FirstOrDefault(entity=> entity.ID == id);
+        private void ShowOperationForm(ActionType type)
+        { 
+            main.ShowFormByType(type, GetSelectedEntity(), this);
+        }
 
-            if (selected == null)
-                return;
+        public void SetDataTableRow<T>(T entity) where T:IIdentifiable
+        {
+            var row = this.dataTable.Rows.Find(entity.ID);
 
-            main.ShowFormByType(type, selected);
+            if (row == null)
+                row = this.dataTable.NewRow();
+
+            row.ItemArray = entity.GetDisplayedPropertiesValue();
+
+            if (this.dataTable.Rows.IndexOf(row) == -1)
+                this.dataTable.Rows.Add(row);
+            
         }
 
         private void mainDgv_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

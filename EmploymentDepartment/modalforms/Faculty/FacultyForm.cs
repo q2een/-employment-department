@@ -7,22 +7,18 @@ namespace EmploymentDepartment
 {
     public partial class FacultyForm : BaseFacultyForm, IFaculty
     {
-        public FacultyForm(MainMDIForm main, ActionType type, IFaculty faculty = null) : base(type, faculty)
+
+        public FacultyForm(MainMDIForm main, ActionType type, IFaculty entity, IDataListView<IFaculty> viewContext) : base(type, entity, viewContext)
         {
             InitializeComponent();
 
             this.main = main;
-
-            if (Type == ActionType.Edit)
-            {
-                btnApply.Text = "Применить";
-            }
         }
-
+       
         public FacultyForm(MainMDIForm main, IFaculty faculty) : base(main, faculty)
         {
             InitializeComponent();
-        }
+        }     
 
         #region IFaculty implementation.
 
@@ -55,6 +51,9 @@ namespace EmploymentDepartment
 
         private void FacultyForm_Load(object sender, EventArgs e)
         {
+            if (Type == ActionType.Edit)
+                btnApply.Text = "Применить";
+            
             mainPanel.Enabled = controlPanel.Visible = Type != ActionType.View;
         }
 

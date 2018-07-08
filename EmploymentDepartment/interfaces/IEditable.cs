@@ -3,7 +3,7 @@
     /// <summary>
     /// Предоставляет интерфейс указывающий на изменяемость и редактируемость данных.
     /// </summary>
-    public interface IEditable<out T> : IUpdateble, IInsertable, IRemovable where T:IIdentifiable
+    public interface IEditable<out T> : IUpdateble, IInsertable, IRemovable where T: BL.IIdentifiable
     {
         /// <summary>
         /// Тип действия. 

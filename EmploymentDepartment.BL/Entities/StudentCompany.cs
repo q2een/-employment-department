@@ -14,8 +14,8 @@ namespace EmploymentDepartment.BL
 
         [DisplayName("Предприятие")]
         public string CompanyName { get; set; }
-        
-        public bool Status { get; set; }              
+
+        public bool Status { get; set; }
 
         public int? Vacancy { get; set; }
 
@@ -36,13 +36,13 @@ namespace EmploymentDepartment.BL
 
         [DisplayName("Примечание")]
         public string Note { get; set; }
-        
+
         public string Name
         {
             get
             {
                 return CompanyName;
-            } 
+            }
             set
             {
             }
