@@ -44,7 +44,11 @@ namespace EmploymentDepartment
         public override bool ValidateFields() => Extentions.ValidateFields(this, GetErrorProvider());
 
 
-        public override void SetDefaultValues() => this.SetPropertiesValue<IStudentCompany>(Entity, "StudentFullName", "StatusText", "VacancyNumber");
+        public override void SetDefaultValues()
+        {
+            this.SetPropertiesValue<IStudentCompany>(Entity, "StudentFullName", "StatusText", "VacancyNumber");
+            Extentions.ValidateControls(this, GetErrorProvider());
+        }
 
         public override void Save()
         {
@@ -61,7 +65,7 @@ namespace EmploymentDepartment
             throw new NotImplementedException();
         }
 
-        public override void Insert()
+        public override void AddNewItem()
         {
             var msg = $"Информация о месте работы студента добавлена в базу";
             if(this.InsertFormEntityToDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DBGetter, msg, "ID", "Name", "StudentFullName", "StatusText", "VacancyNumber"))

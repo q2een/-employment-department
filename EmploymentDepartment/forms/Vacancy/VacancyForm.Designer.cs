@@ -412,6 +412,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 456);
             this.Controls.Add(this.mainPanel);
+            this.Icon = Properties.Resources._16;
             this.MinimumSize = new System.Drawing.Size(600, 495);
             this.Name = "VacancyForm";
             this.Text = "Добавление вакансии";
@@ -427,7 +428,6 @@
             this.companyPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion

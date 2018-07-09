@@ -59,7 +59,7 @@ namespace EmploymentDepartment
 
         #region IEditable implementation.
 
-        public override void Insert()
+        public override void AddNewItem()
         {
             var msg = $"Информация о вакансии добавлена в базу";
             if(this.InsertFormEntityToDataBase<BaseVacancyForm, IVacancy>(main.DBGetter, msg, "ID", "Name", "CompanyName", "GenderName"))
@@ -86,7 +86,11 @@ namespace EmploymentDepartment
 
         public override bool ValidateFields() => Extentions.ValidateFields(this, GetErrorProvider());
 
-        public override void SetDefaultValues() => this.SetPropertiesValue<IVacancy>(Entity, "CompanyName", "GenderName");
+        public override void SetDefaultValues()
+        {
+            this.SetPropertiesValue<IVacancy>(Entity, "CompanyName", "GenderName");
+            Extentions.ValidateControls(this, GetErrorProvider());
+        }
 
         #endregion
     }

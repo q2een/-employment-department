@@ -61,7 +61,7 @@ namespace EmploymentDepartment
         private void btnApply_Click(object sender, EventArgs e)
         {
             if (Type == ActionType.Add)
-                this.Insert();
+                this.AddNewItem();
 
             if (Type == ActionType.Edit)
                 this.Save();

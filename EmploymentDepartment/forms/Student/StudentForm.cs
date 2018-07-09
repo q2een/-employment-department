@@ -193,7 +193,7 @@ namespace EmploymentDepartment
         
         #endregion
 
-        #region IEditable interfac implemantation.
+        #region IEditable interface implemantation.
 
         // Валидация полей на форме.
         public override bool ValidateFields()
@@ -214,6 +214,8 @@ namespace EmploymentDepartment
                 tbRegDistrict.Text == tbDistrict.Text && !string.IsNullOrEmpty(tbRegDistrict.Text) &&
                 tbRegAddress.Text == tbAddress.Text && !string.IsNullOrEmpty(tbRegAddress.Text))
                 cbAddressesAreEquals.Checked = true;
+
+            Extentions.ValidateControls(this, errorProvider);
         }
         #endregion
 

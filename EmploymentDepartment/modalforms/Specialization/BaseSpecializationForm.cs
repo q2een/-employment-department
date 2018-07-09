@@ -62,7 +62,7 @@ namespace EmploymentDepartment
             throw new NotImplementedException();
         }
 
-        public override void Insert()
+        public override void AddNewItem()
         {
             var msg = $"Профиль подготовки добавлен в базу.\nНаименование профиля: {((ISpecialization)this).Name}";
 

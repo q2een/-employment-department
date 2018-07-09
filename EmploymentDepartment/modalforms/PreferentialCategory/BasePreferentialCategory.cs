@@ -67,7 +67,7 @@ namespace EmploymentDepartment
             throw new NotImplementedException();
         }
 
-        public override void Insert()
+        public override void AddNewItem()
         {
             var msg = $"Льготная категория добавлена в базу";
             if (this.InsertFormEntityToDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DBGetter, msg, "ID"))

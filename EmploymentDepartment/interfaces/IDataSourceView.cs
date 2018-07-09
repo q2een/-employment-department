@@ -5,8 +5,9 @@ using System.Text;
 
 namespace EmploymentDepartment
 {
-    public interface IInsertable
+    public interface IDataSourceView
     {
-        void Insert();
+        System.Windows.Forms.BindingSource DataSource { get; }
+
     }
 }

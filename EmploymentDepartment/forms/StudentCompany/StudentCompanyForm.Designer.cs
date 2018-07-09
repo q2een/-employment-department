@@ -461,6 +461,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 436);
             this.Controls.Add(this.mainPanel);
+            this.Icon = Properties.Resources._16;
             this.MinimumSize = new System.Drawing.Size(565, 475);
             this.Name = "StudentCompanyForm";
             this.Text = "Добавление информации о месте работы";

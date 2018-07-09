@@ -1,16 +1,16 @@
-﻿namespace EmploymentDepartment
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace EmploymentDepartment
 {
-    /// <summary>
-    /// Предоставляет интерфейс указывающий на изменяемость и редактируемость данных.
-    /// </summary>
-    public interface IEditable<out T> : IUpdateble, IInsertable, IRemovable where T: BL.IIdentifiable
+    public interface IEditable
     {
         /// <summary>
         /// Тип действия. 
         /// </summary>
-        ActionType Type { get;}
-
-        T Entity { get;}
+        ActionType Type { get; }
 
         /// <summary>
         /// Задает полям исходные значения.
@@ -30,7 +30,7 @@
         /// <summary>
         /// Добавляет данные.
         /// </summary>
-        void Insert();
+        void AddNewItem();
 
         /// <summary>
         /// Валидация полей.

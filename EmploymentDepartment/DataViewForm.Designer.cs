@@ -1,4 +1,6 @@
-﻿namespace EmploymentDepartment
+﻿using EmploymentDepartment.Properties;
+
+namespace EmploymentDepartment
 {
     partial class DataViewForm<T>
     {
@@ -86,6 +88,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 349);
             this.Controls.Add(this.mainDgv);
+            this.Icon = Resources._16;
             this.Name = "DataViewForm";
             this.Text = "DataViewForm";
             this.Load += new System.EventHandler(this.DataViewForm_Load);

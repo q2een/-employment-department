@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>128.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdvancedDataGridView, Version=0.1.0.10, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ADGV.0.1.0.10\lib\net40\AdvancedDataGridView.dll</HintPath>
@@ -72,11 +75,11 @@
     <Compile Include="forms\Vacancy\BaseVacancyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Company\CompanyFrom.cs">
+    <Compile Include="forms\Company\CompanyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Company\CompanyFrom.Designer.cs">
-      <DependentUpon>CompanyFrom.cs</DependentUpon>
+    <Compile Include="forms\Company\CompanyForm.Designer.cs">
+      <DependentUpon>CompanyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\MDIChild.cs">
       <SubType>Form</SubType>
@@ -97,11 +100,10 @@
       <DependentUpon>VacancyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="interfaces\IDataListView.cs" />
+    <Compile Include="interfaces\IDataSourceView.cs" />
     <Compile Include="interfaces\IDataView.cs" />
-    <Compile Include="interfaces\IInsertable.cs" />
+    <Compile Include="interfaces\IEditable.cs" />
     <Compile Include="interfaces\ILinkPickable.cs" />
-    <Compile Include="interfaces\IRemovable.cs" />
-    <Compile Include="interfaces\IUpdateble.cs" />
     <Compile Include="modalforms\Faculty\BaseFacultyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,7 +133,7 @@
     </Compile>
     <Compile Include="enums\ActionType.cs" />
     <Compile Include="Extentions.cs" />
-    <Compile Include="interfaces\IEditable.cs" />
+    <Compile Include="interfaces\IEditableTyped.cs" />
     <Compile Include="MainMDIForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,8 +157,8 @@
     <EmbeddedResource Include="DataViewForm.resx">
       <DependentUpon>DataViewForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\Company\CompanyFrom.resx">
-      <DependentUpon>CompanyFrom.cs</DependentUpon>
+    <EmbeddedResource Include="forms\Company\CompanyForm.resx">
+      <DependentUpon>CompanyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MDIChild.resx">
       <DependentUpon>MDIChild.cs</DependentUpon>
@@ -187,6 +189,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="modalforms\Specialization\SpecializationForm.resx">
       <DependentUpon>SpecializationForm.cs</DependentUpon>
@@ -245,6 +248,13 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="128.ico" />
+    <Content Include="64.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

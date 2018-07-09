@@ -69,6 +69,7 @@ namespace EmploymentDepartment
                 }
                 else
                 {
+                    var a = errorProvider.GetError(lastControl);
                     // Результат проверки. Если есть ошибка хоть на одном элементе управления - false.
                     result = result && string.IsNullOrEmpty(errorProvider.GetError(lastControl));
 
@@ -82,7 +83,7 @@ namespace EmploymentDepartment
 
             // Устанавливаем фокус на контейнер, чтобы произошла валидация последнего выбранного контрола.
             container.Focus();
-
+            var b = errorProvider.GetError(lastControl);
             return result && string.IsNullOrEmpty(errorProvider.GetError(lastControl));
         }
 

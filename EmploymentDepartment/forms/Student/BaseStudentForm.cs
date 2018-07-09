@@ -95,7 +95,7 @@ namespace EmploymentDepartment
             throw new NotImplementedException();
         }
 
-        public override void Insert()
+        public override void AddNewItem()
         {
             var msg = $"Студент {Surname} {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}\nдобавлен в базу";
             if(this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "PreferentialCategoryText"))

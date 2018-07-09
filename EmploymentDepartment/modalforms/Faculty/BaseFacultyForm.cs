@@ -66,7 +66,7 @@ namespace EmploymentDepartment
             throw new NotImplementedException();
         }
 
-        public override void Insert()
+        public override void AddNewItem()
         {
             var msg = $"Факультет добавлен в базу.\nНаименование факультета: {((IFaculty)this).Name}";
 

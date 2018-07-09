@@ -139,7 +139,7 @@ namespace EmploymentDepartment
             throw new NotImplementedException();
         }
 
-        public virtual void Insert()
+        public virtual void AddNewItem()
         {
             throw new NotImplementedException();
         }

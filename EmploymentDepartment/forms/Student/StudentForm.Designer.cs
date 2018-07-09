@@ -304,9 +304,6 @@
             this.lblPhone.TabIndex = 3;
             this.lblPhone.Tag = this.tbPhone;
             this.lblPhone.Text = "...";
-            this.lblPhone.Click += this.lblEdit_Click;
-            this.lblPhone.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblPhone.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbPhone
             // 
@@ -448,9 +445,6 @@
             this.lblRegCity.TabIndex = 29;
             this.lblRegCity.Tag = this.tbRegCity;
             this.lblRegCity.Text = "...";
-            this.lblRegCity.Click += this.lblEdit_Click;
-            this.lblRegCity.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblRegCity.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbRegCity
             // 
@@ -477,9 +471,6 @@
             this.lblRegRegion.TabIndex = 29;
             this.lblRegRegion.Tag = this.tbRegRegion;
             this.lblRegRegion.Text = "...";
-            this.lblRegRegion.Click += this.lblEdit_Click;
-            this.lblRegRegion.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblRegRegion.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbRegRegion
             // 
@@ -505,9 +496,6 @@
             this.lblRegDistrict.TabIndex = 29;
             this.lblRegDistrict.Tag = this.tbRegDistrict;
             this.lblRegDistrict.Text = "...";
-            this.lblRegDistrict.Click += this.lblEdit_Click;
-            this.lblRegDistrict.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblRegDistrict.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbRegDistrict
             // 
@@ -533,9 +521,6 @@
             this.lblRegAddress.TabIndex = 29;
             this.lblRegAddress.Tag = this.tbRegAddress;
             this.lblRegAddress.Text = "...";
-            this.lblRegAddress.Click += this.lblEdit_Click;
-            this.lblRegAddress.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblRegAddress.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbRegAddress
             // 
@@ -652,9 +637,6 @@
             this.lblAddress.TabIndex = 29;
             this.lblAddress.Tag = this.tbAddress;
             this.lblAddress.Text = "...";
-            this.lblAddress.Click += this.lblEdit_Click;
-            this.lblAddress.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblAddress.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbAddress
             // 
@@ -682,9 +664,6 @@
             this.lblDistrict.TabIndex = 29;
             this.lblDistrict.Tag = this.tbDistrict;
             this.lblDistrict.Text = "...";
-            this.lblDistrict.Click += this.lblEdit_Click;
-            this.lblDistrict.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblDistrict.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbDistrict
             // 
@@ -710,9 +689,6 @@
             this.lblRegion.TabIndex = 29;
             this.lblRegion.Tag = this.tbRegion;
             this.lblRegion.Text = "...";
-            this.lblRegion.Click += this.lblEdit_Click;
-            this.lblRegion.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblRegion.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbRegion
             // 
@@ -739,9 +715,6 @@
             this.lblCity.TabIndex = 29;
             this.lblCity.Tag = this.tbCity;
             this.lblCity.Text = "...";
-            this.lblCity.Click += this.lblEdit_Click;
-            this.lblCity.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblCity.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbCity
             // 
@@ -1450,6 +1423,7 @@
             this.ClientSize = new System.Drawing.Size(649, 604);
             this.Controls.Add(this.mainPanel);
             this.DoubleBuffered = true;
+            this.Icon = Properties.Resources._16;
             this.MinimumSize = new System.Drawing.Size(665, 400);
             this.Name = "StudentForm";
             this.Text = "Добавление анкеты студента";

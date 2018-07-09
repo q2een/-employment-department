@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    public partial class CompanyFrom : BaseCompanyForm, ICompany
+    public partial class CompanyForm : BaseCompanyForm, ICompany
     {
         #region ICompany implementation.
 
@@ -225,17 +225,17 @@ namespace EmploymentDepartment
         #endregion
 
         // Модальное окно для просмотра информации.
-        public CompanyFrom(MainMDIForm mainForm, ICompany company) : base(mainForm, company)
+        public CompanyForm(MainMDIForm mainForm, ICompany company) : base(mainForm, company)
         {
             InitializeComponent();
         }
 
-        public CompanyFrom(ActionType type, ICompany entity, IDataListView<ICompany> viewContext) : base(type, entity, viewContext)
+        public CompanyForm(ActionType type, ICompany entity, IDataListView<ICompany> viewContext) : base(type, entity, viewContext)
         {
             InitializeComponent();
         }
 
-        public CompanyFrom(ActionType type, ICompany company = null) :base(type,company)
+        public CompanyForm(ActionType type, ICompany company = null) :base(type,company)
         {
             InitializeComponent();
         }
@@ -271,6 +271,11 @@ namespace EmploymentDepartment
         }
 
         private void lblPhone_MouseLeave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbCity_Validating(object sender, CancelEventArgs e)
         {
 
         }

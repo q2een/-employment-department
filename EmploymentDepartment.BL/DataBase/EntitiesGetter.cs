@@ -134,6 +134,16 @@ namespace EmploymentDepartment.BL
             return GetEntities<Company>(Company);
         }
 
+        public List<StudentCompany> GetCompaniesByStudentID(int id)
+        {
+            return GetEntities<StudentCompany>(StudentCompany + $" WHERE s1.ID = {id}");
+        }
+
+        public List<StudentCompany> GetSudentsByCompanyID(int id)
+        {
+            return GetEntities<StudentCompany>(StudentCompany + $" WHERE v.Employer= {id}");
+        }
+
         public List<StudentCompany> GetStudentCompanies(string dbQuery)
         {
             return GetEntities<StudentCompany>(dbQuery);
@@ -142,6 +152,11 @@ namespace EmploymentDepartment.BL
         public List<StudentCompany> GetStudentCompanies()
         {
             return GetEntities<StudentCompany>(StudentCompany);
+        }
+
+        public List<Vacancy> GetVacanciesByCompanyID(int id)
+        {
+            return GetEntities<Vacancy>(Vacancy + $" WHERE c.ID = {id}");
         }
 
         public List<Vacancy> GetVacancies(string dbQuery)

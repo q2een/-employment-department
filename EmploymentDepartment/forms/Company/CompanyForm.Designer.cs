@@ -1,6 +1,6 @@
 ﻿namespace EmploymentDepartment
 {
-    partial class CompanyFrom
+    partial class CompanyForm
     {
         /// <summary>
         /// Required designer variable.
@@ -197,9 +197,6 @@
             this.lblNameOfStateDepartment.TabIndex = 30;
             this.lblNameOfStateDepartment.Tag = this.tbNameOfStateDepartment;
             this.lblNameOfStateDepartment.Text = "...";
-            this.lblNameOfStateDepartment.Click += this.lblEdit_Click;
-            this.lblNameOfStateDepartment.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblNameOfStateDepartment.MouseHover += this.lblEdit_MouseHover;
             // 
             // groupBox2
             // 
@@ -240,9 +237,6 @@
             this.lblAddress.TabIndex = 29;
             this.lblAddress.Tag = this.tbAddress;
             this.lblAddress.Text = "...";
-            this.lblAddress.Click += this.lblEdit_Click;
-            this.lblAddress.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblAddress.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbAddress
             // 
@@ -270,9 +264,6 @@
             this.lblDistrict.TabIndex = 29;
             this.lblDistrict.Tag = this.tbDistrict;
             this.lblDistrict.Text = "...";
-            this.lblDistrict.Click += this.lblEdit_Click;
-            this.lblDistrict.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblDistrict.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbDistrict
             // 
@@ -299,9 +290,6 @@
             this.lblRegion.TabIndex = 29;
             this.lblRegion.Tag = this.tbRegion;
             this.lblRegion.Text = "...";
-            this.lblRegion.Click += this.lblEdit_Click;
-            this.lblRegion.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblRegion.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbRegion
             // 
@@ -329,9 +317,6 @@
             this.lblCity.TabIndex = 29;
             this.lblCity.Tag = this.tbCity;
             this.lblCity.Text = "...";
-            this.lblCity.Click += this.lblEdit_Click;
-            this.lblCity.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblCity.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbCity
             // 
@@ -731,9 +716,6 @@
             this.lblPhone.TabIndex = 29;
             this.lblPhone.Tag = this.tbPhone;
             this.lblPhone.Text = "...";
-            this.lblPhone.Click += this.lblEdit_Click;
-            this.lblPhone.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblPhone.MouseHover += this.lblEdit_MouseHover;
             // 
             // tbPhone
             // 
@@ -817,9 +799,6 @@
             this.lblOrganizationName.TabIndex = 30;
             this.lblOrganizationName.Tag = this.tbOrganizationName;
             this.lblOrganizationName.Text = "...";
-            this.lblOrganizationName.Click += this.lblEdit_Click;
-            this.lblOrganizationName.MouseLeave += this.lblEdit_MouseLeave;
-            this.lblOrganizationName.MouseHover += this.lblEdit_MouseHover;
             // 
             // errorProvider
             // 
@@ -827,14 +806,15 @@
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
-            // CompanyFrom
+            // CompanyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(629, 536);
             this.Controls.Add(this.mainPanel);
+            this.Icon = Properties.Resources._16;
             this.MinimumSize = new System.Drawing.Size(645, 400);
-            this.Name = "CompanyFrom";
+            this.Name = "CompanyForm";
             this.Text = "Добавление предприятия";
             this.Load += new System.EventHandler(this.CompanyFrom_Load);
             this.SizeChanged += new System.EventHandler(this.CompanyFrom_SizeChanged);

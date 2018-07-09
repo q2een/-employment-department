@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
+    // TODO: create NoData image
     public partial class DataViewForm<T>: Form, IDataListView<T> where T:class,IIdentifiable
     {
         private MainMDIForm main;
         private DataTable dataTable = null;
         private DataSet dataSet = null;
-
         private readonly ILinkPickable selectParent;
         
         public DataViewForm(string text, ViewType type, List<T> data)
@@ -47,6 +47,13 @@ namespace EmploymentDepartment
 
         public IEnumerable<T> Data { get; set; }
         public ViewType Type { get; set; }
+        public BindingSource DataSource
+        {
+            get
+            {
+                return bindingSource;
+            }
+        }
 
         private void DataViewForm_Load(object sender, EventArgs e)
         {
@@ -105,7 +112,7 @@ namespace EmploymentDepartment
         }
 
         // TODO : GET ENTITY BY ID
-        private T GetSelectedEntity()
+        public T GetSelectedEntity()
         {
             int id;
 
@@ -165,11 +172,12 @@ namespace EmploymentDepartment
         private void mainDgv_DoubleClick(object sender, EventArgs e)
         {
             SetSelected();
-            new ExcelFile(dataTable, mainDgv.FilterString, mainDgv.SortString);
+            var excel = new ExcelFile(1);
+            excel.AddSheet(dataTable, this.Text, mainDgv.FilterString, mainDgv.SortString);
+            excel.Save(@"E:\file.xls");
+
         }
-
-
-
+              
         private void mainDgv_FilterStringChanged(object sender, EventArgs e)
         {
             bindingSource.Filter = mainDgv.FilterString;
