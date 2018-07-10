@@ -109,6 +109,7 @@
             this.tbCompanyNumber.Name = "tbCompanyNumber";
             this.tbCompanyNumber.Size = new System.Drawing.Size(398, 22);
             this.tbCompanyNumber.TabIndex = 1;
+            this.tbCompanyNumber.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label41
             // 
@@ -163,6 +164,7 @@
             this.tbOrganizationName.Name = "tbOrganizationName";
             this.tbOrganizationName.Size = new System.Drawing.Size(371, 22);
             this.tbOrganizationName.TabIndex = 2;
+            this.tbOrganizationName.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label4
             // 
@@ -197,6 +199,9 @@
             this.lblNameOfStateDepartment.TabIndex = 30;
             this.lblNameOfStateDepartment.Tag = this.tbNameOfStateDepartment;
             this.lblNameOfStateDepartment.Text = "...";
+            this.lblNameOfStateDepartment.Click += new System.EventHandler(this.lableEdit_Click);
+            this.lblNameOfStateDepartment.MouseLeave += new System.EventHandler(this.lableEdit_MouseLeave);
+            this.lblNameOfStateDepartment.MouseHover += new System.EventHandler(this.lableEdit_MouseHover);
             // 
             // groupBox2
             // 
@@ -237,6 +242,9 @@
             this.lblAddress.TabIndex = 29;
             this.lblAddress.Tag = this.tbAddress;
             this.lblAddress.Text = "...";
+            this.lblAddress.Click += new System.EventHandler(this.lableEdit_Click);
+            this.lblAddress.MouseLeave += new System.EventHandler(this.lableEdit_MouseLeave);
+            this.lblAddress.MouseHover += new System.EventHandler(this.lableEdit_MouseHover);
             // 
             // tbAddress
             // 
@@ -250,6 +258,7 @@
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(511, 22);
             this.tbAddress.TabIndex = 7;
+            this.tbAddress.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // lblDistrict
             // 
@@ -264,6 +273,9 @@
             this.lblDistrict.TabIndex = 29;
             this.lblDistrict.Tag = this.tbDistrict;
             this.lblDistrict.Text = "...";
+            this.lblDistrict.Click += new System.EventHandler(this.lableEdit_Click);
+            this.lblDistrict.MouseLeave += new System.EventHandler(this.lableEdit_MouseLeave);
+            this.lblDistrict.MouseHover += new System.EventHandler(this.lableEdit_MouseHover);
             // 
             // tbDistrict
             // 
@@ -290,6 +302,9 @@
             this.lblRegion.TabIndex = 29;
             this.lblRegion.Tag = this.tbRegion;
             this.lblRegion.Text = "...";
+            this.lblRegion.Click += new System.EventHandler(this.lableEdit_Click);
+            this.lblRegion.MouseLeave += new System.EventHandler(this.lableEdit_MouseLeave);
+            this.lblRegion.MouseHover += new System.EventHandler(this.lableEdit_MouseHover);
             // 
             // tbRegion
             // 
@@ -317,6 +332,9 @@
             this.lblCity.TabIndex = 29;
             this.lblCity.Tag = this.tbCity;
             this.lblCity.Text = "...";
+            this.lblCity.Click += new System.EventHandler(this.lableEdit_Click);
+            this.lblCity.MouseLeave += new System.EventHandler(this.lableEdit_MouseLeave);
+            this.lblCity.MouseHover += new System.EventHandler(this.lableEdit_MouseHover);
             // 
             // tbCity
             // 
@@ -330,6 +348,7 @@
             this.tbCity.Name = "tbCity";
             this.tbCity.Size = new System.Drawing.Size(511, 22);
             this.tbCity.TabIndex = 4;
+            this.tbCity.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label28
             // 
@@ -461,6 +480,7 @@
             this.tbName.Size = new System.Drawing.Size(210, 22);
             this.tbName.TabIndex = 9;
             this.tbName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
+            this.tbName.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // tbSurname
             // 
@@ -474,6 +494,7 @@
             this.tbSurname.Size = new System.Drawing.Size(210, 22);
             this.tbSurname.TabIndex = 8;
             this.tbSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
+            this.tbSurname.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label7
             // 
@@ -593,6 +614,7 @@
             this.tbContactName.Size = new System.Drawing.Size(209, 22);
             this.tbContactName.TabIndex = 13;
             this.tbContactName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
+            this.tbContactName.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label12
             // 
@@ -616,6 +638,7 @@
             this.tbContactSurname.Size = new System.Drawing.Size(209, 22);
             this.tbContactSurname.TabIndex = 12;
             this.tbContactSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSurname_KeyPress);
+            this.tbContactSurname.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // mainPanel
             // 
@@ -716,6 +739,9 @@
             this.lblPhone.TabIndex = 29;
             this.lblPhone.Tag = this.tbPhone;
             this.lblPhone.Text = "...";
+            this.lblPhone.Click += new System.EventHandler(this.lableEdit_Click);
+            this.lblPhone.MouseLeave += new System.EventHandler(this.lableEdit_MouseLeave);
+            this.lblPhone.MouseHover += new System.EventHandler(this.lableEdit_MouseHover);
             // 
             // tbPhone
             // 
@@ -728,6 +754,7 @@
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(203, 22);
             this.tbPhone.TabIndex = 15;
+            this.tbPhone.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTB_Validating);
             // 
             // label20
             // 
@@ -799,6 +826,9 @@
             this.lblOrganizationName.TabIndex = 30;
             this.lblOrganizationName.Tag = this.tbOrganizationName;
             this.lblOrganizationName.Text = "...";
+            this.lblOrganizationName.Click += new System.EventHandler(this.lableEdit_Click);
+            this.lblOrganizationName.MouseLeave += new System.EventHandler(this.lableEdit_MouseLeave);
+            this.lblOrganizationName.MouseHover += new System.EventHandler(this.lableEdit_MouseHover);
             // 
             // errorProvider
             // 
@@ -812,7 +842,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(629, 536);
             this.Controls.Add(this.mainPanel);
-            this.Icon = Properties.Resources._16;
+            this.Icon = global::EmploymentDepartment.Properties.Resources._16;
             this.MinimumSize = new System.Drawing.Size(645, 400);
             this.Name = "CompanyForm";
             this.Text = "Добавление предприятия";

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace EmploymentDepartment
@@ -16,7 +12,7 @@ namespace EmploymentDepartment
         public ExcelFile(int sheets)
         {
             ex = new Excel.Application();
-            ex.Visible = true;
+            ex.Visible = false;
             ex.DisplayAlerts = false;
 
             this.sheetsCount = sheets;
@@ -29,7 +25,7 @@ namespace EmploymentDepartment
         {
             //Получаем первый лист документа (счет начинается с 1)
             Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(1);
-            sheet.Name = sheetName;
+            sheet.Name = ValidateName(sheetName);
 
             for (int i = 1; i < table.Columns.Count + 1; i++)
             {
@@ -55,8 +51,26 @@ namespace EmploymentDepartment
         public void Save(string filename)
         {
             ex.Application.ActiveWorkbook.SaveAs(filename, Excel.XlFileFormat.xlWorkbookNormal);
+            workBook.Close();
+            ex.Quit();
         }
-        
+
+        // длина введенного имени не превышает 31 знака;
+        // имя не содержит ни одного из следующих знаков:  :  \  /  ?  *  [  или  ];
+        // имя не оставлено пустым.
+        private string ValidateName(string name)
+        {
+            if (string.IsNullOrEmpty(name.Trim()))
+                return "Новый лист";
+
+            name = name.Replace(":", "").Replace("\\", "").Replace("/", "").Replace("?", "").Replace("*", "").Replace("[", "").Replace("]", "");
+
+            if (name.Length > 31)
+                return name.Remove(30, name.Length - 30);
+
+            return name;
+        }
+
         private string GetExcelColumnNameByIndex(int index)
         {
             char c = 'A';

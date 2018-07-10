@@ -5,9 +5,9 @@ using System.Text;
 
 namespace EmploymentDepartment
 {
-    public interface IDataSourceView
+    enum UserRole
     {
-        System.Windows.Forms.BindingSource DataSource { get; }
-        void Export(string path);
+        Moderator,
+        Administrator
     }
 }

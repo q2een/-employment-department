@@ -260,24 +260,17 @@ namespace EmploymentDepartment
             mainPanel.Enabled = Type != ActionType.View;
         }
 
-        private void lblPhone_Click(object sender, EventArgs e)
-        {
+        #region Поведение кнопок "..." (Редакторовать)
+        protected void lableEdit_Click(object sender, EventArgs e) => this.lblEdit_Click(sender, e);
 
-        }
+        protected void lableEdit_MouseHover(object sender, EventArgs e) => this.lblEdit_MouseHover(sender, e);
 
-        private void lblPhone_MouseHover(object sender, EventArgs e)
-        {
+        protected void lableEdit_MouseLeave(object sender, EventArgs e) => this.lblEdit_MouseLeave(sender, e);
+        #endregion
 
-        }
+        // Валидация обязательного текстового поля.
+        private void RequiredTB_Validating(object sender, CancelEventArgs e) => this.RequiredTextBox_Validating(sender, e);
 
-        private void lblPhone_MouseLeave(object sender, EventArgs e)
-        {
 
-        }
-
-        private void tbCity_Validating(object sender, CancelEventArgs e)
-        {
-
-        }
     }
 }

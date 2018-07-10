@@ -61,8 +61,10 @@
     <Compile Include="DataViewForm.Designer.cs">
       <DependentUpon>DataViewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="enums\UserRole.cs" />
     <Compile Include="enums\ViewType.cs" />
-    <Compile Include="ExcelFile.cs" />
+    <Compile Include="export\WordFile.cs" />
+    <Compile Include="export\ExcelFile.cs" />
     <Compile Include="forms\Company\BaseCompanyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +106,12 @@
     <Compile Include="interfaces\IDataView.cs" />
     <Compile Include="interfaces\IEditable.cs" />
     <Compile Include="interfaces\ILinkPickable.cs" />
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="modalforms\Faculty\BaseFacultyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Vacancy\VacancyForm.resx">
       <DependentUpon>VacancyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="modalforms\EditModalForm.resx">
       <DependentUpon>EditModalForm.cs</DependentUpon>
@@ -239,6 +250,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="VBIDE">
       <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>5</VersionMajor>
@@ -254,7 +274,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="128.ico" />
-    <Content Include="64.ico" />
+    <None Include="Resources\logo.png" />
+    <None Include="Resources\vacancy.png" />
+    <None Include="Resources\studentcompany.png" />
+    <None Include="Resources\addfactory.png" />
+    <None Include="Resources\factory.png" />
+    <None Include="Resources\addstudent.png" />
+    <None Include="Resources\student.png" />
+    <None Include="Resources\view.png" />
+    <None Include="Resources\export.png" />
+    <None Include="Resources\settings.png" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\remove.png" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\edit.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\addvacancy.png" />
+    <None Include="Resources\no-data.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

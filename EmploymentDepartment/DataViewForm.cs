@@ -19,7 +19,7 @@ namespace EmploymentDepartment
         private DataSet dataSet = null;
         private readonly ILinkPickable selectParent;
         
-        public DataViewForm(string text, ViewType type, List<T> data)
+        public DataViewForm(string text, ViewType type, IEnumerable<T> data)
         {
             if (data == null)
                 throw new ArgumentNullException();
@@ -29,6 +29,12 @@ namespace EmploymentDepartment
             this.Type = type;
             this.Text = text;
 
+            if (data.Count() == 0)
+            {
+                noDataBox.Visible = true;
+                return;
+            }
+
             dataTable = new DataTable();
             dataSet = new DataSet();
 
@@ -37,15 +43,25 @@ namespace EmploymentDepartment
             mainDgv.DataSource = bindingSource;
 
             SetData();
+
+            mainDgv.DoubleBuffered(true);
+            mainDgv.StretchLastColumn();
         }
 
-        public DataViewForm(string text, List<T> data, MainMDIForm mainForm, ILinkPickable parent) :this(text,ViewType.Select,data)
+        public DataViewForm(string text, IEnumerable<T> data, MainMDIForm mainForm, ILinkPickable parent) :this(text,ViewType.Select,data)
         {
             this.selectParent = parent;
             this.main = mainForm;
         }
 
         public IEnumerable<T> Data { get; set; }
+        public int ItemsCount
+        {
+            get
+            {
+                return Data.Count();
+            }
+        }
         public ViewType Type { get; set; }
         public BindingSource DataSource
         {
@@ -59,9 +75,6 @@ namespace EmploymentDepartment
         {
             if (!(this.MdiParent is MainMDIForm) && main == null)
                 throw new ArgumentNullException();
-
-            mainDgv.DoubleBuffered(true);
-            mainDgv.StretchLastColumn();
 
             this.main = main == null ? this.MdiParent as MainMDIForm : main;
         }
@@ -122,6 +135,17 @@ namespace EmploymentDepartment
             return Data.FirstOrDefault(entity => entity.ID == id);
         }
 
+        public void Export(string path)
+        {
+            var dt = dataTable.Copy();
+            dt.PrimaryKey = null;
+            dt.Columns.Remove("ID");
+
+            var excel = new ExcelFile(1);
+            excel.AddSheet(dt, this.Text, mainDgv.FilterString, mainDgv.SortString);
+            excel.Save(path);
+        }
+
         private void ShowOperationForm(ActionType type)
         { 
             main.ShowFormByType(type, GetSelectedEntity(), this);
@@ -172,10 +196,6 @@ namespace EmploymentDepartment
         private void mainDgv_DoubleClick(object sender, EventArgs e)
         {
             SetSelected();
-            var excel = new ExcelFile(1);
-            excel.AddSheet(dataTable, this.Text, mainDgv.FilterString, mainDgv.SortString);
-            excel.Save(@"E:\file.xls");
-
         }
               
         private void mainDgv_FilterStringChanged(object sender, EventArgs e)

@@ -48,7 +48,7 @@ namespace EmploymentDepartment
             {
                 return linkStudent.Tag as IStudent;
             }
-            private set
+            set
             {                   
                 linkStudent.Tag = value;
                 string text = value == null ? "Выбрать студента ..." : $"{value.Surname} {value.Name} {value.Patronymic}";
@@ -64,8 +64,11 @@ namespace EmploymentDepartment
             {
                 return linkVacancy.Tag as IVacancy;
             }
-            private set
+            set
             {
+                if(value != null)
+                    cbUnivercityEmployment.Checked = true;
+
                 linkVacancy.Tag = value;
                 string text = value == null ? "Выбрать вакансию ..." : $"Вакансия №{value.VacancyNumber}";
                 linkVacancy.Text = Extentions.ShortenString(text, vacancyPanel.Width - linkVacancyClear.Width - 90, linkVacancy.Font);

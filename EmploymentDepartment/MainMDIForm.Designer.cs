@@ -34,10 +34,15 @@ namespace EmploymentDepartment
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMDIForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportMI = new System.Windows.Forms.ToolStripMenuItem();
             this.exortDataMI = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.showStudentCompaniesMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.showVacanciesByCompanyMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.showStudentsByCompanyMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.entityTempItemsSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.dataStudentsMI = new System.Windows.Forms.ToolStripMenuItem();
             this.dataCompaniesMI = new System.Windows.Forms.ToolStripMenuItem();
             this.dataVacanciesMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +63,12 @@ namespace EmploymentDepartment
             this.entityInserMI = new System.Windows.Forms.ToolStripMenuItem();
             this.entityEditMI = new System.Windows.Forms.ToolStripMenuItem();
             this.entityEditSeparatorMI = new System.Windows.Forms.ToolStripSeparator();
+            this.saveMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveSeparatorMI = new System.Windows.Forms.ToolStripSeparator();
+            this.setDefaultValueMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.setDefaultValueSeparatorMI = new System.Windows.Forms.ToolStripSeparator();
             this.entityRemoveMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.отчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,35 +84,31 @@ namespace EmploymentDepartment
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolStrip = new System.Windows.Forms.BindingNavigator(this.components);
-            this.tsMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.tsMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.tsCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.tsMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.tsMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.tsSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.tsPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.tsCountItem = new System.Windows.Forms.ToolStripLabel();
             this.tsSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.tsMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.tsEditItem = new System.Windows.Forms.ToolStripButton();
-            this.tsNavigationSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.tsAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.tsDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.tsMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.tsMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.tsDataStudents = new System.Windows.Forms.ToolStripButton();
+            this.tsDataCompanies = new System.Windows.Forms.ToolStripButton();
+            this.tsDataVacancies = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsAddStudent = new System.Windows.Forms.ToolStripButton();
+            this.tsAddStudentCompany = new System.Windows.Forms.ToolStripButton();
+            this.tsAddCompany = new System.Windows.Forms.ToolStripButton();
+            this.tsAddVacancy = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsViewItem = new System.Windows.Forms.ToolStripButton();
-            this.tsSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsShowStudentCompanies = new System.Windows.Forms.ToolStripButton();
-            this.tsShowVacanciesByCompany = new System.Windows.Forms.ToolStripButton();
-            this.tsShowStudentsByCompany = new System.Windows.Forms.ToolStripButton();
             this.tsViewItemSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.entityTempItemsSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.showStudentCompaniesMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.showVacanciesByCompanyMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.showStudentsByCompanyMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.setDefaultValueSeparatorMI = new System.Windows.Forms.ToolStripSeparator();
-            this.setDefaultValueMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveSeparatorMI = new System.Windows.Forms.ToolStripSeparator();
-            this.saveMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsSetDefaultValues = new System.Windows.Forms.ToolStripButton();
+            this.tsAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.tsEditItem = new System.Windows.Forms.ToolStripButton();
             this.tsSaveChanges = new System.Windows.Forms.ToolStripButton();
-            this.exportMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.tsNavigationSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStrip)).BeginInit();
@@ -116,6 +122,7 @@ namespace EmploymentDepartment
             this.dataMI,
             this.addMI,
             this.editMI,
+            this.отчетToolStripMenuItem,
             this.windowsMenu,
             this.helpMenu,
             this.toolsMenu});
@@ -138,8 +145,17 @@ namespace EmploymentDepartment
             this.fileMenu.Size = new System.Drawing.Size(48, 20);
             this.fileMenu.Text = "&Файл";
             // 
+            // exportMI
+            // 
+            this.exportMI.Name = "exportMI";
+            this.exportMI.Size = new System.Drawing.Size(162, 22);
+            this.exportMI.Text = "Экспорт";
+            this.exportMI.Visible = false;
+            this.exportMI.Click += new System.EventHandler(this.exportMI_Click);
+            // 
             // exortDataMI
             // 
+            this.exortDataMI.Image = global::EmploymentDepartment.Properties.Resources.export;
             this.exortDataMI.Name = "exortDataMI";
             this.exortDataMI.Size = new System.Drawing.Size(162, 22);
             this.exortDataMI.Text = "Экспорт данных";
@@ -152,6 +168,7 @@ namespace EmploymentDepartment
             // 
             // exitToolStripMenuItem
             // 
+            this.exitToolStripMenuItem.Image = global::EmploymentDepartment.Properties.Resources.exit;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.exitToolStripMenuItem.Text = "В&ыход";
@@ -160,6 +177,10 @@ namespace EmploymentDepartment
             // dataMI
             // 
             this.dataMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showStudentCompaniesMI,
+            this.showVacanciesByCompanyMI,
+            this.showStudentsByCompanyMI,
+            this.entityTempItemsSeparator,
             this.dataStudentsMI,
             this.dataCompaniesMI,
             this.dataVacanciesMI,
@@ -169,31 +190,64 @@ namespace EmploymentDepartment
             this.dataMI.Size = new System.Drawing.Size(62, 20);
             this.dataMI.Text = "Данные";
             // 
+            // showStudentCompaniesMI
+            // 
+            this.showStudentCompaniesMI.Name = "showStudentCompaniesMI";
+            this.showStudentCompaniesMI.Size = new System.Drawing.Size(217, 22);
+            this.showStudentCompaniesMI.Text = "Места работы студента";
+            this.showStudentCompaniesMI.Visible = false;
+            this.showStudentCompaniesMI.Click += new System.EventHandler(this.tsShowStudentCompanies_Click);
+            // 
+            // showVacanciesByCompanyMI
+            // 
+            this.showVacanciesByCompanyMI.Name = "showVacanciesByCompanyMI";
+            this.showVacanciesByCompanyMI.Size = new System.Drawing.Size(217, 22);
+            this.showVacanciesByCompanyMI.Text = "Вакансии на предприятии";
+            this.showVacanciesByCompanyMI.Visible = false;
+            this.showVacanciesByCompanyMI.Click += new System.EventHandler(this.tsShowVacanciesByCompany_Click);
+            // 
+            // showStudentsByCompanyMI
+            // 
+            this.showStudentsByCompanyMI.Name = "showStudentsByCompanyMI";
+            this.showStudentsByCompanyMI.Size = new System.Drawing.Size(217, 22);
+            this.showStudentsByCompanyMI.Text = "Студенты на предприятии";
+            this.showStudentsByCompanyMI.Visible = false;
+            this.showStudentsByCompanyMI.Click += new System.EventHandler(this.tsShowStudentsByCompany_Click);
+            // 
+            // entityTempItemsSeparator
+            // 
+            this.entityTempItemsSeparator.Name = "entityTempItemsSeparator";
+            this.entityTempItemsSeparator.Size = new System.Drawing.Size(214, 6);
+            this.entityTempItemsSeparator.Visible = false;
+            // 
             // dataStudentsMI
             // 
+            this.dataStudentsMI.Image = global::EmploymentDepartment.Properties.Resources.student;
             this.dataStudentsMI.Name = "dataStudentsMI";
-            this.dataStudentsMI.Size = new System.Drawing.Size(152, 22);
+            this.dataStudentsMI.Size = new System.Drawing.Size(217, 22);
             this.dataStudentsMI.Text = "Студенты";
             this.dataStudentsMI.Click += new System.EventHandler(this.dataStudentsMI_Click);
             // 
             // dataCompaniesMI
             // 
+            this.dataCompaniesMI.Image = global::EmploymentDepartment.Properties.Resources.factory;
             this.dataCompaniesMI.Name = "dataCompaniesMI";
-            this.dataCompaniesMI.Size = new System.Drawing.Size(152, 22);
+            this.dataCompaniesMI.Size = new System.Drawing.Size(217, 22);
             this.dataCompaniesMI.Text = "Предприятия";
             this.dataCompaniesMI.Click += new System.EventHandler(this.dataCompaniesMI_Click);
             // 
             // dataVacanciesMI
             // 
+            this.dataVacanciesMI.Image = ((System.Drawing.Image)(resources.GetObject("dataVacanciesMI.Image")));
             this.dataVacanciesMI.Name = "dataVacanciesMI";
-            this.dataVacanciesMI.Size = new System.Drawing.Size(152, 22);
+            this.dataVacanciesMI.Size = new System.Drawing.Size(217, 22);
             this.dataVacanciesMI.Text = "Вакансии";
             this.dataVacanciesMI.Click += new System.EventHandler(this.dataVacanciesMI_Click);
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(214, 6);
             // 
             // dataSpecialMI
             // 
@@ -202,7 +256,7 @@ namespace EmploymentDepartment
             this.dataSpecializationsMI,
             this.dataPreferentialCategoriesMI});
             this.dataSpecialMI.Name = "dataSpecialMI";
-            this.dataSpecialMI.Size = new System.Drawing.Size(152, 22);
+            this.dataSpecialMI.Size = new System.Drawing.Size(217, 22);
             this.dataSpecialMI.Text = "Служебные";
             // 
             // dataFacultiesMI
@@ -240,13 +294,15 @@ namespace EmploymentDepartment
             // 
             // addStudentMI
             // 
+            this.addStudentMI.Image = global::EmploymentDepartment.Properties.Resources.addstudent;
             this.addStudentMI.Name = "addStudentMI";
             this.addStudentMI.Size = new System.Drawing.Size(203, 22);
-            this.addStudentMI.Text = "Студент";
+            this.addStudentMI.Text = "Анкета студента";
             this.addStudentMI.Click += new System.EventHandler(this.addStudentMI_Click);
             // 
             // addStudentCompanyMI
             // 
+            this.addStudentCompanyMI.Image = global::EmploymentDepartment.Properties.Resources.studentcompany;
             this.addStudentCompanyMI.Name = "addStudentCompanyMI";
             this.addStudentCompanyMI.Size = new System.Drawing.Size(203, 22);
             this.addStudentCompanyMI.Text = "Место работы студента";
@@ -259,6 +315,7 @@ namespace EmploymentDepartment
             // 
             // addCompanyMI
             // 
+            this.addCompanyMI.Image = global::EmploymentDepartment.Properties.Resources.addfactory;
             this.addCompanyMI.Name = "addCompanyMI";
             this.addCompanyMI.Size = new System.Drawing.Size(203, 22);
             this.addCompanyMI.Text = "Предприятие";
@@ -266,6 +323,7 @@ namespace EmploymentDepartment
             // 
             // addVacancyMI
             // 
+            this.addVacancyMI.Image = global::EmploymentDepartment.Properties.Resources.addvacancy;
             this.addVacancyMI.Name = "addVacancyMI";
             this.addVacancyMI.Size = new System.Drawing.Size(203, 22);
             this.addVacancyMI.Text = "Вакансия";
@@ -283,11 +341,7 @@ namespace EmploymentDepartment
             this.saveSeparatorMI,
             this.setDefaultValueMI,
             this.setDefaultValueSeparatorMI,
-            this.entityRemoveMI,
-            this.entityTempItemsSeparator,
-            this.showStudentCompaniesMI,
-            this.showVacanciesByCompanyMI,
-            this.showStudentsByCompanyMI});
+            this.entityRemoveMI});
             this.editMI.Name = "editMI";
             this.editMI.Size = new System.Drawing.Size(59, 20);
             this.editMI.Text = "Правка";
@@ -295,6 +349,7 @@ namespace EmploymentDepartment
             // 
             // entityViewMI
             // 
+            this.entityViewMI.Image = global::EmploymentDepartment.Properties.Resources.view;
             this.entityViewMI.Name = "entityViewMI";
             this.entityViewMI.ShortcutKeyDisplayString = "Space";
             this.entityViewMI.Size = new System.Drawing.Size(244, 22);
@@ -308,6 +363,7 @@ namespace EmploymentDepartment
             // 
             // entityInserMI
             // 
+            this.entityInserMI.Image = global::EmploymentDepartment.Properties.Resources.add;
             this.entityInserMI.Name = "entityInserMI";
             this.entityInserMI.ShortcutKeyDisplayString = "Insert";
             this.entityInserMI.Size = new System.Drawing.Size(244, 22);
@@ -316,6 +372,7 @@ namespace EmploymentDepartment
             // 
             // entityEditMI
             // 
+            this.entityEditMI.Image = global::EmploymentDepartment.Properties.Resources.edit;
             this.entityEditMI.Name = "entityEditMI";
             this.entityEditMI.ShortcutKeyDisplayString = "F2";
             this.entityEditMI.Size = new System.Drawing.Size(244, 22);
@@ -327,13 +384,46 @@ namespace EmploymentDepartment
             this.entityEditSeparatorMI.Name = "entityEditSeparatorMI";
             this.entityEditSeparatorMI.Size = new System.Drawing.Size(241, 6);
             // 
+            // saveMI
+            // 
+            this.saveMI.Image = global::EmploymentDepartment.Properties.Resources.save;
+            this.saveMI.Name = "saveMI";
+            this.saveMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveMI.Size = new System.Drawing.Size(244, 22);
+            this.saveMI.Text = "Сохранить";
+            this.saveMI.Click += new System.EventHandler(this.saveMI_Click);
+            // 
+            // saveSeparatorMI
+            // 
+            this.saveSeparatorMI.Name = "saveSeparatorMI";
+            this.saveSeparatorMI.Size = new System.Drawing.Size(241, 6);
+            // 
+            // setDefaultValueMI
+            // 
+            this.setDefaultValueMI.Name = "setDefaultValueMI";
+            this.setDefaultValueMI.Size = new System.Drawing.Size(244, 22);
+            this.setDefaultValueMI.Text = "Установить исходное значение";
+            this.setDefaultValueMI.Click += new System.EventHandler(this.setDefaultValueMI_Click);
+            // 
+            // setDefaultValueSeparatorMI
+            // 
+            this.setDefaultValueSeparatorMI.Name = "setDefaultValueSeparatorMI";
+            this.setDefaultValueSeparatorMI.Size = new System.Drawing.Size(241, 6);
+            // 
             // entityRemoveMI
             // 
+            this.entityRemoveMI.Image = global::EmploymentDepartment.Properties.Resources.remove;
             this.entityRemoveMI.Name = "entityRemoveMI";
             this.entityRemoveMI.ShortcutKeyDisplayString = "Ctrl + Del";
             this.entityRemoveMI.Size = new System.Drawing.Size(244, 22);
             this.entityRemoveMI.Text = "Удалить";
             this.entityRemoveMI.Click += new System.EventHandler(this.entityRemoveMI_Click);
+            // 
+            // отчетToolStripMenuItem
+            // 
+            this.отчетToolStripMenuItem.Name = "отчетToolStripMenuItem";
+            this.отчетToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.отчетToolStripMenuItem.Text = "Отчет";
             // 
             // windowsMenu
             // 
@@ -413,8 +503,9 @@ namespace EmploymentDepartment
             // 
             // optionsToolStripMenuItem
             // 
+            this.optionsToolStripMenuItem.Image = global::EmploymentDepartment.Properties.Resources.settings;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.optionsToolStripMenuItem.Text = "&Параметры";
             // 
             // statusStrip
@@ -449,18 +540,22 @@ namespace EmploymentDepartment
             this.tsSeparator1,
             this.tsMovePreviousItem,
             this.tsMoveFirstItem,
+            this.tsDataStudents,
+            this.tsDataCompanies,
+            this.tsDataVacancies,
+            this.toolStripSeparator1,
+            this.tsAddStudent,
+            this.tsAddStudentCompany,
+            this.tsAddCompany,
+            this.tsAddVacancy,
+            this.toolStripSeparator2,
             this.tsViewItem,
             this.tsViewItemSeparator,
             this.tsAddNewItem,
             this.tsEditItem,
             this.tsSaveChanges,
-            this.tsSetDefaultValues,
             this.tsDeleteItem,
-            this.tsNavigationSeparator,
-            this.tsShowStudentCompanies,
-            this.tsShowVacanciesByCompany,
-            this.tsShowStudentsByCompany,
-            this.tsSeparator3});
+            this.tsNavigationSeparator});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.MoveFirstItem = this.tsMoveFirstItem;
             this.toolStrip.MoveLastItem = this.tsMoveLastItem;
@@ -471,32 +566,41 @@ namespace EmploymentDepartment
             this.toolStrip.Size = new System.Drawing.Size(1076, 25);
             this.toolStrip.TabIndex = 4;
             // 
-            // tsMoveFirstItem
+            // tsCountItem
             // 
-            this.tsMoveFirstItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("tsMoveFirstItem.Image")));
-            this.tsMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.tsMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.tsMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.tsMoveFirstItem.Text = "Переместить в начало";
-            this.tsMoveFirstItem.Visible = false;
+            this.tsCountItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsCountItem.Name = "tsCountItem";
+            this.tsCountItem.Size = new System.Drawing.Size(36, 22);
+            this.tsCountItem.Text = "из {0}";
+            this.tsCountItem.ToolTipText = "Общее число элементов";
+            this.tsCountItem.Visible = false;
             // 
-            // tsMovePreviousItem
+            // tsMoveLastItem
             // 
-            this.tsMovePreviousItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("tsMovePreviousItem.Image")));
-            this.tsMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.tsMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.tsMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.tsMovePreviousItem.Text = "Переместить назад";
-            this.tsMovePreviousItem.Visible = false;
+            this.tsMoveLastItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("tsMoveLastItem.Image")));
+            this.tsMoveLastItem.Name = "tsMoveLastItem";
+            this.tsMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.tsMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.tsMoveLastItem.Text = "Переместить в конец";
+            this.tsMoveLastItem.Visible = false;
+            // 
+            // tsMoveNextItem
+            // 
+            this.tsMoveNextItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("tsMoveNextItem.Image")));
+            this.tsMoveNextItem.Name = "tsMoveNextItem";
+            this.tsMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.tsMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.tsMoveNextItem.Text = "Переместить вперед";
+            this.tsMoveNextItem.Visible = false;
             // 
             // tsSeparator
             // 
             this.tsSeparator.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsSeparator.Name = "bindingNavigatorSeparator";
+            this.tsSeparator.Name = "tsSeparator";
             this.tsSeparator.Size = new System.Drawing.Size(6, 25);
             this.tsSeparator.Visible = false;
             // 
@@ -505,94 +609,126 @@ namespace EmploymentDepartment
             this.tsPositionItem.AccessibleName = "Положение";
             this.tsPositionItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsPositionItem.AutoSize = false;
-            this.tsPositionItem.Name = "bindingNavigatorPositionItem";
+            this.tsPositionItem.Name = "tsPositionItem";
             this.tsPositionItem.Size = new System.Drawing.Size(50, 23);
             this.tsPositionItem.Text = "0";
             this.tsPositionItem.ToolTipText = "Текущее положение";
             this.tsPositionItem.Visible = false;
             this.tsPositionItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tsPositionItem_KeyPress);
             // 
-            // tsCountItem
-            // 
-            this.tsCountItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsCountItem.Name = "bindingNavigatorCountItem";
-            this.tsCountItem.Size = new System.Drawing.Size(36, 22);
-            this.tsCountItem.Text = "из {0}";
-            this.tsCountItem.ToolTipText = "Общее число элементов";
-            this.tsCountItem.Visible = false;
-            // 
             // tsSeparator1
             // 
             this.tsSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsSeparator1.Name = "bindingNavigatorSeparator";
+            this.tsSeparator1.Name = "tsSeparator1";
             this.tsSeparator1.Size = new System.Drawing.Size(6, 25);
             this.tsSeparator1.Visible = false;
             // 
-            // tsMoveNextItem
+            // tsMovePreviousItem
             // 
-            this.tsMoveNextItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("tsMoveNextItem.Image")));
-            this.tsMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.tsMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.tsMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.tsMoveNextItem.Text = "Переместить вперед";
-            this.tsMoveNextItem.Visible = false;
+            this.tsMovePreviousItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("tsMovePreviousItem.Image")));
+            this.tsMovePreviousItem.Name = "tsMovePreviousItem";
+            this.tsMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.tsMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.tsMovePreviousItem.Text = "Переместить назад";
+            this.tsMovePreviousItem.Visible = false;
             // 
-            // tsMoveLastItem
+            // tsMoveFirstItem
             // 
-            this.tsMoveLastItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("tsMoveLastItem.Image")));
-            this.tsMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.tsMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.tsMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.tsMoveLastItem.Text = "Переместить в конец";
-            this.tsMoveLastItem.Visible = false;
+            this.tsMoveFirstItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("tsMoveFirstItem.Image")));
+            this.tsMoveFirstItem.Name = "tsMoveFirstItem";
+            this.tsMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.tsMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.tsMoveFirstItem.Text = "Переместить в начало";
+            this.tsMoveFirstItem.Visible = false;
             // 
-            // tsEditItem
+            // tsDataStudents
             // 
-            this.tsEditItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsEditItem.Image = ((System.Drawing.Image)(resources.GetObject("tsEditItem.Image")));
-            this.tsEditItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsEditItem.Name = "tsEditItem";
-            this.tsEditItem.Size = new System.Drawing.Size(23, 22);
-            this.tsEditItem.Text = "Редактировать";
-            this.tsEditItem.Visible = false;
-            this.tsEditItem.Click += new System.EventHandler(this.entityEditMI_Click);
+            this.tsDataStudents.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsDataStudents.Image = global::EmploymentDepartment.Properties.Resources.student;
+            this.tsDataStudents.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsDataStudents.Name = "tsDataStudents";
+            this.tsDataStudents.Size = new System.Drawing.Size(23, 22);
+            this.tsDataStudents.Text = "Показать студентов";
+            this.tsDataStudents.Click += new System.EventHandler(this.dataStudentsMI_Click);
             // 
-            // tsNavigationSeparator
+            // tsDataCompanies
             // 
-            this.tsNavigationSeparator.Name = "tsNavigationSeparator";
-            this.tsNavigationSeparator.Size = new System.Drawing.Size(6, 25);
-            this.tsNavigationSeparator.Visible = false;
+            this.tsDataCompanies.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsDataCompanies.Image = global::EmploymentDepartment.Properties.Resources.factory;
+            this.tsDataCompanies.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsDataCompanies.Name = "tsDataCompanies";
+            this.tsDataCompanies.Size = new System.Drawing.Size(23, 22);
+            this.tsDataCompanies.Text = "Показать предприятия";
+            this.tsDataCompanies.Click += new System.EventHandler(this.dataCompaniesMI_Click);
             // 
-            // tsAddNewItem
+            // tsDataVacancies
             // 
-            this.tsAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("tsAddNewItem.Image")));
-            this.tsAddNewItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsAddNewItem.Name = "tsAddNewItem";
-            this.tsAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.tsAddNewItem.Text = "Добавить";
-            this.tsAddNewItem.Visible = false;
-            this.tsAddNewItem.Click += new System.EventHandler(this.entityInserMI_Click);
+            this.tsDataVacancies.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsDataVacancies.Image = ((System.Drawing.Image)(resources.GetObject("tsDataVacancies.Image")));
+            this.tsDataVacancies.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsDataVacancies.Name = "tsDataVacancies";
+            this.tsDataVacancies.Size = new System.Drawing.Size(23, 22);
+            this.tsDataVacancies.Text = "Показать вакансии";
+            this.tsDataVacancies.Click += new System.EventHandler(this.dataVacanciesMI_Click);
             // 
-            // tsDeleteItem
+            // toolStripSeparator1
             // 
-            this.tsDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("tsDeleteItem.Image")));
-            this.tsDeleteItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsDeleteItem.Name = "tsDeleteItem";
-            this.tsDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.tsDeleteItem.Text = "Удалить";
-            this.tsDeleteItem.Visible = false;
-            this.tsDeleteItem.Click += new System.EventHandler(this.entityRemoveMI_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsAddStudent
+            // 
+            this.tsAddStudent.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsAddStudent.Image = global::EmploymentDepartment.Properties.Resources.addstudent;
+            this.tsAddStudent.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsAddStudent.Name = "tsAddStudent";
+            this.tsAddStudent.Size = new System.Drawing.Size(23, 22);
+            this.tsAddStudent.Text = "Добавить анкету студента";
+            this.tsAddStudent.Click += new System.EventHandler(this.addStudentMI_Click);
+            // 
+            // tsAddStudentCompany
+            // 
+            this.tsAddStudentCompany.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsAddStudentCompany.Image = global::EmploymentDepartment.Properties.Resources.studentcompany;
+            this.tsAddStudentCompany.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsAddStudentCompany.Name = "tsAddStudentCompany";
+            this.tsAddStudentCompany.Size = new System.Drawing.Size(23, 22);
+            this.tsAddStudentCompany.Text = "Добавить место работы студента";
+            this.tsAddStudentCompany.Click += new System.EventHandler(this.addStudentCompanyMI_Click);
+            // 
+            // tsAddCompany
+            // 
+            this.tsAddCompany.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsAddCompany.Image = global::EmploymentDepartment.Properties.Resources.addfactory;
+            this.tsAddCompany.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsAddCompany.Name = "tsAddCompany";
+            this.tsAddCompany.Size = new System.Drawing.Size(23, 22);
+            this.tsAddCompany.Text = "Добавить предприятие";
+            this.tsAddCompany.Click += new System.EventHandler(this.addCompanyMI_Click);
+            // 
+            // tsAddVacancy
+            // 
+            this.tsAddVacancy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsAddVacancy.Image = global::EmploymentDepartment.Properties.Resources.addvacancy;
+            this.tsAddVacancy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsAddVacancy.Name = "tsAddVacancy";
+            this.tsAddVacancy.Size = new System.Drawing.Size(23, 22);
+            this.tsAddVacancy.Text = "Добавить вакансию";
+            this.tsAddVacancy.Click += new System.EventHandler(this.addVacancyMI_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // tsViewItem
             // 
             this.tsViewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsViewItem.Image = ((System.Drawing.Image)(resources.GetObject("tsViewItem.Image")));
+            this.tsViewItem.Image = global::EmploymentDepartment.Properties.Resources.view;
             this.tsViewItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsViewItem.Name = "tsViewItem";
             this.tsViewItem.Size = new System.Drawing.Size(23, 22);
@@ -600,127 +736,66 @@ namespace EmploymentDepartment
             this.tsViewItem.Visible = false;
             this.tsViewItem.Click += new System.EventHandler(this.entityViewMI_Click);
             // 
-            // tsSeparator3
-            // 
-            this.tsSeparator3.Name = "tsSeparator3";
-            this.tsSeparator3.Size = new System.Drawing.Size(6, 25);
-            this.tsSeparator3.Visible = false;
-            // 
-            // tsShowStudentCompanies
-            // 
-            this.tsShowStudentCompanies.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsShowStudentCompanies.Image = ((System.Drawing.Image)(resources.GetObject("tsShowStudentCompanies.Image")));
-            this.tsShowStudentCompanies.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsShowStudentCompanies.Name = "tsShowStudentCompanies";
-            this.tsShowStudentCompanies.Size = new System.Drawing.Size(23, 22);
-            this.tsShowStudentCompanies.Text = "Показать места работы студента";
-            this.tsShowStudentCompanies.Visible = false;
-            this.tsShowStudentCompanies.Click += new System.EventHandler(this.tsShowStudentCompanies_Click);
-            // 
-            // tsShowVacanciesByCompany
-            // 
-            this.tsShowVacanciesByCompany.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsShowVacanciesByCompany.Image = ((System.Drawing.Image)(resources.GetObject("tsShowVacanciesByCompany.Image")));
-            this.tsShowVacanciesByCompany.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsShowVacanciesByCompany.Name = "tsShowVacanciesByCompany";
-            this.tsShowVacanciesByCompany.Size = new System.Drawing.Size(23, 22);
-            this.tsShowVacanciesByCompany.Text = "Показать вакансии предприятия";
-            this.tsShowVacanciesByCompany.Visible = false;
-            this.tsShowVacanciesByCompany.Click += new System.EventHandler(this.tsShowVacanciesByCompany_Click);
-            // 
-            // tsShowStudentsByCompany
-            // 
-            this.tsShowStudentsByCompany.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsShowStudentsByCompany.Image = ((System.Drawing.Image)(resources.GetObject("tsShowStudentsByCompany.Image")));
-            this.tsShowStudentsByCompany.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsShowStudentsByCompany.Name = "tsShowStudentsByCompany";
-            this.tsShowStudentsByCompany.Size = new System.Drawing.Size(23, 22);
-            this.tsShowStudentsByCompany.Text = "Показать студентов, работающих на предприятии";
-            this.tsShowStudentsByCompany.Visible = false;
-            this.tsShowStudentsByCompany.Click += new System.EventHandler(this.tsShowStudentsByCompany_Click);
-            // 
             // tsViewItemSeparator
             // 
             this.tsViewItemSeparator.Name = "tsViewItemSeparator";
             this.tsViewItemSeparator.Size = new System.Drawing.Size(6, 25);
             this.tsViewItemSeparator.Visible = false;
             // 
-            // entityTempItemsSeparator
+            // tsAddNewItem
             // 
-            this.entityTempItemsSeparator.Name = "entityTempItemsSeparator";
-            this.entityTempItemsSeparator.Size = new System.Drawing.Size(241, 6);
+            this.tsAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsAddNewItem.Image = global::EmploymentDepartment.Properties.Resources.add;
+            this.tsAddNewItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsAddNewItem.Name = "tsAddNewItem";
+            this.tsAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.tsAddNewItem.Text = "Добавить";
+            this.tsAddNewItem.Visible = false;
+            this.tsAddNewItem.Click += new System.EventHandler(this.entityInserMI_Click);
             // 
-            // showStudentCompaniesMI
+            // tsEditItem
             // 
-            this.showStudentCompaniesMI.Name = "showStudentCompaniesMI";
-            this.showStudentCompaniesMI.Size = new System.Drawing.Size(244, 22);
-            this.showStudentCompaniesMI.Text = "Места работы студента";
-            this.showStudentCompaniesMI.Click += new System.EventHandler(this.tsShowStudentCompanies_Click);
-            // 
-            // showVacanciesByCompanyMI
-            // 
-            this.showVacanciesByCompanyMI.Name = "showVacanciesByCompanyMI";
-            this.showVacanciesByCompanyMI.Size = new System.Drawing.Size(244, 22);
-            this.showVacanciesByCompanyMI.Text = "Вакансии на предприятии";
-            this.showVacanciesByCompanyMI.Click += new System.EventHandler(this.tsShowVacanciesByCompany_Click);
-            // 
-            // showStudentsByCompanyMI
-            // 
-            this.showStudentsByCompanyMI.Name = "showStudentsByCompanyMI";
-            this.showStudentsByCompanyMI.Size = new System.Drawing.Size(244, 22);
-            this.showStudentsByCompanyMI.Text = "Студенты на предприятии";
-            this.showStudentsByCompanyMI.Click += new System.EventHandler(this.tsShowStudentsByCompany_Click);
-            // 
-            // setDefaultValueSeparatorMI
-            // 
-            this.setDefaultValueSeparatorMI.Name = "setDefaultValueSeparatorMI";
-            this.setDefaultValueSeparatorMI.Size = new System.Drawing.Size(241, 6);
-            // 
-            // setDefaultValueMI
-            // 
-            this.setDefaultValueMI.Name = "setDefaultValueMI";
-            this.setDefaultValueMI.Size = new System.Drawing.Size(244, 22);
-            this.setDefaultValueMI.Text = "Установить исходное значение";
-            this.setDefaultValueMI.Click += new System.EventHandler(this.setDefaultValueMI_Click);
-            // 
-            // saveSeparatorMI
-            // 
-            this.saveSeparatorMI.Name = "saveSeparatorMI";
-            this.saveSeparatorMI.Size = new System.Drawing.Size(241, 6);
-            // 
-            // saveMI
-            // 
-            this.saveMI.Name = "saveMI";
-            this.saveMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveMI.Size = new System.Drawing.Size(244, 22);
-            this.saveMI.Text = "Сохранить";
-            this.saveMI.Click += new System.EventHandler(this.saveMI_Click);
-            // 
-            // tsSetDefaultValues
-            // 
-            this.tsSetDefaultValues.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsSetDefaultValues.Image = ((System.Drawing.Image)(resources.GetObject("tsSetDefaultValues.Image")));
-            this.tsSetDefaultValues.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsSetDefaultValues.Name = "tsSetDefaultValues";
-            this.tsSetDefaultValues.Size = new System.Drawing.Size(23, 22);
-            this.tsSetDefaultValues.Text = "Установить исходные значения";
-            this.tsSetDefaultValues.Visible = false;
+            this.tsEditItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsEditItem.Image = global::EmploymentDepartment.Properties.Resources.edit;
+            this.tsEditItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsEditItem.Name = "tsEditItem";
+            this.tsEditItem.Size = new System.Drawing.Size(23, 22);
+            this.tsEditItem.Text = "Редактировать";
+            this.tsEditItem.Visible = false;
+            this.tsEditItem.Click += new System.EventHandler(this.entityEditMI_Click);
             // 
             // tsSaveChanges
             // 
             this.tsSaveChanges.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsSaveChanges.Image = ((System.Drawing.Image)(resources.GetObject("tsSaveChanges.Image")));
+            this.tsSaveChanges.Image = global::EmploymentDepartment.Properties.Resources.save;
             this.tsSaveChanges.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsSaveChanges.Name = "tsSaveChanges";
             this.tsSaveChanges.Size = new System.Drawing.Size(23, 22);
             this.tsSaveChanges.Text = "Сохранить";
             this.tsSaveChanges.Visible = false;
+            this.tsSaveChanges.Click += new System.EventHandler(this.saveMI_Click);
             // 
-            // exportMI
+            // tsDeleteItem
             // 
-            this.exportMI.Name = "exportMI";
-            this.exportMI.Size = new System.Drawing.Size(162, 22);
-            this.exportMI.Text = "Экспорт";
+            this.tsDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsDeleteItem.Image = global::EmploymentDepartment.Properties.Resources.remove;
+            this.tsDeleteItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsDeleteItem.Name = "tsDeleteItem";
+            this.tsDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.tsDeleteItem.Text = "Удалить";
+            this.tsDeleteItem.Visible = false;
+            this.tsDeleteItem.Click += new System.EventHandler(this.entityRemoveMI_Click);
+            // 
+            // tsNavigationSeparator
+            // 
+            this.tsNavigationSeparator.Name = "tsNavigationSeparator";
+            this.tsNavigationSeparator.Size = new System.Drawing.Size(6, 25);
+            this.tsNavigationSeparator.Visible = false;
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Лист .xls|*.xls";
+            this.saveFileDialog.Title = "Экспорт...";
             // 
             // MainMDIForm
             // 
@@ -730,7 +805,7 @@ namespace EmploymentDepartment
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
-            this.Icon = Resources._16;
+            this.Icon = global::EmploymentDepartment.Properties.Resources._16;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainMDIForm";
@@ -806,22 +881,28 @@ namespace EmploymentDepartment
         private System.Windows.Forms.ToolStripButton tsAddNewItem;
         private System.Windows.Forms.ToolStripButton tsDeleteItem;
         private System.Windows.Forms.ToolStripButton tsViewItem;
-        private System.Windows.Forms.ToolStripSeparator tsSeparator3;
-        private System.Windows.Forms.ToolStripButton tsShowStudentCompanies;
-        private System.Windows.Forms.ToolStripButton tsShowVacanciesByCompany;
-        private System.Windows.Forms.ToolStripButton tsShowStudentsByCompany;
         private System.Windows.Forms.ToolStripSeparator tsViewItemSeparator;
-        private System.Windows.Forms.ToolStripMenuItem showStudentCompaniesMI;
-        private System.Windows.Forms.ToolStripMenuItem showVacanciesByCompanyMI;
-        private System.Windows.Forms.ToolStripMenuItem showStudentsByCompanyMI;
-        private System.Windows.Forms.ToolStripSeparator entityTempItemsSeparator;
         private System.Windows.Forms.ToolStripMenuItem saveMI;
         private System.Windows.Forms.ToolStripSeparator saveSeparatorMI;
         private System.Windows.Forms.ToolStripMenuItem setDefaultValueMI;
         private System.Windows.Forms.ToolStripSeparator setDefaultValueSeparatorMI;
         private System.Windows.Forms.ToolStripButton tsSaveChanges;
-        private System.Windows.Forms.ToolStripButton tsSetDefaultValues;
         private System.Windows.Forms.ToolStripMenuItem exportMI;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.ToolStripButton tsDataStudents;
+        private System.Windows.Forms.ToolStripButton tsDataCompanies;
+        private System.Windows.Forms.ToolStripButton tsDataVacancies;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton tsAddStudent;
+        private System.Windows.Forms.ToolStripButton tsAddStudentCompany;
+        private System.Windows.Forms.ToolStripButton tsAddCompany;
+        private System.Windows.Forms.ToolStripButton tsAddVacancy;
+        private System.Windows.Forms.ToolStripMenuItem showStudentCompaniesMI;
+        private System.Windows.Forms.ToolStripMenuItem showVacanciesByCompanyMI;
+        private System.Windows.Forms.ToolStripMenuItem showStudentsByCompanyMI;
+        private System.Windows.Forms.ToolStripSeparator entityTempItemsSeparator;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem отчетToolStripMenuItem;
     }
 }
 

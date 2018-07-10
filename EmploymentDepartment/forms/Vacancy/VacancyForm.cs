@@ -18,7 +18,7 @@ namespace EmploymentDepartment
             {
                 return linkCompany.Tag as ICompany;
             }
-            private set
+            set
             {
                 linkCompany.Tag = value;
                 string text = value == null ? "Выбрать  предприятие..." : $"{value.Name}";

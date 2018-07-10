@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ namespace EmploymentDepartment
     {
         public IDataBase DBGetter { get; set; }
         public EntitiesGetter EntGetter { get; set; }
+        private readonly UserRole userRole;
 
         public List<Faculty> Faculties { get; set; }
         public List<Specialization> Specializations { get; set; }
@@ -22,8 +24,9 @@ namespace EmploymentDepartment
         public MainMDIForm()
         {
             InitializeComponent();
-            DBGetter = new MySqlDB();
-            EntGetter = new EntitiesGetter(DBGetter);
+            this.DBGetter = new MySqlDB();
+            this.EntGetter = new EntitiesGetter(DBGetter);
+            this.userRole = UserRole.Moderator;
 
             UpdateFaculties();
             UpdateSpecializations();
@@ -97,17 +100,27 @@ namespace EmploymentDepartment
 
 
         #region Show child froms.         
-
-        public void ShowMdiChild<U, T>(U entity, ActionType type, IDataListView<U> viewContext) where U: class, IIdentifiable where T : MDIChild<U>
+        private T GetMDIChild<U, T>(U entity, ActionType type, IDataListView<U> viewContext) where U : class, IIdentifiable where T : MDIChild<U>
         {
-            var form = this.MdiChildren.FirstOrDefault(i => (i is MDIChild<U>) && (i as MDIChild<U>).Type == type && (i as MDIChild<U>).ID == entity.ID);
+            var form = this.MdiChildren.FirstOrDefault(i => (i is MDIChild<U>) && (i as MDIChild<U>).Type == type && (i as MDIChild<U>).ID == entity.ID) as T;
 
             if (form == null)
                 form = Activator.CreateInstance(typeof(T), new object[] { type, entity, viewContext }) as T;
 
+            return form;
+        }
+
+        private void ShowFormAsMDIChild(Form form)
+        {
             form.MdiParent = this;
             form.Show();
             form.Activate();
+        }
+
+        public void ShowMDIChild<U, T>(U entity, ActionType type, IDataListView<U> viewContext) where U : class, IIdentifiable where T : MDIChild<U>
+        {
+            var form = GetMDIChild<U, T>(entity, type, viewContext);
+            ShowFormAsMDIChild(form);
         }
 
         public void ShowViewDialog<U, T>(U entity) where U : class, IIdentifiable where T : MDIChild<U>
@@ -124,7 +137,7 @@ namespace EmploymentDepartment
                 return;
             }
 
-            ShowMdiChild<U, T>(entity, type, viewContext);
+            ShowMDIChild<U, T>(entity, type, viewContext);
         }
 
         public void ShowFormByType<U>(ActionType type, U entity, IDataListView<U> viewContext = null) where U : class, IIdentifiable
@@ -173,17 +186,19 @@ namespace EmploymentDepartment
             ShowFormByType(ActionType.Add, new T(), null);
         }
 
-        private DataViewForm<T> GetDataViewForm<T>() where T : class, IIdentifiable
+        private DataViewForm<T> GetDataViewForm<T>(string text, IEnumerable<T> data) where T : class, IIdentifiable
         {
             if (!(typeof(T) is IFaculty) && (typeof(T) is ISpecialization) && (typeof(T) is IPreferentialCategory))
                 return null;
 
-            return this.MdiChildren.FirstOrDefault(i => (i is DataViewForm<T>) && (i as DataViewForm<T>).Type == ViewType.Edit) as DataViewForm<T>;
+            return this.MdiChildren.FirstOrDefault(i => (i is DataViewForm<T>) && (i as DataViewForm<T>).Type == ViewType.Edit 
+                                                        && ((i as DataViewForm<T>).Data.SequenceEqual(data) 
+                                                        && i.Text == text)) as DataViewForm<T>;
         }
 
-        public void ShowEditDataViewForm<T>(string text, List<T> data) where T : class, IIdentifiable
+        public void ShowEditDataViewForm<T>(string text, IEnumerable<T> data) where T : class, IIdentifiable
         {
-            var form = GetDataViewForm<T>();
+            var form = GetDataViewForm<T>(text, data);
             form = form == null ? new DataViewForm<T>(text,ViewType.Edit, data) : form;
             form.MdiParent = this;
             form.Show();
@@ -199,9 +214,32 @@ namespace EmploymentDepartment
             ShowAddForm<Student>();
         }
 
+        private T GetActiveIDataListViewSelectedEntity<T>() where T : class, IIdentifiable
+        {
+            var active = ActiveMdiChild as IDataListView<T>;
+
+            if (active == null || active.ItemsCount == 0)
+                return null;
+
+            return active.GetSelectedEntity();
+        }
+
         private void addStudentCompanyMI_Click(object sender, EventArgs e)
         {
-            ShowAddForm<StudentCompany>();
+            if(!(ActiveMdiChild is IDataView) || (ActiveMdiChild as IDataView).ItemsCount == 0)
+            {
+                ShowAddForm<StudentCompany>();
+                return;
+            }
+
+            var form = GetMDIChild<IStudentCompany, StudentCompanyForm>(null, ActionType.Add, null);
+
+            var student = GetActiveIDataListViewSelectedEntity<IStudent>();
+            var vacancy = GetActiveIDataListViewSelectedEntity<IVacancy>();
+
+            ShowFormAsMDIChild(form);
+            form.LinkStudent = student;
+            form.LinkVacancy = vacancy;              
         }
 
         private void addCompanyMI_Click(object sender, EventArgs e)
@@ -211,17 +249,22 @@ namespace EmploymentDepartment
 
         private void addVacancyMI_Click(object sender, EventArgs e)
         {
-            ShowAddForm<Vacancy>();
+            var form = GetMDIChild<IVacancy, VacancyForm>(null, ActionType.Add, null);
+
+            var company = GetActiveIDataListViewSelectedEntity<ICompany>();
+             
+            ShowFormAsMDIChild(form);
+            form.LinkCompany = company;
         }
 
         #endregion
 
         private void MainMDIForm_MdiChildActivate(object sender, EventArgs e)
         {
-            
             SetNavigator();
             SetEditMIByActiveChild();
-
+            ShowExportMI();
+            SetDataMIByActiveChild();
         }
 
         private void SetNavigationTSItemsVisible(bool isVisible)
@@ -244,7 +287,7 @@ namespace EmploymentDepartment
         {
             var active = this.ActiveMdiChild;
 
-            SetNavigationTSItemsVisible(active is IDataSourceView);
+            SetNavigationTSItemsVisible(active is IDataView && (active as IDataView).ItemsCount != 0);
 
             if (!(active is IDataView) && !(active is IDataSourceView))
                 return;
@@ -257,35 +300,30 @@ namespace EmploymentDepartment
         private void SetEditMIByActiveChild()
         {
             var active = this.ActiveMdiChild;
-            
-            editMI.Visible = (active is IDataView) || (active is IDataSourceView) || (active is IEditable);
+
+            var isDataView = active is IDataView && (active as IDataView).ItemsCount != 0;
+
+            editMI.Visible = isDataView || (active is IEditable);
 
             // Пункты меню для просмотра списка элементов.
-            var isDataView = active is IDataSourceView;
-                        
+                                    
             entityViewMI.Visible = isDataView;
             tsViewItem.Visible = tsViewItemSeparator.Visible = isDataView;
 
             entityInserMI.Visible = tsAddNewItem.Visible = isDataView;
             entityEditMI.Visible = tsEditItem.Visible = isDataView;
-            entityEditSeparatorMI.Visible = isDataView; 
+            entityEditSeparatorMI.Visible = isDataView && userRole == UserRole.Administrator; 
             entityAddNEditSeparatorMI.Visible = isDataView;
 
             // Пункты меню для добавления / редактирования элементов.
             var isIEditable = active is IEditable;
 
             saveMI.Visible = tsSaveChanges.Visible = saveSeparatorMI.Visible = isIEditable && ((active as IEditable).Type == ActionType.Edit || (active as IEditable).Type == ActionType.Add);
-            setDefaultValueMI.Visible = tsSetDefaultValues.Visible = setDefaultValueSeparatorMI.Visible = saveSeparatorMI.Visible = isIEditable && ((active as IEditable).Type == ActionType.Edit);
-            entityRemoveMI.Visible = tsDeleteItem.Visible = (isIEditable && ((active as IEditable).Type == ActionType.Edit)) || isDataView;
-            tsNavigationSeparator.Visible = (isIEditable && ((active as IEditable).Type == ActionType.Edit)) || isDataView;
-            
-            // Пункты меню для определенных сущностей
-            ShowStudentCompaniesItemsVisible();
-            ShowVacanciesByCompanyItemsVisible();
-            ShowStudentsByCompanyItemsVisible();
-            entityTempItemsSeparator.Visible = IsActiveEditOrViewStudentForm() || IsActiveEditOrViewCompanyForm();
+            setDefaultValueMI.Visible = setDefaultValueSeparatorMI.Visible = saveSeparatorMI.Visible = isIEditable && ((active as IEditable).Type == ActionType.Edit);
+            entityRemoveMI.Visible = tsDeleteItem.Visible = ((isIEditable && ((active as IEditable).Type == ActionType.Edit)) || isDataView) && userRole == UserRole.Administrator;
+            tsNavigationSeparator.Visible = tsDeleteItem.Visible;
+            setDefaultValueSeparatorMI.Visible = setDefaultValueSeparatorMI.Visible && userRole == UserRole.Administrator;
 
-            
         }
 
         private void entityViewMI_Click(object sender, EventArgs e)
@@ -341,13 +379,32 @@ namespace EmploymentDepartment
                 active.Save();
         }
 
-        #region Временнные пункты меню. Активны только при необходимых выбранных сущностях.
+        #endregion
 
-        private void ShowStudentCompaniesItemsVisible()
-        {  
-            tsShowStudentCompanies.Visible = IsActiveEditOrViewStudentForm();
-            showStudentCompaniesMI.Visible = IsActiveEditOrViewStudentForm();
+        private void экспортДанныхToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var student = EntGetter.GetStudentById(1);
+
+            var doc = new WordFile(@"E:\it's my\EmploymentDepartment\EmploymentDepartment\bin\Debug\1.docx");
+            doc.ReplaceWordText("{surname}", student.Surname);
+            doc.ReplaceWordText("{name}", student.Name);
+            doc.ReplaceWordText("{patronymic}", student.Patronymic);
+
+            doc.Save(@"E:\it's my\EmploymentDepartment\EmploymentDepartment\bin\Debug\2.docx");
         }
+
+        #region Пункт меню "Данные"
+
+        private void SetDataMIByActiveChild()
+        {
+            // Пункты меню для определенных сущностей
+            showStudentCompaniesMI.Visible = IsActiveEditOrViewStudentForm();
+            showVacanciesByCompanyMI.Visible = IsActiveEditOrViewCompanyForm();
+            showStudentsByCompanyMI.Visible = IsActiveEditOrViewCompanyForm();
+            entityTempItemsSeparator.Visible = IsActiveEditOrViewStudentForm() || IsActiveEditOrViewCompanyForm();
+        }
+
+        #region Временнные пункты меню. Активны только при необходимых выбранных сущностях.
 
         private bool IsActiveEditOrViewStudentForm()
         {
@@ -363,6 +420,9 @@ namespace EmploymentDepartment
                     visible = false;
             }
 
+            if (ActiveMdiChild is DataViewForm<Student>)
+                visible = (ActiveMdiChild as DataViewForm<Student>).ItemsCount != 0;
+
             return visible;
         }
 
@@ -371,6 +431,9 @@ namespace EmploymentDepartment
             bool visible = false;
 
             visible = ActiveMdiChild is DataViewForm<Company>;
+
+            if (ActiveMdiChild is DataViewForm<Company>)
+                visible = (ActiveMdiChild as DataViewForm<Company>).ItemsCount != 0;
 
             if (ActiveMdiChild is CompanyForm)
             {
@@ -383,19 +446,6 @@ namespace EmploymentDepartment
             return visible;
         }
 
-        private void ShowVacanciesByCompanyItemsVisible()
-        {
-            tsShowVacanciesByCompany.Visible = IsActiveEditOrViewCompanyForm();
-            showVacanciesByCompanyMI.Visible = IsActiveEditOrViewCompanyForm();
-        }
-
-        private void ShowStudentsByCompanyItemsVisible()
-        {
-
-
-            tsShowStudentsByCompany.Visible = IsActiveEditOrViewCompanyForm();
-            showStudentsByCompanyMI.Visible = IsActiveEditOrViewCompanyForm();
-        }
 
         // Показать места работы студента.
         private void tsShowStudentCompanies_Click(object sender, EventArgs e)
@@ -472,14 +522,6 @@ namespace EmploymentDepartment
 
         #endregion
 
-        #endregion
-
-        private void экспортДанныхToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        #region Пункт меню "Данные"
         private void dataVacanciesMI_Click(object sender, EventArgs e)
         {
             ShowEditDataViewForm("Вакансии", EntGetter.GetVacancies());
@@ -520,6 +562,42 @@ namespace EmploymentDepartment
         {
             e.Handled = e.KeyChar == '.' || !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Delete);
         }
+        #region Пункт меню "Файл".
+        
+        private void ShowExportMI()
+        {
+            var active = ActiveMdiChild as IDataView;
 
+            if (active == null)
+            {
+                exportMI.Visible = false;
+                return;
+            }
+
+            exportMI.Visible = active.ItemsCount != 0;
+        }
+
+        // Экспорт.
+        private void exportMI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var active = ActiveMdiChild as IDataSourceView;
+
+                    if (active == null)
+                        return;
+
+                    active.Export(saveFileDialog.FileName);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Экспорт", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
     }
 }
