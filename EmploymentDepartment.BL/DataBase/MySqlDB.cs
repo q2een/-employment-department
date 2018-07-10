@@ -11,6 +11,16 @@ namespace EmploymentDepartment.BL
     {
         private readonly string connection = "Database=work;Data Source=localhost;User Id=root;Password=root;CharSet=utf8;";
 
+        public MySqlDB()
+        {
+
+        }
+
+        public MySqlDB(string connection)
+        {
+            this.connection = connection;
+        }
+
         public List<Dictionary<string, object>> GetCollection(string query)
         {
             List<Dictionary<string, object>> queryList = new List<Dictionary<string, object>>();
@@ -116,6 +126,31 @@ namespace EmploymentDepartment.BL
             }
 
             Query($"UPDATE {tableName} SET {values.TrimEnd(',')} WHERE id = {id}");
+        }
+
+        public object GetSimple(string query)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(this.connection))
+                {
+                    var command = new MySqlCommand(query, conn);
+                    conn.Open();
+                    return command.ExecuteScalar();
+                }
+            }
+            catch (MySqlException MySqlEx)
+            {
+                switch (MySqlEx.Number)
+                {
+                    case 1451: throw new Exception("Не удалось выполнить операцию! Данаая запись используется в других таблицах!");
+                    case 1042: // Исключения при отсутствии соединения
+                    case 1044: // Или неправильно введенной комбинации "имя пользователя - пароль"
+                    case 1045: throw new Exception("Не удалось подключиться к базе данных!");
+                    case 1264: throw new Exception("Проверьте правильность введенных данных!");
+                    default: throw new Exception("Ошибка при обращении к базе данных! #" + MySqlEx.Number);
+                }
+            }
         }
 
         private object TypeValidator(object obj)

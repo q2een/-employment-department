@@ -7,6 +7,7 @@ namespace EmploymentDepartment
 {
     enum UserRole
     {
+        None,
         Moderator,
         Administrator
     }
