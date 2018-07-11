@@ -24,7 +24,7 @@ namespace EmploymentDepartment
         public void AddSheet(DataTable table, string sheetName, string filter = null, string sort = null)
         {
             //Получаем первый лист документа (счет начинается с 1)
-            Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(1);
+            Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(sheetsCount--);
             sheet.Name = ValidateName(sheetName);
 
             for (int i = 1; i < table.Columns.Count + 1; i++)

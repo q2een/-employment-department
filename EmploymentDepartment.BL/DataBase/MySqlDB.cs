@@ -61,18 +61,60 @@ namespace EmploymentDepartment.BL
             {
                 switch (MySqlEx.Number)
                 {
+                    case 0: throw new Exception("Проверьте правильность введенных данных для подключения");
                     case 1451: throw new Exception("Не удалось выполнить операцию. Данаая запись используется в других таблицах!");
                     case 1042: // Исключения при отсутствии соединения
                     case 1044: // Или неправильно введенной комбинации "имя пользователя - пароль"
-                    case 1045: throw new Exception("Не удалось подключиться к базе данных!");
+                    case 1045: throw new Exception("Не удалось подключиться к базе данных. Возможно, отсутствует подключение к Интернет или база данных недоступна");
                     case 1264: throw new Exception("Проверьте правильность введенных данных!");
-                    default: throw new Exception("Ошибка при обращении к базе данных! #" + MySqlEx.Number);
+                    default: throw new Exception("Ошибка при обращении к базе данных.Ошибка №" + MySqlEx.Number);
                 }
             }
 
             return queryList;
         }
-        
+
+        public DataTable GetDataTable(string query)
+        {
+            var table = new DataTable();
+            try
+            {
+                using (var conn = new MySqlConnection(this.connection))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = query;
+                        cmd.ExecuteNonQuery();
+
+                        using (var da = new MySqlDataAdapter(cmd))
+                            da.Fill(table);
+                    }
+                }
+            }
+            catch (MySqlException MySqlEx)
+            {
+                throw ExecptionHandler(MySqlEx);
+            }
+
+            return table;
+        }
+
+        private Exception ExecptionHandler(MySqlException MySqlEx)
+        {
+            switch (MySqlEx.Number)
+            {
+                case 0: return new Exception("Проверьте правильность введенных данных для подключения");
+                case 1451: return new Exception("Не удалось выполнить операцию. Данаая запись используется в других таблицах!");
+                case 1042: // Исключения при отсутствии соединения
+                case 1044: // Или неправильно введенной комбинации "имя пользователя - пароль"
+                case 1045: return new Exception("Не удалось подключиться к базе данных. Возможно, отсутствует подключение к Интернет или база данных недоступна");
+                case 1264: return new Exception("Проверьте правильность введенных данных!");
+                default: return new Exception("Ошибка при обращении к базе данных.Ошибка №" + MySqlEx.Number);
+            }
+        }
+
         public long Insert(string tableName, Dictionary<string, object> nameValue)
         {
             if (nameValue == null || nameValue.Count == 0)
@@ -100,15 +142,7 @@ namespace EmploymentDepartment.BL
             }
             catch (MySqlException MySqlEx)
             {
-                switch (MySqlEx.Number)
-                {
-                    case 1451: throw new Exception("Не удалось выполнить операцию! Данаая запись используется в других таблицах!");
-                    case 1042: // Исключения при отсутствии соединения
-                    case 1044: // Или неправильно введенной комбинации "имя пользователя - пароль"
-                    case 1045: throw new Exception("Не удалось подключиться к базе данных!");
-                    case 1264: throw new Exception("Проверьте правильность введенных данных!");
-                    default: throw new Exception("Ошибка при обращении к базе данных! #" + MySqlEx.Number);
-                }
+                throw ExecptionHandler(MySqlEx);
             }
         }
 
@@ -141,15 +175,7 @@ namespace EmploymentDepartment.BL
             }
             catch (MySqlException MySqlEx)
             {
-                switch (MySqlEx.Number)
-                {
-                    case 1451: throw new Exception("Не удалось выполнить операцию! Данаая запись используется в других таблицах!");
-                    case 1042: // Исключения при отсутствии соединения
-                    case 1044: // Или неправильно введенной комбинации "имя пользователя - пароль"
-                    case 1045: throw new Exception("Не удалось подключиться к базе данных!");
-                    case 1264: throw new Exception("Проверьте правильность введенных данных!");
-                    default: throw new Exception("Ошибка при обращении к базе данных! #" + MySqlEx.Number);
-                }
+                throw ExecptionHandler(MySqlEx);
             }
         }
 
@@ -187,15 +213,7 @@ namespace EmploymentDepartment.BL
             }
             catch (MySqlException MySqlEx)
             {
-                switch (MySqlEx.Number)
-                {
-                    case 1451: throw new Exception("Не удалось выполнить операцию! Данаая запись используется в других таблицах!");
-                    case 1042: // Исключения при отсутствии соединения
-                    case 1044: // Или неправильно введенной комбинации "имя пользователя - пароль"
-                    case 1045: throw new Exception("Не удалось подключиться к базе данных!");
-                    case 1264: throw new Exception("Проверьте правильность введенных данных!");
-                    default: throw new Exception("Ошибка при обращении к базе данных! #" + MySqlEx.Number);
-                }
+                throw ExecptionHandler(MySqlEx);
             }
         }
     }

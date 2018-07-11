@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.tbVacanciesCount = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmbGender = new System.Windows.Forms.ComboBox();
@@ -54,10 +55,12 @@
             this.tbWorkArea = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbPost = new System.Windows.Forms.TextBox();
+            this.lblVacanciesCount = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tbVacancyNumber = new System.Windows.Forms.TextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.mainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbVacanciesCount)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -67,6 +70,7 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.tbVacanciesCount);
             this.mainPanel.Controls.Add(this.tableLayoutPanel1);
             this.mainPanel.Controls.Add(this.companyPanel);
             this.mainPanel.Controls.Add(this.label8);
@@ -79,6 +83,7 @@
             this.mainPanel.Controls.Add(this.tbWorkArea);
             this.mainPanel.Controls.Add(this.label7);
             this.mainPanel.Controls.Add(this.tbPost);
+            this.mainPanel.Controls.Add(this.lblVacanciesCount);
             this.mainPanel.Controls.Add(this.label1);
             this.mainPanel.Controls.Add(this.tbVacancyNumber);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -86,6 +91,30 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(584, 456);
             this.mainPanel.TabIndex = 0;
+            // 
+            // tbVacanciesCount
+            // 
+            this.tbVacanciesCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbVacanciesCount.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbVacanciesCount.Location = new System.Drawing.Point(497, 7);
+            this.tbVacanciesCount.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.tbVacanciesCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.tbVacanciesCount.Name = "tbVacanciesCount";
+            this.tbVacanciesCount.Size = new System.Drawing.Size(75, 23);
+            this.tbVacanciesCount.TabIndex = 3;
+            this.tbVacanciesCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // tableLayoutPanel1
             // 
@@ -378,6 +407,17 @@
             this.tbPost.TabIndex = 5;
             this.tbPost.Validating += new System.ComponentModel.CancelEventHandler(this.tbSalary_Validating);
             // 
+            // lblVacanciesCount
+            // 
+            this.lblVacanciesCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVacanciesCount.AutoSize = true;
+            this.lblVacanciesCount.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblVacanciesCount.Location = new System.Drawing.Point(367, 9);
+            this.lblVacanciesCount.Name = "lblVacanciesCount";
+            this.lblVacanciesCount.Size = new System.Drawing.Size(124, 16);
+            this.lblVacanciesCount.TabIndex = 0;
+            this.lblVacanciesCount.Text = "Количество мест";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -397,7 +437,7 @@
             this.tbVacancyNumber.Location = new System.Drawing.Point(156, 6);
             this.tbVacancyNumber.MaxLength = 50;
             this.tbVacancyNumber.Name = "tbVacancyNumber";
-            this.tbVacancyNumber.Size = new System.Drawing.Size(416, 22);
+            this.tbVacancyNumber.Size = new System.Drawing.Size(205, 22);
             this.tbVacancyNumber.TabIndex = 2;
             this.tbVacancyNumber.Validating += new System.ComponentModel.CancelEventHandler(this.tbSalary_Validating);
             // 
@@ -412,13 +452,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 456);
             this.Controls.Add(this.mainPanel);
-            this.Icon = Properties.Resources._16;
+            this.Icon = global::EmploymentDepartment.Properties.Resources._16;
             this.MinimumSize = new System.Drawing.Size(600, 495);
             this.Name = "VacancyForm";
             this.Text = "Добавление вакансии";
             this.Load += new System.EventHandler(this.VacancyForm_Load);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbVacanciesCount)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -428,6 +469,7 @@
             this.companyPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -460,5 +502,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbPost;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.NumericUpDown tbVacanciesCount;
+        private System.Windows.Forms.Label lblVacanciesCount;
     }
 }

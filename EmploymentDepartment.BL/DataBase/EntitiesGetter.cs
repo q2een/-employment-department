@@ -88,18 +88,79 @@ namespace EmploymentDepartment.BL
             return result;
         }
 
-        public Student GetStudentById(int id)
+
+        #region Single Entities.
+
+        private T GetSingle<T>(string query) where T : class, IIdentifiable, new()
         {
-            var dict = db.GetCollection($"{Student} WHERE s.ID = {id}");
+            var dict = db.GetCollection(query);
 
             if (dict == null || dict.Count != 1)
                 return null;
 
-            var entity = new Student();
+            var entity = new T();
             entity.SetProperties(dict[0]);
 
             return entity;
         }
+
+        public T GetSingle<T>(int id) where T : class, IIdentifiable
+        {
+            if (typeof(T) == typeof(Student))
+                return GetStudent(id) as T;
+            if (typeof(T) == typeof(Company))
+                return GetCompany(id) as T;
+            if (typeof(T) == typeof(Faculty))
+                return GetFaculty(id) as T;
+            if (typeof(T) == typeof(PreferentialCategory))
+                return GetPreferentialCategory(id) as T;
+            if (typeof(T) == typeof(Specialization))
+                return GetSpecialization(id) as T;
+            if (typeof(T) == typeof(StudentCompany))
+                return GetStudentCompany(id) as T;
+            if (typeof(T) == typeof(Vacancy))
+                return GetVacancy(id) as T;
+
+            return null;
+        }
+
+        public Student GetStudent(int id)
+        {
+            return GetSingle<Student>($"{Student} WHERE s.ID = {id}");
+        }
+        
+        public Company GetCompany(int id)
+        {
+            return GetSingle<Company>("SELECT * FROM company WHERE ID = " + id);
+        }
+
+        public StudentCompany GetStudentCompany(int id)
+        {
+            return GetSingle<StudentCompany>($"{StudentCompany} WHERE s.ID = {id}");
+        }
+
+        public Vacancy GetVacancy(int id)
+        {
+            return GetSingle<Vacancy>($"{Vacancy} WHERE v.ID = {id}");
+        }
+
+        public Faculty GetFaculty(int id)
+        {
+            return GetSingle<Faculty>($"{Faculty} WHERE f.ID = {id}");
+        }
+
+        public Specialization GetSpecialization(int id)
+        {
+            return GetSingle<Specialization>($"{Specialization} WHERE s.ID = {id}");
+        }
+
+        public PreferentialCategory GetPreferentialCategory(int id)
+        {
+            return GetSingle<PreferentialCategory>($"{PreferentialCategory} WHERE ID = {id}");
+        }
+
+        #endregion
+
 
         public List<Student> GetStudents(string dbQuery)
         {
@@ -109,19 +170,6 @@ namespace EmploymentDepartment.BL
         public List<Student> GetStudents()
         {
             return GetEntities<Student>(Student);
-        }
-
-        public Company GetCompanyById(int id)
-        {
-            var dict = db.GetCollection("SELECT * FROM company WHERE ID = " + id);
-
-            if (dict == null || dict.Count != 1)
-                return null;
-
-            var entity = new Company();
-            entity.SetProperties(dict[0]);
-
-            return entity;
         }
 
         public List<Company> GetCompanies(string dbQuery)
@@ -163,23 +211,7 @@ namespace EmploymentDepartment.BL
         {
             return GetEntities<Vacancy>(dbQuery);
         }
-                
-        public Vacancy GetVacancyById(int? id)
-        {
-            if (id == null)
-                return null;
 
-            var dict = db.GetCollection($"{Vacancy} WHERE ID = {id}");
-
-            if (dict == null || dict.Count != 1)
-                return null;
-
-            var entity = new Vacancy();
-            entity.SetProperties(dict[0]);
-
-            return entity;
-        }
-         
         public List<Vacancy> GetVacancies()
         {
             return GetEntities<Vacancy>(Vacancy);

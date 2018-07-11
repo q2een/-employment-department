@@ -63,6 +63,8 @@ namespace EmploymentDepartment.BL
         int? PreferentialCategory { get; set; }
 
         [DisplayName("Самостоятельное трудоустройство")]
+        string SelfEmploymentText { get; }
+
         bool SelfEmployment { get; set; }
 
         [DisplayName("Город (проживание)")]

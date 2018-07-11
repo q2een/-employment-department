@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EmploymentDepartment
 {
-    enum UserRole
+    public enum UserRole
     {
         None,
         Moderator,

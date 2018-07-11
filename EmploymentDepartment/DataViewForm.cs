@@ -43,7 +43,7 @@ namespace EmploymentDepartment
             mainDgv.DataSource = bindingSource;
 
             SetData();
-
+            
             mainDgv.DoubleBuffered(true);
             mainDgv.StretchLastColumn();
         }
@@ -123,16 +123,17 @@ namespace EmploymentDepartment
                 this.Close();
             }
         }
-
-        // TODO : GET ENTITY BY ID
+                
         public T GetSelectedEntity()
         {
             int id;
 
             if (!Int32.TryParse(mainDgv.SelectedRows[0].Cells[0].Value.ToString(), out id))
                 return null;
-             
-            return Data.FirstOrDefault(entity => entity.ID == id);
+
+            var entity = Data.FirstOrDefault(i => i.ID == id);
+
+            return entity ?? main.Entities.GetSingle<T>(id);
         }
 
         public void Export(string path)

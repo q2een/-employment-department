@@ -81,7 +81,9 @@ namespace EmploymentDepartment
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLblMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLblLoginAs = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLblUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.tsCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -109,6 +111,7 @@ namespace EmploymentDepartment
             this.tsDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.tsNavigationSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.dataStudentCompaniesMI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStrip)).BeginInit();
@@ -159,7 +162,7 @@ namespace EmploymentDepartment
             this.exortDataMI.Name = "exortDataMI";
             this.exortDataMI.Size = new System.Drawing.Size(162, 22);
             this.exortDataMI.Text = "Экспорт данных";
-            this.exortDataMI.Click += new System.EventHandler(this.экспортДанныхToolStripMenuItem_Click);
+            this.exortDataMI.Click += new System.EventHandler(this.exortDataMI_Click);
             // 
             // toolStripSeparator4
             // 
@@ -182,6 +185,7 @@ namespace EmploymentDepartment
             this.showStudentsByCompanyMI,
             this.entityTempItemsSeparator,
             this.dataStudentsMI,
+            this.dataStudentCompaniesMI,
             this.dataCompaniesMI,
             this.dataVacanciesMI,
             this.toolStripMenuItem8,
@@ -511,18 +515,44 @@ namespace EmploymentDepartment
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
+            this.statusLblMessage,
+            this.statusLblLoginAs,
+            this.statusLblUser});
             this.statusStrip.Location = new System.Drawing.Point(0, 490);
             this.statusStrip.Name = "statusStrip";
+            this.statusStrip.ShowItemToolTips = true;
             this.statusStrip.Size = new System.Drawing.Size(1076, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
-            // toolStripStatusLabel
+            // statusLblMessage
             // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(66, 17);
-            this.toolStripStatusLabel.Text = "Состояние";
+            this.statusLblMessage.Name = "statusLblMessage";
+            this.statusLblMessage.Size = new System.Drawing.Size(860, 17);
+            this.statusLblMessage.Spring = true;
+            this.statusLblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // statusLblLoginAs
+            // 
+            this.statusLblLoginAs.Image = global::EmploymentDepartment.Properties.Resources.user;
+            this.statusLblLoginAs.Name = "statusLblLoginAs";
+            this.statusLblLoginAs.Size = new System.Drawing.Size(107, 17);
+            this.statusLblLoginAs.Text = "Вы вошли как: ";
+            // 
+            // statusLblUser
+            // 
+            this.statusLblUser.IsLink = true;
+            this.statusLblUser.Name = "statusLblUser";
+            this.statusLblUser.Size = new System.Drawing.Size(94, 17);
+            this.statusLblUser.Text = "Администратор";
+            this.statusLblUser.ToolTipText = "Сменить пользователя или выйти";
+            this.statusLblUser.Click += new System.EventHandler(this.statusLblUser_Click);
+            // 
+            // toolTip
+            // 
+            this.toolTip.AutoPopDelay = 5000;
+            this.toolTip.InitialDelay = 500;
+            this.toolTip.ReshowDelay = 100;
             // 
             // toolStrip
             // 
@@ -797,6 +827,13 @@ namespace EmploymentDepartment
             this.saveFileDialog.Filter = "Лист .xls|*.xls";
             this.saveFileDialog.Title = "Экспорт...";
             // 
+            // dataStudentCompaniesMI
+            // 
+            this.dataStudentCompaniesMI.Name = "dataStudentCompaniesMI";
+            this.dataStudentCompaniesMI.Size = new System.Drawing.Size(217, 22);
+            this.dataStudentCompaniesMI.Text = "Места работы студентов";
+            this.dataStudentCompaniesMI.Click += new System.EventHandler(this.dataStudentCompaniesMI_Click);
+            // 
             // MainMDIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -810,6 +847,7 @@ namespace EmploymentDepartment
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainMDIForm";
             this.Text = "Трудоустройство студентов";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainMDIForm_FormClosed);
             this.Load += new System.EventHandler(this.MainMDIForm_Load);
             this.MdiChildActivate += new System.EventHandler(this.MainMDIForm_MdiChildActivate);
             this.menuStrip.ResumeLayout(false);
@@ -830,7 +868,7 @@ namespace EmploymentDepartment
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel statusLblMessage;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tileHorizontalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileMenu;
@@ -903,6 +941,9 @@ namespace EmploymentDepartment
         private System.Windows.Forms.ToolStripSeparator entityTempItemsSeparator;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem отчетToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel statusLblLoginAs;
+        private System.Windows.Forms.ToolStripStatusLabel statusLblUser;
+        private System.Windows.Forms.ToolStripMenuItem dataStudentCompaniesMI;
     }
 }
 

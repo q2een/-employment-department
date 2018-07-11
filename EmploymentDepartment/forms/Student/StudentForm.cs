@@ -105,7 +105,7 @@ namespace EmploymentDepartment
         // Смена значений в выдающем списке "Уровень образования". Обработка события.
         private void cmbLevelOfEducation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var faculties = main.EntGetter.GetFaculties((EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1)).Select(i=> i as IFaculty).ToList();
+            var faculties = main.Entities.GetFaculties((EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1)).Select(i=> i as IFaculty).ToList();
             cmbFaculty.BindComboboxData(faculties);
             var specializations = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == (int)cmbFaculty.SelectedValue).Select(i => i as ISpecialization).ToList();
             cmbFieldOfStudy.BindComboboxData(specializations);
@@ -216,7 +216,7 @@ namespace EmploymentDepartment
         // Задает полям исходные значения.
         public override void SetDefaultValues()
         {
-            this.SetPropertiesValue<IStudent>(Entity, "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "PreferentialCategoryText");
+            this.SetPropertiesValue<IStudent>(Entity, "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "SelfEmploymentText", "PreferentialCategoryText");
             if (tbRegCity.Text == tbCity.Text && !string.IsNullOrEmpty(tbRegCity.Text) &&
                 tbRegRegion.Text == tbRegion.Text && !string.IsNullOrEmpty(tbRegRegion.Text) &&
                 tbRegDistrict.Text == tbDistrict.Text && !string.IsNullOrEmpty(tbRegDistrict.Text) &&
@@ -612,6 +612,14 @@ namespace EmploymentDepartment
             get
             {
                 return cmbFieldOfStudy.Text;
+            }
+        }
+
+        public new string SelfEmploymentText
+        {
+            get
+            {
+                return SelfEmployment ? "Да" : "Нет";
             }
         }
 

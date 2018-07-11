@@ -72,7 +72,7 @@ namespace EmploymentDepartment
                 linkVacancy.Tag = value;
                 string text = value == null ? "Выбрать вакансию ..." : $"Вакансия №{value.VacancyNumber}";
                 linkVacancy.Text = Extentions.ShortenString(text, vacancyPanel.Width - linkVacancyClear.Width - 90, linkVacancy.Font);
-                tbCompany.Text = value == null ? "" : main.EntGetter.GetCompanyById(value.Employer)?.Name;
+                tbCompany.Text = value == null ? "" : main.Entities.GetCompany(value.Employer)?.Name;
                 tbPost.Text = value?.Post;
 
                 linkVacancyClear.Visible = Type != ActionType.View;
@@ -173,7 +173,7 @@ namespace EmploymentDepartment
         {
             if (LinkStudent == null)
             {
-                var form = new DataViewForm<Student>("Выбор студента", main.EntGetter.GetStudents(), main, this);
+                var form = new DataViewForm<Student>("Выбор студента", main.Entities.GetStudents(), main, this);
                 form.ShowDialog(this);
                 return;
             }
@@ -185,7 +185,7 @@ namespace EmploymentDepartment
         {
             if (LinkVacancy == null)
             {
-                var form = new DataViewForm<Vacancy>("Выбор вакансии", main.EntGetter.GetVacancies(), main, this);
+                var form = new DataViewForm<Vacancy>("Выбор вакансии", main.Entities.GetVacancies(), main, this);
                 form.ShowDialog(this);
                 return;
             }
@@ -236,7 +236,7 @@ namespace EmploymentDepartment
             }
             set
             {
-                LinkStudent = main?.EntGetter?.GetStudentById(value);
+                LinkStudent = main?.Entities?.GetStudent(value);
             }
         }
 
@@ -274,7 +274,7 @@ namespace EmploymentDepartment
 
             set
             {
-                LinkVacancy = main?.EntGetter?.GetVacancyById(value);
+                LinkVacancy = Vacancy == null ? null : main?.Entities?.GetVacancy((int)value);
             }
         }
 

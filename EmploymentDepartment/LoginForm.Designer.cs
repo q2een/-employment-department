@@ -39,10 +39,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbHost = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.tbPort = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbHost = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             this.panel1.SuspendLayout();
@@ -164,26 +164,16 @@
             this.panel3.Size = new System.Drawing.Size(270, 52);
             this.panel3.TabIndex = 6;
             // 
-            // label3
+            // tbPort
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(-3, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 16);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Адрес:";
-            // 
-            // tbHost
-            // 
-            this.tbHost.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbHost.Location = new System.Drawing.Point(0, 22);
-            this.tbHost.MaxLength = 150;
-            this.tbHost.Name = "tbHost";
-            this.tbHost.Size = new System.Drawing.Size(196, 23);
-            this.tbHost.TabIndex = 0;
-            this.tbHost.Text = "localhost";
+            this.tbPort.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPort.Location = new System.Drawing.Point(204, 22);
+            this.tbPort.MaxLength = 4;
+            this.tbPort.Name = "tbPort";
+            this.tbPort.Size = new System.Drawing.Size(56, 23);
+            this.tbPort.TabIndex = 0;
+            this.tbPort.Text = "3306";
+            this.tbPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPort_KeyPress);
             // 
             // label4
             // 
@@ -196,15 +186,26 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Порт:";
             // 
-            // tbPort
+            // tbHost
             // 
-            this.tbPort.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbPort.Location = new System.Drawing.Point(204, 22);
-            this.tbPort.MaxLength = 4;
-            this.tbPort.Name = "tbPort";
-            this.tbPort.Size = new System.Drawing.Size(56, 23);
-            this.tbPort.TabIndex = 0;
-            this.tbPort.Text = "3306";
+            this.tbHost.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbHost.Location = new System.Drawing.Point(0, 22);
+            this.tbHost.MaxLength = 150;
+            this.tbHost.Name = "tbHost";
+            this.tbHost.Size = new System.Drawing.Size(196, 23);
+            this.tbHost.TabIndex = 0;
+            this.tbHost.Text = "localhost";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(-3, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 16);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Адрес:";
             // 
             // panel4
             // 

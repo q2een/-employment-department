@@ -72,6 +72,7 @@ namespace EmploymentDepartment
         public string MartialStatusString { get; }
         public string FacultyName { get; }
         public string EducationLevel { get; }
+        public string SelfEmploymentText { get;}
         public string Specialization { get; }
         public string PreferentialCategoryText { get; }
 
@@ -83,7 +84,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о студенте обновлена\nФИО студента: {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}";
 
-            if (this.UpdateFormEntityInDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "PreferentialCategoryText"))
+            if (this.UpdateFormEntityInDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "SelfEmploymentText", "PreferentialCategoryText"))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IStudent);
@@ -98,7 +99,7 @@ namespace EmploymentDepartment
         public override void AddNewItem()
         {
             var msg = $"Студент {Surname} {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}\nдобавлен в базу";
-            if(this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "PreferentialCategoryText"))
+            if(this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "SelfEmploymentText", "PreferentialCategoryText"))
             {
                 ViewContext?.SetDataTableRow(this as IStudent);
                 this.Close();

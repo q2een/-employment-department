@@ -65,7 +65,7 @@ namespace EmploymentDepartment
 
             set
             {
-                LinkCompany = main?.EntGetter?.GetCompanyById(value);
+                LinkCompany = main?.Entities?.GetCompany(value);
             }
         }
 
@@ -180,6 +180,34 @@ namespace EmploymentDepartment
         }
 
         #region IEditable interfaces implemantation.
+        public override void AddNewItem()
+        {
+            try
+            {
+                for (int i = 0; i < tbVacanciesCount.Value; i++)
+                {
+                    if (!ValidateFields() || Type != ActionType.Add)
+                        return;
+
+                    // Поля не учитываются в таблице в БД.
+                    var nameValue = (this as IVacancy).GetPropertiesNameValuePair(true, "ID", "Name", "CompanyName", "GenderName");
+
+                    // Добавляем запись в БД.
+                    this.ID = (int)main.DBGetter.Insert(EntitiesGetter.GetTableNameByType<IVacancy>(this).ToString(), nameValue);
+
+                    ViewContext?.SetDataTableRow(this as IVacancy);
+                }
+
+                MessageBox.Show("Информация о вакансии добавлена в базу", "Операция добавления", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public void Remove()
         {
             throw new NotImplementedException();
@@ -192,7 +220,7 @@ namespace EmploymentDepartment
         {
             if (LinkCompany == null)
             {
-                var form = new DataViewForm<Company>("Выбор предприятия", main.EntGetter.GetCompanies(), main, this);
+                var form = new DataViewForm<Company>("Выбор предприятия", main.Entities.GetCompanies(), main, this);
                 form.ShowDialog(this);
                 return;
             }
@@ -260,6 +288,7 @@ namespace EmploymentDepartment
         private void VacancyForm_Load(object sender, EventArgs e)
         {
             mainPanel.Enabled = Type != ActionType.View;
+            lblVacanciesCount.Visible = tbVacanciesCount.Visible = Type == ActionType.Add;
         }
 
     }

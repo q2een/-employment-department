@@ -63,6 +63,12 @@
     </Compile>
     <Compile Include="enums\UserRole.cs" />
     <Compile Include="enums\ViewType.cs" />
+    <Compile Include="export\ExportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="export\ExportForm.Designer.cs">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="export\WordFile.cs" />
     <Compile Include="export\ExcelFile.cs" />
     <Compile Include="forms\Company\BaseCompanyForm.cs">
@@ -165,6 +171,9 @@
     <EmbeddedResource Include="DataViewForm.resx">
       <DependentUpon>DataViewForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="export\ExportForm.resx">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\Company\CompanyForm.resx">
       <DependentUpon>CompanyForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +217,7 @@
     <EmbeddedResource Include="forms\Student\StudentForm.resx">
       <DependentUpon>StudentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\EmploymentDepartment.BL.Faculty.datasource" />
     <None Include="Properties\DataSources\EmploymentDepartment.BL.IFaculty.datasource" />
@@ -274,6 +284,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="128.ico" />
+    <None Include="Resources\user.png" />
     <None Include="Resources\logo.png" />
     <None Include="Resources\vacancy.png" />
     <None Include="Resources\studentcompany.png" />

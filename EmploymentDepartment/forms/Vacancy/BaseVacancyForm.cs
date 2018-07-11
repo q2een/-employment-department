@@ -59,16 +59,6 @@ namespace EmploymentDepartment
 
         #region IEditable implementation.
 
-        public override void AddNewItem()
-        {
-            var msg = $"Информация о вакансии добавлена в базу";
-            if(this.InsertFormEntityToDataBase<BaseVacancyForm, IVacancy>(main.DBGetter, msg, "ID", "Name", "CompanyName", "GenderName"))
-            {
-                ViewContext?.SetDataTableRow(this as IVacancy);
-                this.Close();
-            }
-        }
-
         public override void Remove()
         {
             throw new NotImplementedException();

@@ -128,7 +128,12 @@ namespace EmploymentDepartment
         {
             var lastColIndex = dataGridView.Columns.Count - 1;
             var lastCol = dataGridView.Columns[lastColIndex];
-            lastCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            int size = 0;
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+                size += column.Width;
+
+            if (size < dataGridView.Parent.Width)
+                lastCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         public static void DoubleBuffered(this DataGridView dgv, bool setting)
