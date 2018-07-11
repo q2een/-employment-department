@@ -1,17 +1,18 @@
 ﻿using EmploymentDepartment.BL;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
+    /// <summary>
+    /// Предоставляет окно для входа в программу и подключения к БД.
+    /// </summary>
     public partial class LoginForm : Form
     {
+        /// <summary>
+        /// Предоставляет окно для входа в программу и подключения к БД.
+        /// </summary>
         public LoginForm()
         {   
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace EmploymentDepartment
             }
         }
 
+        // Возвращает роль пользователя в зависимости от полученных из БД данных.
         private UserRole GetRole(List<Dictionary<string, object>> grants)
         {
             foreach (var dict in grants)
@@ -45,6 +47,7 @@ namespace EmploymentDepartment
             return UserRole.None;
         }
 
+        // Отображает главное окно программы при корректно введенных пользователем данных.
         private void ShowMainForm(string connection)
         {
             try
@@ -76,12 +79,14 @@ namespace EmploymentDepartment
             }
         }
 
+        // Нажатие на кнопку "Войти". Обработка события.
         private void btnApply_Click(object sender, EventArgs e)
         {
             var connection = $"Database=work;Data Source={tbHost.Text};Port={tbPort.Text};User Id={tbLogin.Text};Password={tbPassword.Text};CharSet=utf8;";
             ShowMainForm(connection);
         }
 
+        // Проверка корректности ввода данных в поле "Порт". Разрешен ввод только цифр.
         private void tbPort_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = e.KeyChar == '.' || (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back);
