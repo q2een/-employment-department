@@ -49,7 +49,8 @@ namespace EmploymentDepartment.BL
         {
             get
             {
-                return "SELECT v.ID, v.VacancyNumber, v.Post, v.Employer, c.Name as CompanyName, v.WorkArea, v.Salary, v.IsActive, v.SalaryNote,v.Gender AS GenderName, v.Gender + 0 AS Gender, v.Features FROM vacancy v INNER JOIN company c ON v.Employer = c.ID";
+                return "  SELECT v.ID, v.VacancyNumber, v.Post, v.Employer, c.Name as CompanyName, v.WorkArea, v.Salary, v.IsActive, v.SalaryNote,v.Gender AS GenderName,"+
+                       "v.Gender + 0 AS Gender, v.Features FROM vacancy v Left JOIN company c ON v.Employer = c.ID LEFT JOIN studentcompany s ON v.ID = s.vacancy ";
             }
         }
 
@@ -57,7 +58,7 @@ namespace EmploymentDepartment.BL
         {
             get
             {
-                return "SELECT s.ID, s.Student,CONCAT(s1.Surname,\" \", s1.Name,\" \", s1.Patronymic) AS StudentFullName, s.CompanyName, s.Status, s.Post, s.YearOfEmployment, s.Vacancy, v.VacancyNumber AS VacancyNumber, s.Note FROM studentcompany s LEFT JOIN vacancy v ON s.Vacancy = v.ID INNER JOIN student s1 ON s.Student = s1.ID";
+                return "SELECT s.ID, s.Student,CONCAT(s1.Surname,\" \", s1.Name,\" \", s1.Patronymic) AS StudentFullName, s.NameOfCompany, s.Status, s.Post, s.YearOfEmployment, s.Vacancy, v.VacancyNumber AS VacancyNumber, s.Salary, s.NameOfStateDepartment, s.Note FROM studentcompany s LEFT JOIN vacancy v ON s.Vacancy = v.ID INNER JOIN student s1 ON s.Student = s1.ID";
             }
         }
 
@@ -160,8 +161,7 @@ namespace EmploymentDepartment.BL
         }
 
         #endregion
-
-
+      
         public List<Student> GetStudents(string dbQuery)
         {
             return GetEntities<Student>(dbQuery);
@@ -214,7 +214,7 @@ namespace EmploymentDepartment.BL
 
         public List<Vacancy> GetVacancies()
         {
-            return GetEntities<Vacancy>(Vacancy);
+            return GetEntities<Vacancy>(Vacancy + " WHERE s.Vacancy IS NULL");
         }
 
         public List<Faculty> GetFaculties(string dbQuery)

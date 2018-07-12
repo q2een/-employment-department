@@ -76,11 +76,12 @@ namespace EmploymentDepartment
             this.mainDgv.Name = "mainDgv";
             this.mainDgv.RowHeadersVisible = false;
             this.mainDgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.mainDgv.Size = new System.Drawing.Size(737, 399);
+            this.mainDgv.Size = new System.Drawing.Size(734, 411);
             this.mainDgv.TabIndex = 0;
             this.mainDgv.TimeFilter = false;
             this.mainDgv.SortStringChanged += new System.EventHandler(this.mainDgv_SortStringChanged);
             this.mainDgv.FilterStringChanged += new System.EventHandler(this.mainDgv_FilterStringChanged);
+            this.mainDgv.SizeChanged += new System.EventHandler(this.mainDgv_SizeChanged);
             this.mainDgv.DoubleClick += new System.EventHandler(this.mainDgv_DoubleClick);
             this.mainDgv.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.mainDgv_PreviewKeyDown);
             // 
@@ -90,7 +91,7 @@ namespace EmploymentDepartment
             this.noDataBox.Image = global::EmploymentDepartment.Properties.Resources.nodata;
             this.noDataBox.Location = new System.Drawing.Point(0, 0);
             this.noDataBox.Name = "noDataBox";
-            this.noDataBox.Size = new System.Drawing.Size(737, 399);
+            this.noDataBox.Size = new System.Drawing.Size(734, 411);
             this.noDataBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.noDataBox.TabIndex = 1;
             this.noDataBox.TabStop = false;
@@ -100,10 +101,11 @@ namespace EmploymentDepartment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 399);
+            this.ClientSize = new System.Drawing.Size(734, 411);
             this.Controls.Add(this.noDataBox);
             this.Controls.Add(this.mainDgv);
             this.Icon = global::EmploymentDepartment.Properties.Resources._16;
+            this.MinimumSize = new System.Drawing.Size(750, 450);
             this.Name = "DataViewForm";
             this.Text = "DataViewForm";
             this.Load += new System.EventHandler(this.DataViewForm_Load);

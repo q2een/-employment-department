@@ -51,11 +51,10 @@ namespace EmploymentDepartment.BL
         [DisplayName("Факультет")]
         public string FacultyName { get; set; }
 
-        public int Faculty { get; set; }
-
-        [Browsable(false)]
         public EducationLevelType LevelOfEducation { get; set; }
 
+        public int Faculty { get; set; }
+         
         [DisplayName("Уровень образования")]
         public string EducationLevel
         {

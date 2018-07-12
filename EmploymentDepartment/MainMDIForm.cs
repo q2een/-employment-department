@@ -251,6 +251,7 @@ namespace EmploymentDepartment
         {
             try
             {
+                saveFileDialog.Filter = "Лист .xls|*.xls";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     var active = ActiveMdiChild as IDataSourceView;
@@ -428,7 +429,7 @@ namespace EmploymentDepartment
         // Показать список работы студентов. Обработка события нажатия на пункт меню.
         private void dataStudentCompaniesMI_Click(object sender, EventArgs e)
         {
-            ShowEditDataViewForm("Места работы студентов", Entities.GetStudentCompanies());
+            ShowEditDataViewForm<IStudentCompany>("Места работы студентов", Entities.GetStudentCompanies());
         }
 
         // Показать список студентов. Обработка события нажатия на пункт меню.
@@ -704,6 +705,150 @@ namespace EmploymentDepartment
             // Закрываем текущее окно.
             isUnlogin = true;
             this.Close();
+        }
+
+        private void selfEmploymentMI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var student = GetEntityFromActiveChild<Student>();
+
+                if (student == null)
+                    return;
+
+                saveFileDialog.Filter = "Документ MS Word .docx|*.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var doc = new WordFile(Directory.GetCurrentDirectory() + @"\templates\selfEmployment.docx");
+
+                    doc.ReplaceWordText("{surname}", student.Surname);
+                    doc.ReplaceWordText("{name}", student.Name);
+                    doc.ReplaceWordText("{patronymic}", student.Patronymic);
+                    doc.ReplaceWordText("{year}", student.YearOfGraduation.ToString());
+                    doc.ReplaceWordText("{specialization}", student.Specialization);
+
+                    doc.Save(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void reportStatementMI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileDialog.Filter = "Документ MS Word .docx|*.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    new StatementReportForm(DBGetter, saveFileDialog.FileName).ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private T GetEntityFromActiveChild<T>() where T:class, IIdentifiable
+        {
+            T entity = null;
+
+            if (ActiveMdiChild is DataViewForm<T>)
+            {
+                entity = (ActiveMdiChild as DataViewForm<T>).GetSelectedEntity();
+            }
+
+            if (ActiveMdiChild is MDIChild<T>)
+            {
+                if ((ActiveMdiChild as MDIChild<T>).Type == ActionType.Add)
+                    return entity;
+
+                entity = (ActiveMdiChild as MDIChild<T>).Entity;
+            }
+
+            return entity;
+        }
+
+        private void reportCertificateMI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var studentCompany = GetEntityFromActiveChild<StudentCompany>();
+
+                if (studentCompany == null)
+                    return;
+
+                var student = Entities.GetStudent(studentCompany.Student);
+
+                if (student == null)
+                    return;
+
+                saveFileDialog.Filter = "Документ MS Word .docx|*.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var doc = new WordFile(Directory.GetCurrentDirectory() + @"\templates\certificate.docx");
+
+                    doc.ReplaceWordText("{surname}", student.Surname);
+                    doc.ReplaceWordText("{name}", student.Name);
+                    doc.ReplaceWordText("{patronymic}", student.Patronymic);
+                    doc.ReplaceWordText("{specialization}", student.Specialization);
+                    doc.ReplaceWordText("{year}", studentCompany.YearOfEmployment.ToString());
+                    doc.ReplaceWordText("{salary}", studentCompany.Salary.ToString());
+                    doc.ReplaceWordText("{company}", studentCompany.NameOfCompany.ToString());
+
+                    doc.Save(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void reportConfirmationOfArrivalMI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var studentCompany = GetEntityFromActiveChild<IStudentCompany>();
+
+                if (studentCompany == null)
+                    return;
+
+                var student = Entities.GetStudent(studentCompany.Student);
+
+                if (student == null)
+                    return;
+
+                saveFileDialog.Filter = "Документ MS Word .docx|*.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var template = student.SelfEmployment ? "confirmationOfArrivalSelf" : "confirmationOfArrival";
+                    var doc = new WordFile(Directory.GetCurrentDirectory() + $@"\templates\{template}.docx");
+
+                    doc.ReplaceWordText("{surname}", student.Surname);
+                    doc.ReplaceWordText("{name}", student.Name);
+                    doc.ReplaceWordText("{patronymic}", student.Patronymic);
+                    doc.ReplaceWordText("{specialization}", student.Specialization);
+                    doc.ReplaceWordText("{year}", studentCompany.YearOfEmployment.ToString());
+                    doc.ReplaceWordText("{salary}", studentCompany.Salary.ToString());
+                    doc.ReplaceWordText("{company}", studentCompany.NameOfCompany.ToString());
+
+                    doc.Save(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

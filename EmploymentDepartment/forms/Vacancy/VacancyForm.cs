@@ -28,134 +28,6 @@ namespace EmploymentDepartment
             }
         }
 
-        #region IVacancy implementation
-
-        public new string VacancyNumber
-        {
-            get
-            {
-                return tbVacancyNumber.Text;
-            }
-
-            set
-            {
-                tbVacancyNumber.Text = value;
-            }
-        }
-
-        public new string Post
-        {
-            get
-            {
-                return tbPost.Text;
-            }
-
-            set
-            {
-                tbPost.Text = value;
-            }
-        }
-
-        public new int Employer
-        {
-            get
-            {
-                return LinkCompany.ID;
-            }
-
-            set
-            {
-                LinkCompany = main?.Entities?.GetCompany(value);
-            }
-        }
-
-        public new string WorkArea
-        {
-            get
-            {
-                return tbWorkArea.Text;
-            }
-
-            set
-            {
-                tbWorkArea.Text = value;
-            }
-        }
-
-        public new decimal Salary
-        {
-            get
-            {
-                decimal value;
-                if (Decimal.TryParse(tbSalary.Text, out value))
-                    return value;
-
-                return 0;
-            }
-
-            set
-            {
-                tbSalary.Text = value.ToString();
-            }
-        }
-
-        public new string SalaryNote
-        {
-            get
-            {
-                return tbSalaryNote.Text;
-            }
-
-            set
-            {
-                tbSalaryNote.Text = value;
-            }
-        }
-
-        public new int Gender
-        {
-            get
-            {
-                return cmbGender.SelectedIndex + 1;
-            }
-
-            set
-            {
-                cmbGender.SelectedIndex = value - 1;
-            }
-        }
-
-        public new string Features
-        {
-            get
-            {
-                return tbFeatures.Text;
-            }
-
-            set
-            {
-                tbFeatures.Text = value;
-            }
-        }
-
-        string IVacancy.CompanyName
-        {
-            get
-            {
-                return LinkCompany?.Name;
-            }
-        }
-
-        public new string GenderName
-        {
-            get
-            {
-                return cmbGender.Text;
-            }
-        }
-
-        #endregion
-
         public VacancyForm(ActionType type, IVacancy entity = null) : base (type, entity)
         {
             InitializeComponent();
@@ -290,6 +162,144 @@ namespace EmploymentDepartment
             mainPanel.Enabled = Type != ActionType.View;
             lblVacanciesCount.Visible = tbVacanciesCount.Visible = Type == ActionType.Add;
         }
+
+        private void tbSalary_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ',')
+            {
+                if (tbSalary.Text.Length == 0)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                e.Handled = tbSalary.Text.IndexOf(",") != -1;
+                return;                 
+            }
+
+            e.Handled = !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+
+        #region IVacancy implementation
+
+        public new string VacancyNumber
+        {
+            get
+            {
+                return tbVacancyNumber.Text;
+            }
+
+            set
+            {
+                tbVacancyNumber.Text = value;
+            }
+        }
+
+        public new string Post
+        {
+            get
+            {
+                return tbPost.Text;
+            }
+
+            set
+            {
+                tbPost.Text = value;
+            }
+        }
+
+        public new int Employer
+        {
+            get
+            {
+                return LinkCompany.ID;
+            }
+
+            set
+            {
+                LinkCompany = main?.Entities?.GetCompany(value);
+            }
+        }
+
+        public new string WorkArea
+        {
+            get
+            {
+                return tbWorkArea.Text;
+            }
+
+            set
+            {
+                tbWorkArea.Text = value;
+            }
+        }
+
+        public new decimal Salary
+        {
+            get
+            {
+                decimal value;
+                if (Decimal.TryParse(tbSalary.Text, out value))
+                    return value;
+
+                return 0;
+            }
+
+            set
+            {
+                tbSalary.Text = value.ToString();
+            }
+        }
+
+        public new string SalaryNote
+        {
+            get
+            {
+                return tbSalaryNote.Text;
+            }
+
+            set
+            {
+                tbSalaryNote.Text = value;
+            }
+        }
+
+        public new int Gender
+        {
+            get
+            {
+                return cmbGender.SelectedIndex + 1;
+            }
+
+            set
+            {
+                cmbGender.SelectedIndex = value - 1;
+            }
+        }
+
+        public new string Features
+        {
+            get
+            {
+                return tbFeatures.Text;
+            }
+
+            set
+            {
+                tbFeatures.Text = value;
+            }
+        }
+        
+        public new string GenderName
+        {
+            get
+            {
+                return cmbGender.Text;
+            }
+        }
+
+        #endregion
 
     }
 }

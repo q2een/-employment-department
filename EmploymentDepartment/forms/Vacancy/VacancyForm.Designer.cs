@@ -228,6 +228,7 @@
             this.tbSalary.Name = "tbSalary";
             this.tbSalary.Size = new System.Drawing.Size(200, 22);
             this.tbSalary.TabIndex = 2;
+            this.tbSalary.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSalary_KeyPress);
             this.tbSalary.Validating += new System.ComponentModel.CancelEventHandler(this.tbSalaryDecimal_Validating);
             // 
             // companyPanel

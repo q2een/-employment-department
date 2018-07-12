@@ -28,11 +28,14 @@ namespace EmploymentDepartment
         #region IStudentCompany
         public int ID { get; set; }
         public int Student { get; set; }
-        string IStudentCompany.CompanyName { get; set; }
+        public string NameOfCompany { get; set; }
         public bool Status { get; set; }
         public int? Vacancy { get; set; }
         public string Post { get; set; }
         public string Note { get; set; }
+        public decimal? Salary { get; set; }
+        public string NameOfStateDepartment { get; set; }
+        public int YearOfEmployment { get; set; }
 
         public string StudentFullName { get; }
         public string StatusText { get; }

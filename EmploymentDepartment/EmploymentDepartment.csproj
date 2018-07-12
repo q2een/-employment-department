@@ -11,6 +11,21 @@
     <AssemblyName>EmploymentDepartment</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -74,7 +89,7 @@
     <Compile Include="forms\Company\BaseCompanyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\StudentCompany\BaseStudentCompenyForm.cs">
+    <Compile Include="forms\StudentCompany\BaseStudentCompanyForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\Student\BaseStudentForm.cs">
@@ -154,6 +169,12 @@
     <Compile Include="MainMDIForm.Designer.cs">
       <DependentUpon>MainMDIForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="modalforms\StatementReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modalforms\StatementReportForm.Designer.cs">
+      <DependentUpon>StatementReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="modalforms\Specialization\SpecializationForm.cs">
@@ -201,6 +222,9 @@
     <EmbeddedResource Include="modalforms\PreferentialCategory\PreferentialCategoryForm.resx">
       <DependentUpon>PreferentialCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="modalforms\StatementReportForm.resx">
+      <DependentUpon>StatementReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -231,6 +255,21 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="templates\certificate.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\confirmationOfArrival.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\confirmationOfArrivalSelf.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\selfEmployment.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\statement.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EmploymentDepartment.BL\EmploymentDepartment.BL.csproj">
@@ -302,6 +341,23 @@
     <None Include="Resources\add.png" />
     <None Include="Resources\addvacancy.png" />
     <None Include="Resources\no-data.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -151,8 +151,8 @@ namespace EmploymentDepartment
                                          "c.ContactName AS 'Имя (Контактное лицо)', c.ContactPatronymic AS 'Отчество (Контактное лицо)',c.Phone AS 'Телефон',"+
                                          "c.Email AS 'Электронный адрес', c.Note AS 'Примечание' FROM company c";
 
-        private const string studentcompanies = "SELECT CONCAT(s1.Surname,' ', s1.Name,' ', s1.Patronymic) AS 'ФИО студента', s1.ApplicationFormNumber AS 'Шифр анкеты студента'," + 
-                                                "s1.StudyGroup AS 'Группа', s.CompanyName AS 'Наименование предприятия',(CASE WHEN s.Status <> 0 THEN 'Работает' ELSE 'Не работает' END) AS 'Статус', s.Post AS 'Должность'," +
+        private const string studentcompanies = "SELECT CONCAT_WS(' ',s1.Surname, s1.Name, s1.Patronymic) AS 'ФИО студента', s1.ApplicationFormNumber AS 'Шифр анкеты студента'," + 
+                                                "s1.StudyGroup AS 'Группа', s.NameOfCompany AS 'Наименование предприятия',(CASE WHEN s.Status <> 0 THEN 'Работает' ELSE 'Не работает' END) AS 'Статус', s.Post AS 'Должность'," +
                                                 "v.VacancyNumber AS 'Шифр занимаемой вакансии', s.YearOfEmployment AS 'Год трудоустройства', s.Note AS 'Примечание' FROM studentcompany s LEFT JOIN student s1 ON s.Student = s1.ID LEFT JOIN vacancy v ON s.Vacancy = v.ID";
 
         private const string vacancies = "SELECT v.VacancyNumber AS 'Шифр вакансии', c.Name AS 'Предприятие', v.Post AS 'Должность', v.WorkArea AS 'Рабочая область',"+

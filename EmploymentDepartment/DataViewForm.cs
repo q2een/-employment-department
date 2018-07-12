@@ -75,7 +75,7 @@ namespace EmploymentDepartment
         {
             if (!(this.MdiParent is MainMDIForm) && main == null)
                 throw new ArgumentNullException();
-
+            
             this.main = main == null ? this.MdiParent as MainMDIForm : main;
         }
 
@@ -218,6 +218,12 @@ namespace EmploymentDepartment
         void IDataView.Remove()
         {
             throw new NotImplementedException();
+        }
+
+        private void mainDgv_SizeChanged(object sender, EventArgs e)
+        {
+            mainDgv.AutoResizeColumns();
+            mainDgv.StretchLastColumn();
         }
     }
 }

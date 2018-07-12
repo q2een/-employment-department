@@ -72,8 +72,12 @@ namespace EmploymentDepartment
                 linkVacancy.Tag = value;
                 string text = value == null ? "Выбрать вакансию ..." : $"Вакансия №{value.VacancyNumber}";
                 linkVacancy.Text = Extentions.ShortenString(text, vacancyPanel.Width - linkVacancyClear.Width - 90, linkVacancy.Font);
-                tbCompany.Text = value == null ? "" : main.Entities.GetCompany(value.Employer)?.Name;
+                var compnany = value == null ? null : main.Entities.GetCompany(value.Employer);
+
+                tbCompany.Text = compnany == null ? "" : compnany?.Name;
+                tbNameOfStateDepartment.Text = compnany == null ? "" : compnany?.NameOfStateDepartment;
                 tbPost.Text = value?.Post;
+                tbSalary.Text = value?.Salary.ToString();
 
                 linkVacancyClear.Visible = Type != ActionType.View;
             }
@@ -84,6 +88,8 @@ namespace EmploymentDepartment
             vacancyPanel.Enabled = cbUnivercityEmployment.Checked;
             tbCompany.Enabled = !cbUnivercityEmployment.Checked;
             tbPost.Enabled = !cbUnivercityEmployment.Checked;
+            tbSalary.Enabled = !cbUnivercityEmployment.Checked;
+            tbNameOfStateDepartment.Enabled = !cbUnivercityEmployment.Checked; 
 
             if (!cbUnivercityEmployment.Checked)
             {
@@ -97,6 +103,23 @@ namespace EmploymentDepartment
                 errorProvider.SetError(tbCompany, "");
                 errorProvider.SetError(tbPost, "");
             }
+        }
+
+        private void tbSalary_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ',')
+            {
+                if (tbSalary.Text.Length == 0)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                e.Handled = tbSalary.Text.IndexOf(",") != -1;
+                return;
+            }
+
+            e.Handled = !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
 
         private void StudentCompanyForm_Load(object sender, EventArgs e)
@@ -224,9 +247,22 @@ namespace EmploymentDepartment
             else
                 errorProvider.SetError(linkVacancy, "");
         }
+
+        private void TBRequire_Validating(object sender, CancelEventArgs e) => this.RequiredTextBox_Validating(sender, e);
+
+        private void cmbStatus_Validating(object sender, CancelEventArgs e) => this.RequiredComboBox_Validating(sender, e);
+
         #endregion
 
         #region IStudentCompany implementation
+        
+        public new string StudentFullName
+        {
+            get
+            {
+                return LinkStudent == null ? null : $"{LinkStudent.Surname} {LinkStudent.Name} {LinkStudent.Patronymic}";
+            }
+        }
 
         public new int Student
         {
@@ -240,7 +276,33 @@ namespace EmploymentDepartment
             }
         }
 
-        string IStudentCompany.CompanyName
+        public new int? Vacancy
+        {
+            get
+            {
+                return LinkVacancy?.ID;
+            }
+
+            set
+            {
+                LinkVacancy = value == null ? null : main?.Entities?.GetVacancy((int)value);
+            }
+        }
+        
+        public new string NameOfStateDepartment
+        {
+            get
+            {
+                return tbNameOfStateDepartment.Text;
+            }
+
+            set
+            {
+                tbNameOfStateDepartment.Text = value;
+            }
+        }
+      
+        public new string NameOfCompany
         {
             get
             {
@@ -265,19 +327,6 @@ namespace EmploymentDepartment
             }
         }
 
-        public new int? Vacancy
-        {
-            get
-            {
-                return LinkVacancy?.ID;
-            }
-
-            set
-            {
-                LinkVacancy = Vacancy == null ? null : main?.Entities?.GetVacancy((int)value);
-            }
-        }
-
         public new string Post
         {
             get
@@ -291,6 +340,56 @@ namespace EmploymentDepartment
             }
         }
 
+        public new string StatusText
+        {
+            get
+            {
+                return cmbStatus.Text;
+            }
+        }
+
+        public new decimal? Salary
+        {
+            get
+            {
+                decimal value;
+                if (Decimal.TryParse(tbSalary.Text, out value))
+                    return value;
+
+                return 0;
+            }
+
+            set
+            {
+                tbSalary.Text = value.ToString();
+            }
+        }
+         
+        public new string VacancyNumber
+        {
+            get
+            {
+                return LinkVacancy?.VacancyNumber;
+            }
+        }
+
+        public new int YearOfEmployment
+        {
+            get
+            {
+                int year;
+                if (!Int32.TryParse(tbYearOfEmployment.Text, out year))
+                    return 0;
+
+                return year;
+            }
+
+            set
+            {
+                tbYearOfEmployment.Text = value.ToString();
+            }
+        }
+         
         public new string Note
         {
             get
@@ -303,31 +402,7 @@ namespace EmploymentDepartment
                 tbNote.Text = value;
             }
         }
-
-        public new string StudentFullName
-        {
-            get
-            {
-                return LinkStudent == null ? null : $"{LinkStudent.Surname} {LinkStudent.Name} {LinkStudent.Patronymic}";
-            }
-        }
-
-        public new string StatusText
-        {
-            get
-            {
-                return cmbStatus.Text;
-            }
-        }
-
-        public new string VacancyNumber
-        {
-            get
-            {
-                return LinkVacancy?.VacancyNumber;
-            }
-        }
-
+         
         #endregion
     }
 }

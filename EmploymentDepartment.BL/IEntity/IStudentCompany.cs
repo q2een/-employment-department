@@ -11,16 +11,25 @@ namespace EmploymentDepartment.BL
         string StudentFullName { get; }
 
         int Student { get; set; }
+        
+        int? Vacancy { get; set; }
+        
+        [DisplayName("Название гос. органа")]
+        string NameOfStateDepartment { get; set; }
 
         [DisplayName("Предприятие")]
-        string CompanyName { get; set; }
+        string NameOfCompany { get; set; }
         
         bool Status { get; set; }              
 
-        int? Vacancy { get; set; }
-
         [DisplayName("Должность")]
         string Post { get; set; }
+
+        [DisplayName("Оклад")]
+        decimal? Salary { get; set; }
+         
+        [DisplayName("Год трудоустройства")]
+        int YearOfEmployment { get; set; }
 
         [DisplayName("Статус")]
         string StatusText { get;}

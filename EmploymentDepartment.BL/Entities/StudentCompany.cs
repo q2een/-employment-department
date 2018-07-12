@@ -11,16 +11,25 @@ namespace EmploymentDepartment.BL
         public string StudentFullName { get; set; }
 
         public int Student { get; set; }
-
+         
+        public int? Vacancy { get; set; }
+        
+        [DisplayName("Название гос. органа")]
+        public string NameOfStateDepartment { get; set; }
+        
         [DisplayName("Предприятие")]
-        public string CompanyName { get; set; }
+        public string NameOfCompany { get; set; }
 
         public bool Status { get; set; }
-
-        public int? Vacancy { get; set; }
-
+        
         [DisplayName("Должность")]
         public string Post { get; set; }
+
+        [DisplayName("Оклад")]
+        public decimal? Salary { get; set; }
+
+        [DisplayName("Год трудоустройства")]
+        public int YearOfEmployment { get; set; }
 
         [DisplayName("Статус")]
         public string StatusText
@@ -30,10 +39,10 @@ namespace EmploymentDepartment.BL
                 return Status ? "Работает" : "Не работает";
             }
         }
-
+        
         [DisplayName("Шифр вакансии")]
         public string VacancyNumber { get; set; }
-
+                 
         [DisplayName("Примечание")]
         public string Note { get; set; }
 
@@ -41,7 +50,7 @@ namespace EmploymentDepartment.BL
         {
             get
             {
-                return CompanyName;
+                return NameOfCompany;
             }
             set
             {
