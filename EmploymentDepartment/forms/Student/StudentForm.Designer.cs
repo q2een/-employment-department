@@ -1449,7 +1449,6 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(649, 604);
             this.Controls.Add(this.mainPanel);
-            this.DoubleBuffered = true;
             this.Icon = global::EmploymentDepartment.Properties.Resources._16;
             this.MinimumSize = new System.Drawing.Size(665, 400);
             this.Name = "StudentForm";

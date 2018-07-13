@@ -69,6 +69,31 @@ namespace EmploymentDepartment
                 this.Close();
         }
 
+        // Обработка события закрытия окна.
+        private void MDIChild_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Type == ActionType.View)
+                return;
+
+            var nameValue = this.Entity.GetPropertiesDifference<T>(this as T, "");
+
+            if (nameValue.Count() == 0)
+                return;
+
+            this.Activate();
+
+            DialogResult dialogResult = MessageBox.Show("Закрытие окна приведет к потере несохраненных изменений. Сохранить изменения перед закрытием?", "Закрытие окна", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            switch (dialogResult)
+            {
+                case DialogResult.Yes:
+                    this.Save();
+                    break;
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    break;
+            }
+        }
+
         protected virtual void SetFormText()
         {
             throw new NotImplementedException();
@@ -136,7 +161,10 @@ namespace EmploymentDepartment
 
         public virtual void Remove()
         {
-            throw new NotImplementedException();
+            Entity.RemoveEntity(main?.Entities);
+
+            if (ViewContext != null)
+                ViewContext.RemoveDataTableRow(Entity);
         }
 
         public virtual void AddNewItem()
@@ -149,6 +177,5 @@ namespace EmploymentDepartment
             throw new NotImplementedException();
         }
         #endregion
-
     }
 }

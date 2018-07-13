@@ -42,7 +42,6 @@ namespace EmploymentDepartment
         }
 
         #region IVacancy
-        public int ID { get; set; }
         public string VacancyNumber { get; set; }
         public string Post { get; set; }
         public int Employer { get; set; }
@@ -59,15 +58,10 @@ namespace EmploymentDepartment
 
         #region IEditable implementation.
 
-        public override void Remove()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Save()
         {
             var msg = $"Информация о вакансии обновлена";
-            if (this.UpdateFormEntityInDataBase<BaseVacancyForm, IVacancy>(main.DBGetter, msg, "ID", "Name", "CompanyName", "GenderName"))
+            if (this.UpdateFormEntityInDataBase<BaseVacancyForm, IVacancy>(main.DataBase, msg, "ID", "Name", "CompanyName", "GenderName"))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IVacancy);

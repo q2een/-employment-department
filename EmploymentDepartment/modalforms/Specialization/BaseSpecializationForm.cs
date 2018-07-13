@@ -44,7 +44,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о профиле подготовки обновлена\nНаименование профиля: {((ISpecialization)this).Name}";
 
-            if (this.UpdateFormEntityInDataBase<BaseSpecializationForm, ISpecialization>(main.DBGetter, msg, "ID", "FacultyName", "LevelOfEducationName"))
+            if (this.UpdateFormEntityInDataBase<BaseSpecializationForm, ISpecialization>(main.DataBase, msg, "ID", "FacultyName", "LevelOfEducationName"))
             {
                 SetFormText();
                 main.UpdateFaculties();
@@ -57,16 +57,11 @@ namespace EmploymentDepartment
             
         }
 
-        public override void Remove()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void AddNewItem()
         {
             var msg = $"Профиль подготовки добавлен в базу.\nНаименование профиля: {((ISpecialization)this).Name}";
 
-            if (this.InsertFormEntityToDataBase<BaseSpecializationForm, ISpecialization>(main.DBGetter, msg, "ID", "FacultyName", "LevelOfEducationName"))
+            if (this.InsertFormEntityToDataBase<BaseSpecializationForm, ISpecialization>(main.DataBase, msg, "ID", "FacultyName", "LevelOfEducationName"))
             {
                 SetFormText();
                 main.UpdateFaculties();

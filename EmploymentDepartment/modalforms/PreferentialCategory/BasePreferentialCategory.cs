@@ -51,7 +51,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о льготной категории обновлена";
 
-            if (this.UpdateFormEntityInDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DBGetter, msg, "ID"))
+            if (this.UpdateFormEntityInDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DataBase, msg, "ID"))
             {
                 SetFormText();
                 main.UpdatePreferentialCategories();
@@ -62,15 +62,10 @@ namespace EmploymentDepartment
             }
         }
 
-        public override void Remove()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void AddNewItem()
         {
             var msg = $"Льготная категория добавлена в базу";
-            if (this.InsertFormEntityToDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DBGetter, msg, "ID"))
+            if (this.InsertFormEntityToDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DataBase, msg, "ID"))
             {
                 main.UpdatePreferentialCategories();
 

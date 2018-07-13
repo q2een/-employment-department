@@ -72,7 +72,7 @@ namespace EmploymentDepartment
                 linkVacancy.Tag = value;
                 string text = value == null ? "Выбрать вакансию ..." : $"Вакансия №{value.VacancyNumber}";
                 linkVacancy.Text = Extentions.ShortenString(text, vacancyPanel.Width - linkVacancyClear.Width - 90, linkVacancy.Font);
-                var compnany = value == null ? null : main.Entities.GetCompany(value.Employer);
+                var compnany = value == null ? null : main.Entities.GetSingle<Company>(value.Employer);
 
                 tbCompany.Text = compnany == null ? "" : compnany?.Name;
                 tbNameOfStateDepartment.Text = compnany == null ? "" : compnany?.NameOfStateDepartment;
@@ -149,6 +149,22 @@ namespace EmploymentDepartment
             return errorProvider;
         }
 
+        public override void AddNewItem()
+        {
+            if (Vacancy != null)
+            {
+                var vacancies = main.Entities.GetSudentsByVacancyID((int)Vacancy);
+
+                if (vacancies != null && vacancies.Count() != 0)
+                {
+                    System.Windows.Forms.MessageBox.Show("Выбранную вакансию уже занимает другой студент. Укажите другую вакансию", "Операция добавления", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                    return;
+                }
+            }
+
+            base.AddNewItem();
+        }
+
         #region link elements events
         // Нажатие на элемент управления "Очистить". Обработка события.
         private void linkClear_Click(object sender, EventArgs e)
@@ -196,7 +212,7 @@ namespace EmploymentDepartment
         {
             if (LinkStudent == null)
             {
-                var form = new DataViewForm<Student>("Выбор студента", main.Entities.GetStudents(), main, this);
+                var form = new DataViewForm<Student>("Выбор студента", main.Entities.GetEntities<Student>(), main, this);
                 form.ShowDialog(this);
                 return;
             }
@@ -208,7 +224,7 @@ namespace EmploymentDepartment
         {
             if (LinkVacancy == null)
             {
-                var form = new DataViewForm<Vacancy>("Выбор вакансии", main.Entities.GetVacancies(), main, this);
+                var form = new DataViewForm<Vacancy>("Выбор вакансии", main.Entities.GetEntities<Vacancy>(), main, this);
                 form.ShowDialog(this);
                 return;
             }
@@ -272,7 +288,7 @@ namespace EmploymentDepartment
             }
             set
             {
-                LinkStudent = main?.Entities?.GetStudent(value);
+                LinkStudent = main?.Entities?.GetSingle<Student>(value);
             }
         }
 
@@ -285,7 +301,7 @@ namespace EmploymentDepartment
 
             set
             {
-                LinkVacancy = value == null ? null : main?.Entities?.GetVacancy((int)value);
+                LinkVacancy = value == null ? null : main?.Entities?.GetSingle<Vacancy>((int)value);
             }
         }
         
@@ -293,7 +309,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbNameOfStateDepartment.Text;
+                return string.IsNullOrEmpty(tbNameOfStateDepartment.Text.Trim()) ? null : tbNameOfStateDepartment.Text;
             }
 
             set
@@ -394,7 +410,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbNote.Text;
+                return string.IsNullOrEmpty(tbNote.Text.Trim()) ? null : tbNote.Text;
             }
 
             set

@@ -1,12 +1,18 @@
-﻿using System.ComponentModel;
-
-namespace EmploymentDepartment.BL
+﻿namespace EmploymentDepartment.BL
 {
+    /// <summary>
+    /// Представляет объект, который можно идентифицировать.
+    /// </summary>
     public interface IIdentifiable
     {
-        [DisplayName("ID")]
+        /// <summary>
+        /// Идентификатор.
+        /// </summary>             
         int ID { get; set; }
 
+        /// <summary>
+        /// Имя.
+        /// </summary>
         string Name { get; set; }
     }
 }

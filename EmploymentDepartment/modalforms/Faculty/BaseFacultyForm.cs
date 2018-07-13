@@ -51,7 +51,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о факультете\nНаименование факультета: {((IFaculty)this).Name}";
 
-            if (this.UpdateFormEntityInDataBase<BaseFacultyForm, IFaculty>(main.DBGetter, msg, "ID"))
+            if (this.UpdateFormEntityInDataBase<BaseFacultyForm, IFaculty>(main.DataBase, msg, "ID"))
             {
                 SetFormText();
                 main.UpdateFaculties();
@@ -61,16 +61,11 @@ namespace EmploymentDepartment
             }
         }
 
-        public override void Remove()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void AddNewItem()
         {
             var msg = $"Факультет добавлен в базу.\nНаименование факультета: {((IFaculty)this).Name}";
 
-            if (this.InsertFormEntityToDataBase<BaseFacultyForm, IFaculty>(main.DBGetter, msg, "ID"))
+            if (this.InsertFormEntityToDataBase<BaseFacultyForm, IFaculty>(main.DataBase, msg, "ID"))
             {
                 SetFormText();
                 main.UpdateFaculties();

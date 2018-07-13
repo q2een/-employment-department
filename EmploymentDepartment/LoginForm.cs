@@ -1,6 +1,5 @@
 ﻿using EmploymentDepartment.BL;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace EmploymentDepartment
@@ -22,31 +21,7 @@ namespace EmploymentDepartment
                 ShowMainForm(Properties.Settings.Default.connection);
             }
         }
-
-        // Возвращает роль пользователя в зависимости от полученных из БД данных.
-        private UserRole GetRole(List<Dictionary<string, object>> grants)
-        {
-            foreach (var dict in grants)
-                foreach (var value in dict.Values)
-                {
-                    if (!value.ToString().Contains("ON *.*") && !value.ToString().Contains("ON `work`"))
-                        continue;
-
-                    if (value.ToString().Contains("ALL PRIVILEGES"))
-                        return UserRole.Administrator;
-
-                    if (value.ToString().Contains("SELECT") && value.ToString().Contains("INSERT") && value.ToString().Contains("UPDATE"))
-                    {
-                        if (value.ToString().Contains("DELETE"))
-                            return UserRole.Administrator;
-
-                        return UserRole.Moderator;
-                    }
-                }  
-
-            return UserRole.None;
-        }
-
+        
         // Отображает главное окно программы при корректно введенных пользователем данных.
         private void ShowMainForm(string connection)
         {
@@ -54,9 +29,7 @@ namespace EmploymentDepartment
             {
                 var db = new MySqlDB(connection);
 
-                var grants = db.GetCollection("SHOW GRANTS FOR CURRENT_USER()");
-
-                var role = GetRole(grants);
+                var role = db.GetUserRole();
 
                 if (role == UserRole.None)
                     throw new Exception("У Вас нет прав для доступа к базе данных");

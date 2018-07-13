@@ -4,6 +4,7 @@
     {
         System.Collections.Generic.IEnumerable<T> Data { get; }        
         void SetDataTableRow<T>(T entity) where T : BL.IIdentifiable;
-        T GetSelectedEntity(); 
+        void RemoveDataTableRow<T>(T entity) where T : BL.IIdentifiable;
+        T GetSelectedEntity();        
     }
 }

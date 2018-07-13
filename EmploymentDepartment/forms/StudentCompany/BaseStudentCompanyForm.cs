@@ -10,7 +10,6 @@ namespace EmploymentDepartment
     {
         protected BaseStudentCompanyForm() : base()
         {
-
         }
 
         public BaseStudentCompanyForm(ActionType type, IStudentCompany entity = null) : base(type, entity)
@@ -25,8 +24,7 @@ namespace EmploymentDepartment
         {
         }
          
-        #region IStudentCompany
-        public int ID { get; set; }
+        #region IStudentCompany 
         public int Student { get; set; }
         public string NameOfCompany { get; set; }
         public bool Status { get; set; }
@@ -56,22 +54,18 @@ namespace EmploymentDepartment
         public override void Save()
         {
             var msg = $"Информация о месте работы студента обновлена";
-            if (this.UpdateFormEntityInDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DBGetter, msg, "ID", "Name", "StudentFullName", "StatusText", "VacancyNumber"))
+            if (this.UpdateFormEntityInDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DataBase, msg, "ID", "Name", "StudentFullName", "StatusText", "VacancyNumber"))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IStudentCompany);
             }
         }
 
-        public override void Remove()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void AddNewItem()
         {
             var msg = $"Информация о месте работы студента добавлена в базу";
-            if(this.InsertFormEntityToDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DBGetter, msg, "ID", "Name", "StudentFullName", "StatusText", "VacancyNumber"))
+
+            if (this.InsertFormEntityToDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DataBase, msg, "ID", "Name", "StudentFullName", "StatusText", "VacancyNumber"))
             {
                 ViewContext?.SetDataTableRow(this as IStudentCompany);
                 this.Close();

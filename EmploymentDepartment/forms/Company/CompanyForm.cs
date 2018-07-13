@@ -12,6 +12,53 @@ namespace EmploymentDepartment
 {
     public partial class CompanyForm : BaseCompanyForm, ICompany
     {
+        // Модальное окно для просмотра информации.
+        public CompanyForm(MainMDIForm mainForm, ICompany company) : base(mainForm, company)
+        {
+            InitializeComponent();
+        }
+
+        public CompanyForm(ActionType type, ICompany entity, IDataListView<ICompany> viewContext) : base(type, entity, viewContext)
+        {
+            InitializeComponent();
+        }
+
+        public CompanyForm(ActionType type, ICompany company = null) :base(type,company)
+        {
+            InitializeComponent();
+        }
+
+        protected override ErrorProvider GetErrorProvider()
+        {
+            return errorProvider;
+        }
+
+        private void tbSurname_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Extentions.SurnameKeyPressValidator(e.KeyChar);
+        }
+
+        private void CompanyFrom_SizeChanged(object sender, EventArgs e)
+        {
+            mainPanel.AutoScroll = this.Size.Height < 575;
+        }
+
+        private void CompanyFrom_Load(object sender, EventArgs e)
+        {
+            mainPanel.Enabled = Type != ActionType.View;
+        }
+
+        // Валидация обязательного текстового поля.
+        private void RequiredTB_Validating(object sender, CancelEventArgs e) => this.RequiredTextBox_Validating(sender, e);
+        
+        #region Поведение кнопок "..." (Редакторовать)
+        protected void lableEdit_Click(object sender, EventArgs e) => this.lblEdit_Click(sender, e);
+
+        protected void lableEdit_MouseHover(object sender, EventArgs e) => this.lblEdit_MouseHover(sender, e);
+
+        protected void lableEdit_MouseLeave(object sender, EventArgs e) => this.lblEdit_MouseLeave(sender, e);
+        #endregion
+
         #region ICompany implementation.
 
         public new string Address
@@ -70,7 +117,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbContactPatronymic.Text;
+                return string.IsNullOrEmpty(tbContactPatronymic.Text) ? null : tbContactPatronymic.Text;
             }
 
             set
@@ -109,7 +156,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbPatronymic.Text;
+                return string.IsNullOrEmpty(tbPatronymic.Text) ? null : tbPatronymic.Text;
             }
 
             set
@@ -135,7 +182,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbDistrict.Text;
+                return string.IsNullOrEmpty(tbDistrict.Text) ? null : tbDistrict.Text;
             }
 
             set
@@ -161,7 +208,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbNameOfStateDepartment.Text;
+                return string.IsNullOrEmpty(tbNameOfStateDepartment.Text) ? null : tbNameOfStateDepartment.Text;
             }
 
             set
@@ -174,7 +221,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbNote.Text;
+                return string.IsNullOrEmpty(tbNote.Text) ? null : tbNote.Text;
             }
 
             set
@@ -200,7 +247,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbRegion.Text;
+                return string.IsNullOrEmpty(tbRegion.Text) ? null : tbRegion.Text;
             }
 
             set
@@ -223,54 +270,6 @@ namespace EmploymentDepartment
         }
 
         #endregion
-
-        // Модальное окно для просмотра информации.
-        public CompanyForm(MainMDIForm mainForm, ICompany company) : base(mainForm, company)
-        {
-            InitializeComponent();
-        }
-
-        public CompanyForm(ActionType type, ICompany entity, IDataListView<ICompany> viewContext) : base(type, entity, viewContext)
-        {
-            InitializeComponent();
-        }
-
-        public CompanyForm(ActionType type, ICompany company = null) :base(type,company)
-        {
-            InitializeComponent();
-        }
-
-        protected override ErrorProvider GetErrorProvider()
-        {
-            return errorProvider;
-        }
-
-        private void tbSurname_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = Extentions.SurnameKeyPressValidator(e.KeyChar);
-        }
-
-        private void CompanyFrom_SizeChanged(object sender, EventArgs e)
-        {
-            mainPanel.AutoScroll = this.Size.Height < 575;
-        }
-
-        private void CompanyFrom_Load(object sender, EventArgs e)
-        {
-            mainPanel.Enabled = Type != ActionType.View;
-        }
-
-        #region Поведение кнопок "..." (Редакторовать)
-        protected void lableEdit_Click(object sender, EventArgs e) => this.lblEdit_Click(sender, e);
-
-        protected void lableEdit_MouseHover(object sender, EventArgs e) => this.lblEdit_MouseHover(sender, e);
-
-        protected void lableEdit_MouseLeave(object sender, EventArgs e) => this.lblEdit_MouseLeave(sender, e);
-        #endregion
-
-        // Валидация обязательного текстового поля.
-        private void RequiredTB_Validating(object sender, CancelEventArgs e) => this.RequiredTextBox_Validating(sender, e);
-
 
     }
 }

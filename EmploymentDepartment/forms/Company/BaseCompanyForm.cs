@@ -41,12 +41,10 @@ namespace EmploymentDepartment
         }
 
         #region ICompany
-        public int ID { get; set; }
         public string CompanyNumber { get; set; }
-        public string Name { get; set; }
         public string NameOfStateDepartment { get; set; }
         public string City { get; set; }
-        public string Region { get; set; }
+        string ICompany.Region { get; set; }
         public string District { get; set; }
         public string Address { get; set; }
         public string DirectorName { get; set; }
@@ -74,23 +72,18 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о предприятии «{(this as ICompany).Name}» обновлена";
 
-            if (this.UpdateFormEntityInDataBase<BaseCompanyForm, ICompany>(main.DBGetter, msg, "ID"))
+            if (this.UpdateFormEntityInDataBase<BaseCompanyForm, ICompany>(main.DataBase, msg, "ID"))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as ICompany);
             }
         }
 
-        public override void Remove()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void AddNewItem()
         {
             var msg = $"Предприятие «{(this as ICompany).Name}»\nдобавлено в базу";
 
-            if (this.InsertFormEntityToDataBase<BaseCompanyForm, ICompany>(main.DBGetter, msg, "ID"))
+            if (this.InsertFormEntityToDataBase<BaseCompanyForm, ICompany>(main.DataBase, msg, "ID"))
             {
                 ViewContext?.SetDataTableRow(this as IStudent);
                 this.Close();

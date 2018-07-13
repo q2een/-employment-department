@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "MDIChild";
             this.Text = "MDIChild";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MDIChild_FormClosing);
             this.Load += new System.EventHandler(this.MDIChild_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MDIChild_KeyDown);
             this.ResumeLayout(false);

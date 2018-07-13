@@ -7,9 +7,8 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public class MySqlDB: IDataBase
+    public class MySqlDB : IDataBase
     {
-        private readonly string connection = "Database=work;Data Source=localhost;User Id=root;Password=root;CharSet=utf8;";
 
         public MySqlDB()
         {
@@ -20,8 +19,15 @@ namespace EmploymentDepartment.BL
         {
             this.connection = connection;
         }
+         
+        public UserRole GetUserRole()
+        {
+            var grants = GetCollection("SHOW GRANTS FOR CURRENT_USER()");
 
-        public List<Dictionary<string, object>> GetCollection(string query)
+            return GetRole(grants);
+        }
+        
+        public IEnumerable<Dictionary<string, object>> GetCollection(string query)
         {
             List<Dictionary<string, object>> queryList = new List<Dictionary<string, object>>();
             try
@@ -101,25 +107,11 @@ namespace EmploymentDepartment.BL
             return table;
         }
 
-        private Exception ExecptionHandler(MySqlException MySqlEx)
-        {
-            switch (MySqlEx.Number)
-            {
-                case 0: return new Exception("Проверьте правильность введенных данных для подключения");
-                case 1451: return new Exception("Не удалось выполнить операцию. Данаая запись используется в других таблицах!");
-                case 1042: // Исключения при отсутствии соединения
-                case 1044: // Или неправильно введенной комбинации "имя пользователя - пароль"
-                case 1045: return new Exception("Не удалось подключиться к базе данных. Возможно, отсутствует подключение к Интернет или база данных недоступна");
-                case 1264: return new Exception("Проверьте правильность введенных данных!");
-                default: return new Exception("Ошибка при обращении к базе данных.Ошибка №" + MySqlEx.Number);
-            }
-        }
-
         public long Insert(string tableName, Dictionary<string, object> nameValue)
         {
             if (nameValue == null || nameValue.Count == 0)
                 throw new ArgumentNullException();
-            
+
             string fields = "", values = "";
 
             foreach (var kv in nameValue)
@@ -145,7 +137,7 @@ namespace EmploymentDepartment.BL
                 throw ExecptionHandler(MySqlEx);
             }
         }
-
+        
         public void Update(string tableName, int id, Dictionary<string, object> fields)
         {
             if (fields == null || fields.Count == 0)
@@ -155,14 +147,18 @@ namespace EmploymentDepartment.BL
             foreach (var kv in fields)
             {
                 object value = TypeValidator(kv.Value);
-                
+
                 values += $"{kv.Key} = {value},";
             }
 
             Query($"UPDATE {tableName} SET {values.TrimEnd(',')} WHERE id = {id}");
         }
-
-        public object GetSimple(string query)
+       
+        /// <summary>
+        /// Выполняет запрос к БД
+        /// </summary>
+        /// <param name="query">Строка запроса к БД</param>
+        public void Query(string query)
         {
             try
             {
@@ -170,7 +166,7 @@ namespace EmploymentDepartment.BL
                 {
                     var command = new MySqlCommand(query, conn);
                     conn.Open();
-                    return command.ExecuteScalar();
+                    command.ExecuteNonQuery();
                 }
             }
             catch (MySqlException MySqlEx)
@@ -179,6 +175,30 @@ namespace EmploymentDepartment.BL
             }
         }
 
+        // Возвращает роль пользователя в зависимости от полученных из БД данных.
+        private UserRole GetRole(IEnumerable<Dictionary<string, object>> grants)
+        {
+            foreach (var dict in grants)
+                foreach (var value in dict.Values)
+                {
+                    if (!value.ToString().Contains("ON *.*") && !value.ToString().Contains("ON `work`"))
+                        continue;
+
+                    if (value.ToString().Contains("ALL PRIVILEGES"))
+                        return UserRole.Administrator;
+
+                    if (value.ToString().Contains("SELECT") && value.ToString().Contains("INSERT") && value.ToString().Contains("UPDATE"))
+                    {
+                        if (value.ToString().Contains("DELETE"))
+                            return UserRole.Administrator;
+
+                        return UserRole.Moderator;
+                    }
+                }
+
+            return UserRole.None;
+        }
+        
         private object TypeValidator(object obj)
         {
             if (obj == null)
@@ -196,25 +216,27 @@ namespace EmploymentDepartment.BL
             return $"'{obj}'";
         }
 
-        /// <summary>
-        /// Выполняет запрос к БД
-        /// </summary>
-        /// <param name="query">Строка запроса к БД</param>
-        private void Query(string query)
+        private Exception ExecptionHandler(MySqlException MySqlEx)
         {
-            try
+            switch (MySqlEx.Number)
             {
-                using (var conn = new MySqlConnection(this.connection))
-                {
-                    var command = new MySqlCommand(query, conn);
-                    conn.Open();
-                    command.ExecuteNonQuery();
-                }
-            }
-            catch (MySqlException MySqlEx)
-            {
-                throw ExecptionHandler(MySqlEx);
+                case 0: return new Exception("Проверьте правильность введенных данных для подключения");
+                case 1451: return new Exception("Не удалось выполнить операцию. Данаая запись используется в других таблицах!");
+                case 1042: // Исключения при отсутствии соединения
+                case 1044: // Или неправильно введенной комбинации "имя пользователя - пароль"
+                case 1045: return new Exception("Не удалось подключиться к базе данных. Возможно, отсутствует подключение к Интернет или база данных недоступна");
+                case 1264: return new Exception("Проверьте правильность введенных данных!");
+                default: return new Exception("Ошибка при обращении к базе данных.Ошибка №" + MySqlEx.Number);
             }
         }
+
+        public string Connection
+        {
+            get
+            {
+                return connection;
+            }
+        }
+        private readonly string connection = "Database=work;Data Source=localhost;User Id=root;Password=root;CharSet=utf8;";
     }
 }

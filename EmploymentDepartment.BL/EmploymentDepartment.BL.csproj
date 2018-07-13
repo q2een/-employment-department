@@ -44,10 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBase\MySqlDB.cs" />
-    <Compile Include="DataBase\EntitiesGetter.cs" />
+    <Compile Include="DataBase\IEntityGetter.cs" />
+    <Compile Include="MySQL\MySqlDB.cs" />
+    <Compile Include="MySQL\MySqlGetter.cs" />
     <Compile Include="DataBase\IDataBase.cs" />
     <Compile Include="DataBase\Table.cs" />
+    <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\Faculty.cs" />
+    <Compile Include="Entities\PreferentialCategory.cs" />
+    <Compile Include="Entities\Specialization.cs" />
+    <Compile Include="Entities\Student.cs" />
+    <Compile Include="Entities\StudentCompany.cs" />
+    <Compile Include="Entities\Vacancy.cs" />
+    <Compile Include="Enums\UserRole.cs" />
     <Compile Include="IEntity\ICompany.cs" />
     <Compile Include="IEntity\IFaculty.cs" />
     <Compile Include="IIdentifiable.cs" />
@@ -56,15 +65,8 @@
     <Compile Include="IEntity\IStudent.cs" />
     <Compile Include="IEntity\IStudentCompany.cs" />
     <Compile Include="IEntity\IVacancy.cs" />
-    <Compile Include="Entities\Company.cs" />
-    <Compile Include="enums\EducationLevelType.cs" />
-    <Compile Include="Entities\Faculty.cs" />
-    <Compile Include="enums\GenderType.cs" />
-    <Compile Include="Entities\PreferentialCategory.cs" />
-    <Compile Include="Entities\Specialization.cs" />
-    <Compile Include="Entities\Student.cs" />
-    <Compile Include="Entities\StudentCompany.cs" />
-    <Compile Include="Entities\Vacancy.cs" />
+    <Compile Include="Enums\EducationLevelType.cs" />
+    <Compile Include="Enums\GenderType.cs" />
     <Compile Include="Extention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

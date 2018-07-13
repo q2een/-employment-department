@@ -159,11 +159,25 @@ namespace EmploymentDepartment
             if (row == null)
                 row = this.dataTable.NewRow();
 
-            row.ItemArray = entity.GetDisplayedPropertiesValue();
+            var newValues = entity.GetDisplayedPropertiesValue();
+
+            for (int i = 0; i < newValues.Length; i++)
+            {
+                row[i] = newValues[i];
+            }
 
             if (this.dataTable.Rows.IndexOf(row) == -1)
-                this.dataTable.Rows.Add(row);
-            
+                this.dataTable.Rows.Add(row);  
+        }
+
+        public void RemoveDataTableRow<T>(T entity) where T : IIdentifiable
+        {
+            var row = this.dataTable.Rows.Find(entity.ID);
+
+            if (row == null)
+                return;
+
+            this.dataTable.Rows.Remove(row);
         }
 
         private void mainDgv_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -174,7 +188,7 @@ namespace EmploymentDepartment
                 return;
             }
 
-            if ((e.KeyCode != Keys.Space && e.KeyCode != Keys.F2 && e.KeyCode != Keys.Insert) || mainDgv.RowCount <= 0)
+            if ((e.KeyCode != Keys.Space && e.KeyCode != Keys.F2 && e.KeyCode != Keys.Insert && e.KeyCode != Keys.Delete) || mainDgv.RowCount <= 0)
                 return;
 
             ActionType type = ActionType.View;
@@ -189,6 +203,9 @@ namespace EmploymentDepartment
                 case Keys.Insert:
                     type = ActionType.Add;
                     break;
+                case Keys.Delete:
+                    ((IDataView)this).Remove();
+                    return;
             }
 
             ShowOperationForm(type);          
@@ -208,6 +225,12 @@ namespace EmploymentDepartment
         {
             bindingSource.Sort = mainDgv.SortString;
         }
+        
+        private void mainDgv_SizeChanged(object sender, EventArgs e)
+        {
+            mainDgv.AutoResizeColumns();
+            mainDgv.StretchLastColumn();
+        }
 
         void IDataView.View() => ShowOperationForm(ActionType.View);
 
@@ -217,13 +240,12 @@ namespace EmploymentDepartment
 
         void IDataView.Remove()
         {
-            throw new NotImplementedException();
-        }
+            var entity = GetSelectedEntity();
 
-        private void mainDgv_SizeChanged(object sender, EventArgs e)
-        {
-            mainDgv.AutoResizeColumns();
-            mainDgv.StretchLastColumn();
+            if (entity.RemoveEntity(main.Entities))
+            {
+                RemoveDataTableRow(entity);
+            }
         }
     }
 }

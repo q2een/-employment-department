@@ -65,7 +65,7 @@ namespace EmploymentDepartment
                     var nameValue = (this as IVacancy).GetPropertiesNameValuePair(true, "ID", "Name", "CompanyName", "GenderName");
 
                     // Добавляем запись в БД.
-                    this.ID = (int)main.DBGetter.Insert(EntitiesGetter.GetTableNameByType<IVacancy>(this).ToString(), nameValue);
+                    this.ID = (int)main.DataBase.Insert(MySqlGetter.GetTableNameByType<IVacancy>(this).ToString(), nameValue);
 
                     ViewContext?.SetDataTableRow(this as IVacancy);
                 }
@@ -79,11 +79,6 @@ namespace EmploymentDepartment
                 MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        public void Remove()
-        {
-            throw new NotImplementedException();
-        }
         #endregion
 
         #region Обработка событий для выбора предприятия.
@@ -92,7 +87,7 @@ namespace EmploymentDepartment
         {
             if (LinkCompany == null)
             {
-                var form = new DataViewForm<Company>("Выбор предприятия", main.Entities.GetCompanies(), main, this);
+                var form = new DataViewForm<Company>("Выбор предприятия", main.Entities.GetEntities<Company>(), main, this);
                 form.ShowDialog(this);
                 return;
             }
@@ -218,7 +213,7 @@ namespace EmploymentDepartment
 
             set
             {
-                LinkCompany = main?.Entities?.GetCompany(value);
+                LinkCompany = main?.Entities?.GetSingle<Company>(value);
             }
         }
 
@@ -226,7 +221,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbWorkArea.Text;
+                return string.IsNullOrEmpty(tbWorkArea.Text.Trim()) ? null : tbWorkArea.Text;
             }
 
             set
@@ -256,7 +251,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbSalaryNote.Text;
+                return string.IsNullOrEmpty(tbSalaryNote.Text.Trim()) ? null : tbSalaryNote.Text;
             }
 
             set
@@ -282,7 +277,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbFeatures.Text;
+                return string.IsNullOrEmpty(tbFeatures.Text.Trim()) ? null : tbFeatures.Text;
             }
 
             set
@@ -296,6 +291,14 @@ namespace EmploymentDepartment
             get
             {
                 return cmbGender.Text;
+            }
+        }
+
+        string IVacancy.CompanyName
+        {
+            get
+            {
+                return LinkCompany == null ? null : LinkCompany.Name;
             }
         }
 

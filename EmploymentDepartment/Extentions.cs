@@ -143,6 +143,7 @@ namespace EmploymentDepartment
                 BindingFlags.Instance | BindingFlags.NonPublic);
             pi.SetValue(dgv, setting, null);
         }
+
         // Обрезает строку для ее корректного отображения на окне.
         public static string ShortenString(string myString, int width, Font font)
         {
@@ -327,7 +328,7 @@ namespace EmploymentDepartment
                     return false;
 
                 // Обновляем данные
-                db.Update(EntitiesGetter.GetTableNameByType<U>(self).ToString(), self.ID, nameValue);
+                db.Update(MySqlGetter.GetTableNameByType<U>(self).ToString(), self.ID, nameValue);
 
                 MessageBox.Show(informationMessage, "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -364,7 +365,7 @@ namespace EmploymentDepartment
                 var nameValue = (self as U).GetPropertiesNameValuePair<U>(true, ignore);
 
                 // Добавляем запись в БД.
-                self.ID = (int)db.Insert(EntitiesGetter.GetTableNameByType<U>(self).ToString(), nameValue);
+                self.ID = (int)db.Insert(MySqlGetter.GetTableNameByType<U>(self).ToString(), nameValue);
 
                 MessageBox.Show(informationMessage, "Операция добавления", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -372,6 +373,31 @@ namespace EmploymentDepartment
             {                
                 MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
+            }
+
+            return true;
+        }
+
+        public static bool IsPropertiesAreNullOrDefault<T>(this T self) where T : class, IIdentifiable
+        {
+            if (self == null)
+                return true;
+
+            Type type = typeof(T);
+
+            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                try
+                {
+                    object value = type.GetProperty(property.Name).GetValue(self, null);
+
+                    if (value != null || string.IsNullOrEmpty(value.ToString()))
+                        continue;
+                }
+                catch(Exception)
+                {
+                    continue;
+                }
             }
 
             return true;

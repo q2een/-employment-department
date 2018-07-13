@@ -84,22 +84,17 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о студенте обновлена\nФИО студента: {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}";
 
-            if (this.UpdateFormEntityInDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "SelfEmploymentText", "PreferentialCategoryText"))
+            if (this.UpdateFormEntityInDataBase<BaseStudentForm, IStudent>(main.DataBase, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "SelfEmploymentText", "PreferentialCategoryText"))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IStudent);
             }
         }
 
-        public override void Remove()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void AddNewItem()
         {
             var msg = $"Студент {Surname} {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}\nдобавлен в базу";
-            if(this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(main.DBGetter, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "SelfEmploymentText", "PreferentialCategoryText"))
+            if(this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(main.DataBase, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "SelfEmploymentText", "PreferentialCategoryText"))
             {
                 ViewContext?.SetDataTableRow(this as IStudent);
                 this.Close();
