@@ -237,6 +237,7 @@ namespace EmploymentDepartment.BL
                 return connection;
             }
         }
-        private readonly string connection = "Database=work;Data Source=localhost;User Id=root;Password=root;CharSet=utf8;";
+        //private readonly string connection = "Database=work;Data Source=localhost;User Id=root;Password=root;CharSet=utf8;";
+        private readonly string connection = "Database=work;Data Source=194.79.62.216;User Id=Administrator;Password=123;CharSet=utf8;";
     }
 }

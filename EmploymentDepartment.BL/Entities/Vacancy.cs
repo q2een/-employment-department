@@ -32,7 +32,7 @@ namespace EmploymentDepartment.BL
         [DisplayName("Пол")]
         public string GenderName { get; set; }
 
-        public int Gender { get; set; }
+        public long Gender { get; set; }
 
         [DisplayName("Дополнительная информация")]
         public string Features { get; set; }

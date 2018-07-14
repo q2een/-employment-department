@@ -86,7 +86,7 @@ namespace EmploymentDepartment
          
         #region ISpecialization
         public int Faculty { get; set; }
-        public int LevelOfEducation { get; set; }
+        public long LevelOfEducation { get; set; }
         string ISpecialization.Name { get; set; }
         public string FacultyName { get; }
         public string LevelOfEducationName { get; }

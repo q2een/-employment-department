@@ -18,19 +18,20 @@ namespace EmploymentDepartment.BL
         /// <returns>Сущность из БД</returns>
         public T GetSingle<T>(int id) where T : class, IIdentifiable
         {
-            if (typeof(T) == typeof(Student))
+            var type = typeof(T);
+            if (typeof(IStudent).IsAssignableFrom(type))
                 return GetStudent(id) as T;
-            if (typeof(T) == typeof(Company))
+            if (typeof(ICompany).IsAssignableFrom(type))
                 return GetCompany(id) as T;
-            if (typeof(T) == typeof(Faculty))
+            if (typeof(IFaculty).IsAssignableFrom(type))
                 return GetFaculty(id) as T;
-            if (typeof(T) == typeof(PreferentialCategory))
+            if (typeof(IPreferentialCategory).IsAssignableFrom(type))
                 return GetPreferentialCategory(id) as T;
-            if (typeof(T) == typeof(Specialization))
+            if (typeof(ISpecialization).IsAssignableFrom(type))
                 return GetSpecialization(id) as T;
-            if (typeof(T) == typeof(StudentCompany))
+            if (typeof(IStudentCompany).IsAssignableFrom(type))
                 return GetStudentCompany(id) as T;
-            if (typeof(T) == typeof(Vacancy))
+            if (typeof(IVacancy).IsAssignableFrom(type))
                 return GetVacancy(id) as T;
 
             return null;

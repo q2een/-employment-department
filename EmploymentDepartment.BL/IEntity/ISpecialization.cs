@@ -10,7 +10,7 @@ namespace EmploymentDepartment.BL
         int Faculty { get; set; }
 
         [Browsable(false)]
-        int LevelOfEducation { get; set; }
+        long LevelOfEducation { get; set; }
 
         [DisplayName("Факультет")]
         string FacultyName { get; }

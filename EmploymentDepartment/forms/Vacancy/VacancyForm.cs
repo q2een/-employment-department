@@ -265,7 +265,7 @@ namespace EmploymentDepartment
             }
         }
 
-        public new int Gender
+        public new long Gender
         {
             get
             {
@@ -274,7 +274,7 @@ namespace EmploymentDepartment
 
             set
             {
-                cmbGender.SelectedIndex = value - 1;
+                cmbGender.SelectedIndex = (int)value - 1;
             }
         }
 

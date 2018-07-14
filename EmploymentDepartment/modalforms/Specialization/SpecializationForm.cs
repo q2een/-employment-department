@@ -48,7 +48,7 @@ namespace EmploymentDepartment
                 tbFieldOfStudy.Text = value;
             }
         }
-        public new int LevelOfEducation
+        public new long LevelOfEducation
         {
             get
             {
@@ -56,7 +56,7 @@ namespace EmploymentDepartment
             }
             set
             {
-                cmbLevelOfEducation.SelectedIndex = value - 1;
+                cmbLevelOfEducation.SelectedIndex = (int)value - 1;
             }
         }
 

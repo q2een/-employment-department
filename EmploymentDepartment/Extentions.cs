@@ -194,6 +194,21 @@ namespace EmploymentDepartment
             cmb.SelectedIndex = data.IndexOf(elem);
         }
 
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> first, params T[] second)
+        {
+            return first.Concat(second);
+        }
+
+        public static IEnumerable<T> Add<T>(this IEnumerable<T> collection, T value)
+        {
+            foreach (var item in collection)
+            {
+                yield return item;
+            }
+
+            yield return value;
+        }
+
         /// <summary>
         /// Устанавливает значения свойст одного экземпляра класса <c>self</c> значениями другого экземпляра класса<c>source</c>.
         /// </summary>

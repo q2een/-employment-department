@@ -144,42 +144,51 @@ namespace EmploymentDepartment
         // Отображает форму в зависимости от типа сущности и типа действия (ActionType).
         public void ShowFormByType<U>(ActionType type, U entity, IDataListView<U> viewContext = null) where U : class, IIdentifiable
         {
-            if (entity is IVacancy)
+            var nullEntity = typeof(U);
+
+            if (entity is IVacancy || nullEntity == typeof(IVacancy))
             { 
                 ShowFormByActionType<IVacancy, VacancyForm>(type, entity as IVacancy, viewContext as IDataListView<IVacancy>);
+                return;
             }
 
-            if (entity is IStudent)
+            if (entity is IStudent || nullEntity == typeof(IStudent))
             {
                 ShowFormByActionType<IStudent, StudentForm>(type, entity as IStudent, viewContext as IDataListView<IStudent>);
+                return;
             }  
 
-            if (entity is ICompany)
+            if (entity is ICompany || nullEntity == typeof(ICompany))
             {
                 ShowFormByActionType<ICompany, CompanyForm>(type, entity as ICompany, viewContext as IDataListView<ICompany>);
+                return;
             }
            
-            if (entity is IStudentCompany)
+            if (entity is IStudentCompany || nullEntity == typeof(IStudentCompany))
             {
                 ShowFormByActionType<IStudentCompany, StudentCompanyForm>(type, entity as IStudentCompany, viewContext as IDataListView<IStudentCompany>);
+                return;
             }
 
-            if (entity is ISpecialization)
+            if (entity is ISpecialization || typeof(ISpecialization).IsAssignableFrom(nullEntity))
             {
                 var form = new SpecializationForm(this,type, entity as ISpecialization, viewContext as IDataListView<ISpecialization>);
                 form.ShowDialog();
+                return;
             }   
 
-            if (entity is IFaculty)
+            if (entity is IFaculty || typeof(IFaculty).IsAssignableFrom(nullEntity))
             {
                 var form = new FacultyForm(this, type, entity as IFaculty, viewContext as IDataListView<IFaculty>);
                 form.ShowDialog();
+                return;
             }
 
-            if (entity is IPreferentialCategory)
+            if (entity is IPreferentialCategory || typeof(IPreferentialCategory).IsAssignableFrom(nullEntity))
             {
                 var form = new PreferentialCategoryForm(this, type, entity as IPreferentialCategory, viewContext as IDataListView<IPreferentialCategory>);
                 form.ShowDialog();
+                return;
             }
         }
 
@@ -380,17 +389,17 @@ namespace EmploymentDepartment
 
         private void dataFacultiesMI_Click(object sender, EventArgs e)
         {
-            ShowEditDataViewForm("Факультеты", this.Faculties);
+            ShowEditDataViewForm<IFaculty>("Факультеты", this.Faculties);
         }
 
         private void dataSpecializationsMI_Click(object sender, EventArgs e)
         {
-            ShowEditDataViewForm("Профили подготовки", this.Specializations);
+            ShowEditDataViewForm<ISpecialization>("Профили подготовки", this.Specializations);
         }
 
         private void dataPreferentialCategoriesMI_Click(object sender, EventArgs e)
         {
-            ShowEditDataViewForm("Льготные категории", this.PreferentialCategories);
+            ShowEditDataViewForm<IPreferentialCategory>("Льготные категории", this.PreferentialCategories);
         }
 
         #endregion
@@ -461,26 +470,26 @@ namespace EmploymentDepartment
         {
             var active = this.ActiveMdiChild;
 
-            var isDataView = active is IDataView && (active as IDataView).ItemsCount != 0;
+            var isDataView = active is IDataView;
 
             editMI.Visible = isDataView || (active is IEditable);
 
             // Пункты меню для просмотра списка элементов.
 
-            entityViewMI.Visible = isDataView;
-            tsViewItem.Visible = tsViewItemSeparator.Visible = isDataView;
+            entityViewMI.Visible = isDataView && (active as IDataView).ItemsCount != 0;
+            tsViewItem.Visible = tsViewItemSeparator.Visible = isDataView && (active as IDataView).ItemsCount != 0;
 
             entityInserMI.Visible = tsAddNewItem.Visible = isDataView;
-            entityEditMI.Visible = tsEditItem.Visible = isDataView;
-            entityEditSeparatorMI.Visible = isDataView && userRole == UserRole.Administrator;
-            entityAddNEditSeparatorMI.Visible = isDataView;
+            entityEditMI.Visible = tsEditItem.Visible = isDataView && (active as IDataView).ItemsCount != 0;
+            entityEditSeparatorMI.Visible = (isDataView && (active as IDataView).ItemsCount != 0) && userRole == UserRole.Administrator;
+            entityAddNEditSeparatorMI.Visible = isDataView && (active as IDataView).ItemsCount != 0;
 
             // Пункты меню для добавления / редактирования элементов.
             var isIEditable = active is IEditable;
 
             saveMI.Visible = tsSaveChanges.Visible = saveSeparatorMI.Visible = isIEditable && ((active as IEditable).Type == ActionType.Edit || (active as IEditable).Type == ActionType.Add);
             setDefaultValueMI.Visible = setDefaultValueSeparatorMI.Visible = saveSeparatorMI.Visible = isIEditable && ((active as IEditable).Type == ActionType.Edit);
-            entityRemoveMI.Visible = tsDeleteItem.Visible = ((isIEditable && ((active as IEditable).Type == ActionType.Edit)) || isDataView) && userRole == UserRole.Administrator;
+            entityRemoveMI.Visible = tsDeleteItem.Visible = ((isIEditable && ((active as IEditable).Type == ActionType.Edit)) || (isDataView && (active as IDataView).ItemsCount != 0)) && userRole == UserRole.Administrator;
             tsNavigationSeparator.Visible = tsDeleteItem.Visible;
             setDefaultValueSeparatorMI.Visible = setDefaultValueSeparatorMI.Visible && userRole == UserRole.Administrator;
 
@@ -579,19 +588,6 @@ namespace EmploymentDepartment
         #endregion
         
         #endregion
-
-        private void экспортДанныхToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            /*var student = EntGetter.GetStudent(1);
-
-            var doc = new WordFile(@"E:\it's my\EmploymentDepartment\EmploymentDepartment\bin\Debug\1.docx");
-            doc.ReplaceWordText("{surname}", student.Surname);
-            doc.ReplaceWordText("{name}", student.Name);
-            doc.ReplaceWordText("{patronymic}", student.Patronymic);
-
-            doc.Save(@"E:\it's my\EmploymentDepartment\EmploymentDepartment\bin\Debug\2.docx");*/
-
-        }
          
         // Обработка события загрузки окна.
         private void MainMDIForm_Load(object sender, EventArgs e)
@@ -767,6 +763,11 @@ namespace EmploymentDepartment
             {
                 MessageBox.Show(ex.Message, "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void aboutMI_Click(object sender, EventArgs e)
+        {
+            new AboutForm().ShowDialog(this);
         }
     }
 }

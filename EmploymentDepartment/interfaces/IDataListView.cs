@@ -1,10 +1,13 @@
-﻿namespace EmploymentDepartment
+﻿using System.Collections;
+
+namespace EmploymentDepartment
 {
-    public interface IDataListView<out T> : IDataView, IDataSourceView where T: BL.IIdentifiable
+    public interface IDataListView<T> : IDataView, IDataSourceView where T: BL.IIdentifiable
     {
-        System.Collections.Generic.IEnumerable<T> Data { get; }        
-        void SetDataTableRow<T>(T entity) where T : BL.IIdentifiable;
-        void RemoveDataTableRow<T>(T entity) where T : BL.IIdentifiable;
-        T GetSelectedEntity();        
+        System.Collections.Generic.IEnumerable<T> Data { get; }
+
+        void SetDataTableRow(T entity);
+        void RemoveDataTableRow(T entity);
+        T GetSelectedEntity();  
     }
 }

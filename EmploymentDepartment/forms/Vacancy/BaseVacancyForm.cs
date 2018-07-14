@@ -57,7 +57,7 @@ namespace EmploymentDepartment
         public decimal Salary { get; set; }
         public bool? IsActive { get; set; }
         public string SalaryNote { get; set; }
-        public int Gender { get; set; }
+        public long Gender { get; set; }
         public string Features { get; set; }
 
         string IVacancy.CompanyName { get; }

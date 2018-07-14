@@ -67,32 +67,16 @@ namespace EmploymentDepartment
             this.Type = type;
             this.Text = text;
 
-            if (data.Count() == 0)
-            {
-                noDataBox.Visible = true;
-                return;
-            }
-
             dataTable = new DataTable();
             dataSet = new DataSet();
 
             bindingSource.DataSource = this.dataSet;
 
             mainDgv.DataSource = bindingSource;
-
-            SetData();
-            
             mainDgv.DoubleBuffered(true);
 
-            // Получаем размер колонок для корректного отображения содержимого.
-            foreach (DataGridViewColumn column in mainDgv.Columns)
-            {
-                columnsSize += column.Width;
-            }
+            Init();
 
-            // Если текущий размер таблицы больше растаягиваем колонки.
-            if(columnsSize < mainDgv.Size.Width)
-                mainDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         /// <summary>
@@ -112,7 +96,7 @@ namespace EmploymentDepartment
         // Данный элемент DataGridView не поддерживает сортировку для польлзовательских коллекций.
         // Для корректной работы сортировки и фильтрации не стоит менят логику привязки данных.
         private void SetData()
-        {
+        { 
             dataTable = dataSet.Tables.Add("Entity");
 
             // Получаем наименования свойств объекта в формате "Имя свойства" - "Отображаемое имя свойства".
@@ -166,6 +150,9 @@ namespace EmploymentDepartment
         {
             int id;
 
+            if (mainDgv.SelectedRows.Count == 0)
+                return null;
+
             if (!Int32.TryParse(mainDgv.SelectedRows[0].Cells[0].Value.ToString(), out id))
                 return null;
 
@@ -180,12 +167,24 @@ namespace EmploymentDepartment
         /// в обратном случае создает новую строку.
         /// </summary>
         /// <param name="entity">Сущность, значениями которой необходимо заполнить строку</param>
-        public void SetDataTableRow<T>(T entity) where T : IIdentifiable
+        public void SetDataTableRow(T entity)
         {
+            if (entity == null)
+                return;
+
+            if(ItemsCount == 0)
+            {
+                Data = Data.Add(entity);
+                Init();
+            }
+
             var row = this.dataTable.Rows.Find(entity.ID);
 
             if (row == null)
+            {
                 row = this.dataTable.NewRow();
+                Data.Add(entity);
+            }
 
             var newValues = entity.GetDisplayedPropertiesValue();
 
@@ -202,7 +201,7 @@ namespace EmploymentDepartment
         /// Удаляет строку с идентификатором сущности из таблицы.
         /// </summary>
         /// <param name="entity">Сущность, строку с которой необходимо удалить</param>
-        public void RemoveDataTableRow<T>(T entity) where T : IIdentifiable
+        public void RemoveDataTableRow(T entity)
         {
             var row = this.dataTable.Rows.Find(entity.ID);
 
@@ -227,9 +226,32 @@ namespace EmploymentDepartment
             excel.Save(fileName);
         }
         
+        private void Init()
+        {
+            if (Data.Count() == 0)
+            {
+                noDataBox.Visible = true;
+                return;
+            }
+
+            SetData();
+
+            // Получаем размер колонок для корректного отображения содержимого.
+            foreach (DataGridViewColumn column in mainDgv.Columns)
+            {
+                columnsSize += column.Width;
+            }
+
+            // Если текущий размер таблицы больше растаягиваем колонки.
+            if (columnsSize < mainDgv.Size.Width)
+                mainDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            noDataBox.Visible = false;
+        }
+
         // Отображает форму в зависимости от типа.
         private void ShowOperationForm(ActionType type)
-        { 
+        {
             main.ShowFormByType(type, GetSelectedEntity(), this);
         }
 
