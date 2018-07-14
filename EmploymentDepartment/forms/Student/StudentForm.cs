@@ -26,6 +26,9 @@ namespace EmploymentDepartment
                 int width = this.Width - lblPreferentialCategory.Width - 70;
 
                 linkPreferentialCategory.Text = Extentions.ShortenString(text, width, linkPreferentialCategory.Font);
+
+                if (Type == ActionType.View && value == null)
+                    linkPreferentialCategory.Enabled = false;
             }
         }
 
@@ -53,7 +56,10 @@ namespace EmploymentDepartment
         // Обработка события загрузки формы.
         private void StudentForm_Load(object sender, EventArgs e)
         {
-            mainPanel.Enabled = Type != ActionType.View;
+            if (Type == ActionType.View)
+            {
+                mainPanel.DisableControls(linkPreferentialCategory);
+            }
         }
 
         // Обработка события изменения размера формы.

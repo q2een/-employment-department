@@ -2,23 +2,61 @@
 using FastMember;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    // TODO: create NoData image
+    /// <summary>
+    /// Предоставляет окно для просмотра данны в табличном виде с возможностью сортировки и фильтрации данных.
+    /// </summary>
     public partial class DataViewForm<T>: Form, IDataListView<T> where T:class,IIdentifiable
     {
+        /// <summary>
+        /// Возвращает коллекцию отображаемых данных.
+        /// </summary>
+        public IEnumerable<T> Data { get; private set; }
+
+        /// <summary>
+        /// Возвращает количество элементов в коллекции для отображения.
+        /// </summary>
+        public int ItemsCount
+        {
+            get
+            {
+                return Data.Count();
+            }
+        }
+
+        /// <summary>
+        /// Возвращает тип отображаения экземпляра формы.
+        /// </summary>
+        public ViewType Type { get; private set; }
+
+        /// <summary>
+        /// Возвращает источник данных для формы.
+        /// </summary>
+        public BindingSource DataSource
+        {
+            get
+            {
+                return bindingSource;
+            }
+        }
+
         private MainMDIForm main;
         private DataTable dataTable = null;
         private DataSet dataSet = null;
         private readonly ILinkPickable selectParent;
-        
+        private int columnsSize;
+
+        /// <summary>
+        /// Предоставляет окно для просмотра данных в табличном виде с возможностью сортировки и фильтрации данных.
+        /// </summary>
+        /// <param name="text">Текст, отображаемый в заголовке окна</param>
+        /// <param name="type">Тип просмотра данного окна</param>
+        /// <param name="data">Коллекция данных для отображения</param>
         public DataViewForm(string text, ViewType type, IEnumerable<T> data)
         {
             if (data == null)
@@ -45,40 +83,34 @@ namespace EmploymentDepartment
             SetData();
             
             mainDgv.DoubleBuffered(true);
-            mainDgv.StretchLastColumn();
+
+            // Получаем размер колонок для корректного отображения содержимого.
+            foreach (DataGridViewColumn column in mainDgv.Columns)
+            {
+                columnsSize += column.Width;
+            }
+
+            // Если текущий размер таблицы больше растаягиваем колонки.
+            if(columnsSize < mainDgv.Size.Width)
+                mainDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        /// <summary>
+        /// Предоставляет окно для просмотра данных в табличном виде с возможностью сортировки, фильтрации и выбора данных.
+        /// </summary>
+        /// <param name="text">Текст, отображаемый в заголовке окна</param>
+        /// <param name="data">Коллекция данных для отображения</param>
+        /// <param name="mainForm">Экзземпляр главного MDI окна</param>
+        /// <param name="parent">Экземпляр родительского окна, которое является инициатором вызова данной формы</param>
         public DataViewForm(string text, IEnumerable<T> data, MainMDIForm mainForm, ILinkPickable parent) :this(text,ViewType.Select,data)
         {
             this.selectParent = parent;
             this.main = mainForm;
         }
-
-        public IEnumerable<T> Data { get; set; }
-        public int ItemsCount
-        {
-            get
-            {
-                return Data.Count();
-            }
-        }
-        public ViewType Type { get; set; }
-        public BindingSource DataSource
-        {
-            get
-            {
-                return bindingSource;
-            }
-        }
-
-        private void DataViewForm_Load(object sender, EventArgs e)
-        {
-            if (!(this.MdiParent is MainMDIForm) && main == null)
-                throw new ArgumentNullException();
-            
-            this.main = main == null ? this.MdiParent as MainMDIForm : main;
-        }
-
+        
+        // Отображает данные в сотрируемой таблице.
+        // Данный элемент DataGridView не поддерживает сортировку для польлзовательских коллекций.
+        // Для корректной работы сортировки и фильтрации не стоит менят логику привязки данных.
         private void SetData()
         {
             dataTable = dataSet.Tables.Add("Entity");
@@ -115,6 +147,9 @@ namespace EmploymentDepartment
             mainDgv.Columns["ID"].Visible = false;
         }
 
+        /// <summary>
+        /// Устанавливает выбранный элемент из таблицы в запрашиваемой форме.
+        /// </summary>
         public void SetSelected()
         {
             if (Type == ViewType.Select)
@@ -123,7 +158,10 @@ namespace EmploymentDepartment
                 this.Close();
             }
         }
-                
+
+        /// <summary>
+        /// Возвращает выбранную в данный момент в таблице сущность.
+        /// </summary>                   
         public T GetSelectedEntity()
         {
             int id;
@@ -136,23 +174,13 @@ namespace EmploymentDepartment
             return entity ?? main.Entities.GetSingle<T>(id);
         }
 
-        public void Export(string path)
-        {
-            var dt = dataTable.Copy();
-            dt.PrimaryKey = null;
-            dt.Columns.Remove("ID");
-
-            var excel = new ExcelFile(1);
-            excel.AddSheet(dt, this.Text, mainDgv.FilterString, mainDgv.SortString);
-            excel.Save(path);
-        }
-
-        private void ShowOperationForm(ActionType type)
-        { 
-            main.ShowFormByType(type, GetSelectedEntity(), this);
-        }
-
-        public void SetDataTableRow<T>(T entity) where T:IIdentifiable
+        /// <summary>
+        /// Устанавливает значения сущности <c>entity</c> в строку таблицы. 
+        /// Если строка существует с идентификатором существует - меняет ее значения,
+        /// в обратном случае создает новую строку.
+        /// </summary>
+        /// <param name="entity">Сущность, значениями которой необходимо заполнить строку</param>
+        public void SetDataTableRow<T>(T entity) where T : IIdentifiable
         {
             var row = this.dataTable.Rows.Find(entity.ID);
 
@@ -167,9 +195,13 @@ namespace EmploymentDepartment
             }
 
             if (this.dataTable.Rows.IndexOf(row) == -1)
-                this.dataTable.Rows.Add(row);  
+                this.dataTable.Rows.Add(row);
         }
 
+        /// <summary>
+        /// Удаляет строку с идентификатором сущности из таблицы.
+        /// </summary>
+        /// <param name="entity">Сущность, строку с которой необходимо удалить</param>
         public void RemoveDataTableRow<T>(T entity) where T : IIdentifiable
         {
             var row = this.dataTable.Rows.Find(entity.ID);
@@ -179,7 +211,38 @@ namespace EmploymentDepartment
 
             this.dataTable.Rows.Remove(row);
         }
+        
+        /// <summary>
+        /// Производит экспорт данных в excel файл, сохраняя фильтрацию и сортировку.
+        /// </summary>
+        /// <param name="fileName">Путь к файлу</param>
+        public void Export(string fileName)
+        {
+            var dt = dataTable.Copy();
+            dt.PrimaryKey = null;
+            dt.Columns.Remove("ID");
 
+            var excel = new ExcelFile(1);
+            excel.AddSheet(dt, this.Text, mainDgv.FilterString, mainDgv.SortString);
+            excel.Save(fileName);
+        }
+        
+        // Отображает форму в зависимости от типа.
+        private void ShowOperationForm(ActionType type)
+        { 
+            main.ShowFormByType(type, GetSelectedEntity(), this);
+        }
+
+        // Обработка события загрузки формы.
+        private void DataViewForm_Load(object sender, EventArgs e)
+        {
+            if (!(this.MdiParent is MainMDIForm) && main == null)
+                throw new ArgumentNullException();
+
+            this.main = main == null ? this.MdiParent as MainMDIForm : main;
+        }
+
+        // Обработка события нажатия на кнопку.
         private void mainDgv_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -211,33 +274,51 @@ namespace EmploymentDepartment
             ShowOperationForm(type);          
         }
 
+        // Обработка события двойного щелчка.
         private void mainDgv_DoubleClick(object sender, EventArgs e)
         {
             SetSelected();
         }
-              
+         
+        // Обработка события изменения строки фильтрации.     
         private void mainDgv_FilterStringChanged(object sender, EventArgs e)
         {
             bindingSource.Filter = mainDgv.FilterString;
         }
 
+        // Обработка события изменения строки сортировки.
         private void mainDgv_SortStringChanged(object sender, EventArgs e)
         {
             bindingSource.Sort = mainDgv.SortString;
         }
         
+        // Обработка события изменения размера окна.
         private void mainDgv_SizeChanged(object sender, EventArgs e)
         {
-            mainDgv.AutoResizeColumns();
-            mainDgv.StretchLastColumn();
+            if (columnsSize < mainDgv.Size.Width)
+                mainDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            else
+                mainDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         }
 
+        /// <summary>
+        /// Отображает окно для просмотра данных.
+        /// </summary>
         void IDataView.View() => ShowOperationForm(ActionType.View);
 
+        /// <summary>
+        /// Отображает окно для добавления данных.
+        /// </summary>
         void IDataView.Insert() => ShowOperationForm(ActionType.Add);
 
+        /// <summary>
+        /// Отображает окно для редактирования данных.
+        /// </summary>
         void IDataView.Edit() => ShowOperationForm(ActionType.Edit);
 
+        /// <summary>
+        /// Удаляет выбранную строку из БД.
+        /// </summary>
         void IDataView.Remove()
         {
             var entity = GetSelectedEntity();

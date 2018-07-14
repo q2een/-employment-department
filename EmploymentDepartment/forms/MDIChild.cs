@@ -15,6 +15,8 @@ namespace EmploymentDepartment
     public partial class MDIChild<T> : Form, IEditable<T>, IIdentifiable where T : class, IIdentifiable
     {
         protected MainMDIForm main { get; set; }
+        protected virtual string[] IngnoreProperties { get; }
+
         public T Entity { get; set; }
         public ActionType Type { get; set; }
         protected IDataListView<T> ViewContext { get; set; }
@@ -55,6 +57,8 @@ namespace EmploymentDepartment
             
             this.main = main == null ? this.MdiParent as MainMDIForm : main;
 
+            this.KeyPreview = Type == ActionType.View;
+
             SetDefaultValues();
             SetFormText();
         }
@@ -75,7 +79,7 @@ namespace EmploymentDepartment
             if (Type == ActionType.View)
                 return;
 
-            var nameValue = this.Entity.GetPropertiesDifference<T>(this as T, "");
+            var nameValue = this.Entity.GetPropertiesDifference<T>(this as T, IngnoreProperties);
 
             if (nameValue.Count() == 0)
                 return;
@@ -161,10 +165,13 @@ namespace EmploymentDepartment
 
         public virtual void Remove()
         {
-            Entity.RemoveEntity(main?.Entities);
+            if(!Entity.RemoveEntity(main?.Entities))
+                return;
 
             if (ViewContext != null)
                 ViewContext.RemoveDataTableRow(Entity);
+
+            this.Close();
         }
 
         public virtual void AddNewItem()

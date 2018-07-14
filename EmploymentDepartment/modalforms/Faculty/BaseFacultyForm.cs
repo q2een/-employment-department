@@ -1,5 +1,4 @@
 ﻿using EmploymentDepartment.BL;
-using System;
 
 namespace EmploymentDepartment
 {
@@ -37,6 +36,14 @@ namespace EmploymentDepartment
             }
         }
 
+        protected override string[] IngnoreProperties
+        {
+            get
+            {
+                return new string[] { "ID" };
+            }
+        }
+
         #region IFaculty
         string IFaculty.Name { get; set; }
         #endregion
@@ -51,7 +58,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о факультете\nНаименование факультета: {((IFaculty)this).Name}";
 
-            if (this.UpdateFormEntityInDataBase<BaseFacultyForm, IFaculty>(main.DataBase, msg, "ID"))
+            if (this.UpdateFormEntityInDataBase<BaseFacultyForm, IFaculty>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 main.UpdateFaculties();
@@ -65,12 +72,15 @@ namespace EmploymentDepartment
         {
             var msg = $"Факультет добавлен в базу.\nНаименование факультета: {((IFaculty)this).Name}";
 
-            if (this.InsertFormEntityToDataBase<BaseFacultyForm, IFaculty>(main.DataBase, msg, "ID"))
+            if (this.InsertFormEntityToDataBase<BaseFacultyForm, IFaculty>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 main.UpdateFaculties();
                 main.UpdateSpecializations();
-                ViewContext?.SetDataTableRow(this as IFaculty);
+
+                var viewForm = ViewContext ?? main.GetDataViewForm<IFaculty>();
+                viewForm?.SetDataTableRow(this as IFaculty);
+
                 this.Close();
             }
         }

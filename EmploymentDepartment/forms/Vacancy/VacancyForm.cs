@@ -62,12 +62,14 @@ namespace EmploymentDepartment
                         return;
 
                     // Поля не учитываются в таблице в БД.
-                    var nameValue = (this as IVacancy).GetPropertiesNameValuePair(true, "ID", "Name", "CompanyName", "GenderName");
+                    var nameValue = (this as IVacancy).GetPropertiesNameValuePair(true, IngnoreProperties);
 
                     // Добавляем запись в БД.
                     this.ID = (int)main.DataBase.Insert(MySqlGetter.GetTableNameByType<IVacancy>(this).ToString(), nameValue);
 
-                    ViewContext?.SetDataTableRow(this as IVacancy);
+                    var viewForm = ViewContext ?? main.GetDataViewForm<IVacancy>();
+
+                    viewForm?.SetDataTableRow(this as IVacancy);
                 }
 
                 MessageBox.Show("Информация о вакансии добавлена в базу", "Операция добавления", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -154,7 +156,11 @@ namespace EmploymentDepartment
 
         private void VacancyForm_Load(object sender, EventArgs e)
         {
-            mainPanel.Enabled = Type != ActionType.View;
+            if (Type == ActionType.View)
+            {
+                mainPanel.DisableControls(linkCompany);
+            }
+
             lblVacanciesCount.Visible = tbVacanciesCount.Visible = Type == ActionType.Add;
         }
 
@@ -182,9 +188,8 @@ namespace EmploymentDepartment
         {
             get
             {
-                return tbVacancyNumber.Text;
+                return string.IsNullOrEmpty(tbVacancyNumber.Text.Trim()) ? null : tbVacancyNumber.Text;
             }
-
             set
             {
                 tbVacancyNumber.Text = value;

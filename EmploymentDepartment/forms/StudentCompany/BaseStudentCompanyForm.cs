@@ -23,7 +23,15 @@ namespace EmploymentDepartment
         public BaseStudentCompanyForm(MainMDIForm mainForm, IStudentCompany entity) : base(mainForm, entity)
         {
         }
-         
+
+        protected override string[] IngnoreProperties
+        {
+            get
+            {
+                return new string[] { "ID", "Name", "StudentFullName", "StatusText", "VacancyNumber" };
+            }
+        }
+
         #region IStudentCompany 
         public int Student { get; set; }
         public string NameOfCompany { get; set; }
@@ -54,7 +62,7 @@ namespace EmploymentDepartment
         public override void Save()
         {
             var msg = $"Информация о месте работы студента обновлена";
-            if (this.UpdateFormEntityInDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DataBase, msg, "ID", "Name", "StudentFullName", "StatusText", "VacancyNumber"))
+            if (this.UpdateFormEntityInDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IStudentCompany);
@@ -65,9 +73,17 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о месте работы студента добавлена в базу";
 
-            if (this.InsertFormEntityToDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DataBase, msg, "ID", "Name", "StudentFullName", "StatusText", "VacancyNumber"))
+            if (this.InsertFormEntityToDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DataBase, msg, IngnoreProperties))
             {
-                ViewContext?.SetDataTableRow(this as IStudentCompany);
+                var viewForm = ViewContext ?? main.GetDataViewForm<IStudentCompany>();
+
+                viewForm?.SetDataTableRow(this as IStudentCompany);
+
+                var vacancy = (this as IStudentCompany).Vacancy;
+
+                if (vacancy != null)
+                    main.GetDataViewForm<IVacancy>()?.RemoveDataTableRow(main.Entities.GetSingle<Vacancy>((int)vacancy));
+
                 this.Close();
             }
         }

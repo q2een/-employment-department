@@ -41,6 +41,14 @@ namespace EmploymentDepartment
             }
         }
 
+        protected override string[] IngnoreProperties
+        {
+            get
+            {
+                return new string[] { "ID", "Name", "CompanyName", "GenderName" };
+            }
+        }
+         
         #region IVacancy
         public string VacancyNumber { get; set; }
         public string Post { get; set; }
@@ -61,7 +69,7 @@ namespace EmploymentDepartment
         public override void Save()
         {
             var msg = $"Информация о вакансии обновлена";
-            if (this.UpdateFormEntityInDataBase<BaseVacancyForm, IVacancy>(main.DataBase, msg, "ID", "Name", "CompanyName", "GenderName"))
+            if (this.UpdateFormEntityInDataBase<BaseVacancyForm, IVacancy>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IVacancy);

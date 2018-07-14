@@ -82,7 +82,7 @@ namespace EmploymentDepartment
                 linkVacancyClear.Visible = Type != ActionType.View;
             }
         }
-                
+
         private void cbUnivercityEmployment_CheckedChanged(object sender, EventArgs e)
         {
             vacancyPanel.Enabled = cbUnivercityEmployment.Checked;
@@ -124,7 +124,11 @@ namespace EmploymentDepartment
 
         private void StudentCompanyForm_Load(object sender, EventArgs e)
         {
-            mainPanel.Enabled = Type != ActionType.View;
+            //mainPanel.Enabled = Type != ActionType.View;
+            if(Type == ActionType.View)
+            {
+                mainPanel.DisableControls(linkVacancy, linkStudent);
+            }
         }
 
         // Устанавливает заголовок окна.
@@ -276,7 +280,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return LinkStudent == null ? null : $"{LinkStudent.Surname} {LinkStudent.Name} {LinkStudent.Patronymic}";
+                return LinkStudent == null ? null : $"{LinkStudent.Surname} {LinkStudent.Name} {LinkStudent.Patronymic}".Trim();
             }
         }
 

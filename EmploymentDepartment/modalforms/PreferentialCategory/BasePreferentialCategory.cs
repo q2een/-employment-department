@@ -37,6 +37,14 @@ namespace EmploymentDepartment
             }
         }
 
+        protected override string[] IngnoreProperties
+        {
+            get
+            {
+                return new string[] { "ID" };
+            }
+        }
+
         #region IPreferentialCategory
         string IPreferentialCategory.Name { get; set; }
         #endregion
@@ -51,7 +59,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о льготной категории обновлена";
 
-            if (this.UpdateFormEntityInDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DataBase, msg, "ID"))
+            if (this.UpdateFormEntityInDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 main.UpdatePreferentialCategories();
@@ -65,11 +73,12 @@ namespace EmploymentDepartment
         public override void AddNewItem()
         {
             var msg = $"Льготная категория добавлена в базу";
-            if (this.InsertFormEntityToDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DataBase, msg, "ID"))
+            if (this.InsertFormEntityToDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DataBase, msg, IngnoreProperties))
             {
                 main.UpdatePreferentialCategories();
 
-                ViewContext?.SetDataTableRow(this as IPreferentialCategory);
+                var viewForm = ViewContext ?? main.GetDataViewForm<IPreferentialCategory>();
+                viewForm?.SetDataTableRow(this as IPreferentialCategory);
 
                 this.Close();
             }

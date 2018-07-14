@@ -124,24 +124,35 @@ namespace EmploymentDepartment
         }
         #endregion
 
-        public static void StretchLastColumn(this DataGridView dataGridView)
+        /// <summary>
+        /// Отключает возможность редактировать элементы упраления, расположенные в контейнере <c>container</c>, за исключением элементов управления <c>ignore</c>. 
+        /// </summary>
+        /// <param name="container">Контейнер, содержащий элементы управления для отключения возможности редактировать</param>
+        /// <param name="ignore">Элементу управления, которые необходимо пропустить и оставить редактируемыми</param>
+        public static void DisableControls(this Control container, params Control[] ignore)
         {
-            var lastColIndex = dataGridView.Columns.Count - 1;
-            var lastCol = dataGridView.Columns[lastColIndex];
-            int size = 0;
-            foreach (DataGridViewColumn column in dataGridView.Columns)
-                size += column.Width;
+            foreach (Control control in container.Controls)
+            {
+                if (ignore.Contains(control))
+                    continue;
 
-            if (size < dataGridView.Parent.Width)
-                lastCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                if (control.Controls.Count > 0)
+                {
+                    DisableControls(control, ignore);
+                    continue;
+                }
+
+                control.Enabled = false;
+            }
         }
 
-        public static void DoubleBuffered(this DataGridView dgv, bool setting)
+        // Включает или отключает двойную буферезацию для элемента управления DataGridView.
+        public static void DoubleBuffered(this DataGridView dgv, bool enable)
         {
             Type dgvType = dgv.GetType();
             PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
                 BindingFlags.Instance | BindingFlags.NonPublic);
-            pi.SetValue(dgv, setting, null);
+            pi.SetValue(dgv, enable, null);
         }
 
         // Обрезает строку для ее корректного отображения на окне.
@@ -403,6 +414,11 @@ namespace EmploymentDepartment
             return true;
         }
 
+        /// <summary>
+        /// Возвращает коллекцию значние публичных свойств объекта <c>self</c>, которые помечены атрибутом DisplayNameAttribute.
+        /// </summary>
+        /// <param name="self">Объект, значения публичных свойств которого необходимо получить</param>
+        /// <returns>Коллекция значний публичных свойств объекта</returns>
         public static object[] GetDisplayedPropertiesValue<T>(this T self) where T:IIdentifiable
         {
             var propValues = new List<object>();
@@ -420,6 +436,11 @@ namespace EmploymentDepartment
             return propValues.ToArray();
         }
 
+        /// <summary>
+        /// Возвращает коллекцию "Ключ" - "Значение", где Ключ - имя свойства, а Значение - содержимое атрибута DisplayNameAttribute.
+        /// </summary>
+        /// <param name="self">Объект, содержащий свойства</param>
+        /// <returns>Коллекция "Ключ" - "Значение", где Ключ - имя свойства, а Значение - содержимое атрибута DisplayNameAttribute</returns>
         public static Dictionary<string, string> GetTypePropertiesNameDisplayName<T>(this T self)
         {
             var nameDisplayName = new Dictionary<string, string>();

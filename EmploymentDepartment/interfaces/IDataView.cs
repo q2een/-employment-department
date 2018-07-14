@@ -3,7 +3,7 @@
     public interface IDataView
     {
         int ItemsCount { get; }
-        ViewType Type { get; set; }
+        ViewType Type { get;}
         void View();
         void Insert();
         void Edit();

@@ -40,6 +40,14 @@ namespace EmploymentDepartment
             }
         }
 
+        protected override string[] IngnoreProperties
+        {
+            get
+            {
+                return new string[] { "ID" };
+            }
+        }
+
         #region ICompany
         public string CompanyNumber { get; set; }
         public string NameOfStateDepartment { get; set; }
@@ -72,7 +80,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о предприятии «{(this as ICompany).Name}» обновлена";
 
-            if (this.UpdateFormEntityInDataBase<BaseCompanyForm, ICompany>(main.DataBase, msg, "ID"))
+            if (this.UpdateFormEntityInDataBase<BaseCompanyForm, ICompany>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as ICompany);
@@ -83,9 +91,11 @@ namespace EmploymentDepartment
         {
             var msg = $"Предприятие «{(this as ICompany).Name}»\nдобавлено в базу";
 
-            if (this.InsertFormEntityToDataBase<BaseCompanyForm, ICompany>(main.DataBase, msg, "ID"))
+            if (this.InsertFormEntityToDataBase<BaseCompanyForm, ICompany>(main.DataBase, msg, IngnoreProperties))
             {
-                ViewContext?.SetDataTableRow(this as IStudent);
+                var viewForm = ViewContext ?? main.GetDataViewForm<ICompany>();
+                viewForm?.SetDataTableRow(this as ICompany);
+
                 this.Close();
             }
         }

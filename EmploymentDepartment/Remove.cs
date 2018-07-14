@@ -9,7 +9,7 @@ namespace EmploymentDepartment
 {
     public static class Remove
     {
-        public static bool RemoveEntity<T>(this T entity, IEntityGetter getter) where T : IIdentifiable
+        public static bool RemoveEntity<T>(this T entity, IEntityGetter getter) where T : class, IIdentifiable
         {
             if (entity.GetDialogRezultByEntityType() != DialogResult.OK)
                 return false;

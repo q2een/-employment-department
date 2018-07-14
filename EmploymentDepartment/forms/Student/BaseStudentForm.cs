@@ -40,8 +40,16 @@ namespace EmploymentDepartment
             }
         }
 
+        protected override string[] IngnoreProperties
+        {
+            get
+            {
+                return new string[] { "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "SelfEmploymentText", "PreferentialCategoryText" };
+            }
+        }
+
         #region IStudent
-       
+
         public string ApplicationFormNumber { get; set; }
         public string Surname { get; set; }
         string IStudent.Name { get; set; }
@@ -84,7 +92,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о студенте обновлена\nФИО студента: {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}";
 
-            if (this.UpdateFormEntityInDataBase<BaseStudentForm, IStudent>(main.DataBase, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "SelfEmploymentText", "PreferentialCategoryText"))
+            if (this.UpdateFormEntityInDataBase<BaseStudentForm, IStudent>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IStudent);
@@ -94,9 +102,12 @@ namespace EmploymentDepartment
         public override void AddNewItem()
         {
             var msg = $"Студент {Surname} {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}\nдобавлен в базу";
-            if(this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(main.DataBase, msg, "ID", "LevelOfEducation", "Faculty", "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "SelfEmploymentText", "PreferentialCategoryText"))
+            if(this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(main.DataBase, msg, IngnoreProperties))
             {
-                ViewContext?.SetDataTableRow(this as IStudent);
+                var viewForm = ViewContext ?? main.GetDataViewForm<IStudent>();
+
+                viewForm?.SetDataTableRow(this as IStudent);
+
                 this.Close();
             }
         }

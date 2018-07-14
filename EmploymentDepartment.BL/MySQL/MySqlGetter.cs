@@ -362,7 +362,7 @@ namespace EmploymentDepartment.BL
         {
             get
             {
-                return "  SELECT v.ID, v.VacancyNumber, v.Post, v.Employer, c.Name as CompanyName, v.WorkArea, v.Salary, v.IsActive, v.SalaryNote,v.Gender AS GenderName," +
+                return "SELECT v.ID, v.VacancyNumber, v.Post, v.Employer, c.Name as CompanyName, v.WorkArea, v.Salary, v.IsActive, v.SalaryNote,v.Gender AS GenderName," +
                        "v.Gender + 0 AS Gender, v.Features FROM vacancy v Left JOIN company c ON v.Employer = c.ID LEFT JOIN studentcompany s ON v.ID = s.vacancy ";
             }
         }

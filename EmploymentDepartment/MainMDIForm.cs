@@ -1,18 +1,12 @@
 ﻿using EmploymentDepartment.BL;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
-    // TODO добавить метод для получения открытого DataViewForm и удалять из него вакансии, если они добавлены
-    // или удалять записи, если запись удалена через другое окно.
     public partial class MainMDIForm : Form
     {
         public IDataBase DataBase { get; set; }
@@ -193,6 +187,11 @@ namespace EmploymentDepartment
         public void ShowAddForm<T>() where T: class, IIdentifiable, new()
         {
             ShowFormByType(ActionType.Add, new T(), null);
+        }
+                                                  
+        public DataViewForm<T> GetDataViewForm<T>() where T: class,IIdentifiable
+        {
+            return MdiChildren.FirstOrDefault(i=> i is DataViewForm<T>) as DataViewForm<T>;
         }
 
         // Возвращает экземпляр окна, если окно с такими же данными уже открыто.
