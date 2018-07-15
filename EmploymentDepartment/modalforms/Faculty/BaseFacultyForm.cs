@@ -54,18 +54,20 @@ namespace EmploymentDepartment
 
         public override void SetDefaultValues() => this.SetPropertiesValue<IFaculty>(Entity, "");
 
-        public override void Save()
+        public override bool Save()
         {
             var msg = $"Информация о факультете\nНаименование факультета: {((IFaculty)this).Name}";
 
             if (this.UpdateFormEntityInDataBase<BaseFacultyForm, IFaculty>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
-                main.UpdateFaculties();
-                main.UpdateSpecializations();
+
                 ViewContext?.SetDataTableRow(this as IFaculty);
                 this.Close();
+                return true;
             }
+
+            return false;
         }
 
         public override void AddNewItem()
@@ -75,8 +77,6 @@ namespace EmploymentDepartment
             if (this.InsertFormEntityToDataBase<BaseFacultyForm, IFaculty>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
-                main.UpdateFaculties();
-                main.UpdateSpecializations();
 
                 var viewForm = ViewContext ?? main.GetDataViewForm<IFaculty>();
                 viewForm?.SetDataTableRow(this as IFaculty);

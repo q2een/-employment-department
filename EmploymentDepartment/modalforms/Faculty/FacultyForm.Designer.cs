@@ -96,6 +96,7 @@ namespace EmploymentDepartment
             this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FacultyForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Добавление факультета";
             this.Load += new System.EventHandler(this.FacultyForm_Load);
             this.mainPanel.ResumeLayout(false);

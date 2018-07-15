@@ -20,7 +20,7 @@ namespace EmploymentDepartment
         /// <summary>
         /// Сохраняет внесенные изменения.
         /// </summary>
-        void Save();
+        bool Save();
 
         /// <summary>
         /// Удаление данных.

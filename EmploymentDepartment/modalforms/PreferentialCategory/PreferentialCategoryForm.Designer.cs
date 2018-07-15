@@ -96,6 +96,7 @@ namespace EmploymentDepartment
             this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "PreferentialCategoryForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Добавление факультета";
             this.Load += new System.EventHandler(this.PreferentialCategoryForm_Load);
             this.mainPanel.ResumeLayout(false);

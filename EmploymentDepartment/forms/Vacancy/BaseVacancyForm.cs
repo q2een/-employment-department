@@ -66,14 +66,18 @@ namespace EmploymentDepartment
 
         #region IEditable implementation.
 
-        public override void Save()
+        public override bool Save()
         {
             var msg = $"Информация о вакансии обновлена";
             if (this.UpdateFormEntityInDataBase<BaseVacancyForm, IVacancy>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IVacancy);
+
+                return true;
             }
+
+            return false;
         }
 
         public override bool ValidateFields() => Extentions.ValidateFields(this, GetErrorProvider());

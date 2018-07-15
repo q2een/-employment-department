@@ -11,10 +11,6 @@ namespace EmploymentDepartment
     {
         public IDataBase DataBase { get; set; }
         public IEntityGetter Entities { get; set; }
-        
-        public IEnumerable<Faculty> Faculties { get; set; }
-        public IEnumerable<Specialization> Specializations { get; set; }
-        public IEnumerable<PreferentialCategory> PreferentialCategories { get; set; }
 
         private readonly UserRole userRole;
         private bool isUnlogin = false;
@@ -28,10 +24,6 @@ namespace EmploymentDepartment
 
             if (userRole == UserRole.Moderator)
                 statusLblUser.Text = "Редактор";
-
-            UpdateFaculties();
-            UpdateSpecializations();
-            UpdatePreferentialCategories();
         }
 
         public MainMDIForm()
@@ -40,39 +32,7 @@ namespace EmploymentDepartment
             this.DataBase = new MySqlDB();
             this.Entities = new MySqlGetter(DataBase);
             this.userRole = UserRole.Administrator;
-
-            UpdateFaculties();
-            UpdateSpecializations();
-            UpdatePreferentialCategories();
         }
-
-        #region Получение базовых списков.
-
-        /// <summary>
-        /// Обновляет коллекцию с данными о факультетах из БД.
-        /// </summary>
-        public void UpdateFaculties()
-        {
-            this.Faculties = Entities.GetEntities<Faculty>(); 
-        }
-
-        /// <summary>
-        /// Обновляет коллекцию с данными о профилях подготовки из БД.
-        /// </summary>
-        public void UpdateSpecializations()
-        {
-            this.Specializations = Entities.GetEntities<Specialization>();
-        }
-
-        /// <summary>
-        /// Обновляет коллекцию с данными о льготных категориях из БД.
-        /// </summary>
-        public void UpdatePreferentialCategories()
-        {
-            this.PreferentialCategories = Entities.GetEntities<PreferentialCategory>();
-        }
-
-        #endregion
        
         private T GetEntityFromActiveChild<T>() where T : class, IIdentifiable
         {
@@ -389,17 +349,17 @@ namespace EmploymentDepartment
 
         private void dataFacultiesMI_Click(object sender, EventArgs e)
         {
-            ShowEditDataViewForm<IFaculty>("Факультеты", this.Faculties);
+            ShowEditDataViewForm<IFaculty>("Факультеты", Entities.GetEntities<Faculty>());
         }
 
         private void dataSpecializationsMI_Click(object sender, EventArgs e)
         {
-            ShowEditDataViewForm<ISpecialization>("Профили подготовки", this.Specializations);
+            ShowEditDataViewForm<ISpecialization>("Профили подготовки", Entities.GetEntities<Specialization>());
         }
 
         private void dataPreferentialCategoriesMI_Click(object sender, EventArgs e)
         {
-            ShowEditDataViewForm<IPreferentialCategory>("Льготные категории", this.PreferentialCategories);
+            ShowEditDataViewForm<IPreferentialCategory>("Льготные категории", Entities.GetEntities<PreferentialCategory>());
         }
 
         #endregion
@@ -556,89 +516,15 @@ namespace EmploymentDepartment
 
         #endregion
 
-        #region Пункт меню "Окно".
-
-        // ВЫровнять окна каскадом. Обработка события нажатия на пункт меню.
-        private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
+        #region Пункт меню "Отчет".
+        private void SetReportMIVisible()
         {
-            LayoutMdi(MdiLayout.Cascade);
-        }
+            var student = GetEntityFromActiveChild<IStudent>();
+            var studentCompany = GetEntityFromActiveChild<IStudentCompany>();
 
-        // Выровнять окна слева направо. Обработка события нажатия на пункт меню.
-        private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.TileVertical);
-        }
-
-        // Выровнять окна слева вниз. Обработка события нажатия на пункт меню.
-        private void TileHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.TileHorizontal);
-        }
-
-        // Закрыть дочерние окна. Обработка события нажатия на пункт меню.
-        private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (Form childForm in MdiChildren)
-            {
-                childForm.Close();
-            }
-        }
-
-        #endregion
-        
-        #endregion
-         
-        // Обработка события загрузки окна.
-        private void MainMDIForm_Load(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Maximized;
-        }
-
-        // Обработка события смены активного дочернего окна.
-        private void MainMDIForm_MdiChildActivate(object sender, EventArgs e)
-        {
-            // Видимсоть навигации.
-            SetNavigator();
-
-            // Видимость элементов меню "Правка".
-            SetEditMIByActiveChild();
-
-            // Видимость пункта меню "Файл-Экспорт".
-            ShowExportMI();
-
-            // Видимость элемента меню "Данные".
-            SetDataMIByActiveChild();
-        }
-
-        // Проверка корректности ввода данных в текстовое поле при навигиции по данным. Разрешен ввод только цифр.
-        private void tsPositionItem_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = e.KeyChar == '.' || !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Delete);
-        }
-
-        // TODO : проверить работу анлогина через флаг.
-        // Обработка события, происходящего после закрытия формы.
-        private void MainMDIForm_FormClosed(object sender, FormClosedEventArgs e)
-        {   
-            if(isUnlogin)
-                (this.Owner as Form)?.Show();
-
-            if (e.CloseReason != CloseReason.FormOwnerClosing)
-                if(this.Owner is Form && !(this.Owner as Form).Visible)
-                    (this.Owner as Form)?.Close();
-        }
-
-        // Нажатие на роль пользователя в строке состояния. Обработка события.
-        private void statusLblUser_Click(object sender, EventArgs e)
-        {
-            // Сброс сохраненных параметров подключения.
-            Properties.Settings.Default.connection = null;
-            Properties.Settings.Default.Save();
-
-            // Закрываем текущее окно.
-            isUnlogin = true;
-            this.Close();
+            selfEmploymentMI.Visible = student != null;
+            reportConfirmationOfArrivalMI.Visible = reportConfirmationOfArrivalSelfMI.Visible = studentCompany != null;
+            reportSeparatorMI.Visible = student != null || studentCompany != null;
         }
 
         private void selfEmploymentMI_Click(object sender, EventArgs e)
@@ -727,7 +613,7 @@ namespace EmploymentDepartment
 
         }
 
-        private void reportConfirmationOfArrivalMI_Click(object sender, EventArgs e)
+        private void reportConformationOfArrival(string template)
         {
             try
             {
@@ -745,7 +631,6 @@ namespace EmploymentDepartment
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var template = student.SelfEmployment ? "confirmationOfArrivalSelf" : "confirmationOfArrival";
                     var doc = new WordFile(Directory.GetCurrentDirectory() + $@"\templates\{template}.docx");
 
                     doc.ReplaceWordText("{surname}", student.Surname);
@@ -765,9 +650,112 @@ namespace EmploymentDepartment
             }
         }
 
+        private void reportConfirmationOfArrivalMI_Click(object sender, EventArgs e)
+        {
+            reportConformationOfArrival("confirmationOfArrival");
+        }
+
+        private void reportConfirmationOfArrivalSelfMI_Click(object sender, EventArgs e)
+        {
+            reportConformationOfArrival("confirmationOfArrivalSelf");
+        }
+        #endregion
+
+        #region Пункт меню "Окно".
+
+        // ВЫровнять окна каскадом. Обработка события нажатия на пункт меню.
+        private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.Cascade);
+        }
+
+        // Выровнять окна слева направо. Обработка события нажатия на пункт меню.
+        private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileVertical);
+        }
+
+        // Выровнять окна слева вниз. Обработка события нажатия на пункт меню.
+        private void TileHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileHorizontal);
+        }
+
+        // Закрыть дочерние окна. Обработка события нажатия на пункт меню.
+        private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form childForm in MdiChildren)
+            {
+                childForm.Close();
+            }
+        }
+
+        #endregion
+
+        #region Пункт меню "Справка".
+        
         private void aboutMI_Click(object sender, EventArgs e)
         {
             new AboutForm().ShowDialog(this);
+        }
+       
+        #endregion
+
+        #endregion
+
+        // Обработка события загрузки окна.
+        private void MainMDIForm_Load(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+        }
+
+        // Обработка события смены активного дочернего окна.
+        private void MainMDIForm_MdiChildActivate(object sender, EventArgs e)
+        {
+            // Видимсоть навигации.
+            SetNavigator();
+
+            // Видимость элементов меню "Правка".
+            SetEditMIByActiveChild();
+
+            // Видимость пункта меню "Файл-Экспорт".
+            ShowExportMI();
+
+            // Видимость элемента меню "Данные".
+            SetDataMIByActiveChild();
+
+            // Видимость пунктов меню "Отчет".
+            SetReportMIVisible();
+        }
+
+        // Проверка корректности ввода данных в текстовое поле при навигиции по данным. Разрешен ввод только цифр.
+        private void tsPositionItem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = e.KeyChar == '.' || !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Delete);
+        }
+
+        // TODO : проверить работу анлогина через флаг.
+        // Обработка события, происходящего после закрытия формы.
+        private void MainMDIForm_FormClosed(object sender, FormClosedEventArgs e)
+        {   
+            if(isUnlogin)
+                (this.Owner as Form)?.Show();
+
+            if (e.CloseReason != CloseReason.FormOwnerClosing)
+                if(this.Owner is Form && !(this.Owner as Form).Visible)
+                    (this.Owner as Form)?.Close();
+        }
+
+        // Нажатие на роль пользователя в строке состояния. Обработка события.
+        private void statusLblUser_Click(object sender, EventArgs e)
+        {
+            // Сброс сохраненных параметров подключения.
+            Properties.Settings.Default.connection = null;
+            Properties.Settings.Default.Save();
+
+            // Закрываем текущее окно.
+            isUnlogin = true;
+            this.Close();
         }
     }
 }

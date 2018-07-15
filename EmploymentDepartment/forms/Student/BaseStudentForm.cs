@@ -55,10 +55,10 @@ namespace EmploymentDepartment
         string IStudent.Name { get; set; }
         public string Patronymic { get; set; }
         public DateTime DOB { get; set; }
-        public int Gender { get; set; }
+        public bool IsMale { get; set; }
         public bool MaritalStatus { get; set; }
         public int YearOfGraduation { get; set; }
-        public EducationLevelType LevelOfEducation { get; set; }
+        public long LevelOfEducation { get; set; }
         public int Faculty { get; set; }
         public int FieldOfStudy { get; set; }
         public string StudyGroup { get; set; }
@@ -88,7 +88,7 @@ namespace EmploymentDepartment
 
         #region IEditable implementation.
 
-        public override void Save()
+        public override bool Save()
         {
             var msg = $"Информация о студенте обновлена\nФИО студента: {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}";
 
@@ -96,7 +96,11 @@ namespace EmploymentDepartment
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IStudent);
+
+                return true;
             }
+
+            return false;
         }
 
         public override void AddNewItem()

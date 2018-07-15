@@ -90,7 +90,8 @@ namespace EmploymentDepartment
             switch (dialogResult)
             {
                 case DialogResult.Yes:
-                    this.Save();
+                    if (!this.Save())
+                        e.Cancel = true;
                     break;
                 case DialogResult.Cancel:
                     e.Cancel = true;
@@ -158,7 +159,7 @@ namespace EmploymentDepartment
             throw new NotImplementedException();
         }
 
-        public virtual void Save()
+        public virtual bool Save()
         {
             throw new NotImplementedException();
         }

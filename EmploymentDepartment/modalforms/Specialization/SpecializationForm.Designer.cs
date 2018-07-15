@@ -69,7 +69,7 @@
             this.btnApply.Location = new System.Drawing.Point(307, 208);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(104, 23);
-            this.btnApply.TabIndex = 5;
+            this.btnApply.TabIndex = 9;
             this.btnApply.Text = "Добавить";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
@@ -82,7 +82,7 @@
             this.label5.Location = new System.Drawing.Point(87, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(13, 16);
-            this.label5.TabIndex = 4;
+            this.label5.TabIndex = 1;
             this.label5.Text = "*";
             // 
             // label6
@@ -104,7 +104,7 @@
             this.label4.Location = new System.Drawing.Point(199, 103);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(13, 16);
-            this.label4.TabIndex = 4;
+            this.label4.TabIndex = 7;
             this.label4.Text = "*";
             // 
             // tbFieldOfStudy
@@ -120,7 +120,7 @@
             this.tbFieldOfStudy.Multiline = true;
             this.tbFieldOfStudy.Name = "tbFieldOfStudy";
             this.tbFieldOfStudy.Size = new System.Drawing.Size(396, 77);
-            this.tbFieldOfStudy.TabIndex = 3;
+            this.tbFieldOfStudy.TabIndex = 8;
             this.tbFieldOfStudy.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredTextBox_Validating);
             // 
             // label3
@@ -130,7 +130,7 @@
             this.label3.Location = new System.Drawing.Point(12, 103);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(189, 16);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 6;
             this.label3.Text = "Профиль (специализация)";
             // 
             // label2
@@ -140,13 +140,14 @@
             this.label2.Location = new System.Drawing.Point(12, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(156, 16);
-            this.label2.TabIndex = 2;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Уровень образования";
             // 
             // cmbLevelOfEducation
             // 
             this.cmbLevelOfEducation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbLevelOfEducation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLevelOfEducation.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbLevelOfEducation.FormattingEnabled = true;
             this.errorProvider.SetIconAlignment(this.cmbLevelOfEducation, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
@@ -158,20 +159,21 @@
             this.cmbLevelOfEducation.Location = new System.Drawing.Point(199, 68);
             this.cmbLevelOfEducation.Name = "cmbLevelOfEducation";
             this.cmbLevelOfEducation.Size = new System.Drawing.Size(212, 24);
-            this.cmbLevelOfEducation.TabIndex = 1;
+            this.cmbLevelOfEducation.TabIndex = 5;
             this.cmbLevelOfEducation.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
             // cmbFaculty
             // 
             this.cmbFaculty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbFaculty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFaculty.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbFaculty.FormattingEnabled = true;
             this.errorProvider.SetIconPadding(this.cmbFaculty, -35);
             this.cmbFaculty.Location = new System.Drawing.Point(15, 28);
             this.cmbFaculty.Name = "cmbFaculty";
             this.cmbFaculty.Size = new System.Drawing.Size(396, 24);
-            this.cmbFaculty.TabIndex = 1;
+            this.cmbFaculty.TabIndex = 2;
             this.cmbFaculty.Validating += new System.ComponentModel.CancelEventHandler(this.RequiredComboBox_Validating);
             // 
             // label1
@@ -198,6 +200,7 @@
             this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SpecializationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Добавление профиля подготовки";
             this.Load += new System.EventHandler(this.SpecializationForm_Load);
             this.mainPanel.ResumeLayout(false);

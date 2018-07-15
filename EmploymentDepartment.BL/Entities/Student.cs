@@ -28,11 +28,11 @@ namespace EmploymentDepartment.BL
         {
             get
             {
-                return Gender == 1 ? "Мужской" : "Женский";
+                return IsMale ? "Мужской" : "Женский";
             }
         }
 
-        public int Gender { get; set; }
+        public bool IsMale { get; set; }
 
         [DisplayName("Семейное положение")]
         public string MartialStatusString
@@ -51,7 +51,7 @@ namespace EmploymentDepartment.BL
         [DisplayName("Факультет")]
         public string FacultyName { get; set; }
 
-        public EducationLevelType LevelOfEducation { get; set; }
+        public long LevelOfEducation { get; set; }
 
         public int Faculty { get; set; }
          
@@ -62,9 +62,9 @@ namespace EmploymentDepartment.BL
             {
                 switch (LevelOfEducation)
                 {
-                    case EducationLevelType.Bachelor:
+                    case (long)EducationLevelType.Bachelor:
                         return "Бакалавриат";
-                    case EducationLevelType.Specialist:
+                    case (long)EducationLevelType.Specialist:
                         return "Специалитет";
                     default:
                         return "Магистратура";

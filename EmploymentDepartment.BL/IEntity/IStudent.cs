@@ -26,7 +26,7 @@ namespace EmploymentDepartment.BL
         [DisplayName("Пол")]
         string GenderName { get;}
 
-        int Gender { get; set; }
+        bool IsMale { get; set; }
 
         [DisplayName("Семейное положение")]
         string MartialStatusString { get;}
@@ -39,7 +39,7 @@ namespace EmploymentDepartment.BL
         [DisplayName("Факультет")]
         string FacultyName { get; }
 
-        EducationLevelType LevelOfEducation { get; set; }
+        long LevelOfEducation { get; set; }
 
         int Faculty { get; set; }
 

@@ -76,7 +76,7 @@ namespace EmploymentDepartment
             Extentions.ValidateControls(this, GetErrorProvider());
         }
 
-        public override void Save()
+        public override bool Save()
         {
             var msg = $"Информация о предприятии «{(this as ICompany).Name}» обновлена";
 
@@ -84,7 +84,11 @@ namespace EmploymentDepartment
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as ICompany);
+
+                return true;
             }
+
+            return false;
         }
 
         public override void AddNewItem()

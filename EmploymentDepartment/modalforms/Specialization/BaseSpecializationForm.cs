@@ -48,21 +48,22 @@ namespace EmploymentDepartment
 
         public override bool ValidateFields() => Extentions.ValidateFields(this, GetErrorProvider());
 
-        public override void Save()
+        public override bool Save()
         {
             var msg = $"Информация о профиле подготовки обновлена\nНаименование профиля: {((ISpecialization)this).Name}";
 
             if (this.UpdateFormEntityInDataBase<BaseSpecializationForm, ISpecialization>(main.DataBase, msg, IngnoreProperties))
             {
-                SetFormText();
-                main.UpdateFaculties();
-                main.UpdateSpecializations();
+                SetFormText();;
 
                 ViewContext?.SetDataTableRow(this as ISpecialization);
 
                 this.Close();
+
+                return true;
             }
-            
+
+            return false;
         }
 
         public override void AddNewItem()
@@ -72,8 +73,6 @@ namespace EmploymentDepartment
             if (this.InsertFormEntityToDataBase<BaseSpecializationForm, ISpecialization>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
-                main.UpdateFaculties();
-                main.UpdateSpecializations();
 
                 var viewForm = ViewContext ?? main.GetDataViewForm<ISpecialization>();
                 viewForm?.SetDataTableRow(this as ISpecialization);

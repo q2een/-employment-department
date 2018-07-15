@@ -98,7 +98,10 @@ namespace EmploymentDepartment
 
         private void SpecializationForm_Load(object sender, EventArgs e)
         {
-            if (Type == ActionType.Edit)
+            if (Type == ActionType.Add)
+                cmbLevelOfEducation.SelectedIndex = 0;
+
+            if (Type == ActionType.Edit) 
                 btnApply.Text = "Применить";
 
             mainPanel.Enabled = btnApply.Visible = Type != ActionType.View;
@@ -106,7 +109,7 @@ namespace EmploymentDepartment
 
         public override void SetDefaultValues()
         {
-            cmbFaculty.BindComboboxData(main.Faculties.Select(i => i as IFaculty).ToList());
+            cmbFaculty.BindComboboxData(main.Entities.GetEntities<Faculty>().Select(i => i as IFaculty).ToList());
             this.SetPropertiesValue<ISpecialization>(Entity, "FacultyName", "LevelOfEducationName");
         }
 

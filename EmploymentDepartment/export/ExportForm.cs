@@ -136,7 +136,7 @@ namespace EmploymentDepartment
 
         #region SQL queries
 
-        private const string students = " SELECT s.ApplicationFormNumber AS 'Шифр анкеты', s.Surname AS 'Фамилия', s.Name AS 'Имя', s.Patronymic AS 'Отчество', s.DOB AS 'Дата рождения', s.Gender AS 'Пол'," +
+        private const string students = " SELECT s.ApplicationFormNumber AS 'Шифр анкеты', s.Surname AS 'Фамилия', s.Name AS 'Имя', s.Patronymic AS 'Отчество', s.DOB AS 'Дата рождения', (CASE WHEN s.IsMale <> 0 THEN 'Мужской' ELSE 'Женский' END) AS 'Пол'," +
                                         "(CASE WHEN s.MaritalStatus <> 0 THEN 'Женат(Замужем)' ELSE 'Не женат(Не замужем)' END) AS 'Семейное положение'," +
                                         "s1.Факультет, s1.`Профиль подготовки`, s1.`Уровень образования`, s.YearOfGraduation AS 'Год окончания университета', s.StudyGroup AS 'Группа'," +
                                         "s.Rating AS 'Рейтинг', p.Name AS 'Льготная категория'," +

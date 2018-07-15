@@ -327,7 +327,7 @@ namespace EmploymentDepartment.BL
         {
             get
             {
-                return "SELECT s.ID, s.ApplicationFormNumber, s.Name, s.Surname, s.Patronymic, s.DOB, s.Gender + 0 AS Gender," +
+                return "SELECT s.ID, s.ApplicationFormNumber, s.Name, s.Surname, s.Patronymic, s.DOB, s.IsMale," +
                        "s.MaritalStatus, s.YearOfGraduation, d.LevelOfEducation,d.Faculty,d.FacultyName, d.Specialization, s.StudyGroup,s.Rating," +
                        "s.PreferentialCategory, s.SelfEmployment,s.City, s.Region, s.District, s.Address, s.RegCity,s.RegRegion, s.RegDistrict," +
                        "s.RegAddress, s.Phone, s.Email, s.FieldOfStudy FROM student s INNER JOIN(SELECT sp.LevelOfEducation + 0 as LevelOfEducation," +

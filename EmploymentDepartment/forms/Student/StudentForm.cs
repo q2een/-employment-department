@@ -1,5 +1,6 @@
 ﻿using EmploymentDepartment.BL;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace EmploymentDepartment
 {
     public partial class StudentForm : BaseStudentForm, IStudent, ILinkPickable
     {
+        private IEnumerable<Specialization> specializations = null;
+
         public IPreferentialCategory LinkPreferentialCategory
         {
             get
@@ -60,6 +63,8 @@ namespace EmploymentDepartment
             {
                 mainPanel.DisableControls(linkPreferentialCategory);
             }
+            if (Type == ActionType.Add)
+                cmbGender.SelectedIndex = 0;
         }
 
         // Обработка события изменения размера формы.
@@ -111,13 +116,16 @@ namespace EmploymentDepartment
         // Смена значений в выдающем списке "Уровень образования". Обработка события.
         private void cmbLevelOfEducation_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(specializations == null)
+                specializations = main.Entities.GetEntities<Specialization>();
+
             var faculties = main.Entities.GetFaculties((EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1)).Select(i=> i as IFaculty).ToList();
             cmbFaculty.BindComboboxData(faculties);
-            var specializations = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == (int)cmbFaculty.SelectedValue).Select(i => i as ISpecialization).ToList();
-            cmbFieldOfStudy.BindComboboxData(specializations);
+            var specializationsList = specializations.Where(i => i.LevelOfEducation == LevelOfEducation && i.Faculty == Faculty).Select(i => i as ISpecialization).ToList();
+            cmbFieldOfStudy.BindComboboxData(specializationsList);
 
             cmbFaculty.Enabled = faculties.Count() > 0;
-            cmbFieldOfStudy.Enabled = specializations.Count() > 0;
+            cmbFieldOfStudy.Enabled = specializationsList.Count() > 0;
         }
 
         // Смена значений в выдающем списке "Факультет". Обработка события.
@@ -129,7 +137,7 @@ namespace EmploymentDepartment
             if (!Int32.TryParse(value + "", out id))
                 return;
 
-            var sp = main.Specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == id).Select( z => z as ISpecialization).ToList();
+            var sp = specializations.Where(i => (int)i.LevelOfEducation == cmbLevelOfEducation.SelectedIndex + 1 && i.Faculty == id).Select( z => z as ISpecialization).ToList();
             cmbFieldOfStudy.BindComboboxData(sp);
         }
 
@@ -245,7 +253,7 @@ namespace EmploymentDepartment
         {
             if (LinkPreferentialCategory == null)
             {
-                var form = new DataViewForm<PreferentialCategory>("Выбор льготной категории", main.PreferentialCategories, main, this);
+                var form = new DataViewForm<PreferentialCategory>("Выбор льготной категории", main.Entities.GetEntities<PreferentialCategory>(), main, this);
                 form.ShowDialog(this);
                 return;
             }
@@ -340,15 +348,15 @@ namespace EmploymentDepartment
             }
         }
 
-        public new int Gender
+        public new bool IsMale
         {
             get
             {
-                return cmbGender.SelectedIndex + 1;
+                return cmbGender.SelectedIndex == 0;
             }
             set
             {
-                cmbGender.SelectedIndex = value - 1;
+                cmbGender.SelectedIndex = value ? 0 : 1;
             }
         }
 
@@ -376,11 +384,11 @@ namespace EmploymentDepartment
             }
         }
 
-        public new EducationLevelType LevelOfEducation
+        public new long LevelOfEducation
         {
             get
             {
-                return (EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1);
+                return cmbLevelOfEducation.Items.Count == 0 ? 0 : cmbLevelOfEducation.SelectedIndex + 1;
             }
             set
             {
@@ -392,7 +400,12 @@ namespace EmploymentDepartment
         {
             get
             {
-                return Int32.Parse(cmbFaculty.SelectedValue.ToString());
+                if (cmbFaculty.SelectedValue == null)
+                    return 0;
+
+                int faculty = 0;
+                int.TryParse(cmbFaculty.SelectedValue.ToString(), out faculty);
+                return faculty;
             }
             set
             {
@@ -404,7 +417,12 @@ namespace EmploymentDepartment
         {
             get
             {
-                return Int32.Parse(cmbFieldOfStudy.SelectedValue.ToString());
+                if (cmbFieldOfStudy.SelectedValue == null)
+                    return 0;
+
+                int specialization = 0;
+                int.TryParse(cmbFieldOfStudy.SelectedValue.ToString(), out specialization);
+                return specialization;
             }
             set
             {
@@ -444,7 +462,7 @@ namespace EmploymentDepartment
             }
             set
             {
-                LinkPreferentialCategory = main.PreferentialCategories.FirstOrDefault(i => i.ID == value);
+                LinkPreferentialCategory = main.Entities.GetEntities<PreferentialCategory>().FirstOrDefault(i => i.ID == value);
             }
         }
 

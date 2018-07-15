@@ -35,7 +35,7 @@ namespace EmploymentDepartment
 
             var doc = new WordFile(Directory.GetCurrentDirectory() + @"\templates\Statement.docx");
 
-            string data = " SELECT '' AS '№ п/п', CONCAT_WS(' ', s.Surname, s.Name, s.Patronymic) AS 'ФИО студента', s.Gender AS 'Пол', YEAR(s.DOB) AS 'Год рождения'," +
+            string data = " SELECT '' AS '№ п/п', CONCAT_WS(' ', s.Surname, s.Name, s.Patronymic) AS 'ФИО студента', (CASE WHEN s.IsMale <> 0 THEN 'Мужской' ELSE 'Женский' END) AS 'Пол', YEAR(s.DOB) AS 'Год рождения'," +
                                "(CASE WHEN s.MaritalStatus <> 0 THEN 'Женат(Замужем)' ELSE 'Не женат(Не замужем)' END) AS 'Семейное положение'," +
                                "CONCAT_WS(', ', s.Region, s.District, s.City, s.Address) AS 'Адрес места жительства (адрес родителей)'," +
                                "s1.Name AS Специальность, s1.NameOfStateDepartment AS 'Название государственного органа', s1.NameOfCompany AS 'Название организации', s1.Post AS 'Должность, квалификация'," +

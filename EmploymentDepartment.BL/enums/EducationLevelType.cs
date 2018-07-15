@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EmploymentDepartment.BL
 {
-    public enum EducationLevelType
+    public enum EducationLevelType : long
     {
         Bachelor = 1,
         Specialist,

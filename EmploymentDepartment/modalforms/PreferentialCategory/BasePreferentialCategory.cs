@@ -55,19 +55,22 @@ namespace EmploymentDepartment
 
         public override void SetDefaultValues() => this.SetPropertiesValue<IPreferentialCategory>(Entity, "");
 
-        public override void Save()
+        public override bool Save()
         {
             var msg = $"Информация о льготной категории обновлена";
 
             if (this.UpdateFormEntityInDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
-                main.UpdatePreferentialCategories();
 
                 ViewContext?.SetDataTableRow(this as IPreferentialCategory);
-
+                            
                 this.Close();
+
+                return true;
             }
+
+            return false;
         }
 
         public override void AddNewItem()
@@ -75,8 +78,6 @@ namespace EmploymentDepartment
             var msg = $"Льготная категория добавлена в базу";
             if (this.InsertFormEntityToDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DataBase, msg, IngnoreProperties))
             {
-                main.UpdatePreferentialCategories();
-
                 var viewForm = ViewContext ?? main.GetDataViewForm<IPreferentialCategory>();
                 viewForm?.SetDataTableRow(this as IPreferentialCategory);
 
