@@ -156,6 +156,9 @@ namespace EmploymentDepartment
 
         private void VacancyForm_Load(object sender, EventArgs e)
         {
+            if (Type == ActionType.Add)
+                cmbGender.SelectedIndex = 2;
+
             if (Type == ActionType.View)
             {
                 mainPanel.DisableControls(linkCompany);

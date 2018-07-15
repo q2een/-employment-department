@@ -73,6 +73,7 @@ namespace EmploymentDepartment
             this.selfEmploymentMI = new System.Windows.Forms.ToolStripMenuItem();
             this.reportCertificateMI = new System.Windows.Forms.ToolStripMenuItem();
             this.reportConfirmationOfArrivalMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportConfirmationOfArrivalSelfMI = new System.Windows.Forms.ToolStripMenuItem();
             this.reportSeparatorMI = new System.Windows.Forms.ToolStripSeparator();
             this.reportStatementMI = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,8 +85,6 @@ namespace EmploymentDepartment
             this.indexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLblMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLblLoginAs = new System.Windows.Forms.ToolStripStatusLabel();
@@ -117,7 +116,6 @@ namespace EmploymentDepartment
             this.tsDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.tsNavigationSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.reportConfirmationOfArrivalSelfMI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStrip)).BeginInit();
@@ -133,8 +131,7 @@ namespace EmploymentDepartment
             this.editMI,
             this.отчетToolStripMenuItem,
             this.windowsMenu,
-            this.helpMenu,
-            this.toolsMenu});
+            this.helpMenu});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.windowsMenu;
             this.menuStrip.Name = "menuStrip";
@@ -431,7 +428,8 @@ namespace EmploymentDepartment
             // 
             this.entityRemoveMI.Image = global::EmploymentDepartment.Properties.Resources.remove;
             this.entityRemoveMI.Name = "entityRemoveMI";
-            this.entityRemoveMI.ShortcutKeyDisplayString = "Ctrl + Del";
+            this.entityRemoveMI.ShortcutKeyDisplayString = "";
+            this.entityRemoveMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
             this.entityRemoveMI.Size = new System.Drawing.Size(244, 22);
             this.entityRemoveMI.Text = "Удалить";
             this.entityRemoveMI.Click += new System.EventHandler(this.entityRemoveMI_Click);
@@ -472,6 +470,13 @@ namespace EmploymentDepartment
             this.reportConfirmationOfArrivalMI.Text = "Подтверждение прибытия к свидетельству о направлении";
             this.reportConfirmationOfArrivalMI.Visible = false;
             this.reportConfirmationOfArrivalMI.Click += new System.EventHandler(this.reportConfirmationOfArrivalMI_Click);
+            // 
+            // reportConfirmationOfArrivalSelfMI
+            // 
+            this.reportConfirmationOfArrivalSelfMI.Name = "reportConfirmationOfArrivalSelfMI";
+            this.reportConfirmationOfArrivalSelfMI.Size = new System.Drawing.Size(482, 22);
+            this.reportConfirmationOfArrivalSelfMI.Text = "Подтверждение прибытия к справке о самостоятельном трудоустройстве";
+            this.reportConfirmationOfArrivalSelfMI.Click += new System.EventHandler(this.reportConfirmationOfArrivalSelfMI_Click);
             // 
             // reportSeparatorMI
             // 
@@ -554,21 +559,6 @@ namespace EmploymentDepartment
             this.aboutMI.Size = new System.Drawing.Size(149, 22);
             this.aboutMI.Text = "&О программе";
             this.aboutMI.Click += new System.EventHandler(this.aboutMI_Click);
-            // 
-            // toolsMenu
-            // 
-            this.toolsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
-            this.toolsMenu.Name = "toolsMenu";
-            this.toolsMenu.Size = new System.Drawing.Size(59, 20);
-            this.toolsMenu.Text = "С&ервис";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Image = global::EmploymentDepartment.Properties.Resources.settings;
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.optionsToolStripMenuItem.Text = "&Параметры";
             // 
             // statusStrip
             // 
@@ -885,13 +875,6 @@ namespace EmploymentDepartment
             this.saveFileDialog.Filter = "Лист .xls|*.xls";
             this.saveFileDialog.Title = "Экспорт...";
             // 
-            // reportConfirmationOfArrivalSelfMI
-            // 
-            this.reportConfirmationOfArrivalSelfMI.Name = "reportConfirmationOfArrivalSelfMI";
-            this.reportConfirmationOfArrivalSelfMI.Size = new System.Drawing.Size(482, 22);
-            this.reportConfirmationOfArrivalSelfMI.Text = "Подтверждение прибытия к справке о самостоятельном трудоустройстве";
-            this.reportConfirmationOfArrivalSelfMI.Click += new System.EventHandler(this.reportConfirmationOfArrivalSelfMI_Click);
-            // 
             // MainMDIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -931,8 +914,6 @@ namespace EmploymentDepartment
         private System.Windows.Forms.ToolStripMenuItem tileHorizontalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileMenu;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolsMenu;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowsMenu;
         private System.Windows.Forms.ToolStripMenuItem cascadeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tileVerticalToolStripMenuItem;

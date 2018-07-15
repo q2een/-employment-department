@@ -449,7 +449,7 @@ namespace EmploymentDepartment
 
             saveMI.Visible = tsSaveChanges.Visible = saveSeparatorMI.Visible = isIEditable && ((active as IEditable).Type == ActionType.Edit || (active as IEditable).Type == ActionType.Add);
             setDefaultValueMI.Visible = setDefaultValueSeparatorMI.Visible = saveSeparatorMI.Visible = isIEditable && ((active as IEditable).Type == ActionType.Edit);
-            entityRemoveMI.Visible = tsDeleteItem.Visible = ((isIEditable && ((active as IEditable).Type == ActionType.Edit)) || (isDataView && (active as IDataView).ItemsCount != 0)) && userRole == UserRole.Administrator;
+            entityRemoveMI.Visible = tsDeleteItem.Visible = entityRemoveMI.Enabled = ((isIEditable && ((active as IEditable).Type == ActionType.Edit)) || (isDataView && (active as IDataView).ItemsCount != 0)) && userRole == UserRole.Administrator;
             tsNavigationSeparator.Visible = tsDeleteItem.Visible;
             setDefaultValueSeparatorMI.Visible = setDefaultValueSeparatorMI.Visible && userRole == UserRole.Administrator;
 
@@ -531,7 +531,7 @@ namespace EmploymentDepartment
         {
             try
             {
-                var student = GetEntityFromActiveChild<Student>();
+                var student = GetEntityFromActiveChild<IStudent>();
 
                 if (student == null)
                     return;

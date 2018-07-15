@@ -273,7 +273,7 @@ namespace EmploymentDepartment
                 return;
             }
 
-            if ((e.KeyCode != Keys.Space && e.KeyCode != Keys.F2 && e.KeyCode != Keys.Insert && e.KeyCode != Keys.Delete) || mainDgv.RowCount <= 0)
+            if ((e.KeyCode != Keys.Space && e.KeyCode != Keys.F2 && e.KeyCode != Keys.Insert) || mainDgv.RowCount <= 0)
                 return;
 
             ActionType type = ActionType.View;
@@ -288,9 +288,6 @@ namespace EmploymentDepartment
                 case Keys.Insert:
                     type = ActionType.Add;
                     break;
-                case Keys.Delete:
-                    ((IDataView)this).Remove();
-                    return;
             }
 
             ShowOperationForm(type);          

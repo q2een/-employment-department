@@ -59,7 +59,7 @@
             this.btnApply.Location = new System.Drawing.Point(173, 8);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(87, 35);
-            this.btnApply.TabIndex = 3;
+            this.btnApply.TabIndex = 1;
             this.btnApply.Text = "Войти";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
@@ -71,8 +71,7 @@
             this.tbLogin.MaxLength = 150;
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.Size = new System.Drawing.Size(260, 23);
-            this.tbLogin.TabIndex = 0;
-            this.tbLogin.Text = "root";
+            this.tbLogin.TabIndex = 1;
             // 
             // tbPassword
             // 
@@ -82,8 +81,7 @@
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(260, 23);
-            this.tbPassword.TabIndex = 1;
-            this.tbPassword.Text = "root";
+            this.tbPassword.TabIndex = 3;
             // 
             // logoBox
             // 
@@ -104,7 +102,7 @@
             this.label1.Location = new System.Drawing.Point(-3, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(138, 16);
-            this.label1.TabIndex = 3;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Имя пользователя:";
             // 
             // label2
@@ -115,7 +113,7 @@
             this.label2.Location = new System.Drawing.Point(-3, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 16);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 2;
             this.label2.Text = "Пароль:";
             // 
             // cbRemeber
@@ -126,7 +124,7 @@
             this.cbRemeber.Location = new System.Drawing.Point(0, 16);
             this.cbRemeber.Name = "cbRemeber";
             this.cbRemeber.Size = new System.Drawing.Size(98, 20);
-            this.cbRemeber.TabIndex = 2;
+            this.cbRemeber.TabIndex = 0;
             this.cbRemeber.Text = "Запомнить";
             this.cbRemeber.UseVisualStyleBackColor = true;
             // 
@@ -138,7 +136,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 146);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(270, 53);
-            this.panel1.TabIndex = 4;
+            this.panel1.TabIndex = 2;
             // 
             // panel2
             // 
@@ -150,7 +148,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 52);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(270, 94);
-            this.panel2.TabIndex = 5;
+            this.panel2.TabIndex = 1;
             // 
             // panel3
             // 
@@ -162,7 +160,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(270, 52);
-            this.panel3.TabIndex = 6;
+            this.panel3.TabIndex = 0;
             // 
             // tbPort
             // 
@@ -171,7 +169,7 @@
             this.tbPort.MaxLength = 4;
             this.tbPort.Name = "tbPort";
             this.tbPort.Size = new System.Drawing.Size(56, 23);
-            this.tbPort.TabIndex = 0;
+            this.tbPort.TabIndex = 3;
             this.tbPort.Text = "3306";
             this.tbPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPort_KeyPress);
             // 
@@ -183,7 +181,7 @@
             this.label4.Location = new System.Drawing.Point(201, 3);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 16);
-            this.label4.TabIndex = 3;
+            this.label4.TabIndex = 2;
             this.label4.Text = "Порт:";
             // 
             // tbHost
@@ -193,8 +191,7 @@
             this.tbHost.MaxLength = 150;
             this.tbHost.Name = "tbHost";
             this.tbHost.Size = new System.Drawing.Size(196, 23);
-            this.tbHost.TabIndex = 0;
-            this.tbHost.Text = "localhost";
+            this.tbHost.TabIndex = 1;
             // 
             // label3
             // 
@@ -204,7 +201,7 @@
             this.label3.Location = new System.Drawing.Point(-3, 3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 16);
-            this.label3.TabIndex = 3;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Адрес:";
             // 
             // panel4

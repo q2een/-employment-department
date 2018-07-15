@@ -124,8 +124,10 @@ namespace EmploymentDepartment
 
         private void StudentCompanyForm_Load(object sender, EventArgs e)
         {
-            //mainPanel.Enabled = Type != ActionType.View;
-            if(Type == ActionType.View)
+            if (Type == ActionType.Add)
+                cmbStatus.SelectedIndex = 0;
+
+            if (Type == ActionType.View)
             {
                 mainPanel.DisableControls(linkVacancy, linkStudent);
             }
