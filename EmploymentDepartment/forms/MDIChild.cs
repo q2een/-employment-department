@@ -76,9 +76,9 @@ namespace EmploymentDepartment
         // Обработка события закрытия окна.
         private void MDIChild_FormClosing(object sender, FormClosingEventArgs e)
         {
-            /*if (Type == ActionType.View)
+            if (Type == ActionType.View)
                 return;
-
+            //var ad = (this as T).GetPropertiesNameValuePair(true, IngnoreProperties);
             var nameValue = this.Entity.GetPropertiesDifference<T>(this as T, IngnoreProperties);
 
             if (nameValue.Count() == 0)
@@ -96,7 +96,7 @@ namespace EmploymentDepartment
                 case DialogResult.Cancel:
                     e.Cancel = true;
                     break;
-            }  */
+            }  
         }
 
         protected virtual void SetFormText()

@@ -523,7 +523,7 @@ namespace EmploymentDepartment
             var studentCompany = GetEntityFromActiveChild<IStudentCompany>();
 
             selfEmploymentMI.Visible = student != null;
-            reportConfirmationOfArrivalMI.Visible = reportConfirmationOfArrivalSelfMI.Visible = studentCompany != null;
+            reportConfirmationOfArrivalMI.Visible = reportConfirmationOfArrivalSelfMI.Visible = reportCertificateMI.Visible = studentCompany != null;
             reportSeparatorMI.Visible = student != null || studentCompany != null;
         }
 
@@ -579,7 +579,7 @@ namespace EmploymentDepartment
         {
             try
             {
-                var studentCompany = GetEntityFromActiveChild<StudentCompany>();
+                var studentCompany = GetEntityFromActiveChild<IStudentCompany>();
 
                 if (studentCompany == null)
                     return;

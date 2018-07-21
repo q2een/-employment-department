@@ -192,6 +192,7 @@
             // linkClear
             // 
             this.linkClear.AutoSize = true;
+            this.linkClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkClear.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.linkClear.ForeColor = System.Drawing.Color.Blue;
             this.linkClear.Location = new System.Drawing.Point(72, 20);

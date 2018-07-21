@@ -232,8 +232,8 @@ namespace EmploymentDepartment
         {
             this.SetPropertiesValue<IStudent>(Entity, "GenderName", "MartialStatusString", "FacultyName", "EducationLevel", "Specialization", "SelfEmploymentText", "PreferentialCategoryText");
             if (tbRegCity.Text == tbCity.Text && !string.IsNullOrEmpty(tbRegCity.Text) &&
-                tbRegRegion.Text == tbRegion.Text && !string.IsNullOrEmpty(tbRegRegion.Text) &&
-                tbRegDistrict.Text == tbDistrict.Text && !string.IsNullOrEmpty(tbRegDistrict.Text) &&
+                tbRegRegion.Text == tbRegion.Text &&
+                tbRegDistrict.Text == tbDistrict.Text &&
                 tbRegAddress.Text == tbAddress.Text && !string.IsNullOrEmpty(tbRegAddress.Text))
                 cbAddressesAreEquals.Checked = true;
 
@@ -340,7 +340,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return DateTime.Parse(tbDOB.Text);
+                DateTime dob;
+                if(DateTime.TryParse(tbDOB.Text, out dob))
+                    return dob;
+
+                return default(DateTime);
             }
             set
             {
@@ -376,7 +380,11 @@ namespace EmploymentDepartment
         {
             get
             {
-                return Int32.Parse(tbYearOfGraduation.Text);
+                int year = 0;
+
+                int.TryParse(tbYearOfGraduation.Text, out year);
+
+                return year;
             }
             set
             {
@@ -530,6 +538,9 @@ namespace EmploymentDepartment
         {
             get
             {
+                if (cbAddressesAreEquals.Checked)
+                    return City;
+
                 return String.IsNullOrEmpty(tbRegCity.Text) ? null : tbRegCity.Text;
             }
             set
@@ -542,6 +553,9 @@ namespace EmploymentDepartment
         {
             get
             {
+                if (cbAddressesAreEquals.Checked)
+                    return (this as IStudent).Region;
+
                 return String.IsNullOrEmpty(tbRegRegion.Text) ? null : tbRegRegion.Text;
             }
             set
@@ -554,6 +568,9 @@ namespace EmploymentDepartment
         {
             get
             {
+                if (cbAddressesAreEquals.Checked)
+                    return District;
+
                 return String.IsNullOrEmpty(tbRegDistrict.Text) ? null : tbRegDistrict.Text;
             }
             set
@@ -566,6 +583,9 @@ namespace EmploymentDepartment
         {
             get
             {
+                if (cbAddressesAreEquals.Checked)
+                    return Address;
+
                 return String.IsNullOrEmpty(tbRegAddress.Text) ? null : tbRegAddress.Text;
             }
             set
