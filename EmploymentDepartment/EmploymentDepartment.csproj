@@ -89,6 +89,7 @@
     <Compile Include="export\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="export\PersonalAccountOfGraduatesReport.cs" />
     <Compile Include="export\WordFile.cs" />
     <Compile Include="export\ExcelFile.cs" />
     <Compile Include="forms\Company\BaseCompanyForm.cs">
@@ -146,6 +147,12 @@
     </Compile>
     <Compile Include="modalforms\Faculty\FacultyForm.Designer.cs">
       <DependentUpon>FacultyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="modalforms\PersonalAccountReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modalforms\PersonalAccountReportForm.Designer.cs">
+      <DependentUpon>PersonalAccountReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="modalforms\PreferentialCategory\BasePreferentialCategory.cs">
       <SubType>Form</SubType>
@@ -228,6 +235,9 @@
     <EmbeddedResource Include="modalforms\Faculty\FacultyForm.resx">
       <DependentUpon>FacultyForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="modalforms\PersonalAccountReportForm.resx">
+      <DependentUpon>PersonalAccountReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="modalforms\PreferentialCategory\PreferentialCategoryForm.resx">
       <DependentUpon>PreferentialCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -271,6 +281,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="templates\confirmationOfArrivalSelf.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\personalAccountOfGraduates.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="templates\selfEmployment.docx">

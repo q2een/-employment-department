@@ -116,6 +116,7 @@ namespace EmploymentDepartment
             this.tsDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.tsNavigationSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.personalAccountOfGraduatesMI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStrip)).BeginInit();
@@ -442,7 +443,8 @@ namespace EmploymentDepartment
             this.reportConfirmationOfArrivalMI,
             this.reportConfirmationOfArrivalSelfMI,
             this.reportSeparatorMI,
-            this.reportStatementMI});
+            this.reportStatementMI,
+            this.personalAccountOfGraduatesMI});
             this.отчетToolStripMenuItem.Name = "отчетToolStripMenuItem";
             this.отчетToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.отчетToolStripMenuItem.Text = "Отчет";
@@ -476,6 +478,7 @@ namespace EmploymentDepartment
             this.reportConfirmationOfArrivalSelfMI.Name = "reportConfirmationOfArrivalSelfMI";
             this.reportConfirmationOfArrivalSelfMI.Size = new System.Drawing.Size(482, 22);
             this.reportConfirmationOfArrivalSelfMI.Text = "Подтверждение прибытия к справке о самостоятельном трудоустройстве";
+            this.reportConfirmationOfArrivalSelfMI.Visible = false;
             this.reportConfirmationOfArrivalSelfMI.Click += new System.EventHandler(this.reportConfirmationOfArrivalSelfMI_Click);
             // 
             // reportSeparatorMI
@@ -875,6 +878,13 @@ namespace EmploymentDepartment
             this.saveFileDialog.Filter = "Лист .xls|*.xls";
             this.saveFileDialog.Title = "Экспорт...";
             // 
+            // personalAccountOfGraduatesMI
+            // 
+            this.personalAccountOfGraduatesMI.Name = "personalAccountOfGraduatesMI";
+            this.personalAccountOfGraduatesMI.Size = new System.Drawing.Size(482, 22);
+            this.personalAccountOfGraduatesMI.Text = "Ведомость персонального учета выпускников";
+            this.personalAccountOfGraduatesMI.Click += new System.EventHandler(this.personalAccountOfGraduatesMI_Click);
+            // 
             // MainMDIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -989,6 +999,7 @@ namespace EmploymentDepartment
         private System.Windows.Forms.ToolStripMenuItem reportConfirmationOfArrivalMI;
         private System.Windows.Forms.ToolStripSeparator reportSeparatorMI;
         private System.Windows.Forms.ToolStripMenuItem reportConfirmationOfArrivalSelfMI;
+        private System.Windows.Forms.ToolStripMenuItem personalAccountOfGraduatesMI;
     }
 }
 

@@ -76,9 +76,9 @@ namespace EmploymentDepartment
         // Обработка события закрытия окна.
         private void MDIChild_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Type == ActionType.View)
+            if (Type == ActionType.View || Type == ActionType.Add)
                 return;
-            //var ad = (this as T).GetPropertiesNameValuePair(true, IngnoreProperties);
+
             var nameValue = this.Entity.GetPropertiesDifference<T>(this as T, IngnoreProperties);
 
             if (nameValue.Count() == 0)

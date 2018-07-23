@@ -757,5 +757,21 @@ namespace EmploymentDepartment
             isUnlogin = true;
             this.Close();
         }
+
+        private void personalAccountOfGraduatesMI_Click(object sender, EventArgs e)
+        {
+
+            var a = DataBase.GetDataTable("SELECT CONCAT_WS(' ',s.Surname ,s.Name, s.Patronymic) AS FullName,"+ 
+                                          "CONCAT_WS(', ', CONCAT('Область: ', s.Region), CONCAT('Район: ', s.District), CONCAT('Город: ', s.City), CONCAT('Адрес: ', s.Address)) AS Address, " +
+                                          "year1.NameOfCompany, year1.Post, year1.Note, year2.NameOfCompany, year2.Post, year2.Note, year3.NameOfCompany, year3.Post, year3.Note FROM student s " +
+                                          "LEFT JOIN(SELECT s.NameOfCompany, s.Post, s.Note, s.Student FROM studentcompany s WHERE s.YearOfEmployment = '2018') AS year1 ON s.ID = year1.Student "+
+                                          "LEFT JOIN(SELECT s.NameOfCompany, s.Post, s.Note, s.Student FROM studentcompany s WHERE s.YearOfEmployment = '2019') AS year2 ON s.ID = year2.Student "+
+                                          "LEFT JOIN(SELECT s.NameOfCompany, s.Post, s.Note, s.Student FROM studentcompany s WHERE s.YearOfEmployment = '2020') AS year3 ON s.ID = year3.Student "+
+                                          "WHERE s.FieldOfStudy = 5 AND s.StudyGroup = 'БЙ-13' ORDER BY FullName");
+
+            var doc = new PersonalAccountOfGraduatesReport(Directory.GetCurrentDirectory() + @"\templates\personalAccountOfGraduates.docx");
+            doc.AddTable(a);
+            doc.Save(Directory.GetCurrentDirectory() + @"\123.docx");
+        }
     }
 }

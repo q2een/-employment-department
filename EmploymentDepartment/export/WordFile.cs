@@ -6,52 +6,51 @@ namespace EmploymentDepartment
 {
     class WordFile
     {
-        Word.Application app;
-        Word.Document document;
+        protected Word.Application Application { get; set; }
+        protected Word.Document Document { get; set; }
 
         public WordFile(string templateFile)
         {
             try
             {
-                app = new Word.Application();
-                app.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone;
-                app.Visible = false;
-                app.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone;
+                Application = new Word.Application();
+                Application.Visible = false;
+                Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone;
 
-                document = app.Documents.Open(templateFile);
+                Document = Application.Documents.Open(templateFile);
             }
             catch (Exception ex)
             {
-                document?.Close();
-                app?.Quit();
+                Document?.Close();
+                Application?.Quit();
                 throw ex;
             }
         }
 
-        public void ReplaceWordText(string textToReplace, string text)
+        public virtual void ReplaceWordText(string textToReplace, string text)
         {
             try
             {
-                var range = document.Content;
+                var range = Document.Content;
                 range.Find.ClearFormatting();
                 range.Find.Execute(FindText: textToReplace, ReplaceWith: text);
             }
             catch (Exception ex)
             {
-                document.Close();
-                app.Quit();
+                Document.Close();
+                Application.Quit();
                 throw ex;
             }
         }
 
-        public void AddTable(DataTable dataTable)
+        public virtual void AddTable(DataTable dataTable)
         {
             try
             {
-                var range = document.Content;
-                range = document.Bookmarks[1].Range;
+                var range = Document.Content;
+                range = Document.Bookmarks[1].Range;
 
-                Word.Table table = document.Tables.Add(range, dataTable.Rows.Count + 1, dataTable.Columns.Count);
+                Word.Table table = Document.Tables.Add(range, dataTable.Rows.Count + 1, dataTable.Columns.Count);
                 table.Borders.Enable = 1;
                 for (int i = 1; i <= table.Columns.Count; i++)
                 {
@@ -70,22 +69,22 @@ namespace EmploymentDepartment
             }
             catch (Exception ex)
             {
-                document.Close();
-                app.Quit();
+                Document.Close();
+                Application.Quit();
                 throw ex;
             }
         }
 
-        public void Save(string filename)
+        public virtual void Save(string filename)
         {
             try
             {
-                document.SaveAs(filename);
+                Document.SaveAs(filename);
             }
             finally
             {
-                document.Close();
-                app.Quit();
+                Document.Close();
+                Application.Quit();
             }
         }
     }
