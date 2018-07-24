@@ -8,8 +8,7 @@ using System.Text;
 namespace EmploymentDepartment.BL
 {
     public class MySqlDB : IDataBase
-    {
-
+    { 
         public MySqlDB()
         {
 

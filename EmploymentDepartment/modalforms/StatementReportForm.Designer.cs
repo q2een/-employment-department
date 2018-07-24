@@ -95,6 +95,8 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximumSize = new System.Drawing.Size(267, 155);
+            this.MinimumSize = new System.Drawing.Size(267, 155);
             this.Name = "StatementReportForm";
             this.Text = "Ведомость распределения выпускников";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

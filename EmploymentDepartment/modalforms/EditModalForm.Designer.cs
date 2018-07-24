@@ -73,6 +73,8 @@
             this.Controls.Add(this.tbEdit);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.MaximumSize = new System.Drawing.Size(350, 237);
+            this.MinimumSize = new System.Drawing.Size(350, 237);
             this.Name = "EditModalForm";
             this.Text = "Редактирование";
             this.Load += new System.EventHandler(this.EditModalForm_Load);

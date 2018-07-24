@@ -95,6 +95,10 @@ namespace EmploymentDepartment
             this.ClientSize = new System.Drawing.Size(440, 129);
             this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(456, 168);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(456, 168);
             this.Name = "FacultyForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Добавление факультета";

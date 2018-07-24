@@ -76,6 +76,7 @@ namespace EmploymentDepartment
             this.reportConfirmationOfArrivalSelfMI = new System.Windows.Forms.ToolStripMenuItem();
             this.reportSeparatorMI = new System.Windows.Forms.ToolStripSeparator();
             this.reportStatementMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.personalAccountOfGraduatesMI = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,7 +117,6 @@ namespace EmploymentDepartment
             this.tsDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.tsNavigationSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.personalAccountOfGraduatesMI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStrip)).BeginInit();
@@ -130,8 +130,8 @@ namespace EmploymentDepartment
             this.dataMI,
             this.addMI,
             this.editMI,
-            this.отчетToolStripMenuItem,
             this.windowsMenu,
+            this.отчетToolStripMenuItem,
             this.helpMenu});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.windowsMenu;
@@ -493,6 +493,13 @@ namespace EmploymentDepartment
             this.reportStatementMI.Size = new System.Drawing.Size(482, 22);
             this.reportStatementMI.Text = "Ведомость распределения выпускников";
             this.reportStatementMI.Click += new System.EventHandler(this.reportStatementMI_Click);
+            // 
+            // personalAccountOfGraduatesMI
+            // 
+            this.personalAccountOfGraduatesMI.Name = "personalAccountOfGraduatesMI";
+            this.personalAccountOfGraduatesMI.Size = new System.Drawing.Size(482, 22);
+            this.personalAccountOfGraduatesMI.Text = "Ведомость персонального учета выпускников";
+            this.personalAccountOfGraduatesMI.Click += new System.EventHandler(this.personalAccountOfGraduatesMI_Click);
             // 
             // windowsMenu
             // 
@@ -877,13 +884,6 @@ namespace EmploymentDepartment
             // 
             this.saveFileDialog.Filter = "Лист .xls|*.xls";
             this.saveFileDialog.Title = "Экспорт...";
-            // 
-            // personalAccountOfGraduatesMI
-            // 
-            this.personalAccountOfGraduatesMI.Name = "personalAccountOfGraduatesMI";
-            this.personalAccountOfGraduatesMI.Size = new System.Drawing.Size(482, 22);
-            this.personalAccountOfGraduatesMI.Text = "Ведомость персонального учета выпускников";
-            this.personalAccountOfGraduatesMI.Click += new System.EventHandler(this.personalAccountOfGraduatesMI_Click);
             // 
             // MainMDIForm
             // 

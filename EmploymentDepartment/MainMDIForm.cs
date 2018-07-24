@@ -516,7 +516,8 @@ namespace EmploymentDepartment
 
         #endregion
 
-        #region Пункт меню "Отчет".
+        #region Пункт меню "Отчет". 
+        // Управление видимостью пункта меню.
         private void SetReportMIVisible()
         {
             var student = GetEntityFromActiveChild<IStudent>();
@@ -527,6 +528,7 @@ namespace EmploymentDepartment
             reportSeparatorMI.Visible = student != null || studentCompany != null;
         }
 
+        // Справка о самостоятельном трудоустройстве. Обработка события нажатия на пункт меню.
         private void selfEmploymentMI_Click(object sender, EventArgs e)
         {
             try
@@ -557,6 +559,7 @@ namespace EmploymentDepartment
             }
         }
 
+        // Ведомость распределения выпускников. Обработка события нажатия на пункт меню.
         private void reportStatementMI_Click(object sender, EventArgs e)
         {
             try
@@ -575,6 +578,18 @@ namespace EmploymentDepartment
 
         }
 
+        // Ведомость персонального учета выпускников. Обработка события нажатия на пункт меню.
+        private void personalAccountOfGraduatesMI_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.Filter = "Документ MS Word .docx|*.docx";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                new PersonalAccountReportForm(this, saveFileDialog.FileName).ShowDialog();
+            }
+        }
+
+        // Свидетельство о направлении на работу. Обработка события нажатия на пункт меню.
         private void reportCertificateMI_Click(object sender, EventArgs e)
         {
             try
@@ -613,6 +628,8 @@ namespace EmploymentDepartment
 
         }
 
+        // Формирует отчет "Подтверждение прибытия к свидетельству о направлении" в зависимости от разрешения
+        // на самостоятельное трудоустройство.
         private void reportConformationOfArrival(string template)
         {
             try
@@ -650,11 +667,13 @@ namespace EmploymentDepartment
             }
         }
 
+        // Подтверждение прибытия к свидетельству о направлении. Обработка события нажатия на пункт меню.
         private void reportConfirmationOfArrivalMI_Click(object sender, EventArgs e)
         {
             reportConformationOfArrival("confirmationOfArrival");
         }
 
+        // Подтверждение прибытия к справке о самостоятельном трудоустройстве. Обработка события нажатия на пункт меню.
         private void reportConfirmationOfArrivalSelfMI_Click(object sender, EventArgs e)
         {
             reportConformationOfArrival("confirmationOfArrivalSelf");
@@ -663,7 +682,7 @@ namespace EmploymentDepartment
 
         #region Пункт меню "Окно".
 
-        // ВЫровнять окна каскадом. Обработка события нажатия на пункт меню.
+        // Выровнять окна каскадом. Обработка события нажатия на пункт меню.
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.Cascade);
@@ -734,7 +753,6 @@ namespace EmploymentDepartment
             e.Handled = e.KeyChar == '.' || !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Delete);
         }
 
-        // TODO : проверить работу анлогина через флаг.
         // Обработка события, происходящего после закрытия формы.
         private void MainMDIForm_FormClosed(object sender, FormClosedEventArgs e)
         {   
@@ -756,22 +774,6 @@ namespace EmploymentDepartment
             // Закрываем текущее окно.
             isUnlogin = true;
             this.Close();
-        }
-
-        private void personalAccountOfGraduatesMI_Click(object sender, EventArgs e)
-        {
-
-            var a = DataBase.GetDataTable("SELECT CONCAT_WS(' ',s.Surname ,s.Name, s.Patronymic) AS FullName,"+ 
-                                          "CONCAT_WS(', ', CONCAT('Область: ', s.Region), CONCAT('Район: ', s.District), CONCAT('Город: ', s.City), CONCAT('Адрес: ', s.Address)) AS Address, " +
-                                          "year1.NameOfCompany, year1.Post, year1.Note, year2.NameOfCompany, year2.Post, year2.Note, year3.NameOfCompany, year3.Post, year3.Note FROM student s " +
-                                          "LEFT JOIN(SELECT s.NameOfCompany, s.Post, s.Note, s.Student FROM studentcompany s WHERE s.YearOfEmployment = '2018') AS year1 ON s.ID = year1.Student "+
-                                          "LEFT JOIN(SELECT s.NameOfCompany, s.Post, s.Note, s.Student FROM studentcompany s WHERE s.YearOfEmployment = '2019') AS year2 ON s.ID = year2.Student "+
-                                          "LEFT JOIN(SELECT s.NameOfCompany, s.Post, s.Note, s.Student FROM studentcompany s WHERE s.YearOfEmployment = '2020') AS year3 ON s.ID = year3.Student "+
-                                          "WHERE s.FieldOfStudy = 5 AND s.StudyGroup = 'БЙ-13' ORDER BY FullName");
-
-            var doc = new PersonalAccountOfGraduatesReport(Directory.GetCurrentDirectory() + @"\templates\personalAccountOfGraduates.docx");
-            doc.AddTable(a);
-            doc.Save(Directory.GetCurrentDirectory() + @"\123.docx");
         }
     }
 }

@@ -199,6 +199,8 @@
             this.ClientSize = new System.Drawing.Size(426, 243);
             this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximumSize = new System.Drawing.Size(442, 282);
+            this.MinimumSize = new System.Drawing.Size(442, 282);
             this.Name = "SpecializationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Добавление профиля подготовки";
