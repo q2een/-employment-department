@@ -4,9 +4,18 @@ using System.Linq;
 
 namespace EmploymentDepartment.BL
 {
+    /// <summary>
+    /// Предоставляет класс для работы с сущностями из БД (СУБД MySQL). Позволяет получать и удалять сущности.
+    /// </summary>
     public class MySqlGetter : IEntityGetter
     {
-        public MySqlGetter(IDataBase dbGetter)
+        private readonly MySqlDB db;
+
+        /// <summary>
+        /// Предоставляет класс для работы с сущностями из БД (СУБД MySQL). Позволяет получать и удалять сущности.
+        /// </summary>
+        /// <param name="dbGetter">Экземпляр класса <c>MySqlDB</c> для получения доступа к БД</param>
+        public MySqlGetter(MySqlDB dbGetter)
         {
             this.db = dbGetter;
         }
@@ -318,8 +327,6 @@ namespace EmploymentDepartment.BL
         }
 
         #endregion
-
-        private readonly IDataBase db;
 
         #region Default queries.
 

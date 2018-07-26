@@ -63,26 +63,8 @@ namespace EmploymentDepartment
                 if (!Int32.TryParse(cmbFieldOfStudy.SelectedValue + "", out fielOfStudy))
                     throw new Exception("Укажите профиль подготовки");
 
-                var student = main.DataBase.GetCollection($"SELECT s.YearOfGraduation from student s where s.FieldOfStudy = {fielOfStudy} AND s.StudyGroup = '{tbStudyGroup.Text.Trim()}' LIMIT 0,1");
-
-                if (student.Count() <= 0)
-                    throw new Exception("Данной группы нет в базе данных или данной группе нет студентов. Проверьте указанные данные");
-
-                int year, year2, year3;
-
-                if (!int.TryParse((student.First()).Values.First().ToString(), out year))
-                    throw new Exception("Невозможно определить год окончания университета для студентов группы. Проверьте указанные данные");
-
-                year2 = year + 1;
-                year3 = year + 2; 
-
-                var table = main.DataBase.GetDataTable($"SELECT CONCAT_WS(' ',s.Surname ,s.Name, s.Patronymic) AS FullName," +
-                                              "CONCAT_WS(', ', CONCAT('Область: ', s.Region), CONCAT('Район: ', s.District), CONCAT('Город: ', s.City), CONCAT('Адрес: ', s.Address)) AS Address, " +
-                                              "year1.NameOfCompany, year1.Post, year1.Note, year2.NameOfCompany, year2.Post, year2.Note, year3.NameOfCompany, year3.Post, year3.Note FROM student s " +
-                                              $"LEFT JOIN(SELECT s.NameOfCompany, s.Post, s.Note, s.Student FROM studentcompany s WHERE s.YearOfEmployment = '{year}') AS year1 ON s.ID = year1.Student " +
-                                              $"LEFT JOIN(SELECT s.NameOfCompany, s.Post, s.Note, s.Student FROM studentcompany s WHERE s.YearOfEmployment = '{year2}') AS year2 ON s.ID = year2.Student " +
-                                              $"LEFT JOIN(SELECT s.NameOfCompany, s.Post, s.Note, s.Student FROM studentcompany s WHERE s.YearOfEmployment = '{year3}') AS year3 ON s.ID = year3.Student " +
-                                              $"WHERE s.FieldOfStudy = {fielOfStudy} AND s.StudyGroup = '{tbStudyGroup.Text.Trim()}' ORDER BY FullName");
+                int year = main.DataBase.Export.GetYearOfGraduation(fielOfStudy, tbStudyGroup.Text.Trim());
+                var table = main.DataBase.Export.GetPersonalAccountReport(fielOfStudy, tbStudyGroup.Text.Trim(),year);
 
                 var doc = new PersonalAccountOfGraduatesReport(System.IO.Directory.GetCurrentDirectory() + @"\templates\personalAccountOfGraduates.docx");
 
@@ -90,8 +72,8 @@ namespace EmploymentDepartment
                 doc.ReplaceWordText("{FieldOfStudy}", cmbFieldOfStudy.Text);
                 doc.ReplaceWordText("{StudyGroup}", tbStudyGroup.Text.Trim());
                 doc.ReplaceWordText("{Year1}", year.ToString());
-                doc.ReplaceWordText("{Year2}", year2.ToString());
-                doc.ReplaceWordText("{Year3}", year3.ToString());
+                doc.ReplaceWordText("{Year2}", (++year).ToString());
+                doc.ReplaceWordText("{Year3}", (++year).ToString());
 
                 doc.AddTable(table);
                 doc.Save(fileName);

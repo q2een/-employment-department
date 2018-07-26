@@ -34,7 +34,7 @@ namespace EmploymentDepartment
         {
             InitializeComponent();
             this.DataBase = db;
-            this.Entities = new MySqlGetter(DataBase);
+            this.Entities = db.Entities;
             this.userRole = userRole;
 
             if (userRole == UserRole.Moderator)
@@ -45,7 +45,7 @@ namespace EmploymentDepartment
         {
             InitializeComponent();
             this.DataBase = new MySqlDB();
-            this.Entities = new MySqlGetter(DataBase);
+            this.Entities = new MySqlGetter(DataBase as MySqlDB);
             this.userRole = UserRole.Administrator;
         }
        
@@ -270,7 +270,7 @@ namespace EmploymentDepartment
         // Экспорт данных.
         private void exortDataMI_Click(object sender, EventArgs e)
         {
-            new ExportForm(this.DataBase).ShowDialog(this);
+            new ExportForm(this.DataBase.Export).ShowDialog(this);
         }
 
         // Выход.
@@ -569,7 +569,7 @@ namespace EmploymentDepartment
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    new StatementReportForm(DataBase, saveFileDialog.FileName).ShowDialog();
+                    new StatementReportForm(this.DataBase.Export, saveFileDialog.FileName).ShowDialog();
                 }
             }
             catch (Exception ex)

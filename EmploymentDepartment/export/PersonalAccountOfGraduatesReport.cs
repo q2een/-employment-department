@@ -26,11 +26,13 @@ namespace EmploymentDepartment
 
                 object[] currRow = null;
 
+                int count = 0;
+
                 for (int j = 1; j <= table.Rows.Count; j++)
                 {
                     if (currRow == null || !currRow[0].Equals(dataTable.Rows[j - 1].ItemArray[0]))
                     {
-                        table.Rows[j].Cells[1].Range.Text = j.ToString();
+                        table.Rows[j].Cells[1].Range.Text = (++count).ToString();
                         table.Rows[j].Cells[2].Range.Text = $"{dataTable.Rows[j - 1].ItemArray[0]}\n{dataTable.Rows[j - 1].ItemArray[1]}";
                     }
                     for (int k = 3; k <= table.Columns.Count; k++)

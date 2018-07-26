@@ -2,30 +2,70 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace EmploymentDepartment.BL
 {
+    /// <summary>
+    /// Предоставляет класс для работы с СУБД MySql.
+    /// </summary>
     public class MySqlDB : IDataBase
-    { 
-        public MySqlDB()
+    {
+        // Строка подключения к БД.
+        private readonly string connection;
+
+        /// <summary>
+        /// Возвращает строку подключения к БД.
+        /// </summary>
+        public string Connection
+        {
+            get
+            {
+                return connection;
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает экземпляр класса для работы с сущностями из БД (СУБД MySQL). Позволяет получать и удалять сущности.
+        /// </summary>
+        public IEntityGetter Entities { get; set; }
+
+        /// <summary>
+        /// Возвращает или задает экземпляр класса для экспорта данных и формирования отчетов.
+        /// </summary>
+        public IExport Export { get; set; }
+        
+        public MySqlDB() : this("Database=work;Data Source=194.79.62.216;User Id=Administrator;Password=123;CharSet=utf8;")
         {
 
         }
 
+        /// <summary>
+        /// Предоставляет класс для работы с СУБД MySql.
+        /// </summary>
+        /// <param name="connection">Строка подключения к СУБД</param>
         public MySqlDB(string connection)
         {
             this.connection = connection;
+            this.Export = new MySqlExport(this);
+            this.Entities = new MySqlGetter(this);
         }
-         
+
+        /// <summary>
+        /// Возвращает права текущего пользователя, определенные в СУБД.
+        /// </summary>
+        /// <returns>Права пользователя</returns>
         public UserRole GetUserRole()
         {
             var grants = GetCollection("SHOW GRANTS FOR CURRENT_USER()");
 
             return GetRole(grants);
         }
-        
+
+        /// <summary>
+        /// Возвращает коллекцию коллекций "Ключ" - "Значение", где ключ - имя поля, а значение - его значение для данной записи.
+        /// </summary>
+        /// <param name="query">Запрос к БД</param>
+        /// <returns>Коллекцию коллекций "Ключ" - "Значение"</returns>
         public IEnumerable<Dictionary<string, object>> GetCollection(string query)
         {
             List<Dictionary<string, object>> queryList = new List<Dictionary<string, object>>();
@@ -79,6 +119,11 @@ namespace EmploymentDepartment.BL
             return queryList;
         }
 
+        /// <summary>
+        /// Возвращает экземпляр класса <c>DataTable</c> содержащий данные, возвращенные СУБД для данного запроса.
+        /// </summary>
+        /// <param name="query">Запрос к БД</param>
+        /// <returns>Экземпляр класса <c>DataTable</c></returns>
         public DataTable GetDataTable(string query)
         {
             var table = new DataTable();
@@ -106,6 +151,12 @@ namespace EmploymentDepartment.BL
             return table;
         }
 
+        /// <summary>
+        /// Выполняет добавление записи в указанную таблицу и возвращает идентификатор добавленной записи.
+        /// </summary>
+        /// <param name="tableName">Таблица в БД</param>
+        /// <param name="fields">Коллекция "Ключ-Значение", где ключ - имя поля, а значение - его значение для добавляемой записи</param>
+        /// <returns>Идентификатор добавленной записи</returns>
         public long Insert(string tableName, Dictionary<string, object> nameValue)
         {
             if (nameValue == null || nameValue.Count == 0)
@@ -136,7 +187,13 @@ namespace EmploymentDepartment.BL
                 throw ExecptionHandler(MySqlEx);
             }
         }
-        
+
+        /// <summary>
+        /// Выполняет обновление записи с указанным идентификатором в указанной таблице.
+        /// </summary>
+        /// <param name="tableName">Наименование таблицы</param>
+        /// <param name="id">Идентификатор записи</param>
+        /// <param name="fields">Коллекция "Ключ-Значение", где ключ - имя поля, а значение - его значение для обновляемой записи</param>
         public void Update(string tableName, int id, Dictionary<string, object> fields)
         {
             if (fields == null || fields.Count == 0)
@@ -173,7 +230,7 @@ namespace EmploymentDepartment.BL
                 throw ExecptionHandler(MySqlEx);
             }
         }
-
+        
         // Возвращает роль пользователя в зависимости от полученных из БД данных.
         private UserRole GetRole(IEnumerable<Dictionary<string, object>> grants)
         {
@@ -198,6 +255,7 @@ namespace EmploymentDepartment.BL
             return UserRole.None;
         }
         
+        // Возвращает данные в корректном для СУБД MySQL виде.
         private object TypeValidator(object obj)
         {
             if (obj == null)
@@ -215,6 +273,7 @@ namespace EmploymentDepartment.BL
             return $"'{obj}'";
         }
 
+        // Возвращает текст ошибки в зависимости от номера ошибка MySqlEx. 
         private Exception ExecptionHandler(MySqlException MySqlEx)
         {
             switch (MySqlEx.Number)
@@ -228,15 +287,5 @@ namespace EmploymentDepartment.BL
                 default: return new Exception("Ошибка при обращении к базе данных.Ошибка №" + MySqlEx.Number);
             }
         }
-
-        public string Connection
-        {
-            get
-            {
-                return connection;
-            }
-        }
-        //private readonly string connection = "Database=work;Data Source=localhost;User Id=root;Password=root;CharSet=utf8;";
-        private readonly string connection = "Database=work;Data Source=194.79.62.216;User Id=Administrator;Password=123;CharSet=utf8;";
     }
 }

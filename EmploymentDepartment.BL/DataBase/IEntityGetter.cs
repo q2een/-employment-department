@@ -2,6 +2,9 @@
 
 namespace EmploymentDepartment.BL
 {
+    /// <summary>
+    /// Предоставляет интерфейс для работы с сущностями из БД. Позволяет получать и удалять сущности.
+    /// </summary>
     public interface IEntityGetter
     { 
         /// <summary>
