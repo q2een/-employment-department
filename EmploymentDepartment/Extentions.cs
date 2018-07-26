@@ -354,7 +354,7 @@ namespace EmploymentDepartment
                     return false;
 
                 // Обновляем данные
-                db.Update(MySqlGetter.GetTableNameByType<U>(self).ToString(), self.ID, nameValue);
+                db.Update(Tables.GetTableNameByType<U>(self).ToString(), self.ID, nameValue);
 
                 MessageBox.Show(informationMessage, "Редактирование информации", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -391,7 +391,7 @@ namespace EmploymentDepartment
                 var nameValue = (self as U).GetPropertiesNameValuePair<U>(true, ignore);
 
                 // Добавляем запись в БД.
-                self.ID = (int)db.Insert(MySqlGetter.GetTableNameByType<U>(self).ToString(), nameValue);
+                self.ID = (int)db.Insert(Tables.GetTableNameByType<U>(self).ToString(), nameValue);
 
                 MessageBox.Show(informationMessage, "Операция добавления", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

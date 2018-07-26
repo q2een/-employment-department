@@ -65,7 +65,7 @@ namespace EmploymentDepartment
                     var nameValue = (this as IVacancy).GetPropertiesNameValuePair(true, IngnoreProperties);
 
                     // Добавляем запись в БД.
-                    this.ID = (int)main.DataBase.Insert(MySqlGetter.GetTableNameByType<IVacancy>(this).ToString(), nameValue);
+                    this.ID = (int)main.DataBase.Insert(Tables.GetTableNameByType<IVacancy>(this).ToString(), nameValue);
 
                     var viewForm = ViewContext ?? main.GetDataViewForm<IVacancy>();
 

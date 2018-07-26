@@ -7,14 +7,29 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
+    /// <summary>
+    /// Предоставляет главное MDI окно программы.
+    /// </summary>
     public partial class MainMDIForm : Form
     {
+        /// <summary>
+        /// Возвращшает или задает экземпляр класса для работы с БД.
+        /// </summary>
         public IDataBase DataBase { get; set; }
+
+        /// <summary>
+        /// Возвращшает или задает экземпляр класса для получения сущностей из БД.
+        /// </summary>
         public IEntityGetter Entities { get; set; }
 
         private readonly UserRole userRole;
         private bool isUnlogin = false;
 
+        /// <summary>
+        /// Предоставляет главное MDI окно программы
+        /// </summary>
+        /// <param name="db">Экземпляр класса для работы с БД.</param>
+        /// <param name="userRole">Права пользователя</param>
         public MainMDIForm(IDataBase db, UserRole userRole)
         {
             InitializeComponent();
@@ -34,22 +49,16 @@ namespace EmploymentDepartment
             this.userRole = UserRole.Administrator;
         }
        
+        // Возвращает сущность из активного дочернего MDI окна.
         private T GetEntityFromActiveChild<T>() where T : class, IIdentifiable
         {
             T entity = null;
 
             if (ActiveMdiChild is DataViewForm<T>)
-            {
                 entity = (ActiveMdiChild as DataViewForm<T>).GetSelectedEntity();
-            }
 
-            if (ActiveMdiChild is MDIChild<T>)
-            {
-                if ((ActiveMdiChild as MDIChild<T>).Type == ActionType.Add)
-                    return entity;
-
+            if (ActiveMdiChild is MDIChild<T> && (ActiveMdiChild as MDIChild<T>).Type != ActionType.Add)
                 entity = (ActiveMdiChild as MDIChild<T>).Entity;
-            }
 
             return entity;
         }
@@ -277,11 +286,14 @@ namespace EmploymentDepartment
         // Управляет видимостью пункта меню "Данные" в зависимости от активного дочернего окна.
         private void SetDataMIByActiveChild()
         {
+            var istudent = GetEntityFromActiveChild<IStudent>();
+            var icompany = GetEntityFromActiveChild<ICompany>();
+
             // Пункты меню для определенных сущностей
-            showStudentCompaniesMI.Visible = GetEntityFromActiveChild<IStudent>() != null;
-            showVacanciesByCompanyMI.Visible = GetEntityFromActiveChild<ICompany>() != null;
-            showStudentsByCompanyMI.Visible = GetEntityFromActiveChild<ICompany>() != null;
-            entityTempItemsSeparator.Visible = GetEntityFromActiveChild<IStudent>() != null || GetEntityFromActiveChild<ICompany>() != null;
+            showStudentCompaniesMI.Visible = istudent != null;
+            showVacanciesByCompanyMI.Visible = icompany != null;
+            showStudentsByCompanyMI.Visible = icompany != null;
+            entityTempItemsSeparator.Visible = istudent != null || icompany != null;
         }
 
         #region Временнные пункты меню. Активны только при необходимых выбранных сущностях.
@@ -294,7 +306,7 @@ namespace EmploymentDepartment
             if (entity == null)
                 return;
 
-            ShowEditDataViewForm($"{entity.Surname} {entity.Name} {entity.Patronymic}. Места работы", Entities.GetCompaniesByStudentID(entity.ID));
+            ShowEditDataViewForm($"{entity.Surname} {entity.Name} {entity.Patronymic.Trim()}. Места работы", Entities.GetCompaniesByStudentID(entity.ID));
         }
 
         // Показать вакансии на выбранном предприятии. Обработка события нажатия на пункт меню.
@@ -368,17 +380,6 @@ namespace EmploymentDepartment
 
         #region Пункт меню "Добавить".
 
-        // Возвращает эксемпляр сущности, выделенной в активном окне DataViewFrom.
-        private T GetActiveIDataListViewSelectedEntity<T>() where T : class, IIdentifiable
-        {
-            var active = ActiveMdiChild as IDataListView<T>;
-
-            if (active == null || active.ItemsCount == 0)
-                return null;
-
-            return active.GetSelectedEntity();
-        }
-
         // Добавить студента. Обработка события нажатия на пункт меню. 
         private void addStudentMI_Click(object sender, EventArgs e)
         {
@@ -396,8 +397,8 @@ namespace EmploymentDepartment
 
             var form = GetMDIChild<IStudentCompany, StudentCompanyForm>(null, ActionType.Add, null);
 
-            var student = GetActiveIDataListViewSelectedEntity<IStudent>();
-            var vacancy = GetActiveIDataListViewSelectedEntity<IVacancy>();
+            var student = GetEntityFromActiveChild<IStudent>();
+            var vacancy = GetEntityFromActiveChild<IVacancy>();
 
             ShowFormAsMDIChild(form);
             form.LinkStudent = student;
@@ -415,7 +416,7 @@ namespace EmploymentDepartment
         {
             var form = GetMDIChild<IVacancy, VacancyForm>(null, ActionType.Add, null);
 
-            var company = GetActiveIDataListViewSelectedEntity<ICompany>();
+            var company = GetEntityFromActiveChild<ICompany>();
 
             ShowFormAsMDIChild(form);
             form.LinkCompany = company;
@@ -704,9 +705,7 @@ namespace EmploymentDepartment
         private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (Form childForm in MdiChildren)
-            {
                 childForm.Close();
-            }
         }
 
         #endregion

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase\IEntityGetter.cs" />
+    <Compile Include="DataBase\IExport.cs" />
     <Compile Include="MySQL\MySqlDB.cs" />
     <Compile Include="MySQL\MySqlGetter.cs" />
     <Compile Include="DataBase\IDataBase.cs" />
