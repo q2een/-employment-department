@@ -72,7 +72,7 @@ namespace EmploymentDepartment
                 linkVacancy.Tag = value;
                 string text = value == null ? "Выбрать вакансию ..." : $"Вакансия №{value.VacancyNumber}";
                 linkVacancy.Text = Extentions.ShortenString(text, vacancyPanel.Width - linkVacancyClear.Width - 90, linkVacancy.Font);
-                var compnany = value == null ? null : main.Entities.GetSingle<Company>(value.Employer);
+                var compnany = value == null ? null : Main.Entities.GetSingle<Company>(value.Employer);
 
                 tbCompany.Text = compnany == null ? "" : compnany?.Name;
                 tbNameOfStateDepartment.Text = compnany == null ? "" : compnany?.NameOfStateDepartment;
@@ -159,7 +159,7 @@ namespace EmploymentDepartment
         {
             if (Vacancy != null)
             {
-                var vacancies = main.Entities.GetSudentsByVacancyID((int)Vacancy);
+                var vacancies = Main.Entities.GetSudentsByVacancyID((int)Vacancy);
 
                 if (vacancies != null && vacancies.Count() != 0)
                 {
@@ -218,24 +218,24 @@ namespace EmploymentDepartment
         {
             if (LinkStudent == null)
             {
-                var form = new DataViewForm<Student>("Выбор студента", main.Entities.GetEntities<Student>(), main, this);
+                var form = new DataViewForm<Student>("Выбор студента", Main.Entities.GetEntities<Student>(), Main, this);
                 form.ShowDialog(this);
                 return;
             }
 
-            main.ShowFormByType(ActionType.View, LinkStudent);
+            Main.ShowFormByType(ActionType.View, LinkStudent);
         }
 
         private void linkVacancy_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (LinkVacancy == null)
             {
-                var form = new DataViewForm<Vacancy>("Выбор вакансии", main.Entities.GetEntities<Vacancy>(), main, this);
+                var form = new DataViewForm<Vacancy>("Выбор вакансии", Main.Entities.GetEntities<Vacancy>(), Main, this);
                 form.ShowDialog(this);
                 return;
             }
 
-            main.ShowFormByType(ActionType.View, LinkVacancy);
+            Main.ShowFormByType(ActionType.View, LinkVacancy);
         }
         #endregion
 
@@ -294,7 +294,7 @@ namespace EmploymentDepartment
             }
             set
             {
-                LinkStudent = main?.Entities?.GetSingle<Student>(value);
+                LinkStudent = Main?.Entities?.GetSingle<Student>(value);
             }
         }
 
@@ -307,7 +307,7 @@ namespace EmploymentDepartment
 
             set
             {
-                LinkVacancy = value == null ? null : main?.Entities?.GetSingle<Vacancy>((int)value);
+                LinkVacancy = value == null ? null : Main?.Entities?.GetSingle<Vacancy>((int)value);
             }
         }
         

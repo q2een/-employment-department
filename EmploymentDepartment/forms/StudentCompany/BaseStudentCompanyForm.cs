@@ -62,7 +62,7 @@ namespace EmploymentDepartment
         public override bool Save()
         {
             var msg = $"Информация о месте работы студента обновлена";
-            if (this.UpdateFormEntityInDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DataBase, msg, IngnoreProperties))
+            if (this.UpdateFormEntityInDataBase<BaseStudentCompanyForm, IStudentCompany>(Main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IStudentCompany);
@@ -77,16 +77,16 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о месте работы студента добавлена в базу";
 
-            if (this.InsertFormEntityToDataBase<BaseStudentCompanyForm, IStudentCompany>(main.DataBase, msg, IngnoreProperties))
+            if (this.InsertFormEntityToDataBase<BaseStudentCompanyForm, IStudentCompany>(Main.DataBase, msg, IngnoreProperties))
             {
-                var viewForm = ViewContext ?? main.GetDataViewForm<IStudentCompany>();
+                var viewForm = ViewContext ?? Main.GetDataViewForm<IStudentCompany>();
 
                 viewForm?.SetDataTableRow(this as IStudentCompany);
 
                 var vacancy = (this as IStudentCompany).Vacancy;
 
                 if (vacancy != null)
-                    main.GetDataViewForm<IVacancy>()?.RemoveDataTableRow(main.Entities.GetSingle<Vacancy>((int)vacancy));
+                    Main.GetDataViewForm<IVacancy>()?.RemoveDataTableRow(Main.Entities.GetSingle<Vacancy>((int)vacancy));
 
                 this.Close();
             }

@@ -52,7 +52,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о профиле подготовки обновлена\nНаименование профиля: {((ISpecialization)this).Name}";
 
-            if (this.UpdateFormEntityInDataBase<BaseSpecializationForm, ISpecialization>(main.DataBase, msg, IngnoreProperties))
+            if (this.UpdateFormEntityInDataBase<BaseSpecializationForm, ISpecialization>(Main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();;
 
@@ -70,11 +70,11 @@ namespace EmploymentDepartment
         {
             var msg = $"Профиль подготовки добавлен в базу.\nНаименование профиля: {((ISpecialization)this).Name}";
 
-            if (this.InsertFormEntityToDataBase<BaseSpecializationForm, ISpecialization>(main.DataBase, msg, IngnoreProperties))
+            if (this.InsertFormEntityToDataBase<BaseSpecializationForm, ISpecialization>(Main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
 
-                var viewForm = ViewContext ?? main.GetDataViewForm<ISpecialization>();
+                var viewForm = ViewContext ?? Main.GetDataViewForm<ISpecialization>();
                 viewForm?.SetDataTableRow(this as ISpecialization);
 
                 this.Close();

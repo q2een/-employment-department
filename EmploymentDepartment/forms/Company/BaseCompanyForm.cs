@@ -80,7 +80,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о предприятии «{(this as ICompany).Name}» обновлена";
 
-            if (this.UpdateFormEntityInDataBase<BaseCompanyForm, ICompany>(main.DataBase, msg, IngnoreProperties))
+            if (this.UpdateFormEntityInDataBase<BaseCompanyForm, ICompany>(Main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as ICompany);
@@ -95,9 +95,9 @@ namespace EmploymentDepartment
         {
             var msg = $"Предприятие «{(this as ICompany).Name}»\nдобавлено в базу";
 
-            if (this.InsertFormEntityToDataBase<BaseCompanyForm, ICompany>(main.DataBase, msg, IngnoreProperties))
+            if (this.InsertFormEntityToDataBase<BaseCompanyForm, ICompany>(Main.DataBase, msg, IngnoreProperties))
             {
-                var viewForm = ViewContext ?? main.GetDataViewForm<ICompany>();
+                var viewForm = ViewContext ?? Main.GetDataViewForm<ICompany>();
                 viewForm?.SetDataTableRow(this as ICompany);
 
                 this.Close();

@@ -4,8 +4,14 @@ using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
+    /// <summary>
+    /// Предоставляет модальное окно с общей информацией о программе.
+    /// </summary>
     partial class AboutForm : Form
     {
+        /// <summary>
+        /// Предоставляет модальное окно с общей информацией о программе.
+        /// </summary>
         public AboutForm()
         {
             InitializeComponent();
@@ -19,6 +25,9 @@ namespace EmploymentDepartment
 
         #region Методы доступа к атрибутам сборки
 
+        /// <summary>
+        /// Возвращает короткое наименование продукта.
+        /// </summary>
         public string AssemblyTitle
         {
             get
@@ -36,6 +45,9 @@ namespace EmploymentDepartment
             }
         }
 
+        /// <summary>
+        /// Возвращает версию продукта.
+        /// </summary>
         public string AssemblyVersion
         {
             get
@@ -44,6 +56,9 @@ namespace EmploymentDepartment
             }
         }
 
+        /// <summary>
+        /// Возвращает описание продукта.
+        /// </summary>
         public string AssemblyDescription
         {
             get
@@ -57,6 +72,9 @@ namespace EmploymentDepartment
             }
         }
 
+        /// <summary>
+        /// Возвращает наименование продукта.
+        /// </summary>
         public string AssemblyProduct
         {
             get
@@ -70,6 +88,9 @@ namespace EmploymentDepartment
             }
         }
 
+        /// <summary>
+        /// Возвращает копирайт.
+        /// </summary>
         public string AssemblyCopyright
         {
             get
@@ -83,6 +104,9 @@ namespace EmploymentDepartment
             }
         }
 
+        /// <summary>
+        /// Возвращает наименование компании разработчика.
+        /// </summary>
         public string AssemblyCompany
         {
             get

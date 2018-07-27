@@ -117,9 +117,9 @@ namespace EmploymentDepartment
         private void cmbLevelOfEducation_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(specializations == null)
-                specializations = main.Entities.GetEntities<Specialization>();
+                specializations = Main.Entities.GetEntities<Specialization>();
 
-            var faculties = main.Entities.GetFaculties((EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1)).Select(i=> i as IFaculty).ToList();
+            var faculties = Main.Entities.GetFaculties((EducationLevelType)(cmbLevelOfEducation.SelectedIndex + 1)).Select(i=> i as IFaculty).ToList();
             cmbFaculty.BindComboboxData(faculties);
             var specializationsList = specializations.Where(i => i.LevelOfEducation == LevelOfEducation && i.Faculty == Faculty).Select(i => i as ISpecialization).ToList();
             cmbFieldOfStudy.BindComboboxData(specializationsList);
@@ -253,12 +253,12 @@ namespace EmploymentDepartment
         {
             if (LinkPreferentialCategory == null)
             {
-                var form = new DataViewForm<PreferentialCategory>("Выбор льготной категории", main.Entities.GetEntities<PreferentialCategory>(), main, this);
+                var form = new DataViewForm<PreferentialCategory>("Выбор льготной категории", Main.Entities.GetEntities<PreferentialCategory>(), Main, this);
                 form.ShowDialog(this);
                 return;
             }
 
-            main.ShowFormByType(ActionType.View, LinkPreferentialCategory);
+            Main.ShowFormByType(ActionType.View, LinkPreferentialCategory);
         }
 
         // Нажатие на элемент управления "Очистить". Обработка события.
@@ -470,7 +470,7 @@ namespace EmploymentDepartment
             }
             set
             {
-                LinkPreferentialCategory = main.Entities.GetEntities<PreferentialCategory>().FirstOrDefault(i => i.ID == value);
+                LinkPreferentialCategory = Main.Entities.GetEntities<PreferentialCategory>().FirstOrDefault(i => i.ID == value);
             }
         }
 

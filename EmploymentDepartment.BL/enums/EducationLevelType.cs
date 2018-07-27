@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
-namespace EmploymentDepartment.BL
+﻿namespace EmploymentDepartment.BL
 {
+    /// <summary>
+    /// Предоставляет перечислитель, указывающий на уровень образования.
+    /// </summary>
     public enum EducationLevelType : long
     {
+        /// <summary>
+        /// Бакалавриат.
+        /// </summary>
         Bachelor = 1,
+        /// <summary>
+        /// Специалитет.
+        /// </summary>
         Specialist,
+        /// <summary>
+        /// Магистратура.
+        /// </summary>
         Master
     }
 }

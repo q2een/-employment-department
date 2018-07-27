@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace EmploymentDepartment
+﻿namespace EmploymentDepartment
 {
+    /// <summary>
+    /// Предоставляет интерфейс указывающий на изменяемость и редактируемость данных.
+    /// </summary>
     public interface IEditable
     {
         /// <summary>

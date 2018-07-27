@@ -65,9 +65,9 @@ namespace EmploymentDepartment
                     var nameValue = (this as IVacancy).GetPropertiesNameValuePair(true, IngnoreProperties);
 
                     // Добавляем запись в БД.
-                    this.ID = (int)main.DataBase.Insert(Tables.GetTableNameByType<IVacancy>(this).ToString(), nameValue);
+                    this.ID = (int)Main.DataBase.Insert(Tables.GetTableNameByType<IVacancy>(this).ToString(), nameValue);
 
-                    var viewForm = ViewContext ?? main.GetDataViewForm<IVacancy>();
+                    var viewForm = ViewContext ?? Main.GetDataViewForm<IVacancy>();
 
                     viewForm?.SetDataTableRow(this as IVacancy);
                 }
@@ -89,12 +89,12 @@ namespace EmploymentDepartment
         {
             if (LinkCompany == null)
             {
-                var form = new DataViewForm<Company>("Выбор предприятия", main.Entities.GetEntities<Company>(), main, this);
+                var form = new DataViewForm<Company>("Выбор предприятия", Main.Entities.GetEntities<Company>(), Main, this);
                 form.ShowDialog(this);
                 return;
             }
 
-            main.ShowFormByType(ActionType.View, LinkCompany);
+            Main.ShowFormByType(ActionType.View, LinkCompany);
         }
 
         // Нажатие на элемент управления "Очистить". Обработка события.
@@ -221,7 +221,7 @@ namespace EmploymentDepartment
 
             set
             {
-                LinkCompany = main?.Entities?.GetSingle<Company>(value);
+                LinkCompany = Main?.Entities?.GetSingle<Company>(value);
             }
         }
 

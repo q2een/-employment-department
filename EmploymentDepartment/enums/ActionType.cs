@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace EmploymentDepartment
+﻿namespace EmploymentDepartment
 {
+    /// <summary>
+    /// Представляет перечислитель, указывающий на тип действия.
+    /// </summary>
     public enum ActionType
     {
+        /// <summary>
+        /// Добавление.
+        /// </summary>
         Add,
+        /// <summary>
+        /// Редактирование.
+        /// </summary>
         Edit,
+        /// <summary>
+        /// Просмотр.
+        /// </summary>
         View
     }
 }

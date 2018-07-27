@@ -15,12 +15,12 @@ namespace EmploymentDepartment
         /// <summary>
         /// Возвращшает или задает экземпляр класса для работы с БД.
         /// </summary>
-        public IDataBase DataBase { get; set; }
+        public IDataBase DataBase { get; private set; }
 
         /// <summary>
         /// Возвращшает или задает экземпляр класса для получения сущностей из БД.
         /// </summary>
-        public IEntityGetter Entities { get; set; }
+        public IEntityGetter Entities { get; private set; }
 
         private readonly UserRole userRole;
         private bool isUnlogin = false;

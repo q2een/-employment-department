@@ -69,7 +69,7 @@ namespace EmploymentDepartment
         public override bool Save()
         {
             var msg = $"Информация о вакансии обновлена";
-            if (this.UpdateFormEntityInDataBase<BaseVacancyForm, IVacancy>(main.DataBase, msg, IngnoreProperties))
+            if (this.UpdateFormEntityInDataBase<BaseVacancyForm, IVacancy>(Main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IVacancy);

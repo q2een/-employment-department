@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
+    /// <summary>
+    /// Предоставляет статический клалсс, содержащий часто использующиеся методы, в том числе и методы расширений.
+    /// </summary>
     public static class Extentions
     {
         #region Validate Controls
@@ -125,6 +127,22 @@ namespace EmploymentDepartment
         #endregion
 
         /// <summary>
+        /// Добавляет элемент в обобщенную коллекцию.
+        /// </summary>
+        /// <param name="collection">Исходная коллекция</param>
+        /// <param name="value">Новый обхект, которых необходимо добавить в коллекцию</param>
+        /// <returns>Расширенная коллекция, содержащая новый элемент</returns>
+        public static IEnumerable<T> Add<T>(this IEnumerable<T> collection, T value)
+        {
+            foreach (var item in collection)
+            {
+                yield return item;
+            }
+
+            yield return value;
+        }
+
+        /// <summary>
         /// Отключает возможность редактировать элементы упраления, расположенные в контейнере <c>container</c>, за исключением элементов управления <c>ignore</c>. 
         /// </summary>
         /// <param name="container">Контейнер, содержащий элементы управления для отключения возможности редактировать</param>
@@ -146,7 +164,11 @@ namespace EmploymentDepartment
             }
         }
 
-        // Включает или отключает двойную буферезацию для элемента управления DataGridView.
+        /// <summary>
+        /// Включает или отключает двойную буферезацию для элемента управления DataGridView.
+        /// </summary>
+        /// <param name="dgv">Элемент управления, для которого необходимо установить двойную буферезацию</param>
+        /// <param name="enable">Флаг, указывающий необходимо ли включить двойную буферезацию</param>
         public static void DoubleBuffered(this DataGridView dgv, bool enable)
         {
             Type dgvType = dgv.GetType();
@@ -155,7 +177,13 @@ namespace EmploymentDepartment
             pi.SetValue(dgv, enable, null);
         }
 
-        // Обрезает строку для ее корректного отображения на окне.
+        /// <summary>
+        /// Обрезает строку для ее корректного отображения на окне и возвращает результат.
+        /// </summary>
+        /// <param name="myString">Строка для обрезания</param>
+        /// <param name="width">Размер для строки</param>
+        /// <param name="font">Шрифт</param>
+        /// <returns>Обрезанная под размеры строку</returns>
         public static string ShortenString(string myString, int width, Font font)
         {
             string result = string.Copy(myString);
@@ -192,21 +220,6 @@ namespace EmploymentDepartment
                 return;
 
             cmb.SelectedIndex = data.IndexOf(elem);
-        }
-
-        public static IEnumerable<T> Append<T>(this IEnumerable<T> first, params T[] second)
-        {
-            return first.Concat(second);
-        }
-
-        public static IEnumerable<T> Add<T>(this IEnumerable<T> collection, T value)
-        {
-            foreach (var item in collection)
-            {
-                yield return item;
-            }
-
-            yield return value;
         }
 
         /// <summary>
@@ -312,8 +325,11 @@ namespace EmploymentDepartment
         
         /// <summary>
         /// Возвращает объект класса <c>U</c>.
-        /// U - объект класса. Т - интерфейс.
         /// </summary>
+        /// <typeparam name="T">Реализация интерфейса</typeparam>
+        /// <typeparam name="U">Объект класса</typeparam>
+        /// <param name="self">ОБъект, реализующий интерфейс <c>T</c></param>
+        /// <returns>Объект класса <c>U</c></returns>
         public static U GetInstance<T,U>(this T self) where U : class, new()
         {
             var result = new U();
@@ -399,31 +415,6 @@ namespace EmploymentDepartment
             {                
                 MessageBox.Show(ex.Message, "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
-            }
-
-            return true;
-        }
-
-        public static bool IsPropertiesAreNullOrDefault<T>(this T self) where T : class, IIdentifiable
-        {
-            if (self == null)
-                return true;
-
-            Type type = typeof(T);
-
-            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
-                try
-                {
-                    object value = type.GetProperty(property.Name).GetValue(self, null);
-
-                    if (value != null || string.IsNullOrEmpty(value.ToString()))
-                        continue;
-                }
-                catch(Exception)
-                {
-                    continue;
-                }
             }
 
             return true;

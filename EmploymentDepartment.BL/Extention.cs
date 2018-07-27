@@ -16,12 +16,8 @@ namespace EmploymentDepartment.BL
                 return;
 
             foreach (PropertyInfo property in obj.GetType().GetProperties())
-            {
                 if (dict.ContainsKey(property.Name))
-                {
                     property.SetValue(obj, dict[property.Name], null);
-                }
-            }
         }
     }
 }

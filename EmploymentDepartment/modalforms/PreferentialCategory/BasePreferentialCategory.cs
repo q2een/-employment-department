@@ -59,7 +59,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о льготной категории обновлена";
 
-            if (this.UpdateFormEntityInDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DataBase, msg, IngnoreProperties))
+            if (this.UpdateFormEntityInDataBase<BasePreferentialCategory, IPreferentialCategory>(Main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
 
@@ -76,9 +76,9 @@ namespace EmploymentDepartment
         public override void AddNewItem()
         {
             var msg = $"Льготная категория добавлена в базу";
-            if (this.InsertFormEntityToDataBase<BasePreferentialCategory, IPreferentialCategory>(main.DataBase, msg, IngnoreProperties))
+            if (this.InsertFormEntityToDataBase<BasePreferentialCategory, IPreferentialCategory>(Main.DataBase, msg, IngnoreProperties))
             {
-                var viewForm = ViewContext ?? main.GetDataViewForm<IPreferentialCategory>();
+                var viewForm = ViewContext ?? Main.GetDataViewForm<IPreferentialCategory>();
                 viewForm?.SetDataTableRow(this as IPreferentialCategory);
 
                 this.Close();

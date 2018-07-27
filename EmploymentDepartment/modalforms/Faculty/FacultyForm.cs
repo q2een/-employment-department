@@ -12,7 +12,7 @@ namespace EmploymentDepartment
         {
             InitializeComponent();
 
-            this.main = main;
+            this.Main = main;
         }
        
         public FacultyForm(MainMDIForm main, IFaculty faculty) : base(main, faculty)

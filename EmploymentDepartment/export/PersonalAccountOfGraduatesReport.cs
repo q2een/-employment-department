@@ -1,19 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace EmploymentDepartment
 {
+    /// <summary>
+    /// Предоставляет класс для формирования отчета "Ведомость персонального учета выпускников", который формируется на основании шаблона докумената Word.
+    /// </summary>
     class PersonalAccountOfGraduatesReport : WordFile
     {
+        /// <summary>
+        /// Предоставляет класс для формирования отчета "Ведомость персонального учета выпускников", который формируется на основании шаблона докумената Word.
+        /// </summary>
+        /// <param name="templateFile">Путь к файлу-шаблону</param>
         public PersonalAccountOfGraduatesReport(string templateFile) : base(templateFile)
         {
-
         }
 
+        /// <summary>
+        /// Добавляет таблицу вместо первой закладки в файле-шаблоне. Таблица должна содержать такую же структуру, как и в изначальном шаблоне.
+        /// </summary>
+        /// <param name="dataTable">Данные для отчета</param>
         public override void AddTable(DataTable dataTable)
         {
             try

@@ -12,7 +12,7 @@ namespace EmploymentDepartment
         {
             InitializeComponent();
 
-            this.main = main;
+            this.Main = main;
         }
 
         public PreferentialCategoryForm(MainMDIForm main, IPreferentialCategory faculty) : base(main, faculty)

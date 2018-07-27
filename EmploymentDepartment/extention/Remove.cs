@@ -1,17 +1,23 @@
 ﻿using EmploymentDepartment.BL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EmploymentDepartment
 {
+    /// <summary>
+    /// Предоставляет статический класс, содержащий методы для удаления данных из БД через интерфейс WinForms.
+    /// </summary>
     public static class Remove
     {
+        /// <summary>
+        /// Удаляет сущность из БД и возвращает истину в случает успешного выполнения операции.
+        /// </summary>
+        /// <param name="entity">Объект сущности</param>
+        /// <param name="getter">Экземпляр класса, реализующего интерфейс <c>IEntityGetter</c></param>
+        /// <returns>Результат выполнения операции</returns>
         public static bool RemoveEntity<T>(this T entity, IEntityGetter getter) where T : class, IIdentifiable
         {
-            if (entity.GetDialogRezultByEntityType() != DialogResult.OK)
+            if (entity.GetDialogResultByEntityType() != DialogResult.OK)
                 return false;
 
             try
@@ -26,7 +32,8 @@ namespace EmploymentDepartment
             }
         }
 
-        private static DialogResult GetDialogRezultByEntityType<T>(this T entity)
+        // Возаращает возвращаемое значение диалогового окна в зависимости от типа сущности.
+        private static DialogResult GetDialogResultByEntityType<T>(this T entity)
         {
             if (entity is IStudent)
                 return Student();
@@ -45,6 +52,8 @@ namespace EmploymentDepartment
 
             return DialogResult.Abort;
         }
+
+        #region Диалоговыые окна для разных сущностей.
         private static DialogResult PreferentialCategory()
         {
             return GetMessageBoxResult("При удалении льготной категории все ссылки на нее будут удалены из анкет студентов. Продолжить ?");
@@ -77,6 +86,9 @@ namespace EmploymentDepartment
         {
             return GetMessageBoxResult("Вместе с анкетой студента будет удалено и место работы, и вакансия, привязанная к нему. Продолжить удаление анкеты студента ?");
         }
+        #endregion
+
+        // Возвращает возвращаемое значение диалогового окна. 
         private static DialogResult GetMessageBoxResult(string message)
         {
             return MessageBox.Show(message, "Подтверждение удаления", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);

@@ -4,11 +4,25 @@ using Word = Microsoft.Office.Interop.Word;
 
 namespace EmploymentDepartment
 {
+    /// <summary>
+    /// Предоставляет класса для создания Word файла.
+    /// </summary>
     class WordFile
     {
+        /// <summary>
+        /// Возвращает или задает приложение.
+        /// </summary>
         protected Word.Application Application { get; set; }
+
+        /// <summary>
+        /// Возвращает или задает документ.
+        /// </summary>
         protected Word.Document Document { get; set; }
 
+        /// <summary>
+        /// Предоставляет класса для создания Word файла по шаблону.
+        /// </summary>
+        /// <param name="templateFile">Файл шаблона</param>
         public WordFile(string templateFile)
         {
             try
@@ -27,6 +41,11 @@ namespace EmploymentDepartment
             }
         }
 
+        /// <summary>
+        /// Замещает текст в файле-шаблоне.
+        /// </summary>
+        /// <param name="textToReplace">Текст, который нужно заместить</param>
+        /// <param name="text">ТЕкст, которым нужно заместить</param>
         public virtual void ReplaceWordText(string textToReplace, string text)
         {
             try
@@ -43,6 +62,10 @@ namespace EmploymentDepartment
             }
         }
 
+        /// <summary>
+        /// Добавляет таблицу в файл-шаблон. Таблица добавляется вместо первой закладки в файле-шаблоне.
+        /// </summary>
+        /// <param name="dataTable">Объект класса <c>DataTable</c></param>
         public virtual void AddTable(DataTable dataTable)
         {
             try
@@ -75,6 +98,10 @@ namespace EmploymentDepartment
             }
         }
 
+        /// <summary>
+        /// Сохраняет изменения в указанный файл.
+        /// </summary>
+        /// <param name="filename">Полный путь к файлу.</param>
         public virtual void Save(string filename)
         {
             try

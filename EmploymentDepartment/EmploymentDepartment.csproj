@@ -70,16 +70,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutForm.cs">
+    <Compile Include="modalforms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutForm.Designer.cs">
+    <Compile Include="modalforms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataViewForm.cs">
+    <Compile Include="forms\DataViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataViewForm.Designer.cs">
+    <Compile Include="forms\DataViewForm.Designer.cs">
       <DependentUpon>DataViewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="enums\ViewType.cs" />
@@ -133,10 +133,10 @@
     <Compile Include="interfaces\IDataView.cs" />
     <Compile Include="interfaces\IEditable.cs" />
     <Compile Include="interfaces\ILinkPickable.cs" />
-    <Compile Include="LoginForm.cs">
+    <Compile Include="modalforms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="modalforms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="modalforms\Faculty\BaseFacultyForm.cs">
@@ -173,7 +173,7 @@
       <DependentUpon>EditModalForm.cs</DependentUpon>
     </Compile>
     <Compile Include="enums\ActionType.cs" />
-    <Compile Include="Extentions.cs" />
+    <Compile Include="extention\Extentions.cs" />
     <Compile Include="interfaces\IEditableTyped.cs" />
     <Compile Include="MainMDIForm.cs">
       <SubType>Form</SubType>
@@ -201,11 +201,11 @@
     <Compile Include="forms\Student\StudentForm.Designer.cs">
       <DependentUpon>StudentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Remove.cs" />
-    <EmbeddedResource Include="AboutForm.resx">
+    <Compile Include="extention\Remove.cs" />
+    <EmbeddedResource Include="modalforms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataViewForm.resx">
+    <EmbeddedResource Include="forms\DataViewForm.resx">
       <DependentUpon>DataViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="export\ExportForm.resx">
@@ -223,7 +223,7 @@
     <EmbeddedResource Include="forms\Vacancy\VacancyForm.resx">
       <DependentUpon>VacancyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="modalforms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="modalforms\EditModalForm.resx">

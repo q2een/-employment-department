@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace EmploymentDepartment
+﻿namespace EmploymentDepartment
 {
+    /// <summary>
+    /// Представляет перечислитель, указывающий на тип просмотра.
+    /// </summary>
     public enum ViewType
     {
+        /// <summary>
+        /// Просмотр.
+        /// </summary>
         View,
+        /// <summary>
+        /// Редактирование.
+        /// </summary>
         Edit,
-        Select,
-        Search 
+        /// <summary>
+        /// Выбор элемента.
+        /// </summary>
+        Select
     }
 }

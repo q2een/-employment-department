@@ -92,7 +92,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о студенте обновлена\nФИО студента: {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}";
 
-            if (this.UpdateFormEntityInDataBase<BaseStudentForm, IStudent>(main.DataBase, msg, IngnoreProperties))
+            if (this.UpdateFormEntityInDataBase<BaseStudentForm, IStudent>(Main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
                 ViewContext?.SetDataTableRow(this as IStudent);
@@ -106,9 +106,9 @@ namespace EmploymentDepartment
         public override void AddNewItem()
         {
             var msg = $"Студент {Surname} {((IStudent)this).Surname} {((IStudent)this).Name} {((IStudent)this).Patronymic}\nдобавлен в базу";
-            if(this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(main.DataBase, msg, IngnoreProperties))
+            if(this.InsertFormEntityToDataBase<BaseStudentForm, IStudent>(Main.DataBase, msg, IngnoreProperties))
             {
-                var viewForm = ViewContext ?? main.GetDataViewForm<IStudent>();
+                var viewForm = ViewContext ?? Main.GetDataViewForm<IStudent>();
 
                 viewForm?.SetDataTableRow(this as IStudent);
 

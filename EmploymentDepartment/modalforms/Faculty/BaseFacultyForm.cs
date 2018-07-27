@@ -58,7 +58,7 @@ namespace EmploymentDepartment
         {
             var msg = $"Информация о факультете\nНаименование факультета: {((IFaculty)this).Name}";
 
-            if (this.UpdateFormEntityInDataBase<BaseFacultyForm, IFaculty>(main.DataBase, msg, IngnoreProperties))
+            if (this.UpdateFormEntityInDataBase<BaseFacultyForm, IFaculty>(Main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
 
@@ -74,11 +74,11 @@ namespace EmploymentDepartment
         {
             var msg = $"Факультет добавлен в базу.\nНаименование факультета: {((IFaculty)this).Name}";
 
-            if (this.InsertFormEntityToDataBase<BaseFacultyForm, IFaculty>(main.DataBase, msg, IngnoreProperties))
+            if (this.InsertFormEntityToDataBase<BaseFacultyForm, IFaculty>(Main.DataBase, msg, IngnoreProperties))
             {
                 SetFormText();
 
-                var viewForm = ViewContext ?? main.GetDataViewForm<IFaculty>();
+                var viewForm = ViewContext ?? Main.GetDataViewForm<IFaculty>();
                 viewForm?.SetDataTableRow(this as IFaculty);
 
                 this.Close();
