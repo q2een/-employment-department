@@ -774,5 +774,17 @@ namespace EmploymentDepartment
             isUnlogin = true;
             this.Close();
         }
+
+        private void helpMI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Help.ShowHelp(this, @"help.chm");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Файл справки не найден","Ошибка",MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

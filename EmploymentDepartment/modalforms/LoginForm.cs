@@ -41,6 +41,12 @@ namespace EmploymentDepartment
                 }
 
                 var form = new MainMDIForm(db, role);
+
+                // Очищаем поля логин-пароль для того, чтобы после вызова смены пользователя нельзя было снова зайти под теми же данными.
+                // Необходимо так как данная форма не закрывается и снова вызыается, а просто скрывается.
+                tbLogin.Text = String.Empty;
+                tbPassword.Text = String.Empty;
+
                 this.Hide();
                 form.Show(this);
 
