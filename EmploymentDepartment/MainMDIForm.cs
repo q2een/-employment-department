@@ -1,16 +1,19 @@
 ﻿using EmploymentDepartment.BL;
+using SharpUpdate;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Reflection;
 
 namespace EmploymentDepartment
 {
     /// <summary>
     /// Предоставляет главное MDI окно программы.
     /// </summary>
-    public partial class MainMDIForm : Form
+    public partial class MainMDIForm : Form, ISharpUpdatable
     {
         /// <summary>
         /// Возвращшает или задает экземпляр класса для работы с БД.
@@ -22,6 +25,77 @@ namespace EmploymentDepartment
         /// </summary>
         public IEntityGetter Entities { get; private set; }
 
+        #region ISharpUpdatable
+
+        /// <summary>
+        /// Наименование приложения.
+        /// </summary>
+        public string ApplicationName
+        {
+            get
+            {
+                return "Отдел трудоустройства выпускников ДонГТУ";
+            }
+        }
+
+        /// <summary>
+        /// ID приложения
+        /// </summary>
+        public string ApplicationID
+        {
+            get
+            {
+                return "EmploymentDepartment";
+            }
+        }
+
+        /// <summary>
+        /// Сборка.
+        /// </summary>
+        public Assembly ApplicationAssembly
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly();
+            }
+        }
+
+        /// <summary>
+        /// Значок.
+        /// </summary>
+        public Icon ApplicationIcon
+        {
+            get
+            {
+                return this.Icon;
+            }
+        }
+
+        /// <summary>
+        /// URL для обновления.
+        /// </summary>
+        public Uri UpdateXmlLocation
+        {
+            get
+            {
+                return new Uri("http://qzeen.96.lt/employment/project.xml"); 
+            }
+        }
+
+        /// <summary>
+        /// Контекст.
+        /// </summary>
+        public Form Context
+        {
+            get
+            {
+                return this;
+            }
+        }
+
+        #endregion
+
+        private readonly SharpUpdater updater;
         private readonly UserRole userRole;
         private bool isUnlogin = false;
 
@@ -36,6 +110,7 @@ namespace EmploymentDepartment
             this.DataBase = db;
             this.Entities = db.Entities;
             this.userRole = userRole;
+            this.updater = new SharpUpdater(this);
 
             if (userRole == UserRole.Moderator)
                 statusLblUser.Text = "Редактор";
@@ -47,8 +122,9 @@ namespace EmploymentDepartment
             this.DataBase = new MySqlDB();
             this.Entities = new MySqlGetter(DataBase as MySqlDB);
             this.userRole = UserRole.Administrator;
+            this.updater = new SharpUpdater(this);
         }
-       
+
         // Возвращает сущность из активного дочернего MDI окна.
         private T GetEntityFromActiveChild<T>() where T : class, IIdentifiable
         {
@@ -716,7 +792,24 @@ namespace EmploymentDepartment
         {
             new AboutForm().ShowDialog(this);
         }
-       
+        
+        private void helpMI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Help.ShowHelp(this, @"help.chm");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Файл справки не найден", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void updateMI_Click(object sender, EventArgs e)
+        {
+            updater.DoUpdate();
+        }
+
         #endregion
 
         #endregion
@@ -773,18 +866,6 @@ namespace EmploymentDepartment
             // Закрываем текущее окно.
             isUnlogin = true;
             this.Close();
-        }
-
-        private void helpMI_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Help.ShowHelp(this, @"help.chm");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Файл справки не найден","Ошибка",MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
     }
 }

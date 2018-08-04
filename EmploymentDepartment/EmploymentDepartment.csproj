@@ -301,6 +301,10 @@
       <Project>{17c47d81-fca6-433f-bc67-02828ed5ac30}</Project>
       <Name>EmploymentDepartment.BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharpUpdate\SharpUpdate.csproj">
+      <Project>{811C1D69-764F-4335-8363-B93A1D106268}</Project>
+      <Name>SharpUpdate</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -346,6 +350,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="128.ico" />
+    <None Include="Resources\update.png" />
     <None Include="Resources\user.png" />
     <None Include="Resources\logo.png" />
     <None Include="Resources\vacancy.png" />

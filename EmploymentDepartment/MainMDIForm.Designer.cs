@@ -37,6 +37,8 @@ namespace EmploymentDepartment
             this.exportMI = new System.Windows.Forms.ToolStripMenuItem();
             this.exortDataMI = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.changeUserMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataMI = new System.Windows.Forms.ToolStripMenuItem();
             this.showStudentCompaniesMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,6 +87,8 @@ namespace EmploymentDepartment
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMI = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.updateMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutMI = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLblMessage = new System.Windows.Forms.ToolStripStatusLabel();
@@ -117,8 +121,6 @@ namespace EmploymentDepartment
             this.tsDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.tsNavigationSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.changeUserMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStrip)).BeginInit();
@@ -176,6 +178,19 @@ namespace EmploymentDepartment
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(197, 6);
+            // 
+            // changeUserMI
+            // 
+            this.changeUserMI.Image = global::EmploymentDepartment.Properties.Resources.user;
+            this.changeUserMI.Name = "changeUserMI";
+            this.changeUserMI.Size = new System.Drawing.Size(200, 22);
+            this.changeUserMI.Text = "Сменить пользователя";
+            this.changeUserMI.Click += new System.EventHandler(this.statusLblUser_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(197, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -549,6 +564,8 @@ namespace EmploymentDepartment
             this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpMI,
             this.toolStripSeparator8,
+            this.updateMI,
+            this.toolStripMenuItem2,
             this.aboutMI});
             this.helpMenu.Name = "helpMenu";
             this.helpMenu.Size = new System.Drawing.Size(65, 20);
@@ -559,19 +576,32 @@ namespace EmploymentDepartment
             this.helpMI.Image = ((System.Drawing.Image)(resources.GetObject("helpMI.Image")));
             this.helpMI.ImageTransparentColor = System.Drawing.Color.Black;
             this.helpMI.Name = "helpMI";
-            this.helpMI.Size = new System.Drawing.Size(165, 22);
+            this.helpMI.Size = new System.Drawing.Size(213, 22);
             this.helpMI.Text = "Вызов справки...";
             this.helpMI.Click += new System.EventHandler(this.helpMI_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(162, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(210, 6);
+            // 
+            // updateMI
+            // 
+            this.updateMI.Image = global::EmploymentDepartment.Properties.Resources.update;
+            this.updateMI.Name = "updateMI";
+            this.updateMI.Size = new System.Drawing.Size(213, 22);
+            this.updateMI.Text = "Проверить обновление...";
+            this.updateMI.Click += new System.EventHandler(this.updateMI_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(210, 6);
             // 
             // aboutMI
             // 
             this.aboutMI.Name = "aboutMI";
-            this.aboutMI.Size = new System.Drawing.Size(165, 22);
+            this.aboutMI.Size = new System.Drawing.Size(213, 22);
             this.aboutMI.Text = "&О программе";
             this.aboutMI.Click += new System.EventHandler(this.aboutMI_Click);
             // 
@@ -890,19 +920,6 @@ namespace EmploymentDepartment
             this.saveFileDialog.Filter = "Лист .xls|*.xls";
             this.saveFileDialog.Title = "Экспорт...";
             // 
-            // changeUserMI
-            // 
-            this.changeUserMI.Image = global::EmploymentDepartment.Properties.Resources.user;
-            this.changeUserMI.Name = "changeUserMI";
-            this.changeUserMI.Size = new System.Drawing.Size(200, 22);
-            this.changeUserMI.Text = "Сменить пользователя";
-            this.changeUserMI.Click += new System.EventHandler(this.statusLblUser_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(197, 6);
-            // 
             // MainMDIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1020,6 +1037,8 @@ namespace EmploymentDepartment
         private System.Windows.Forms.ToolStripMenuItem personalAccountOfGraduatesMI;
         private System.Windows.Forms.ToolStripMenuItem changeUserMI;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem updateMI;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
     }
 }
 
