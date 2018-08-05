@@ -13,7 +13,7 @@ namespace EmploymentDepartment
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMDIForm());
+            Application.Run(new LoginForm());
         }
     }
 }

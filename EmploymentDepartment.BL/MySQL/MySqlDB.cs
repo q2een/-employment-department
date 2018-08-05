@@ -33,11 +33,6 @@ namespace EmploymentDepartment.BL
         /// Возвращает или задает экземпляр класса для экспорта данных и формирования отчетов.
         /// </summary>
         public IExport Export { get; set; }
-        
-        public MySqlDB() : this("Database=work;Data Source=194.79.62.216;User Id=Administrator;Password=123;CharSet=utf8;")
-        {
-
-        }
 
         /// <summary>
         /// Предоставляет класс для работы с СУБД MySql.

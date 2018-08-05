@@ -116,15 +116,6 @@ namespace EmploymentDepartment
                 statusLblUser.Text = "Редактор";
         }
 
-        public MainMDIForm()
-        {
-            InitializeComponent();
-            this.DataBase = new MySqlDB();
-            this.Entities = new MySqlGetter(DataBase as MySqlDB);
-            this.userRole = UserRole.Administrator;
-            this.updater = new SharpUpdater(this);
-        }
-
         // Возвращает сущность из активного дочернего MDI окна.
         private T GetEntityFromActiveChild<T>() where T : class, IIdentifiable
         {
