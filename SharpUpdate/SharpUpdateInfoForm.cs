@@ -20,7 +20,7 @@ namespace SharpUpdate
                 this.Icon = applicationInfo.ApplicationIcon;
 
             // Fill in the UI
-            this.Text = applicationInfo.ApplicationName + " - Информация об обновлении";
+            this.Text ="Информация об обновлении - " + applicationInfo.ApplicationName;
             this.lblVersions.Text = String.Format("Текущая версия: {0}\nНовая версия: {1}", applicationInfo.ApplicationAssembly.GetName().Version.ToString(),
                 updateInfo.Version.ToString());
             this.txtDescription.Text = updateInfo.Description;

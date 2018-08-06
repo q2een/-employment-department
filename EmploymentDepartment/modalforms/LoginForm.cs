@@ -15,11 +15,11 @@ namespace EmploymentDepartment
         public LoginForm()
         {   
             InitializeComponent();
+
             if (!string.IsNullOrEmpty(Properties.Settings.Default.connection))
-            {
-                this.Hide();
                 ShowMainForm(Properties.Settings.Default.connection);
-            }
+            else
+                this.Show();
         }
         
         // Отображает главное окно программы при корректно введенных пользователем данных.
@@ -69,6 +69,14 @@ namespace EmploymentDepartment
         private void tbPort_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = e.KeyChar == '.' || (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back);
+        }
+
+        // Обработка события закрытия окна.
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Закрытие приложения. Закрывает приложение и в случае, если закрывается главное окно программы
+            // так как родителем главного окна является данный экземпляр окна.
+            Application.Exit();
         }
     }
 }

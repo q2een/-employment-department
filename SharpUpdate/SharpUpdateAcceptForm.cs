@@ -35,7 +35,7 @@ namespace SharpUpdate
             this.applicationInfo = applicationInfo;
             this.updateInfo = updateInfo;
 
-            this.Text = this.applicationInfo.ApplicationName + " - Доступно обновление";
+            this.Text = "Доступно обновление - " + this.applicationInfo.ApplicationName;
 
             // Assigns the icon if it isn't null
             if (this.applicationInfo.ApplicationIcon != null)

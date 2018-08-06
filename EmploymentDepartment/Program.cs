@@ -13,7 +13,12 @@ namespace EmploymentDepartment
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+
+            // Не передается как аргумент метода Run(), так как данную форму нужно скрывать 
+            // в случае если данные сохранены пользователем.
+            var login = new LoginForm();
+
+            Application.Run();
         }
     }
 }
