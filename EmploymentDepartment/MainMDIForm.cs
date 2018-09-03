@@ -98,6 +98,7 @@ namespace EmploymentDepartment
         private readonly SharpUpdater updater;
         private readonly UserRole userRole;
         private bool isUnlogin = false;
+        private bool isSearchShown = false;
 
         /// <summary>
         /// Предоставляет главное MDI окно программы
@@ -584,6 +585,107 @@ namespace EmploymentDepartment
 
         #endregion
 
+        #region Пункт меню "Поиск".
+
+        // Устанавливает видимость пункта меню и панели поиска.
+        private void SetSearch()
+        {
+            var isStudents = this.ActiveMdiChild is DataViewForm<IStudent>;
+            var isCompanies = this.ActiveMdiChild is DataViewForm<ICompany>;
+
+            tsSearchPanel.Visible = (isStudents || isCompanies) && isSearchShown;
+            searchMI.Visible = isStudents || isCompanies;
+
+            if (!isStudents && !isCompanies)
+                return;
+
+            cmbSearchFilter.Visible = isStudents;
+            lblSearchDescription.Visible = !isStudents;
+        }
+
+        // Возвращает фильтр поиска в зависимости от выбранных параметров.
+        // Предназначено для создания строки фильтрации студентов.
+        private string BuildStudentSearchString()
+        {
+            if (cmbSearchFilter.SelectedIndex == 0)
+            {
+                var name = tbSearch.Text.Trim().Split(' ');
+
+                if (name.Count() == 0)
+                    return "";
+
+                if (name.Count() == 1)
+                    return $"([Фамилия] LIKE '%{name[0]}%') OR ([Имя] LIKE '%{name[0]}%')";
+
+                if (name.Count() == 2)
+                    return $"([Фамилия] LIKE '%{name[0]}%') AND ([Имя] LIKE '%{name[1]}%')";
+
+                cmbSearchFilter.SelectedIndex = 1;
+            }
+
+            var filter = cmbSearchFilter.SelectedIndex == 1 ? "[Фамилия]" : "[Имя]";
+
+            return $"({filter} LIKE '%{tbSearch.Text.Trim()}%')";
+        }
+
+        // Поиск. Обработка события нажатия на кнопку.
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            IDataSourceView students = this.ActiveMdiChild as DataViewForm<IStudent>;
+            IDataSourceView companies = this.ActiveMdiChild as DataViewForm<ICompany>;
+
+            IDataSourceView form = students ?? companies;
+
+            if (form == null)
+                return;
+
+            var filter = students == null ? $"([Название] LIKE '%{tbSearch.Text}%')" : BuildStudentSearchString();
+
+            form.SetDataSourceFilter(filter);
+        }
+
+        // Отменить поиск. Обработка события нажатия на кнопку.
+        private void tbSearchCancel_Click(object sender, EventArgs e)
+        {
+            var form = this.ActiveMdiChild as DataViewForm<IStudent>;
+
+            if (form == null)
+                return;
+
+            form.SetDataSourceFilter(null);
+        }    
+
+        // Поиск. Обработка события нажатия на пункт меню.
+        private void searchMI_Click(object sender, EventArgs e)
+        {
+            if (!this.isSearchShown)
+            {
+                tsSearchPanel.Visible = true;
+                this.isSearchShown = true;
+            }
+
+            tbSearch.Focus();
+            tbSearch.SelectAll();
+        }
+
+        // Закрыть панель поиска. Обработка события нажатия на кнопку.
+        private void btnCloseSearchPanel_Click(object sender, EventArgs e)
+        {
+            this.isSearchShown = false;
+            tsSearchPanel.Visible = false;
+        }
+
+        // Поиск по нажатию на клавишу ENTER. Обработка события нажатия на клавишу.
+        private void tbSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != (char)Keys.Enter)
+                return;
+
+            btnSearch_Click(sender, e);
+        }
+
+        #endregion
+
         #region Пункт меню "Отчет". 
         // Управление видимостью пункта меню.
         private void SetReportMIVisible()
@@ -809,6 +911,9 @@ namespace EmploymentDepartment
         private void MainMDIForm_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+
+            // Фильтр в выпадающем списке для поиска.
+            cmbSearchFilter.SelectedIndex = 0;
         }
 
         // Обработка события смены активного дочернего окна.
@@ -825,6 +930,9 @@ namespace EmploymentDepartment
 
             // Видимость элемента меню "Данные".
             SetDataMIByActiveChild();
+
+            // Видимость элемента меню "Поиск".
+            SetSearch();
 
             // Видимость пунктов меню "Отчет".
             SetReportMIVisible();

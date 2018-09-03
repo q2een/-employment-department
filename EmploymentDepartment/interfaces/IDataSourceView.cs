@@ -15,5 +15,7 @@
         /// </summary>
         /// <param name="fileName">Полный путь к файлу</param>
         void Export(string fileName);
+
+        void SetDataSourceFilter(string filterText);
     }
 }

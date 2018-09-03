@@ -75,7 +75,7 @@ namespace EmploymentDepartment
             mainDgv.DataSource = bindingSource;
             mainDgv.DoubleBuffered(true);
 
-            Init();
+            Init();             
 
         }
 
@@ -195,6 +195,17 @@ namespace EmploymentDepartment
 
             if (this.dataTable.Rows.IndexOf(row) == -1)
                 this.dataTable.Rows.Add(row);
+        }
+
+        public void SetDataSourceFilter(string filterText)
+        {
+            if (filterText == null)
+            {
+                bindingSource.Filter = mainDgv.FilterString;
+                return;
+            }
+
+            bindingSource.Filter = filterText;
         }
 
         /// <summary>

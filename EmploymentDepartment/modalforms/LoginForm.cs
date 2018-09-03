@@ -16,10 +16,10 @@ namespace EmploymentDepartment
         {   
             InitializeComponent();
 
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.connection))
-                ShowMainForm(Properties.Settings.Default.connection);
-            else
-                this.Show();
+             if (!string.IsNullOrEmpty(Properties.Settings.Default.connection))
+                 ShowMainForm(Properties.Settings.Default.connection);
+             else
+                 this.Show();     
         }
         
         // Отображает главное окно программы при корректно введенных пользователем данных.

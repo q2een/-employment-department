@@ -71,6 +71,7 @@ namespace EmploymentDepartment
             this.setDefaultValueMI = new System.Windows.Forms.ToolStripMenuItem();
             this.setDefaultValueSeparatorMI = new System.Windows.Forms.ToolStripSeparator();
             this.entityRemoveMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchMI = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,10 +122,19 @@ namespace EmploymentDepartment
             this.tsDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.tsNavigationSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.tsSearchPanel = new System.Windows.Forms.ToolStrip();
+            this.cmbSearchFilter = new System.Windows.Forms.ToolStripComboBox();
+            this.lblSearchDescription = new System.Windows.Forms.ToolStripLabel();
+            this.tbSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.btnSearch = new System.Windows.Forms.ToolStripButton();
+            this.btnCloseSearchPanel = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tbSearchCancel = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStrip)).BeginInit();
             this.toolStrip.SuspendLayout();
+            this.tsSearchPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -134,6 +144,7 @@ namespace EmploymentDepartment
             this.dataMI,
             this.addMI,
             this.editMI,
+            this.searchMI,
             this.windowsMenu,
             this.отчетToolStripMenuItem,
             this.helpMenu});
@@ -453,6 +464,15 @@ namespace EmploymentDepartment
             this.entityRemoveMI.Size = new System.Drawing.Size(244, 22);
             this.entityRemoveMI.Text = "Удалить";
             this.entityRemoveMI.Click += new System.EventHandler(this.entityRemoveMI_Click);
+            // 
+            // searchMI
+            // 
+            this.searchMI.Name = "searchMI";
+            this.searchMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.searchMI.Size = new System.Drawing.Size(54, 20);
+            this.searchMI.Text = "Поиск";
+            this.searchMI.Visible = false;
+            this.searchMI.Click += new System.EventHandler(this.searchMI_Click);
             // 
             // windowsMenu
             // 
@@ -920,11 +940,85 @@ namespace EmploymentDepartment
             this.saveFileDialog.Filter = "Лист .xls|*.xls";
             this.saveFileDialog.Title = "Экспорт...";
             // 
+            // tsSearchPanel
+            // 
+            this.tsSearchPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmbSearchFilter,
+            this.lblSearchDescription,
+            this.tbSearch,
+            this.btnSearch,
+            this.btnCloseSearchPanel,
+            this.toolStripSeparator3,
+            this.tbSearchCancel});
+            this.tsSearchPanel.Location = new System.Drawing.Point(0, 49);
+            this.tsSearchPanel.Name = "tsSearchPanel";
+            this.tsSearchPanel.Size = new System.Drawing.Size(1076, 25);
+            this.tsSearchPanel.TabIndex = 6;
+            this.tsSearchPanel.Text = "toolStrip1";
+            this.tsSearchPanel.Visible = false;
+            // 
+            // cmbSearchFilter
+            // 
+            this.cmbSearchFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSearchFilter.Items.AddRange(new object[] {
+            "Фамилия и имя",
+            "Фамилия",
+            "Имя"});
+            this.cmbSearchFilter.Name = "cmbSearchFilter";
+            this.cmbSearchFilter.Size = new System.Drawing.Size(121, 25);
+            // 
+            // lblSearchDescription
+            // 
+            this.lblSearchDescription.Name = "lblSearchDescription";
+            this.lblSearchDescription.Size = new System.Drawing.Size(96, 22);
+            this.lblSearchDescription.Text = "Наименование :";
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(200, 25);
+            this.tbSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSearch_KeyPress);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(46, 22);
+            this.btnSearch.Text = "Поиск";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // btnCloseSearchPanel
+            // 
+            this.btnCloseSearchPanel.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnCloseSearchPanel.Name = "btnCloseSearchPanel";
+            this.btnCloseSearchPanel.Size = new System.Drawing.Size(14, 22);
+            this.btnCloseSearchPanel.Text = "Х";
+            this.btnCloseSearchPanel.ToolTipText = "Закрыть панель поиска";
+            this.btnCloseSearchPanel.Click += new System.EventHandler(this.btnCloseSearchPanel_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tbSearchCancel
+            // 
+            this.tbSearchCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tbSearchCancel.Image = ((System.Drawing.Image)(resources.GetObject("tbSearchCancel.Image")));
+            this.tbSearchCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbSearchCancel.Name = "tbSearchCancel";
+            this.tbSearchCancel.Size = new System.Drawing.Size(53, 22);
+            this.tbSearchCancel.Text = "Отмена";
+            this.tbSearchCancel.Click += new System.EventHandler(this.tbSearchCancel_Click);
+            // 
             // MainMDIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1076, 512);
+            this.Controls.Add(this.tsSearchPanel);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
@@ -943,6 +1037,8 @@ namespace EmploymentDepartment
             ((System.ComponentModel.ISupportInitialize)(this.toolStrip)).EndInit();
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
+            this.tsSearchPanel.ResumeLayout(false);
+            this.tsSearchPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1039,6 +1135,15 @@ namespace EmploymentDepartment
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem updateMI;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStrip tsSearchPanel;
+        private System.Windows.Forms.ToolStripTextBox tbSearch;
+        private System.Windows.Forms.ToolStripButton btnSearch;
+        private System.Windows.Forms.ToolStripLabel btnCloseSearchPanel;
+        private System.Windows.Forms.ToolStripButton tbSearchCancel;
+        private System.Windows.Forms.ToolStripLabel lblSearchDescription;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripComboBox cmbSearchFilter;
+        private System.Windows.Forms.ToolStripMenuItem searchMI;
     }
 }
 
