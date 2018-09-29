@@ -78,7 +78,7 @@ namespace EmploymentDepartment
         {
             get
             {
-                return new Uri("http://qzeen.96.lt/employment/project.xml"); 
+                return new Uri("http://194.79.62.216:8082/releases/project.xml"); 
             }
         }
 
