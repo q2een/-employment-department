@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="export\ReportCreator.cs" />
     <Compile Include="modalforms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +164,12 @@
     <Compile Include="modalforms\PreferentialCategory\PreferentialCategoryForm.Designer.cs">
       <DependentUpon>PreferentialCategoryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="modalforms\ReportSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modalforms\ReportSettingsForm.Designer.cs">
+      <DependentUpon>ReportSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="modalforms\Specialization\BaseSpecializationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +248,9 @@
     <EmbeddedResource Include="modalforms\PreferentialCategory\PreferentialCategoryForm.resx">
       <DependentUpon>PreferentialCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="modalforms\ReportSettingsForm.resx">
+      <DependentUpon>ReportSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="modalforms\StatementReportForm.resx">
       <DependentUpon>StatementReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -278,22 +288,25 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="templates\certificate.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="templates\confirmationOfArrival.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="templates\confirmationOfArrivalSelf.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\notification.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="templates\personalAccountOfGraduates.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="templates\selfEmployment.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="templates\statement.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

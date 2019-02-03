@@ -21,5 +21,14 @@ namespace EmploymentDepartment.BL
         [DisplayName("Наименование")]
         string Name { get; set; }
 
+        [DisplayName("Код")]
+        string SpecialtyCode { get; set; }
+
+        string SpecialtyName { get; set; }
+
+        string SpecialtyProfileName { get; set; }
+
+        string Cipher { get; set; }
+
     }
 }

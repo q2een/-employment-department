@@ -128,7 +128,7 @@ namespace EmploymentDepartment
             bindingSource.DataMember = dataTable.TableName;
 
             // Скрываем данные. Пользователь не должен видеть уникальный идентификатор.
-            mainDgv.Columns["ID"].Visible = false;
+            mainDgv.Columns["ID"].Visible = false;          
         }
 
         /// <summary>
