@@ -44,7 +44,6 @@ namespace EmploymentDepartment
             cmbFaculty.BindComboboxData(Main.Entities.GetEntities<Faculty>().Select(i => i as IFaculty).ToList());
             this.SetPropertiesValue<ISpecialization>(Entity, "FacultyName", "LevelOfEducationName");
         }
-         
           
         protected override ErrorProvider GetErrorProvider()
         {
@@ -60,7 +59,11 @@ namespace EmploymentDepartment
             if (Type == ActionType.Edit) 
                 btnApply.Text = "Применить";
 
-            mainPanel.Enabled = btnApply.Visible = Type != ActionType.View;
+            if (Type == ActionType.View)
+            {
+                mainPanel.DisableControls();
+            }
+            btnApply.Visible = Type != ActionType.View;
         }
 
         // Обработка события нажатия на кнопку "Подтверидть".
@@ -158,7 +161,54 @@ namespace EmploymentDepartment
                 return cmbLevelOfEducation.Text;
             }
         }
-        #endregion
 
+        public new string SpecialtyCode
+        {
+            get
+            {
+                return string.IsNullOrEmpty(tbSpecialtyCode.Text) ? null : tbSpecialtyCode.Text; 
+            }
+            set
+            {
+                tbSpecialtyCode.Text = value;
+            }
+        }
+
+        public new string SpecialtyName
+        {
+            get
+            {
+                return string.IsNullOrEmpty(tbSpecialtyName.Text) ? null : tbSpecialtyName.Text; 
+            }
+            set
+            {
+                tbSpecialtyName.Text = value;
+            }
+        }
+
+        public new string SpecialtyProfileName
+        {
+            get
+            {
+                return string.IsNullOrEmpty(tbSpecialtyProfileName.Text) ? null : tbSpecialtyProfileName.Text; 
+            }
+            set
+            {
+                tbSpecialtyProfileName.Text = value;
+            }
+        }
+
+        public new string Cipher
+        {
+            get
+            {
+                return string.IsNullOrEmpty(tbCipher.Text) ? null : tbCipher.Text;
+            }
+            set
+            {
+                tbCipher.Text = value;
+            }
+        }
+        #endregion
     }
 }

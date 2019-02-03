@@ -114,5 +114,19 @@ namespace EmploymentDepartment
                 Application.Quit();
             }
         }
+
+        // Освобождение ресурсов.
+        ~WordFile()
+        {
+            try
+            {
+                Document.Close();
+                Application.Quit();
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

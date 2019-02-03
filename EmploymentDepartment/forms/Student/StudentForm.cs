@@ -79,10 +79,10 @@ namespace EmploymentDepartment
         // Установка одинаковых значений адресов.
         private void SetRegAddressValues(bool isEmpty)
         {
-            tbRegCity.Text = isEmpty ? "" : tbCity.Text;
-            tbRegRegion.Text = isEmpty ? "" : tbRegion.Text;
-            tbRegDistrict.Text = isEmpty ? "" : tbDistrict.Text;
-            tbRegAddress.Text = isEmpty ? "" : tbAddress.Text;
+            tbRegCity.Text = isEmpty ? null : tbCity.Text;
+            tbRegRegion.Text = isEmpty ? null : tbRegion.Text;
+            tbRegDistrict.Text = isEmpty ? null : tbDistrict.Text;
+            tbRegAddress.Text = isEmpty ? null : tbAddress.Text;
             errorProvider.SetError(tbRegCity, "");
             errorProvider.SetError(tbRegAddress, "");
         }
@@ -202,9 +202,9 @@ namespace EmploymentDepartment
                 errorProvider.SetError(tbYearOfGraduation, "Укажите корректный год окончания университета");
             else
                 if(year < 2018)
-                errorProvider.SetError(tbYearOfGraduation, "Год окончания университета должен быть больше 2018");
-            else
-                errorProvider.SetError(tbYearOfGraduation, "");
+                    errorProvider.SetError(tbYearOfGraduation, "Год окончания университета должен быть больше 2018");
+                else
+                    errorProvider.SetError(tbYearOfGraduation, "");
         }
        
         // Валидация обязательного текстового поля.

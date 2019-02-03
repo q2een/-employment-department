@@ -53,9 +53,13 @@ namespace EmploymentDepartment
         {
             if (Type == ActionType.Edit)
                 btnApply.Text = "Применить";
-            
 
-            mainPanel.Enabled = controlPanel.Visible = Type != ActionType.View;
+
+            if (Type == ActionType.View)
+            {
+                mainPanel.DisableControls();
+            }
+            controlPanel.Visible = Type != ActionType.View;
         }
 
         private void btnApply_Click(object sender, EventArgs e)

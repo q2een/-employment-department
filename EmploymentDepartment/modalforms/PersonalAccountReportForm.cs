@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EmploymentDepartment
@@ -68,15 +69,26 @@ namespace EmploymentDepartment
 
                 var doc = new PersonalAccountOfGraduatesReport(System.IO.Directory.GetCurrentDirectory() + @"\templates\personalAccountOfGraduates.docx");
 
-                doc.ReplaceWordText("{Faculty}", cmbFaculty.Text);
-                doc.ReplaceWordText("{FieldOfStudy}", cmbFieldOfStudy.Text);
-                doc.ReplaceWordText("{StudyGroup}", tbStudyGroup.Text.Trim());
-                doc.ReplaceWordText("{Year1}", year.ToString());
-                doc.ReplaceWordText("{Year2}", (++year).ToString());
-                doc.ReplaceWordText("{Year3}", (++year).ToString());
+                this.Hide();
 
-                doc.AddTable(table);
-                doc.Save(fileName);
+                Task t = new Task(() => {
+
+                    MessageBox.Show("Сохрениение файла может занять некоторое время. После успешного сохранения будет показано уведомление", "Формирование отчета", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    doc.ReplaceWordText("{Faculty}", cmbFaculty.Text);
+                    doc.ReplaceWordText("{FieldOfStudy}", cmbFieldOfStudy.Text);
+                    doc.ReplaceWordText("{StudyGroup}", tbStudyGroup.Text.Trim());
+                    doc.ReplaceWordText("{Year1}", year.ToString());
+                    doc.ReplaceWordText("{Year2}", (++year).ToString());
+                    doc.ReplaceWordText("{Year3}", (++year).ToString());
+
+                    doc.AddTable(table);
+                    doc.Save(fileName);
+                });
+                t.Start();
+
+                t.ContinueWith((task) => MessageBox.Show($"Файл {fileName}", "Ведомость персонального учета выпускников", MessageBoxButtons.OK, MessageBoxIcon.Information));
+
                 this.Close();
             }
             catch (Exception ex)
