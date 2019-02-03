@@ -242,4 +242,4 @@ ModelManifest.xml
 .fake/
 
 # templates
-templates/
+**/templates
