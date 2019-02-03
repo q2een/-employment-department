@@ -22,19 +22,5 @@ namespace EmploymentDepartment.BL
         [DisplayName("Наименование")]
         public string Name { get; set; }
 
-        [DisplayName("Код")] 
-        public string SpecialtyCode { get; set; }
-
-        // Наименование специальности.
-        [Browsable(false)]
-        public string SpecialtyName { get; set; }
-
-        // Наименование профиля подготовки.
-        [Browsable(false)]
-        public string SpecialtyProfileName { get; set; }
-
-        // Шифр.
-        [Browsable(false)]
-        public string Cipher { get; set; }
     }
 }

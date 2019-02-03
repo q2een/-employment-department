@@ -128,7 +128,7 @@ namespace EmploymentDepartment
                 case DialogResult.Cancel:
                     e.Cancel = true;
                     break;
-            }
+            }  
         }
 
         /// <summary>

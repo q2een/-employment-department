@@ -7,8 +7,6 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Reflection;
-using System.Threading.Tasks;
-using System.ComponentModel;
 
 namespace EmploymentDepartment
 {
@@ -99,7 +97,6 @@ namespace EmploymentDepartment
 
         private readonly SharpUpdater updater;
         private readonly UserRole userRole;
-        private readonly ReportCreator reportCreator;
         private bool isUnlogin = false;
         private bool isSearchShown = false;
 
@@ -115,26 +112,9 @@ namespace EmploymentDepartment
             this.Entities = db.Entities;
             this.userRole = userRole;
             this.updater = new SharpUpdater(this);
-                        
-            this.reportCreator = new ReportCreator(new FolderBrowserDialog());
-            SetReportCreatorPropertiesBySettings();
-
-            if (userRole == UserRole.Debug)
-                statusLblUser.Text = "Отладка";
 
             if (userRole == UserRole.Moderator)
                 statusLblUser.Text = "Редактор";
-        }
-
-        /// <summary>
-        /// Задает параметры сохранения отчетов по сохраненным настройкам.
-        /// </summary>
-        public void SetReportCreatorPropertiesBySettings()
-        {
-            reportCreator.IsRequirePath = Properties.Settings.Default.isRquirePath;
-            reportCreator.SaveFolderPath = Properties.Settings.Default.reportPath;
-            reportCreator.OpenAfterCreate = Properties.Settings.Default.openAfterCreate;
-            reportCreator.CreateSubfolder = Properties.Settings.Default.createSubfolder;
         }
 
         // Возвращает сущность из активного дочернего MDI окна.
@@ -530,7 +510,7 @@ namespace EmploymentDepartment
 
             entityInserMI.Visible = tsAddNewItem.Visible = isDataView;
             entityEditMI.Visible = tsEditItem.Visible = isDataView && (active as IDataView).ItemsCount != 0;
-            entityEditSeparatorMI.Visible = (isDataView && (active as IDataView).ItemsCount != 0) && (userRole == UserRole.Administrator || userRole == UserRole.Debug);
+            entityEditSeparatorMI.Visible = (isDataView && (active as IDataView).ItemsCount != 0) && userRole == UserRole.Administrator;
             entityAddNEditSeparatorMI.Visible = isDataView && (active as IDataView).ItemsCount != 0;
 
             // Пункты меню для добавления / редактирования элементов.
@@ -538,9 +518,9 @@ namespace EmploymentDepartment
 
             saveMI.Visible = tsSaveChanges.Visible = saveSeparatorMI.Visible = isIEditable && ((active as IEditable).Type == ActionType.Edit || (active as IEditable).Type == ActionType.Add);
             setDefaultValueMI.Visible = setDefaultValueSeparatorMI.Visible = saveSeparatorMI.Visible = isIEditable && ((active as IEditable).Type == ActionType.Edit);
-            entityRemoveMI.Visible = tsDeleteItem.Visible = entityRemoveMI.Enabled = ((isIEditable && ((active as IEditable).Type == ActionType.Edit)) || (isDataView && (active as IDataView).ItemsCount != 0)) && (userRole == UserRole.Administrator || userRole == UserRole.Debug);
+            entityRemoveMI.Visible = tsDeleteItem.Visible = entityRemoveMI.Enabled = ((isIEditable && ((active as IEditable).Type == ActionType.Edit)) || (isDataView && (active as IDataView).ItemsCount != 0)) && userRole == UserRole.Administrator;
             tsNavigationSeparator.Visible = tsDeleteItem.Visible;
-            setDefaultValueSeparatorMI.Visible = setDefaultValueSeparatorMI.Visible && (userRole == UserRole.Administrator || userRole == UserRole.Debug);
+            setDefaultValueSeparatorMI.Visible = setDefaultValueSeparatorMI.Visible && userRole == UserRole.Administrator;
 
         }
 
@@ -667,10 +647,7 @@ namespace EmploymentDepartment
         // Отменить поиск. Обработка события нажатия на кнопку.
         private void tbSearchCancel_Click(object sender, EventArgs e)
         {
-            IDataSourceView students = this.ActiveMdiChild as DataViewForm<IStudent>;
-            IDataSourceView companies = this.ActiveMdiChild as DataViewForm<ICompany>;
-
-            IDataSourceView form = students ?? companies;
+            var form = this.ActiveMdiChild as DataViewForm<IStudent>;
 
             if (form == null)
                 return;
@@ -716,71 +693,40 @@ namespace EmploymentDepartment
             var student = GetEntityFromActiveChild<IStudent>();
             var studentCompany = GetEntityFromActiveChild<IStudentCompany>();
 
-            var isVisible = ((IIdentifiable)student ?? studentCompany) != null;
-
-            selfEmploymentMI.Visible = reportConfirmationOfArrivalSelfMI.Visible = isVisible;
-            reportConfirmationOfArrivalMI.Visible = reportCertificateMI.Visible = reportNotificationMI.Visible  = isVisible;
-            reportSeparatorMI.Visible = selfEmploymentSeparator.Visible = isVisible;
-        }
-
-        // Сохранение отчета в зависимости от выбранного пункта меню.
-        private void SaveReport(ReportCreator.SaveReport saveMethod)
-        {
-            try
-            {
-                IStudent student;
-
-                var studentCompany = GetEntityFromActiveChild<IStudentCompany>();
-
-                if (studentCompany != null)
-                    student = Entities.GetSingle<Student>(studentCompany.Student);
-                else
-                    student = GetEntityFromActiveChild<IStudent>();
-
-                if (student == null)
-                    return;
-
-                saveMethod(student, Entities.GetSingle<Specialization>(student.FieldOfStudy), studentCompany);
-            }
-            catch (FileNotFoundException)
-            {
-                // Не выбрана папка в открывшемся диалоговом окне - отмена действия.
-                return;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            selfEmploymentMI.Visible = student != null;
+            reportConfirmationOfArrivalMI.Visible = reportConfirmationOfArrivalSelfMI.Visible = reportCertificateMI.Visible = studentCompany != null;
+            reportSeparatorMI.Visible = student != null || studentCompany != null;
         }
 
         // Справка о самостоятельном трудоустройстве. Обработка события нажатия на пункт меню.
         private void selfEmploymentMI_Click(object sender, EventArgs e)
         {
-            SaveReport(reportCreator.SaveSelfEmployment);
-        }
+            try
+            {
+                var student = GetEntityFromActiveChild<IStudent>();
 
-        // Подтверждение прибытия к справке о самостоятельном трудоустройстве. Обработка события нажатия на пункт меню.
-        private void reportConfirmationOfArrivalSelfMI_Click(object sender, EventArgs e)
-        {
-            SaveReport(reportCreator.SaveSelfEmploymentConfirmationOfArrival);
-        }
+                if (student == null)
+                    return;
 
-        // Свидетельство о направлении на работу. Обработка события нажатия на пункт меню.
-        private void reportCertificateMI_Click(object sender, EventArgs e)
-        {
-            SaveReport(reportCreator.SaveCertificate);
-        }
+                saveFileDialog.Filter = "Документ MS Word .docx|*.docx";
 
-        // Уведомление к свидетельству о направлении. Обработка события нажатия на пункт меню.
-        private void reportNotificationMI_Click(object sender, EventArgs e)
-        {
-            SaveReport(reportCreator.SaveNotification);
-        }
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var doc = new WordFile(Directory.GetCurrentDirectory() + @"\templates\selfEmployment.docx");
 
-        // Подтверждение прибытия к свидетельству о направлении. Обработка события нажатия на пункт меню.
-        private void reportConfirmationOfArrivalMI_Click(object sender, EventArgs e)
-        {
-            SaveReport(reportCreator.SaveConfirmationOfArrival);
+                    doc.ReplaceWordText("{surname}", student.Surname);
+                    doc.ReplaceWordText("{name}", student.Name);
+                    doc.ReplaceWordText("{patronymic}", student.Patronymic);
+                    doc.ReplaceWordText("{year}", student.YearOfGraduation.ToString());
+                    doc.ReplaceWordText("{specialization}", student.Specialization);
+
+                    doc.Save(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Ведомость распределения выпускников. Обработка события нажатия на пункт меню.
@@ -813,12 +759,95 @@ namespace EmploymentDepartment
             }
         }
 
-        // Параметры. Обработка события нажатия на пункт меню.
-        private void reportSettingsMI_Click(object sender, EventArgs e)
+        // Свидетельство о направлении на работу. Обработка события нажатия на пункт меню.
+        private void reportCertificateMI_Click(object sender, EventArgs e)
         {
-            new ReportSettingsForm(this).ShowDialog();
+            try
+            {
+                var studentCompany = GetEntityFromActiveChild<IStudentCompany>();
+
+                if (studentCompany == null)
+                    return;
+
+                var student = Entities.GetSingle<Student>(studentCompany.Student);
+
+                if (student == null)
+                    return;
+
+                saveFileDialog.Filter = "Документ MS Word .docx|*.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var doc = new WordFile(Directory.GetCurrentDirectory() + @"\templates\certificate.docx");
+
+                    doc.ReplaceWordText("{surname}", student.Surname);
+                    doc.ReplaceWordText("{name}", student.Name);
+                    doc.ReplaceWordText("{patronymic}", student.Patronymic);
+                    doc.ReplaceWordText("{specialization}", student.Specialization);
+                    doc.ReplaceWordText("{year}", studentCompany.YearOfEmployment.ToString());
+                    doc.ReplaceWordText("{salary}", studentCompany.Salary.ToString());
+                    doc.ReplaceWordText("{company}", studentCompany.NameOfCompany.ToString());
+
+                    doc.Save(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
+        // Формирует отчет "Подтверждение прибытия к свидетельству о направлении" в зависимости от разрешения
+        // на самостоятельное трудоустройство.
+        private void reportConformationOfArrival(string template)
+        {
+            try
+            {
+                var studentCompany = GetEntityFromActiveChild<IStudentCompany>();
+
+                if (studentCompany == null)
+                    return;
+
+                var student = Entities.GetSingle<Student>(studentCompany.Student);
+
+                if (student == null)
+                    return;
+
+                saveFileDialog.Filter = "Документ MS Word .docx|*.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var doc = new WordFile(Directory.GetCurrentDirectory() + $@"\templates\{template}.docx");
+
+                    doc.ReplaceWordText("{surname}", student.Surname);
+                    doc.ReplaceWordText("{name}", student.Name);
+                    doc.ReplaceWordText("{patronymic}", student.Patronymic);
+                    doc.ReplaceWordText("{specialization}", student.Specialization);
+                    doc.ReplaceWordText("{year}", studentCompany.YearOfEmployment.ToString());
+                    doc.ReplaceWordText("{salary}", studentCompany.Salary.ToString());
+                    doc.ReplaceWordText("{company}", studentCompany.NameOfCompany.ToString());
+
+                    doc.Save(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Подтверждение прибытия к свидетельству о направлении. Обработка события нажатия на пункт меню.
+        private void reportConfirmationOfArrivalMI_Click(object sender, EventArgs e)
+        {
+            reportConformationOfArrival("confirmationOfArrival");
+        }
+
+        // Подтверждение прибытия к справке о самостоятельном трудоустройстве. Обработка события нажатия на пункт меню.
+        private void reportConfirmationOfArrivalSelfMI_Click(object sender, EventArgs e)
+        {
+            reportConformationOfArrival("confirmationOfArrivalSelf");
+        }
         #endregion
 
         #region Пункт меню "Окно".
@@ -884,7 +913,7 @@ namespace EmploymentDepartment
             this.WindowState = FormWindowState.Maximized;
 
             // Фильтр в выпадающем списке для поиска.
-            cmbSearchFilter.SelectedIndex = 0;      
+            cmbSearchFilter.SelectedIndex = 0;
         }
 
         // Обработка события смены активного дочернего окна.

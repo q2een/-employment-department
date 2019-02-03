@@ -79,16 +79,12 @@ namespace EmploymentDepartment
             this.closeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selfEmploymentMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportConfirmationOfArrivalSelfMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.selfEmploymentSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.reportCertificateMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportNotificationMI = new System.Windows.Forms.ToolStripMenuItem();
             this.reportConfirmationOfArrivalMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportConfirmationOfArrivalSelfMI = new System.Windows.Forms.ToolStripMenuItem();
             this.reportSeparatorMI = new System.Windows.Forms.ToolStripSeparator();
             this.reportStatementMI = new System.Windows.Forms.ToolStripMenuItem();
             this.personalAccountOfGraduatesMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.reportSettingsMI = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMI = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -492,28 +488,28 @@ namespace EmploymentDepartment
             // cascadeToolStripMenuItem
             // 
             this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.cascadeToolStripMenuItem.Text = "&Каскадом";
             this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.CascadeToolStripMenuItem_Click);
             // 
             // tileVerticalToolStripMenuItem
             // 
             this.tileVerticalToolStripMenuItem.Name = "tileVerticalToolStripMenuItem";
-            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.tileVerticalToolStripMenuItem.Text = "С&лева направо";
             this.tileVerticalToolStripMenuItem.Click += new System.EventHandler(this.TileVerticalToolStripMenuItem_Click);
             // 
             // tileHorizontalToolStripMenuItem
             // 
             this.tileHorizontalToolStripMenuItem.Name = "tileHorizontalToolStripMenuItem";
-            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.tileHorizontalToolStripMenuItem.Text = "С&верху вниз";
             this.tileHorizontalToolStripMenuItem.Click += new System.EventHandler(this.TileHorizontalToolStripMenuItem_Click);
             // 
             // closeAllToolStripMenuItem
             // 
             this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
-            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.closeAllToolStripMenuItem.Text = "&Закрыть все";
             this.closeAllToolStripMenuItem.Click += new System.EventHandler(this.CloseAllToolStripMenuItem_Click);
             // 
@@ -521,16 +517,12 @@ namespace EmploymentDepartment
             // 
             this.отчетToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selfEmploymentMI,
-            this.reportConfirmationOfArrivalSelfMI,
-            this.selfEmploymentSeparator,
             this.reportCertificateMI,
-            this.reportNotificationMI,
             this.reportConfirmationOfArrivalMI,
+            this.reportConfirmationOfArrivalSelfMI,
             this.reportSeparatorMI,
             this.reportStatementMI,
-            this.personalAccountOfGraduatesMI,
-            this.toolStripMenuItem3,
-            this.reportSettingsMI});
+            this.personalAccountOfGraduatesMI});
             this.отчетToolStripMenuItem.Name = "отчетToolStripMenuItem";
             this.отчетToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.отчетToolStripMenuItem.Text = "Отчет";
@@ -543,20 +535,6 @@ namespace EmploymentDepartment
             this.selfEmploymentMI.Visible = false;
             this.selfEmploymentMI.Click += new System.EventHandler(this.selfEmploymentMI_Click);
             // 
-            // reportConfirmationOfArrivalSelfMI
-            // 
-            this.reportConfirmationOfArrivalSelfMI.Name = "reportConfirmationOfArrivalSelfMI";
-            this.reportConfirmationOfArrivalSelfMI.Size = new System.Drawing.Size(482, 22);
-            this.reportConfirmationOfArrivalSelfMI.Text = "Подтверждение прибытия к справке о самостоятельном трудоустройстве";
-            this.reportConfirmationOfArrivalSelfMI.Visible = false;
-            this.reportConfirmationOfArrivalSelfMI.Click += new System.EventHandler(this.reportConfirmationOfArrivalSelfMI_Click);
-            // 
-            // selfEmploymentSeparator
-            // 
-            this.selfEmploymentSeparator.Name = "selfEmploymentSeparator";
-            this.selfEmploymentSeparator.Size = new System.Drawing.Size(479, 6);
-            this.selfEmploymentSeparator.Visible = false;
-            // 
             // reportCertificateMI
             // 
             this.reportCertificateMI.Name = "reportCertificateMI";
@@ -565,14 +543,6 @@ namespace EmploymentDepartment
             this.reportCertificateMI.Visible = false;
             this.reportCertificateMI.Click += new System.EventHandler(this.reportCertificateMI_Click);
             // 
-            // reportNotificationMI
-            // 
-            this.reportNotificationMI.Name = "reportNotificationMI";
-            this.reportNotificationMI.Size = new System.Drawing.Size(482, 22);
-            this.reportNotificationMI.Text = "Уведомление к свидетельству о направлении ";
-            this.reportNotificationMI.Visible = false;
-            this.reportNotificationMI.Click += new System.EventHandler(this.reportNotificationMI_Click);
-            // 
             // reportConfirmationOfArrivalMI
             // 
             this.reportConfirmationOfArrivalMI.Name = "reportConfirmationOfArrivalMI";
@@ -580,6 +550,14 @@ namespace EmploymentDepartment
             this.reportConfirmationOfArrivalMI.Text = "Подтверждение прибытия к свидетельству о направлении";
             this.reportConfirmationOfArrivalMI.Visible = false;
             this.reportConfirmationOfArrivalMI.Click += new System.EventHandler(this.reportConfirmationOfArrivalMI_Click);
+            // 
+            // reportConfirmationOfArrivalSelfMI
+            // 
+            this.reportConfirmationOfArrivalSelfMI.Name = "reportConfirmationOfArrivalSelfMI";
+            this.reportConfirmationOfArrivalSelfMI.Size = new System.Drawing.Size(482, 22);
+            this.reportConfirmationOfArrivalSelfMI.Text = "Подтверждение прибытия к справке о самостоятельном трудоустройстве";
+            this.reportConfirmationOfArrivalSelfMI.Visible = false;
+            this.reportConfirmationOfArrivalSelfMI.Click += new System.EventHandler(this.reportConfirmationOfArrivalSelfMI_Click);
             // 
             // reportSeparatorMI
             // 
@@ -600,18 +578,6 @@ namespace EmploymentDepartment
             this.personalAccountOfGraduatesMI.Size = new System.Drawing.Size(482, 22);
             this.personalAccountOfGraduatesMI.Text = "Ведомость персонального учета выпускников";
             this.personalAccountOfGraduatesMI.Click += new System.EventHandler(this.personalAccountOfGraduatesMI_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(479, 6);
-            // 
-            // reportSettingsMI
-            // 
-            this.reportSettingsMI.Name = "reportSettingsMI";
-            this.reportSettingsMI.Size = new System.Drawing.Size(482, 22);
-            this.reportSettingsMI.Text = "Параметры";
-            this.reportSettingsMI.Click += new System.EventHandler(this.reportSettingsMI_Click);
             // 
             // helpMenu
             // 
@@ -1178,10 +1144,6 @@ namespace EmploymentDepartment
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripComboBox cmbSearchFilter;
         private System.Windows.Forms.ToolStripMenuItem searchMI;
-        private System.Windows.Forms.ToolStripSeparator selfEmploymentSeparator;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem reportSettingsMI;
-        private System.Windows.Forms.ToolStripMenuItem reportNotificationMI;
     }
 }
 

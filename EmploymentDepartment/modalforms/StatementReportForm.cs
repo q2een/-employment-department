@@ -2,7 +2,6 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EmploymentDepartment
@@ -40,21 +39,11 @@ namespace EmploymentDepartment
 
             var doc = new WordFile(Directory.GetCurrentDirectory() + @"\templates\Statement.docx");
 
-            this.Hide();
+            var dataTable = export.GetStatementReport(year);
 
-            Task t = new Task(() => {
-
-                var dataTable = export.GetStatementReport(year);
-
-                MessageBox.Show("Сохрениение файла может занять некоторое время. После успешного сохранения будет показано уведомление", "Формирование отчета", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                doc.AddTable(dataTable);
-                doc.ReplaceWordText("{year}", year.ToString());
-                doc.Save(fileName);
-            });
-            t.Start();
-
-            t.ContinueWith((task) => MessageBox.Show($"Файл {fileName}", "Ведомость распределения выпускников, которые окончили ВУЗ", MessageBoxButtons.OK, MessageBoxIcon.Information));
+            doc.AddTable(dataTable);
+            doc.ReplaceWordText("{year}", year.ToString());
+            doc.Save(fileName);
 
             this.Close();
         }

@@ -143,32 +143,12 @@ namespace EmploymentDepartment
         }
 
         /// <summary>
-        /// Отключает возможность редактировать элемент упраления <c>control</c>, переключая фокус на
-        /// элемент управления <c>focusTarget</c>.
-        /// </summary>
-        /// <param name="control">Элемент управления в котором необходимо отключить возможность редактирования</param>
-        /// <param name="focusTarget">Элемент управления на который переводится фокус</param>
-        public static void Disable(this Control control, Control focusTarget)
-        {
-            control.Disable(delegate { focusTarget.Focus(); });
-        }
-
-        // Отключает возможность редактировать элемент упраления. 
-        private static void Disable(this Control control, EventHandler evnDel)
-        {
-            control.TabStop = false;
-            control.Enter += evnDel;
-        }
-
-        /// <summary>
         /// Отключает возможность редактировать элементы упраления, расположенные в контейнере <c>container</c>, за исключением элементов управления <c>ignore</c>. 
         /// </summary>
         /// <param name="container">Контейнер, содержащий элементы управления для отключения возможности редактировать</param>
         /// <param name="ignore">Элементу управления, которые необходимо пропустить и оставить редактируемыми</param>
         public static void DisableControls(this Control container, params Control[] ignore)
         {
-            EventHandler evnt = delegate { container.Focus(); };
-
             foreach (Control control in container.Controls)
             {
                 if (ignore.Contains(control))
@@ -180,7 +160,7 @@ namespace EmploymentDepartment
                     continue;
                 }
 
-                control.Disable(evnt);
+                control.Enabled = false;
             }
         }
 

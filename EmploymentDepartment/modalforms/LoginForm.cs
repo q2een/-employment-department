@@ -1,6 +1,5 @@
 ﻿using EmploymentDepartment.BL;
 using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace EmploymentDepartment
@@ -10,26 +9,17 @@ namespace EmploymentDepartment
     /// </summary>
     public partial class LoginForm : Form
     {
-        private readonly bool isDebug;
         /// <summary>
         /// Предоставляет окно для входа в программу и подключения к БД.
         /// </summary>
-        public LoginForm(bool isDebug = false)
+        public LoginForm()
         {   
             InitializeComponent();
 
-            if(isDebug)
-            {
-                this.Text += " - Режим отладки";
-                this.isDebug = isDebug;
-                this.Show();           
-                return;
-            }
-
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.connection))
+             if (!string.IsNullOrEmpty(Properties.Settings.Default.connection))
                  ShowMainForm(Properties.Settings.Default.connection);
-            else
-                 this.Show();  
+             else
+                 this.Show();     
         }
         
         // Отображает главное окно программы при корректно введенных пользователем данных.
@@ -39,8 +29,8 @@ namespace EmploymentDepartment
             {
                 var db = new MySqlDB(connection);
 
-                var role = isDebug ? UserRole.Debug : db.GetUserRole();
-                                             
+                var role = db.GetUserRole();
+
                 if (role == UserRole.None)
                     throw new Exception("У Вас нет прав для доступа к базе данных");
 
@@ -71,7 +61,7 @@ namespace EmploymentDepartment
         // Нажатие на кнопку "Войти". Обработка события.
         private void btnApply_Click(object sender, EventArgs e)
         {
-            var connection = $"Database={(isDebug ? "testWork" : "work")};Data Source={tbHost.Text};Port={tbPort.Text};User Id={tbLogin.Text};Password={tbPassword.Text};CharSet=utf8;";
+            var connection = $"Database=work;Data Source={tbHost.Text};Port={tbPort.Text};User Id={tbLogin.Text};Password={tbPassword.Text};CharSet=utf8;";
             ShowMainForm(connection);
         }
 

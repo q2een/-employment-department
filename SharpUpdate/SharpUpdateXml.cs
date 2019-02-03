@@ -147,6 +147,5 @@ namespace SharpUpdate
             }
 			catch { return null; }
         }
-
     }
 }

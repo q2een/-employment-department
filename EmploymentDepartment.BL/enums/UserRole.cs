@@ -10,10 +10,6 @@
         /// </summary>
         None,
         /// <summary>
-        /// Работа с базой для отладки.
-        /// </summary>
-        Debug,
-        /// <summary>
         /// Редактор.
         /// </summary>
         Moderator,

@@ -45,10 +45,7 @@ namespace EmploymentDepartment
 
         private void CompanyFrom_Load(object sender, EventArgs e)
         {
-            if (Type == ActionType.View)
-            {
-                mainPanel.DisableControls();
-            }
+            mainPanel.Enabled = Type != ActionType.View;
         }
 
         // Валидация обязательного текстового поля.

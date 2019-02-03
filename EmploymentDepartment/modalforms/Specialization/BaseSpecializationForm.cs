@@ -54,7 +54,7 @@ namespace EmploymentDepartment
 
             if (this.UpdateFormEntityInDataBase<BaseSpecializationForm, ISpecialization>(Main.DataBase, msg, IngnoreProperties))
             {
-                SetFormText();
+                SetFormText();;
 
                 ViewContext?.SetDataTableRow(this as ISpecialization);
 
@@ -89,10 +89,6 @@ namespace EmploymentDepartment
         string ISpecialization.Name { get; set; }
         public string FacultyName { get; }
         public string LevelOfEducationName { get; }
-        public string SpecialtyCode { get; set; }
-        public string SpecialtyName { get; set; }
-        public string SpecialtyProfileName { get; set; }
-        public string Cipher { get; set; }
         #endregion
 
     }
